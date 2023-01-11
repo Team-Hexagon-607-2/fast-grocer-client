@@ -1,9 +1,12 @@
-import './App.css';
+import "./App.css";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   return (
-    <div>
-      
+    <div className="w-full  h-screen">
+      <div className="pt-[35px]">
+        <Navbar />
+      </div>
     </div>
   );
 }
