@@ -18,7 +18,8 @@ const HomePageProducts = () => {
   }
 
   return (
-    <div className='bg-[#fbfff4db]'>
+    <div className='bg-[#fbfff4db] my-28'>
+      {/* Added Margin my-28 -by Taqi */}
       <h2 className='text-3xl text-center font-bold'>Featured Products</h2>
       <div className='border-b-[1px] border-gray-200 my-5 md:my-3'>
         <ul className='w-8/12 md:w-5/12 mx-auto flex justify-between h-40px'>

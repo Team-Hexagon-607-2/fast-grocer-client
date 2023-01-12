@@ -3,7 +3,8 @@ import {TbShoppingCartPlus} from 'react-icons/tb';
 import {AiFillHeart, AiFillStar} from 'react-icons/ai';
 
 const SingleProduct = ({ products }) => {
-  console.log(products);
+  // commented out console.log -by Taqi //
+  // console.log(products);
   const { product_name, product_photo, product_mesurement, product_price } = products;
   return (
     <div className='bg-white shadow-lg rounded-md'>
