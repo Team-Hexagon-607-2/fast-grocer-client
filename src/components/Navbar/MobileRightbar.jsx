@@ -21,7 +21,7 @@ const MobileRightbar = () => {
       <input type="checkbox" id="my-modal-4" className="modal-toggle" />
       <label htmlFor="my-modal-4" className="modal cursor-pointer">
         <div
-          className=" -mt-48 bg-white w-[280px] h-[300px]
+          className=" -mt-2 bg-white w-[280px] h-[300px]
         "
         >
           <p className="w-full text-xl bg-slate-800 p-5 text-white">
