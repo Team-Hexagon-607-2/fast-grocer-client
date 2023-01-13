@@ -14,7 +14,7 @@ const MobileRightbar = () => {
   return (
     <div className="">
       <label htmlFor="my-modal-4" className="">
-        <HiDotsVertical className={`mt-1  ml-2`} size={35} />
+        <HiDotsVertical className={`mt-1  ml-4`} size={35} />
       </label>
 
       {/* Put this part before </body> tag */}
