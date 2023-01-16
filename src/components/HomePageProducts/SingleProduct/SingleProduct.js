@@ -22,8 +22,8 @@ const SingleProduct = ({ products }) => {
         <p className='text-zinc-700 font-semibold'><small>±{product_mesurement}</small></p>
         <p className='text-[#8ba73b] text-2xl font-bold'>৳{product_price}</p>
         <div className='flex mt-5'>
-          <button className='w-full mr-2 bg-[#c4f296] hover:bg-[#b0f36e] duration-300 py-1 rounded-full flex items-center justify-center'><TbShoppingCartPlus className=' mr-2'/>Add to Cart</button>
-          <button className='bg-#8ba73b px-3 rounded-full bg-[#ff00001c] hover:bg-[#ff000044] duration-300 flex items-center justify-center'><AiFillHeart className='text-red-600 mr-2'/>Wishlist</button>
+          <button className='w-full mr-2 bg-[#8ba73b] hover:bg-[#86a72b] duration-300 py-1 rounded-md flex items-center justify-center'><TbShoppingCartPlus className=' mr-2'/>Add to Cart</button>
+          <button className='bg-#8ba73b px-3 rounded-md bg-[#ff00001c] hover:bg-[#ff000044] duration-300 flex items-center justify-center'><AiFillHeart className='text-red-600 mr-2'/>Wishlist</button>
         </div>
       </div>
     </div>
