@@ -8,7 +8,7 @@ import React from "react";
 import { RiArrowDownSLine } from "react-icons/ri";
 const NavLinks = () => {
   return (
-    <div className="flex flex-row gap-5 md:text-md font-bold text-black pt-[50px]">
+    <div className="flex flex-row flex-wrap sm:gap-2 md:gap-5 md:text-md font-bold text-black pt-[50px]">
       <div>
         <div className="dropdown dropdown-end">
           <label
