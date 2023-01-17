@@ -20,7 +20,7 @@ const HomePageProducts = () => {
   }
 
   return (
-    <div className='bg-[#fbfff4db] my-28'>
+    <div className='bg-[#fbfff4db] my-20'>
       {/* Added Margin my-28 -by Taqi */}
       <h2 className='text-3xl text-center font-bold'>Featured Products</h2>
       <div className='border-b-[1px] border-gray-200 my-5 md:my-3'>
@@ -44,7 +44,7 @@ const HomePageProducts = () => {
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 mx-auto py-10'>
         {
-          products?.slice(0, 4)?.map(product => <SingleProduct
+          products?.slice(1, 5)?.map(product => <SingleProduct
             key={product?.id}
             products={product}
           ></SingleProduct>)
