@@ -12,7 +12,7 @@ import NavLinks from "./NavLinks";
 import Offer from "./Offer";
 import Search from "./Search";
 import Wishlist from "./Wishlist";
-import logo from "../../assets/logo/logo.png";
+import logo from "../../../assets/logo/logo.png";
 
 const Navbar = () => {
   const styles = {

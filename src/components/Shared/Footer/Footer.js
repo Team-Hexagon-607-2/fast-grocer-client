@@ -1,9 +1,9 @@
 import React from 'react';
-import bkash from '../../assets/images/bkash.png';
-import nagad from '../../assets/images/nagad.jpg';
-import visaCard from '../../assets/images/visaCard.jpg';
-import masterCard from '../../assets/images/masterCard.png';
-import fastGrocerLogo from '../../assets/images/fastGrocerLogo.jpg';
+import bkash from '../../../assets/images/bkash.png';
+import nagad from '../../../assets/images/nagad.jpg';
+import visaCard from '../../../assets/images/visaCard.jpg';
+import masterCard from '../../../assets/images/masterCard.png';
+import fastGrocerLogo from '../../../assets/images/fastGrocerLogo.jpg';
 import {FaEnvelope} from 'react-icons/fa';
 import {FaPhoneAlt} from 'react-icons/fa';
 
@@ -49,7 +49,7 @@ const Footer = () => {
           
                 <div className='items-center grid-flow-row'>
                     <div>
-                    <FaEnvelope className='inline mr-2'></FaEnvelope><span className='inline mx-0'>info@fastgrocer.com</span>
+                    <FaEnvelope className='inline mr-2'></FaEnvelope><span className='inline mx-0'>info.fastgrocer@gmail.com</span>
 
                     </div>
                     <div>
