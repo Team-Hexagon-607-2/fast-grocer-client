@@ -1,12 +1,12 @@
-## Project Name: FAST GROCER - (A E-commerce and Home Delivery System)
+## Project Name: FAST GROCER - (An E-commerce and Home Delivery System)
 ## Project Type: Web portal for grocery delivery
 
-Live link : [...]
+Live link : https://fast-grocer-client.vercel.app/
 
-## Feature 
-- Wide variety of groceries including fresh produce, meat, dairy, baked goods, and pantry staples
+## Features
+- Wide variety of groceries including fresh products, meat, dairy, baked goods, and pantry staples
 - User-friendly interface for easy product browsing and searching
-- Shopping list creation
+- Shopping cart and wishlist creation
 - Order tracking
 - Fast and convenient home delivery or in-store pickup at select locations
 - Payment options including credit/debit cards, net banking, and cash on delivery
@@ -63,5 +63,5 @@ The grocery delivery web portal has three primary integrations
 - css frameworks: Tailwind
 - css libraries: daisyui
 
-## New Technology: Redex. 
-  Redux will help us with better state management. In our project, there might arise complexity  in several state handling. We will update data across this project sharing at the same time. Redux will help a lot to solve this problem.
+## New Technology: Redux. 
+  Redux will help us with better state management. In our project, there has been complexity  in several state handling. 
