@@ -26,7 +26,7 @@ const SingleProduct = ({ products }) => {
         <p className='text-zinc-700 font-semibold'><small>±{bundle}</small></p>
         <p className='text-[#8ba73b] text-2xl font-bold'>৳{price}</p>
         <div className='flex mt-5'>
-          <button className='w-full mr-2 bg-[#8ba73b] hover:bg-[#708b24] duration-300 py-1 rounded-md flex items-center justify-center'><TbShoppingCartPlus className=' mr-2' />Add to Cart</button>
+          <button className='w-full mr-2 bg-[#9acd5e] hover:bg-[#80b248] duration-300 py-1 rounded-md flex items-center justify-center'><TbShoppingCartPlus className=' mr-2' />Add to Cart</button>
           <button className='bg-#8ba73b px-3 rounded-md bg-[#ff00001c] hover:bg-[#ff00002e] duration-300 flex items-center justify-center'><AiFillHeart className='text-red-600 mr-2' />Wishlist</button>
         </div>
       </div>
