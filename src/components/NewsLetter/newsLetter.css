@@ -1,0 +1,7 @@
+.bg{
+  min-height: 400px;
+  background-image: url('../../../src/assets/images/newsletterbg.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100%;
+}
