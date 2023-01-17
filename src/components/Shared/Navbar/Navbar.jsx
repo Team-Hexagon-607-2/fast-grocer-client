@@ -52,7 +52,7 @@ const Navbar = () => {
               {/* Desktop navbar link such as page home etc */}
               <NavLinks />
             </div>
-            <div className="flex flex-row flex-wrap sm:p-12 gap-4  -mt-[10px] ml-[10px] items-center ">
+            <div className="flex flex-row flex-wrap sm:py-12 gap-4  -mt-[10px] ml-[10px] items-center ">
               <Login />
               <Wishlist />
               <Cart />
