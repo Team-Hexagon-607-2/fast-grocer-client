@@ -5,10 +5,12 @@ const HomePageProducts = () => {
   const [products, setProducts] = useState(null);
 
   useEffect(() => {
-    fetch(` https://fast-grocer-server.vercel.app/products/vegetables`)
+    fetch(` https://fg-server.vercel.app/products`)
       .then(res => res.json())
-      .then(data => setProducts(data.allproducts))
+      .then(data => setProducts(data))
   }, [])
+
+  // console.log(products.slice(0, 4));
 
   // event handler for showing product on home page
   const handleShowProducts = (category) => {
@@ -42,7 +44,7 @@ const HomePageProducts = () => {
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 mx-auto py-10'>
         {
-          products?.map(product => <SingleProduct
+          products?.slice(0, 4)?.map(product => <SingleProduct
             key={product?.id}
             products={product}
           ></SingleProduct>)
