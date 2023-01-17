@@ -14,14 +14,14 @@ const MobileRightbar = () => {
   return (
     <div className="">
       <label htmlFor="my-modal-4" className="">
-        <HiDotsVertical className={`mt-1  ml-2`} size={35} />
+        <HiDotsVertical className={`mt-1  ml-4`} size={35} />
       </label>
 
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="my-modal-4" className="modal-toggle" />
       <label htmlFor="my-modal-4" className="modal cursor-pointer">
         <div
-          className=" -mt-48 bg-white w-[280px] h-[300px]
+          className=" -mt-2 bg-white w-[280px] h-[300px]
         "
         >
           <p className="w-full text-xl bg-slate-800 p-5 text-white">

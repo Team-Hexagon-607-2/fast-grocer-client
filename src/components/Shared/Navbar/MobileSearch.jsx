@@ -13,7 +13,7 @@ const MobileSearch = () => {
       <input
         className="
          placeholder:text-[13px] placeholder:text-black
-        border-none outline-none py-[10px] rounded-[3px] px-8 "
+        border-none outline-none py-[10px] rounded-[3px] px-10 "
         type="text"
         placeholder="Search for products(e.g. eggs, milk, )"
       />

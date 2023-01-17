@@ -17,7 +17,7 @@ const Login = () => {
           <div className="w-[45px] h-[45px]  rounded-[50%] bg-[#F2F4EC] flex items-center justify-center ">
             <BsPeople className="text-xl" />
           </div>
-          <p className="hover:text-[#92ad3f] font-semibold text-black p-1 text-[14px]">
+          <p className="hover:text-[#92ad3f] font-semibold text-black  text-[14px]">
             Login <span className="italic text-[#95AF4D]">or</span> <br />{" "}
             Register
           </p>
