@@ -1,12 +1,13 @@
 import React from 'react';
 import { TbShoppingCartPlus } from 'react-icons/tb';
 import { AiFillHeart, AiFillStar } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const SingleProduct = ({ products }) => {
   // commented out console.log -by Taqi //
   // console.log(products);
   // const { product_name, product_photo, product_mesurement, product_price } = products;
-  const { name, imageUrl, price, bundle, original_price, save } = products;
+  const { _id, name, imageUrl, price, bundle, original_price, save } = products;
   return (
     <div className='bg-white shadow-lg hover:shadow-2xl rounded-md border border-slate-200/60 duration-300'>
       <div className='h-225px'>
@@ -21,7 +22,7 @@ const SingleProduct = ({ products }) => {
           <AiFillStar className='text-yellow-400' />
         </span>
         <div className='md:h-[60px]'>
-          <p className={`text-[17px] font-semibold text-zinc-700 hover:underline cursor-pointer`}>{name.length > 50 ? name.slice(0, 50) + '...' : name}</p>
+          <Link to={`/product/${_id}`}><p className={`text-[17px] font-semibold text-zinc-700 hover:underline cursor-pointer`}>{name.length > 50 ? name.slice(0, 50) + '...' : name}</p></Link>
         </div>
         <p className='text-zinc-700 font-semibold'><small>{bundle ? bundle : 'As Product'}</small></p>
         <div className='flex items-end'>
