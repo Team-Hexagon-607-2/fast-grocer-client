@@ -12,11 +12,12 @@ import NavLinks from "./NavLinks";
 import Offer from "./Offer";
 import Search from "./Search";
 import Wishlist from "./Wishlist";
+import logo from "../../../assets/logo/logo.png";
 
 const Navbar = () => {
   const styles = {
     wrapper:
-      "h-[250px] rounded-[10px]  bg-white w-9/12 mx-auto hidden sm:block ",
+      "h-[220px] rounded-[10px]  bg-white w-9/12 mx-auto hidden sm:block ",
     mobileWrapper: " w-full h-[80px] bg-[#92B137]  block sm:hidden",
     flexRow: "flex w-full flex-row ",
   };
@@ -36,8 +37,12 @@ const Navbar = () => {
         </div>
         <div className={`${styles.flexRow}`}>
           <div className="border-r-[1px]  border-slate-300 w-[30%] flex items-center justify-center">
-            <p className="mr-[100px] text-[40px] font-bold text-[] ml-10 p-[41px]">
-              Logo Fast Grocer
+            <p className="mr-[20px] text-[40px] font-bold text-[] ml-10 md:p-[10px]">
+              <img
+                src={logo}
+                alt="Fast_Grocer"
+                className="w-[230px] h-full object-fit"
+              />
             </p>
           </div>
           <div className="w-[70%] border-box flex flex-row">
@@ -47,7 +52,7 @@ const Navbar = () => {
               {/* Desktop navbar link such as page home etc */}
               <NavLinks />
             </div>
-            <div className="flex flex-row gap-4 -mt-[30px] ml-[20px] items-center ">
+            <div className="flex flex-row flex-wrap sm:py-12 gap-4  -mt-[10px] ml-[10px] items-center ">
               <Login />
               <Wishlist />
               <Cart />
