@@ -1,5 +1,5 @@
 import React from "react";
-import HomePageProducts from "../../HomePageProducts/HomePageProducts";
+import HomePageProducts from "../HomePageProducts/HomePageProducts";
 import NewsLetter from "../NewsLetter/NewsLetter";
 
 const Home = () => {
