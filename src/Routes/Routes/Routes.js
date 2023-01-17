@@ -1,3 +1,4 @@
+import ProductDetails from "../../components/Products/ProductDetails/ProductDetails";
 import Products from "../../components/Products/Products";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -19,6 +20,11 @@ const router = createBrowserRouter([
                 path: '/products',
                 element: <Products></Products>,
                 loader: () => fetch('https://fg-server.vercel.app/products')
+            },
+            {
+                path: '/products/:id',
+                element: <ProductDetails></ProductDetails>,
+                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
             }
         ]        
     }

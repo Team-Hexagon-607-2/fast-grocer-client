@@ -22,7 +22,7 @@ const SingleProduct = ({ products }) => {
           <AiFillStar className='text-yellow-400' />
         </span>
         <div className='md:h-[60px]'>
-          <Link to={`/product/${_id}`}><p className={`text-[17px] font-semibold text-zinc-700 hover:underline cursor-pointer`}>{name.length > 50 ? name.slice(0, 50) + '...' : name}</p></Link>
+          <Link to={`/products/${_id}`}><p className={`text-[17px] font-semibold text-zinc-700 hover:underline cursor-pointer`}>{name.length > 50 ? name.slice(0, 50) + '...' : name}</p></Link>
         </div>
         <p className='text-zinc-700 font-semibold'><small>{bundle ? bundle : 'As Product'}</small></p>
         <div className='flex items-end'>
