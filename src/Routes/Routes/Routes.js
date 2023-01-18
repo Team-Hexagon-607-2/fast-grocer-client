@@ -1,3 +1,4 @@
+import OnSale from "../../components/OnSale/OnSale";
 import ProductDetails from "../../components/Products/ProductDetails/ProductDetails";
 import Products from "../../components/Products/Products";
 import SearchPage from "../../components/SearchPage/SearchPage";
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchPage />,
+      },
+      {
+        path: "/onsale",
+        element: <OnSale />,
       },
     ],
   },
