@@ -10,6 +10,8 @@ import { HiDotsVertical } from "react-icons/hi";
 import { BiLogIn } from "react-icons/bi";
 import { MdPersonAddAlt1 } from "react-icons/md";
 import { BsCart, BsHeart } from "react-icons/bs";
+import logo from "../../../assets/logo/logo.png";
+import { Link } from "react-router-dom";
 const MobileRightbar = () => {
   return (
     <div className="">
@@ -28,20 +30,20 @@ const MobileRightbar = () => {
             Fast Grocer
           </p>
           <div className="p-4">
-            <div className="mt-3 flex items-center  ">
+            <Link to="/login" className="mt-3 flex items-center  ">
               <p>
                 <BiLogIn size={30} />
               </p>
               <p className="text-[17px] ml-2 text-black">Login</p>
-            </div>
-            <div className="mt-5 flex items-center  ">
+            </Link>
+            <Link to="/signup" className="mt-5 flex items-center  ">
               <p>
                 <MdPersonAddAlt1 size={30} />
               </p>
               <p className="text-[17px] ml-2 text-black">Sign Up</p>
-            </div>
-            <div className="mt-5  ">
-              <div className="flex flex-row items-center">
+            </Link>
+            <Link to="wishlist" className="mt-5  ">
+              <div className="flex flex-row items-center mt-5 ">
                 <p>
                   <BsHeart size={25} />
                 </p>
@@ -52,8 +54,8 @@ const MobileRightbar = () => {
                   <p className="text-[17px] ml-2 text-black">WhishList</p>
                 </div>
               </div>
-            </div>
-            <div>
+            </Link>
+            <Link to="/cart">
               <div className="flex flex-row mt-5">
                 <BsCart size={25} />
 
@@ -64,7 +66,7 @@ const MobileRightbar = () => {
                   <p className="text-[17px] ml-2 text-black">Cart</p>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </label>
