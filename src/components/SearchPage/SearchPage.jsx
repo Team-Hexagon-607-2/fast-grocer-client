@@ -32,13 +32,19 @@ const SearchPage = () => {
   };
 
   return (
-    <div>
+    <div className=" sm:mt-[20px] sm:mb-[20px] ">
       {loading ? (
         <div className="flex items-center justify-center mt-10">
           <Loader />
         </div>
       ) : data.length === 0 ? (
-        <div>No Product found</div>
+        <div
+          className="flex mt-[20px] mb-[20px] items-center justify-center
+         sm:text-[50px] text-[20px] text-red-500 font-bold 
+        "
+        >
+          No Product found
+        </div>
       ) : (
         <div className=" mt-[10px] sm:mt-[50px]">
           <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 mx-auto py-10">

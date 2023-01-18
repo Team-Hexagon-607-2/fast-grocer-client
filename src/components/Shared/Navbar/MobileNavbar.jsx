@@ -43,7 +43,7 @@ const MobileNavbar = () => {
       {toggle && (
         <div
           className={`transition slide-right duration-700 transform absolute top-0 h-[100vh] rounded-br-[15px]  w-9/12 opacity-100 bg-[#FCFFF6] backdrop-blur-lg z-10
-            p-6 sm:hidden  ${toggle ? "left-[-100px]" : "-left-full"} `}
+            p-6 sm:hidden   ${toggle ? "left-[-100px]" : "-left-full"} `}
         >
           <div className="slide-top">
             <div
@@ -82,24 +82,17 @@ const MobileNavbar = () => {
                   </ul>
                 </div>
               </div>
+
               <Link
                 onClick={() => setToggle((prev) => !prev)}
-                to="/"
-                className="flex gap-2   cursor-pointer items-center"
-              >
-                <MdContactPage size={28} color="92B137" /> Pages
-                <RiArrowDownSLine />
-              </Link>
-              <Link
-                onClick={() => setToggle((prev) => !prev)}
-                to="/"
+                to="/blog"
                 className="flex gap-2   cursor-pointer items-center"
               >
                 <ImBlogger size={24} color="92B137" /> Blog
               </Link>
               <Link
                 onClick={() => setToggle((prev) => !prev)}
-                to="/"
+                to="/onsale"
                 className="flex gap-2   cursor-pointer items-center"
               >
                 <p>
@@ -109,7 +102,7 @@ const MobileNavbar = () => {
               </Link>
               <Link
                 onClick={() => setToggle((prev) => !prev)}
-                to="/"
+                to="/about"
                 className="flex gap-2   cursor-pointer items-center"
               >
                 <p>
@@ -119,7 +112,7 @@ const MobileNavbar = () => {
               </Link>
               <Link
                 onClick={() => setToggle((prev) => !prev)}
-                to="/"
+                to="/contact"
                 className="flex gap-2   cursor-pointer items-center"
               >
                 <p>
