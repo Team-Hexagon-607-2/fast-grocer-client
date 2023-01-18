@@ -2,6 +2,10 @@ import OnSale from "../../components/OnSale/OnSale";
 import ProductDetails from "../../components/Products/ProductDetails/ProductDetails";
 import Products from "../../components/Products/Products";
 import SearchPage from "../../components/SearchPage/SearchPage";
+import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
+import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
+import AllDeliveryman from "../../Pages/Dashboard/AllDeliveryman/AllDeliveryman";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -39,6 +43,25 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/dashboard',
+    element: <DashboardLayout></DashboardLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>
+      },
+      {
+        path: "/dashboard/all-buyers",
+        element: <AllBuyers></AllBuyers>
+      },
+      {
+        path: "/dashboard/all-deliveryman",
+        element: <AllDeliveryman></AllDeliveryman>,
+      }
+    ]
+  }
 ]);
 
 export default router;
