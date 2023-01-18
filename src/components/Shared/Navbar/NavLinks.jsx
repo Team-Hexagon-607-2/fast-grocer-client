@@ -29,7 +29,7 @@ const NavLinks = () => {
             tabIndex={0}
             className="flex cursor-pointer items-center justify-center"
           >
-            Shop <RiArrowDownSLine />
+            Category <RiArrowDownSLine />
           </label>
           <ul
             tabIndex={0}
