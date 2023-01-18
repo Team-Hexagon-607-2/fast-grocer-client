@@ -32,7 +32,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div>
+    <div className=" sm:mt-[20px] sm:mb-[20px] ">
       {loading ? (
         <div className="flex items-center justify-center mt-10">
           <Loader />
