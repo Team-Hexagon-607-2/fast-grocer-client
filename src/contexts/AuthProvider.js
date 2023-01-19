@@ -1,13 +1,20 @@
 import { createContext, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import app from "../firebase/firebase.config";
+import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile} from 'firebase/auth';
 export const StateContext = createContext();
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
+
 const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 
 export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState("");
   const [cart, setCart] = useState(cartFromLocalStorage);
+  const [loading, setLoading]= useState(true);
 
   // all products
   const {
@@ -96,6 +103,44 @@ export const ContextProvider = ({ children }) => {
     setCart([]);
   };
 
+  //for firebase authentition 
+
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  }
+
+  const signIn = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  }
+
+  const googleSignIn = () => {
+    return signInWithPopup(auth, googleProvider);
+  }
+
+  const resetPassword = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email);
+  }
+
+  const updateUser = (userInfo) => {
+    return updateProfile(auth.currentUser, userInfo)
+  }
+
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  }
+
+  useEffect(()=>{
+    const unsubscribe = onAuthStateChanged(auth, currentUser=> {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, [])
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -122,6 +167,13 @@ export const ContextProvider = ({ children }) => {
         totalQuantity,
         totalPrice,
         clearCart,
+        createUser,
+        signIn,
+        googleSignIn,
+        updateUser,
+        resetPassword,
+        loading,
+        logOut
       }}
     >
       {children}
