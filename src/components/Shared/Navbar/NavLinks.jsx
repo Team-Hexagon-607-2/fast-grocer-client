@@ -4,12 +4,21 @@
  * as home, shop , blog etc
  */
 
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const NavLinks = () => {
-  
+  // all product categories name
+  const { data: categories = [] } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const res = await fetch('https://fg-server.vercel.app/categories');
+      const data = await res.json();
+      return data;
+    }
+  })
 
   return (
     <div className="flex flex-row flex-wrap sm:gap-2 md:gap-5 md:text-md font-bold text-black pt-[50px]">
@@ -26,7 +35,7 @@ const NavLinks = () => {
         </div>
       </div>
       <div>
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-start">
           <label
             tabIndex={0}
             className="flex cursor-pointer items-center justify-center"
@@ -37,12 +46,11 @@ const NavLinks = () => {
             tabIndex={0}
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 2</a>
-            </li>
+            <div className="h-[200px] overflow-auto border">
+              {
+                categories.map(category => <li className="m-0 p-0" key={category._id}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>)
+              }
+            </div>
           </ul>
         </div>
       </div>
