@@ -6,6 +6,7 @@ import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllDeliveryman from "../../Pages/Dashboard/AllDeliveryman/AllDeliveryman";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import Cart from "./../../components/Shared/Navbar/Cart";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -41,27 +42,31 @@ const router = createBrowserRouter([
         path: "/onsale",
         element: <OnSale />,
       },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
     ],
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>
+        element: <Dashboard></Dashboard>,
       },
       {
         path: "/dashboard/all-buyers",
-        element: <AllBuyers></AllBuyers>
+        element: <AllBuyers></AllBuyers>,
       },
       {
         path: "/dashboard/all-deliveryman",
         element: <AllDeliveryman></AllDeliveryman>,
-      }
-    ]
-  }
+      },
+    ],
+  },
 ]);
 
 export default router;
