@@ -85,10 +85,10 @@ const MobileNavbar = () => {
 
               <Link
                 onClick={() => setToggle((prev) => !prev)}
-                to="/blog"
+                to="/allproducts"
                 className="flex gap-2   cursor-pointer items-center"
               >
-                <ImBlogger size={24} color="92B137" /> Blog
+                <ImBlogger size={24} color="92B137" /> All Products
               </Link>
               <Link
                 onClick={() => setToggle((prev) => !prev)}
