@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../contexts/AuthProvider';
 
@@ -12,6 +13,39 @@ const SignUp = () => {
 
     const handleSignUp = data => {
         createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                toast('New User added successfully');
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(data.name, data.email, data.accountType);
+                    })
+                    .catch(err => console.log(err));
+                    navigate('/');
+                    reset();                
+            })
+            .catch(error => {
+                console.log(error);
+                setSignUpError(error.message);
+            });
+    }
+
+    const saveUser = (name, email, role)=> {
+        const user = {name, email, role};
+        fetch('https://fg-server.vercel.app/users',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setCreatedUserEmail(email);
+            })
     }
 
 
@@ -63,9 +97,9 @@ const SignUp = () => {
                             <span className="label-text">Account Type</span>
                         </label>
                         <select  className="select select-bordered w-full"
-                         {...register("accountType",  { required: true })}>
-                            <option value="seller">seller</option>
+                         {...register("accountType",  { required: true })}>                            
                             <option value="buyer">buyer</option>
+                            <option value="delivery man">delivery man</option>
                         </select>
                             
                         {errors.name && <p className='text-red-500'>{errors.accountType.message}</p>}
@@ -77,8 +111,7 @@ const SignUp = () => {
                     }
                 </form>
                 <p>Already have an account? <Link className='text-secondary' to="/login">Please Login</Link></p>
-                <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                
             </div>
         </div>
     );
