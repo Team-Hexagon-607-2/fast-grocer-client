@@ -22,7 +22,7 @@ const MobileNavbar = () => {
   return (
     <div className="flex flex-row overflow-hidden">
       {/* Left Drawer for mobile */}
-      <div>
+      <div className="w-full">
         <div className="drawer-content mt-4 ml-5 flex flex-row  justify-around ">
           {/* left drawer icon here */}
           <div className="mt-1" onClick={() => setToggle((prev) => !prev)}>

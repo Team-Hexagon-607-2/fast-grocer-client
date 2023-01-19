@@ -7,9 +7,9 @@ const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState("");
-
   const [cart, setCart] = useState(cartFromLocalStorage);
 
+  // all products
   const {
     data: AllProducts,
     isLoading,
@@ -21,12 +21,25 @@ export const ContextProvider = ({ children }) => {
       fetch(`https://fg-server.vercel.app/products`).then((res) => res.json()),
   });
 
+  // all product categories name
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () =>
+      fetch("https://fg-server.vercel.app/categories")
+        .then((res) => res.json())
+        .then((data) => {
+          return data;
+        }),
+  });
+
+  console.log(categories);
+
   const handleDecrement = (e, id) => {
     e.preventDefault();
     // Find the index of the item in the cart
     let index = cart.findIndex((item) => item._id === id);
 
-    // check if quantity is greater than 1
+    // check if quantity is greater than 0
     if (cart[index].qunatity > 1) {
       // Create a new cart with the updated item
       const newCart = [...cart];
@@ -74,7 +87,7 @@ export const ContextProvider = ({ children }) => {
     e.preventDefault();
     const remain = cart.filter((item) => item._id !== id);
     setCart(remain);
-    toast.error("Product deleted successfully");
+    toast.success("Product deleted successfully");
   };
 
   const clearCart = () => {

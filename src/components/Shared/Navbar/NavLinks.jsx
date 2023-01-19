@@ -9,6 +9,8 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const NavLinks = () => {
+  
+
   return (
     <div className="flex flex-row flex-wrap sm:gap-2 md:gap-5 md:text-md font-bold text-black pt-[50px]">
       <div>
