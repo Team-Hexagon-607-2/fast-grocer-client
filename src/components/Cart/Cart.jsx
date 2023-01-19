@@ -3,7 +3,8 @@ import { StateContext } from "../../contexts/AuthProvider";
 import CartItem from "./CartItem";
 
 const Cart = () => {
-  const { cart, totalPrice, clearCart } = useContext(StateContext);
+  const { cart, totalPrice, clearCart, totalQuantity } =
+    useContext(StateContext);
   return (
     <div className=" mt-6 sm:mt-[50px] w-full">
       {cart.length === 0 && (
@@ -34,6 +35,9 @@ const Cart = () => {
             <div className="w-full h-[1px] bg-slate-500"></div>
             <div className="p-2 sm:p-1">
               <div className="flex relative items-end flex-col gap-2 justify-end">
+                <button className="text-md font-semibold">
+                  Total Product Quantity: {totalQuantity}
+                </button>
                 <button className="text-lg font-semibold">
                   Sub Total: ৳{totalPrice}
                 </button>

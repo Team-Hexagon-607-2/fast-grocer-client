@@ -79,7 +79,7 @@ export const ContextProvider = ({ children }) => {
 
   const clearCart = () => {
     localStorage.removeItem("cart");
-    toast.error("Cart Clear successfully");
+    toast.success("Cart Clear successfully");
     setCart([]);
   };
 

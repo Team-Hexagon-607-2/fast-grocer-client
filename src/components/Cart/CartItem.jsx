@@ -14,8 +14,12 @@ const CartItem = ({ cart }) => {
               className="w-full h-full object-contain"
             />
           </div>
+
           <div>
             <p className="sm:text-xl text-[13px] font-bold">{cart?.name}</p>
+            <p className="text-slate-600 font-bold sm:text-lg text-sm  ">
+              {cart?.bundle}
+            </p>
             <div className="sm:text-xl text-[13px] font-bold ">
               <div className="mt-2 sm:mt-4 rounded-[2px]">
                 <span className="mr-2"> Quantity:</span>
