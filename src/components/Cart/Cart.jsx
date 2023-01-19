@@ -17,17 +17,18 @@ const Cart = () => {
       <div className="flex flex-col ">
         {cart.length > 0 && cart.length && (
           <div className="">
-            <div className="flex relative items-end flex-row justify-end">
+            <div className="flex sm:p-2 p-1 relative items-end flex-row justify-end">
               <button
                 onClick={clearCart}
                 className="btn bg-red-500 
+            
                border-none
               "
               >
                 Clear Cart
               </button>
             </div>
-            <div className="p-2 sm:p-1 flex items-center justify-center flex-col   sm:gap-3">
+            <div className="p-2 sm:p-1 flex items-center justify-center flex-col gap-3  sm:gap-7">
               {cart?.map((cart) => (
                 <CartItem cart={cart} key={cart._id} />
               ))}
