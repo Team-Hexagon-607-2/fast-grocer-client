@@ -21,6 +21,16 @@ export const ContextProvider = ({ children }) => {
       fetch(`https://fg-server.vercel.app/products`).then((res) => res.json()),
   });
 
+  // all product categories name
+  const { data: categories = [], isLoading: categoryProductLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const res = await fetch('https://fg-server.vercel.app/categories');
+      const data = await res.json();
+      return data;
+    }
+  })
+
   const handleDecrement = (e, id) => {
     e.preventDefault();
     // Find the index of the item in the cart
@@ -99,6 +109,8 @@ export const ContextProvider = ({ children }) => {
         searchText,
         setSearchText,
         AllProducts,
+        categories,
+        categoryProductLoading,
         isLoading,
         isError,
         handleDecrement,

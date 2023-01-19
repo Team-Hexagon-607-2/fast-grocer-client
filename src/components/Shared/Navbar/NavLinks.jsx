@@ -5,20 +5,13 @@
  */
 
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { StateContext } from "../../../contexts/AuthProvider";
 
 const NavLinks = () => {
-  // all product categories name
-  const { data: categories = [] } = useQuery({
-    queryKey: ['categories'],
-    queryFn: async () => {
-      const res = await fetch('https://fg-server.vercel.app/categories');
-      const data = await res.json();
-      return data;
-    }
-  })
+  const { categories, categoryProductLoading } = useContext(StateContext);
 
   return (
     <div className="flex flex-row flex-wrap sm:gap-2 md:gap-5 md:text-md font-bold text-black pt-[50px]">
@@ -44,12 +37,12 @@ const NavLinks = () => {
           </label>
           <ul
             tabIndex={0}
-            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-64"
           >
-            <div className="h-[200px] overflow-auto border">
-              {
-                categories.map(category => <li className="m-0 p-0" key={category._id}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>)
-              }
+            <div className="h-[300px] overflow-auto">
+             {
+                categories.map(category => <li key={category._id}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>)
+             }
             </div>
           </ul>
         </div>
