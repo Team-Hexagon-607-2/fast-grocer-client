@@ -80,63 +80,6 @@ const router = createBrowserRouter([
             },
         ],
     },
-  {
-    path: "/",
-    element: <Main></Main>,
-    errorElement: <ErrorPage></ErrorPage>,
-    children: [
-      {
-        path: "/",
-        element: <Home></Home>,
-      },
-      {
-        path: "/products",
-        element: <Products></Products>,
-        loader: () => fetch("https://fg-server.vercel.app/products"),
-      },
-      {
-        path: "/products/:id",
-        element: <ProductDetails></ProductDetails>,
-        loader: ({ params }) =>
-          fetch(`https://fg-server.vercel.app/products/${params.id}`),
-      },
-      {
-        path: "/search",
-        element: <SearchPage />,
-      },
-      {
-        path: "/onsale",
-        element: <OnSale />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
-      {
-        path: "/allproducts",
-        element: <AllProducts />,
-      },
-    ],
-  },
-  {
-    path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
-    errorElement: <ErrorPage></ErrorPage>,
-    children: [
-      {
-        path: "/dashboard",
-        element: <Dashboard></Dashboard>,
-      },
-      {
-        path: "/dashboard/all-buyers",
-        element: <AllBuyers></AllBuyers>,
-      },
-      {
-        path: "/dashboard/all-deliveryman",
-        element: <AllDeliveryman></AllDeliveryman>,
-      },
-    ],
-  },
 ]);
 
 export default router;

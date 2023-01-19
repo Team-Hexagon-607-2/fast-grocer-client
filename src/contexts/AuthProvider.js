@@ -21,24 +21,6 @@ export const ContextProvider = ({ children }) => {
       fetch(`https://fg-server.vercel.app/products`).then((res) => res.json()),
   });
 
-<<<<<<< HEAD
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity((prev) => prev - 1);
-=======
-  // all product categories name
-  const { data: categories } = useQuery({
-    queryKey: ["categories"],
-    queryFn: () =>
-      fetch("https://fg-server.vercel.app/categories")
-        .then((res) => res.json())
-        .then((data) => {
-          return data;
-        }),
-  });
-
-  console.log(categories);
-
   const handleDecrement = (e, id) => {
     e.preventDefault();
     // Find the index of the item in the cart
@@ -54,7 +36,6 @@ export const ContextProvider = ({ children }) => {
       setCart(newCart);
       // Update the cart in local storage
       localStorage.setItem("cart", JSON.stringify(newCart));
->>>>>>> 0c479b41aacbf3a2c9081157020725440fa4c6a6
     }
   };
 
