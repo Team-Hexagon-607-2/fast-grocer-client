@@ -24,27 +24,6 @@ const router = createBrowserRouter([
                 element: <Home></Home>,
             },
             {
-                path: '/products',
-                element: <Products></Products>,
-                loader: () => fetch('https://fg-server.vercel.app/products')
-            },
-            {
-                path: '/products/:id',
-                element: <ProductDetails></ProductDetails>,
-                loader: ({ params }) => fetch(`https://fg-server.vercel.app/products/${params.id}`)
-            }
-        ]
-    },
-    {
-        path: "/",
-        element: <Main></Main>,
-        errorElement: <ErrorPage></ErrorPage>,
-        children: [
-            {
-                path: "/",
-                element: <Home></Home>,
-            },
-            {
                 path: "/products",
                 element: <Products></Products>,
                 loader: () => fetch("https://fg-server.vercel.app/products"),
