@@ -42,7 +42,9 @@ const MobileNavbar = () => {
       </div>
       {toggle && (
         <div
-          className={`transition slide-right duration-700 transform absolute top-0 h-[100vh] rounded-br-[15px]  w-9/12 opacity-100 bg-[#FCFFF6] backdrop-blur-lg z-10
+          className={`transition slide-right duration-700 transform 
+          absolute top-0 h-[90vh] rounded-br-[15px]  w-9/12 opacity-100
+           bg-[#FCFFF6] backdrop-blur-lg z-10
             p-6 sm:hidden   ${toggle ? "left-[-100px]" : "-left-full"} `}
         >
           <div className="slide-top">
@@ -52,7 +54,7 @@ const MobileNavbar = () => {
             >
               <AiOutlineClose size={40} color="black" />
             </div>
-            <div className="mr-10 flex flex-col  gap-10 ">
+            <div className="mr-10 flex flex-col  gap-9 ">
               <Link
                 onClick={() => setToggle((prev) => !prev)}
                 to="/"
@@ -85,10 +87,10 @@ const MobileNavbar = () => {
 
               <Link
                 onClick={() => setToggle((prev) => !prev)}
-                to="/blog"
+                to="/allproducts"
                 className="flex gap-2   cursor-pointer items-center"
               >
-                <ImBlogger size={24} color="92B137" /> Blog
+                <ImBlogger size={24} color="92B137" /> All Products
               </Link>
               <Link
                 onClick={() => setToggle((prev) => !prev)}
@@ -98,7 +100,7 @@ const MobileNavbar = () => {
                 <p>
                   <MdPointOfSale size={28} color="92B137" />{" "}
                 </p>
-                <p>On Sale</p>
+                <p>Offers</p>
               </Link>
               <Link
                 onClick={() => setToggle((prev) => !prev)}

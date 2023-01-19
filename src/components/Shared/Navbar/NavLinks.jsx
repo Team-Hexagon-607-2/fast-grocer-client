@@ -57,14 +57,14 @@ const NavLinks = () => {
 
       <div>
         <div className="dropdown dropdown-end">
-          <Link to="/blog">
+          <Link to="/allproducts">
             <label className="cursor-pointer flex items-center justify-center">
-              Blog
+              All Products
             </label>
           </Link>
         </div>
       </div>
-      <Link to="/onsale">On Sale</Link>
+      <Link to="/onsale">Offer</Link>
       <Link to="/about">About Us</Link>
       <Link to="/contact">Contact</Link>
     </div>
