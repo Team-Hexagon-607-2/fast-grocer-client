@@ -33,9 +33,9 @@ const Navbar = () => {
 
       {/* Desktop Nav */}
       <div className={styles.wrapper}>
-        <div className="border-b-[1px] border-slate-300">
+        {/* <div className="border-b-[1px] border-slate-300">
           <Offer />
-        </div>
+        </div> */}
         <div className={`${styles.flexRow}`}>
           <div className="border-r-[1px]  border-slate-300 w-[30%] flex items-center justify-center">
             <Link to="/">
