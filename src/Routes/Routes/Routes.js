@@ -9,6 +9,7 @@ import AllDeliveryman from "../../Pages/Dashboard/AllDeliveryman/AllDeliveryman"
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyReviews from "../../Pages/Dashboard/MyReviews/MyReviews";
+import MyWishlist from "../../Pages/Dashboard/MyWishlist/MyWishlist";
 import Payments from "../../Pages/Dashboard/Payments/Payments";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -69,8 +70,8 @@ const router = createBrowserRouter([
         element: <MyOrders></MyOrders>,
       },
       {
-        path: '/dashboard/wishlist',
-        element: <Wishlist></Wishlist>
+        path: '/dashboard/my-wishlist',
+        element: <MyWishlist></MyWishlist>
       },
       {
         path: '/dashboard/payments',
