@@ -70,7 +70,7 @@ const DashboardLayout = () => {
             <li>
               <Link
                 className="border-2 mb-2 bg-primary"
-                to="/dashboard/payments"
+                to="/dashboard/my-reviews"
               >
                 My Reviews
               </Link>

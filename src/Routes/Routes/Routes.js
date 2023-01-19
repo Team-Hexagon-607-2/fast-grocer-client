@@ -2,10 +2,14 @@ import OnSale from "../../components/OnSale/OnSale";
 import ProductDetails from "../../components/Products/ProductDetails/ProductDetails";
 import Products from "../../components/Products/Products";
 import SearchPage from "../../components/SearchPage/SearchPage";
+import Wishlist from "../../components/Shared/Navbar/Wishlist";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllDeliveryman from "../../Pages/Dashboard/AllDeliveryman/AllDeliveryman";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import MyReviews from "../../Pages/Dashboard/MyReviews/MyReviews";
+import Payments from "../../Pages/Dashboard/Payments/Payments";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -59,6 +63,22 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/all-deliveryman",
         element: <AllDeliveryman></AllDeliveryman>,
+      },
+      {
+        path: "/dashboard/my-orders",
+        element: <MyOrders></MyOrders>,
+      },
+      {
+        path: '/dashboard/wishlist',
+        element: <Wishlist></Wishlist>
+      },
+      {
+        path: '/dashboard/payments',
+        element: <Payments></Payments>
+      },
+      {
+        path: '/dashboard/my-reviews',
+        element: <MyReviews></MyReviews>
       }
     ]
   }
