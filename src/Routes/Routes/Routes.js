@@ -2,6 +2,12 @@ import OnSale from "../../components/OnSale/OnSale";
 import ProductDetails from "../../components/Products/ProductDetails/ProductDetails";
 import Products from "../../components/Products/Products";
 import SearchPage from "../../components/SearchPage/SearchPage";
+import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
+import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
+import AllDeliveryman from "../../Pages/Dashboard/AllDeliveryman/AllDeliveryman";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import Cart from "../../components/Cart/Cart.jsx";
+import AllProducts from "../../components/AllProducts/AllProducts";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -36,6 +42,33 @@ const router = createBrowserRouter([
       {
         path: "/onsale",
         element: <OnSale />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/allproducts",
+        element: <AllProducts />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "/dashboard/all-buyers",
+        element: <AllBuyers></AllBuyers>,
+      },
+      {
+        path: "/dashboard/all-deliveryman",
+        element: <AllDeliveryman></AllDeliveryman>,
       },
     ],
   },
