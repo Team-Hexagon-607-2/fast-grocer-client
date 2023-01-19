@@ -5,14 +5,17 @@
  * login , signup, cart, wishlist,
  */
 
-import React from "react";
+import React, { useContext } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import { BiLogIn } from "react-icons/bi";
 import { MdPersonAddAlt1 } from "react-icons/md";
 import { BsCart, BsHeart } from "react-icons/bs";
 import logo from "../../../assets/logo/logo.png";
 import { Link } from "react-router-dom";
+import { StateContext } from "../../../contexts/AuthProvider";
 const MobileRightbar = () => {
+  const { totalQuantity, totalPrice } = useContext(StateContext);
+
   return (
     <div className="">
       <label htmlFor="my-modal-4" className="">
@@ -60,7 +63,7 @@ const MobileRightbar = () => {
                 <BsCart size={25} />
 
                 <div className="badge -mt-2  -ml-[8px] bg-[#92B137] border-none rounded-full w-[20px] h-[20px] font-bold">
-                  0
+                  {totalQuantity}
                 </div>
                 <div>
                   <p className="text-[17px] ml-2 text-black">Cart</p>
