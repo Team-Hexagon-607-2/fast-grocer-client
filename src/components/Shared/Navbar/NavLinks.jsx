@@ -4,12 +4,14 @@
  * as home, shop , blog etc
  */
 
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext } from "react";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { StateContext } from "../../../contexts/AuthProvider";
 
 const NavLinks = () => {
-  
+  const { categories, categoryProductLoading } = useContext(StateContext);
 
   return (
     <div className="flex flex-row flex-wrap sm:gap-2 md:gap-5 md:text-md font-bold text-black pt-[50px]">
@@ -26,7 +28,7 @@ const NavLinks = () => {
         </div>
       </div>
       <div>
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-start">
           <label
             tabIndex={0}
             className="flex cursor-pointer items-center justify-center"
@@ -35,14 +37,13 @@ const NavLinks = () => {
           </label>
           <ul
             tabIndex={0}
-            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-64"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 2</a>
-            </li>
+            <div className="h-[300px] overflow-auto">
+             {
+                categories.map(category => <li key={category._id}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>)
+             }
+            </div>
           </ul>
         </div>
       </div>

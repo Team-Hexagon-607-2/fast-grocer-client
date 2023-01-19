@@ -24,7 +24,7 @@ const DashboardLayout = () => {
                 className="border-2 mb-2 bg-primary"
                 to="/dashboard"
               >
-                My Admin Profile
+                My Profile
               </Link>
             </li>
             <li>

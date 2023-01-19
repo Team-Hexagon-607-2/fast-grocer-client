@@ -29,17 +29,14 @@ export const ContextProvider = ({ children }) => {
   });
 
   // all product categories name
-  const { data: categories } = useQuery({
-    queryKey: ["categories"],
-    queryFn: () =>
-      fetch("https://fg-server.vercel.app/categories")
-        .then((res) => res.json())
-        .then((data) => {
-          return data;
-        }),
-  });
-
-  console.log(categories);
+  const { data: categories = [], isLoading: categoryProductLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const res = await fetch('https://fg-server.vercel.app/categories');
+      const data = await res.json();
+      return data;
+    }
+  })
 
   const handleDecrement = (e, id) => {
     e.preventDefault();
@@ -157,6 +154,8 @@ export const ContextProvider = ({ children }) => {
         searchText,
         setSearchText,
         AllProducts,
+        categories,
+        categoryProductLoading,
         isLoading,
         isError,
         handleDecrement,
