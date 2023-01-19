@@ -8,9 +8,9 @@ const ProductDetails = () => {
   const { name, description, imageUrl, original_price, price, qunatity, stock, bundle, save } = product;
   return (
     <div className='w-10/12 mx-auto my-20'>
-      <div className='flex items-center mb-10'>
-        <div className='max-h-[350px] w-full'>
-          <img src={imageUrl} alt="product img" className='h-[350px] mx-auto rounded-t-md' />
+      <div className='flex flex-col md:flex-row items-center mb-10'>
+        <div className='max-h-[350px] w-full mb-10 md:mb-0'>
+          <img src={imageUrl} alt="product img" className='h-[250px] md:h-[350px] mx-auto rounded-t-md' />
         </div>
         <div className='w-full'>
           <p className='text-xl font-semibold'>{name}</p>
