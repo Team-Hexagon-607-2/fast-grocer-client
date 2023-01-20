@@ -5,7 +5,7 @@ import SingleProduct from "../Home/HomePageProducts/SingleProduct/SingleProduct"
 const OfferProducts = () => {
   const { AllProducts, isError, isLoading } = useContext(StateContext);
 
-  const filter = AllProducts?.filter((p) => p?.status == "onsale");
+  const filter = AllProducts?.filter((p) => p?.status === "onsale");
   const Loader = () => {
     return (
       <div

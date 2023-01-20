@@ -14,7 +14,7 @@ import logo from "../../../assets/logo/logo.png";
 import { Link } from "react-router-dom";
 import { StateContext } from "../../../contexts/AuthProvider";
 const MobileRightbar = () => {
-  const { totalQuantity, totalPrice } = useContext(StateContext);
+  const { totalQuantity, totalPrice, wishListData } = useContext(StateContext);
 
   return (
     <div className="">
@@ -45,13 +45,13 @@ const MobileRightbar = () => {
               </p>
               <p className="text-[17px] ml-2 text-black">Sign Up</p>
             </Link>
-            <Link to="wishlist" className="mt-5  ">
+            <Link to="/dashboard/my-wishlist" className="mt-5  ">
               <div className="flex flex-row items-center mt-5 ">
                 <p>
                   <BsHeart size={25} />
                 </p>
                 <div className="badge -mt-5 -ml-[8px] bg-[#F6A64D] border-none rounded-full w-[20px] h-[20px] font-bold">
-                  0
+                  {wishListData?.data?.length}
                 </div>
                 <div className="">
                   <p className="text-[17px] ml-2 text-black">WhishList</p>
