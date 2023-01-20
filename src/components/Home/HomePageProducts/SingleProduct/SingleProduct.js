@@ -4,15 +4,50 @@ import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { StateContext } from "../../../../contexts/AuthProvider";
+import { toast } from "react-hot-toast";
 
 const SingleProduct = ({ products }) => {
   // commented out console.log -by Taqi //
   // console.log(products);
   // const { product_name, product_photo, product_mesurement, product_price } = products;
-
-  const { handleAddToCart } = useContext(StateContext);
+  const [loading, setLoading] = useState();
+  const { user, handleAddToCart } = useContext(StateContext);
   const { _id, name, imageUrl, price, bundle, original_price, save } = products;
 
+  const handleWishlist = (products) => {
+    const data = {
+      productId: products?._id,
+      productName: products?.name,
+      productPrice: products?.price,
+      productOriginalPrice: products?.original_price,
+      productImage: products?.imageUrl,
+      categoryName: products?.category_name,
+      subCategoryName: products?.sub_category,
+      userName: user?.displayName,
+      userEmail: user?.email,
+      createdAt: new Date(),
+    };
+
+    setLoading(true);
+    fetch("https://fg-server.vercel.app/wishlist", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === true) {
+          setLoading(false);
+          toast.success(`${data.message}`);
+        } else {
+          toast.error("Already Added on Wishlist Page");
+        }
+      })
+      .catch((error) => console.log(error));
+    setLoading(false);
+  };
   return (
     <div className="bg-white shadow-lg hover:shadow-2xl rounded-md border border-slate-200/60 duration-300">
       <div className="h-225px">
@@ -61,7 +96,10 @@ const SingleProduct = ({ products }) => {
             <TbShoppingCartPlus className=" mr-2" />
             Add to Cart
           </button>
-          <button className="bg-#8ba73b px-3 rounded-md bg-[#ff00001c] hover:bg-[#ff00002e] duration-300 flex items-center justify-center">
+          <button
+            onClick={() => handleWishlist(products)}
+            className="bg-#8ba73b px-3 rounded-md bg-[#ff00001c] hover:bg-[#ff00002e] duration-300 flex items-center justify-center"
+          >
             <AiFillHeart className="text-red-600 mr-2" />
             Wishlist
           </button>
