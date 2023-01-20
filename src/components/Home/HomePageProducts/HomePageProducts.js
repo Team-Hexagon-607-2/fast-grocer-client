@@ -19,13 +19,10 @@ const HomePageProducts = () => {
     setProducts(categoryProducts);
   }
 
-  // const categoryProducts = AllProducts?.filter(category => category.category_name === 'Winter Collection');
-  // setProducts(categoryProducts);
-  
   return (
-    <div className='bg-[#fbfff4db] my-20'>
+    <div className='bg-[#fbfff4db] py-20'>
       {/* Added Margin my-28 -by Taqi */}
-      <h2 className='text-3xl text-center font-bold'>Featured Products</h2>
+      <h2 className='text-3xl text-center font-bold py-5'>Featured Products</h2>
       <div className='border-b-[1px] border-gray-200 my-5 md:my-3'>
         <ul className='w-8/12 md:w-8/12 mx-auto hidden justify-between h-40px md:flex'>
           {
@@ -45,7 +42,7 @@ const HomePageProducts = () => {
             products={product}
           ></SingleProduct>)
         }
-        {getAllProducts?.length &&
+        {getAllProducts?.length > 0 &&
           getAllProducts?.slice(1, 5)?.map(product => <SingleProduct
             key={product?._id}
             products={product}
