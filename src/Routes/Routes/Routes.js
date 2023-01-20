@@ -10,6 +10,8 @@ import AllDeliveryman from "../../Pages/Dashboard/AllDeliveryman/AllDeliveryman"
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Cart from "../../components/Cart/Cart.jsx";
 import AllProducts from "../../components/AllProducts/AllProducts";
+import SignUp from "../../components/SignUp/SignUp";
+import Login from "../../components/Login/Login";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -49,6 +51,14 @@ const router = createBrowserRouter([
                 path: "/cart",
                 element: <Cart />,
             },
+            {
+                path: "/signup",
+                element: <SignUp></SignUp>
+            },
+            {
+                path: "/login",
+                element: <Login></Login>
+            }
         ],
     },
     {
