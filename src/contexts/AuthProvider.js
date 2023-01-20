@@ -153,6 +153,7 @@ export const ContextProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
+    toast.success("Logout Successfully");
     return signOut(auth);
   };
 
@@ -172,6 +173,7 @@ export const ContextProvider = ({ children }) => {
     (acc, item) => acc + item.qunatity * item.price,
     0
   );
+  console.log(user);
   return (
     <StateContext.Provider
       value={{

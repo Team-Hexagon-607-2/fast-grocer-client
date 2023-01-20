@@ -6,7 +6,6 @@ import Navbar from "../../components/Shared/Navbar/Navbar";
 const DashboardLayout = () => {
   return (
     <div>
-      <Navbar></Navbar>
       <div className="drawer drawer-mobile lg:w-11/12 mx-auto">
         <input
           id="dashboard-drawer"

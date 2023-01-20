@@ -14,8 +14,12 @@ import Search from "./Search";
 import Wishlist from "./Wishlist";
 import logo from "../../../assets/logo/logo.png";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { StateContext } from "./../../../contexts/AuthProvider";
+import { BiLogOutCircle } from "react-icons/bi";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(StateContext);
   const styles = {
     wrapper:
       "h-[220px] rounded-[10px]  bg-white w-full mx-auto hidden sm:block ",
@@ -48,17 +52,42 @@ const Navbar = () => {
               </p>
             </Link>
           </div>
-          <div className="w-[70%] border-box flex flex-row">
+          <div className="w-[70%]  flex flex-row">
             <div className="flex flex-col p-10">
               {/* Desktop search */}
               <Search />
               {/* Desktop navbar link such as page home etc */}
               <NavLinks />
             </div>
-            <div className="flex flex-row flex-wrap sm:py-10 gap-3  -mt-[10px] ml-[10px] items-center ">
-              <Login />
-              <Wishlist />
-              <Cart />
+            <div className="flex flex-wrap items-center justify-start">
+              <div className=" flex flex-row flex-wrap sm:py-1 gap-3  -mt-[10px] ml-[10px] items-center ">
+                <Login />
+                <Wishlist />
+                <Cart />
+                {user && (
+                  <div className="w-10 h-10 rounded-full bg-[#F2F4EC]">
+                    <img
+                      className="object-contain"
+                      src={
+                        user?.photoURL ||
+                        "https://cdn1.iconfinder.com/data/icons/website-internet/48/website_-_male_user-512.png"
+                      }
+                      alt={user?.displayName}
+                      title={user?.displayName}
+                    />
+                  </div>
+                )}
+                {user && (
+                  <div>
+                    <button
+                      onClick={logOut}
+                      className=" hover:bg-[#e9ebe4] flex items-center text-md font-bold justify-center gap-1 bg-[#F2F4EC] p-[8px] rounded-full"
+                    >
+                      <BiLogOutCircle color="#92ad3f" size={24} /> Logout
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
