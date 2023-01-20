@@ -14,8 +14,19 @@ const AboutUs = () => {
         </div>
       </div>
 
-      <div className='py-20 my-10 p-5 bg-[#FDF2F7]'>
-        <h2 className="text-4xl font-bold mb-5">Grocery shopping in a few staps</h2>
+      <div className='mt-5 px-5'>
+        <p>Fast Grocer is a family-owned and operated grocery store that has been serving our community for over 20 years.
+          Our mission is to provide fresh, high-quality products at an affordable price, while also being a responsible member of our community.
+          We pride ourselves on our wide selection of products, including organic produce, high-quality meats, and specialty items.
+          Our knowledgeable staff is always on hand to help you find what you need and answer any questions you may have.
+          In addition to our in-store offerings, we also offer delivery and curbside pickup for your convenience.
+          Our store is also committed to sustainability, with recycling programs and energy-efficient practices in place.
+          We are proud to be a part of our community, and we support local farmers and businesses whenever possible.
+          We also participate in various charitable events and donation programs throughout the year.</p>
+      </div>
+
+      <div className='py-20 my-10 px-5 bg-[#FDF2F7]'>
+        <h2 className="text-4xl font-bold mb-5">Grocery shopping in a few steps</h2>
         <div className='grid md:grid-cols-3 gap-10'>
           <div>
             <h1 className='text-2xl font-semibold'>1. Browse</h1>
