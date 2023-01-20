@@ -34,7 +34,7 @@ const HomePageProducts = () => {
             categories.slice(0, 3)?.map(category => <li key={category?._id}><button onClick={() => handleLoadProducts(category?.categoryName)} className='mx-5 border-b-2 '>{category?.categoryName}</button></li>)
           }
         </ul>
-      </div>
+      </div> 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 mx-auto py-10'>
         {products?.length &&
           products?.slice(1, 5)?.map(product => <SingleProduct
@@ -49,6 +49,7 @@ const HomePageProducts = () => {
           ></SingleProduct>)
         }
       </div>
+       
     </div>
   );
 };

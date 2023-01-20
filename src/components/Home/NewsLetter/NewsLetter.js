@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import "./newsLetter.css";
+import { toast } from "react-hot-toast";
 
 const NewsLetter = () => {
   const form = useRef();
@@ -18,6 +19,7 @@ const NewsLetter = () => {
         function (response) {
           console.log("SUCCESS!", response.status, response.text);
           e.target.reset();
+          toast('You have subscribed successfully!');
         },
         function (error) {
           console.log("FAILED...", error);
@@ -26,7 +28,7 @@ const NewsLetter = () => {
   };
 
   return (
-    <div className="bg text-center flex items-center justify-center px-4">
+    <div className="bg text-center flex items-center justify-center px-4 mt-10">
       <div className="w-[500px]">
         <h2 className="text-xl md:text-3xl text-center font-bold py-5 mb-20 md:mb-0">
           NEWSLETTER{" "}
