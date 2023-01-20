@@ -12,7 +12,7 @@ import Cart from "../../components/Cart/Cart.jsx";
 import AllProducts from "../../components/AllProducts/AllProducts";
 import SignUp from "../../components/SignUp/SignUp";
 import Login from "../../components/Login/Login";
-import WishList from "../../components/WishList/WishList";
+import WishList from "../../components/WishList/WishList.jsx";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");

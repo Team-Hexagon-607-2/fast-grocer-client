@@ -48,6 +48,21 @@ export const ContextProvider = ({ children }) => {
       },
     }
   );
+  //wishList
+  const {
+    data: wishListData,
+    isLoading: wishlistLoading,
+    refetch: wishlistRefetch,
+  } = useQuery({
+    queryKey: ["wishlist", user?.email],
+    queryFn: () =>
+      fetch(`https://fg-server.vercel.app/wishlist/${user?.email}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+        },
+      }).then((res) => res.json()),
+  });
 
   const handleDecrement = (e, id) => {
     e.preventDefault();
@@ -184,6 +199,9 @@ export const ContextProvider = ({ children }) => {
         resetPassword,
         loading,
         logOut,
+        wishListData,
+        wishlistLoading,
+        wishlistRefetch,
       }}
     >
       {children}

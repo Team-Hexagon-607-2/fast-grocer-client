@@ -11,7 +11,7 @@ const SingleProduct = ({ products }) => {
   // console.log(products);
   // const { product_name, product_photo, product_mesurement, product_price } = products;
   const [loading, setLoading] = useState();
-  const { user, handleAddToCart } = useContext(StateContext);
+  const { user, handleAddToCart, wishlistRefetch } = useContext(StateContext);
   const { _id, name, imageUrl, price, bundle, original_price, save } = products;
 
   const handleWishlist = (products) => {
@@ -45,6 +45,7 @@ const SingleProduct = ({ products }) => {
           if (data.status === true) {
             setLoading(false);
             toast.success(`${data.message}`);
+            wishlistRefetch();
           } else {
             toast.error("Already Added on Wishlist Page");
           }
