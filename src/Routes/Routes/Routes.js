@@ -15,7 +15,6 @@ import MyWishlist from "../../Pages/Dashboard/MyWishlist/MyWishlist";
 import Payments from "../../Pages/Dashboard/Payments/Payments";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import AllProducts from "../../components/AllProducts/AllProducts";
-import WishList from "../../components/WishList/WishList";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -30,93 +29,85 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Main></Main>,
-        errorElement: <ErrorPage></ErrorPage>,
-        children: [
-            {
-                path: "/",
-                element: <Home></Home>,
-            },
-            {
-                path: "/allproducts",
-                element: <AllProducts></AllProducts>
-            },
-            {
-                path: "/products/:id",
-                element: <ProductDetails></ProductDetails>,
-                loader: ({ params }) =>
-                    fetch(`https://fg-server.vercel.app/products/${params.id}`),
-            },
-            {
-                path: "/search",
-                element: <SearchPage />,
-            },
-            {
-                path: "/onsale",
-                element: <OnSale />,
-            },
-            {
-                path: "/cart",
-                element: <Cart />,
-            },
-            {
-                path: "/signup",
-                element: <SignUp></SignUp>
-            },
-            {
-                path: "/login",
-                element: <Login></Login>
-            },
-            {
-                path: "/wishlist",
-                element: <WishList/>
-            },
-        ],
-    },
-    {
-        path: '/category',
+        element: <Home></Home>,
+      },
+      {
+        path: "/allproducts",
+        element: <AllProducts></AllProducts>,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetails></ProductDetails>,
+        loader: ({ params }) =>
+          fetch(`https://fg-server.vercel.app/products/${params.id}`),
+      },
+      {
+        path: "/search",
+        element: <SearchPage />,
+      },
+      {
+        path: "/onsale",
+        element: <OnSale />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+
+      {
+        path: "/category",
         element: <CategoryLayout></CategoryLayout>,
         children: [
-            {
-                path: '/category/:name',
-                element: <CategoryPageProducts></CategoryPageProducts>
-            }
-        ]
-    },
-    {
-        path: '/dashboard',
+          {
+            path: "/category/:name",
+            element: <CategoryPageProducts></CategoryPageProducts>,
+          },
+        ],
+      },
+      {
+        path: "/dashboard",
         element: <DashboardLayout></DashboardLayout>,
         children: [
-            {
-                path: "/dashboard",
-                element: <Dashboard></Dashboard>
-            },
-            {
-                path: "/dashboard/all-buyers",
-                element: <AllBuyers></AllBuyers>
-            },
-            {
-                path: "/dashboard/all-deliveryman",
-                element: <AllDeliveryman></AllDeliveryman>,
-            },
-            {
-                path: "/dashboard/my-orders",
-                element: <MyOrders></MyOrders>,
-            },
-            {
-                path: '/dashboard/my-wishlist',
-                element: <MyWishlist></MyWishlist>
-            },
-            {
-                path: '/dashboard/payments',
-                element: <Payments></Payments>
-            },
-            {
-                path: '/dashboard/my-reviews',
-                element: <MyReviews></MyReviews>
-            }
-        ]
-    },
+          {
+            path: "/dashboard",
+            element: <Dashboard></Dashboard>,
+          },
+          {
+            path: "/dashboard/all-buyers",
+            element: <AllBuyers></AllBuyers>,
+          },
+          {
+            path: "/dashboard/all-deliveryman",
+            element: <AllDeliveryman></AllDeliveryman>,
+          },
+          {
+            path: "/dashboard/my-orders",
+            element: <MyOrders></MyOrders>,
+          },
+          {
+            path: "/dashboard/my-wishlist",
+            element: <MyWishlist></MyWishlist>,
+          },
+          {
+            path: "/dashboard/payments",
+            element: <Payments></Payments>,
+          },
+          {
+            path: "/dashboard/my-reviews",
+            element: <MyReviews></MyReviews>,
+          },
+        ],
+      },
+    ],
+  },
 ]);
 
 export default router;
