@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { TbShoppingCartPlus } from "react-icons/tb";
 import { useLoaderData } from "react-router";
-import { StateContext } from "../../../contexts/AuthProvider";
+import { StateContext } from "../../contexts/AuthProvider";
 
 const ProductDetails = () => {
   const product = useLoaderData();
