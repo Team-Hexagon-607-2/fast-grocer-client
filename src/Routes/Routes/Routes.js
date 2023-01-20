@@ -1,6 +1,6 @@
 import CategoryPageProducts from "../../components/CategoryPage/CategoryPageProducts/CategoryPageProducts";
 import OnSale from "../../components/OnSale/OnSale";
-import ProductDetails from "../../components/Products/ProductDetails/ProductDetails";
+import ProductDetails from "../../components/ProductDetails/ProductDetails";
 import SearchPage from "../../components/SearchPage/SearchPage";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllDeliveryman from "../../Pages/Dashboard/AllDeliveryman/AllDeliveryman";

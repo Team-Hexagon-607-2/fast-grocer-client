@@ -73,7 +73,7 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                setCreatedUserEmail(user.email);
+                setCreatedUserEmail(email);
             })
     }
 
