@@ -28,7 +28,7 @@ const NewsLetter = () => {
   return (
     <div className="bg text-center flex items-center justify-center px-4">
       <div className="w-[500px]">
-        <h2 className="text-2xl font-semibold mt-40 md:mt-20 lg:mt-0">
+        <h2 className="text-xl md:text-3xl text-center font-bold py-5 mb-20 md:mb-0">
           NEWSLETTER{" "}
         </h2>
         <p className="text-slate-500 mt-5">
