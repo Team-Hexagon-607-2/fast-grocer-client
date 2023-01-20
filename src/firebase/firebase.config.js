@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_apiKey,
-    authDomain: process.env.REACT_APP_authDomain,
-    projectId: process.env.REACT_APP_projectId,
-    storageBucket: process.env.REACT_APP_storageBucket,
-    messagingSenderId: process.env.REACT_APP_messagingSenderId,
-    appId: process.env.REACT_APP_appId
+  apiKey: "AIzaSyCk6LAmJ6b3PFURJDwskLCxMMHjxTV8Ioo",
+  authDomain: "fast-grocer-01.firebaseapp.com",
+  projectId: "fast-grocer-01",
+  storageBucket: "fast-grocer-01.appspot.com",
+  messagingSenderId: "491886969293",
+  appId: "1:491886969293:web:700646cd716f3d1aaec484"
 };
 
 // Initialize Firebase
