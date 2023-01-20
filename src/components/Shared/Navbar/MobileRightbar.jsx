@@ -45,7 +45,7 @@ const MobileRightbar = () => {
               </p>
               <p className="text-[17px] ml-2 text-black">Sign Up</p>
             </Link>
-            <Link to="wishlist" className="mt-5  ">
+            <Link to="/dashboard/my-wishlist" className="mt-5  ">
               <div className="flex flex-row items-center mt-5 ">
                 <p>
                   <BsHeart size={25} />
