@@ -44,9 +44,10 @@ export const ContextProvider = ({ children }) => {
       const res = await fetch('https://fg-server.vercel.app/categories');
       const data = await res.json();
       return data;
-    },
+    }
+  }
   );
-  
+
   //wishList
   const {
     data: wishListData,
@@ -169,7 +170,7 @@ export const ContextProvider = ({ children }) => {
   }, [cart]);
 
   const totalQuantity = cart?.reduce((total, item) => total + item.qunatity, 0);
-  
+
   const totalPrice = cart.reduce(
     (acc, item) => acc + item.qunatity * item.price,
     0

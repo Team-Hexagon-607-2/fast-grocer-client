@@ -1,32 +1,11 @@
-<<<<<<< HEAD
 import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import Footer from '../../components/Shared/Footer/Footer';
-import { Navbar } from '../../components/Shared/Navbar';
 import productCategory from '../../assets/images/categoryModalIcon/categoryModalIcon.png';
 import { StateContext } from '../../contexts/AuthProvider';
 
 const CategoryLayout = () => {
   const { AllProducts, isLoading: isProductLoading, categories, isCategoryLoading } = useContext(StateContext);
-=======
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import Footer from "../../components/Shared/Footer/Footer";
-import { Navbar } from "../../components/Shared/Navbar";
-import productCategory from "../../assets/images/categoryModalIcon/categoryModalIcon.png";
-
-const CategoryLayout = () => {
-  // all product categories name
-  const { data: categories = [] } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const res = await fetch("https://fg-server.vercel.app/categories");
-      const data = await res.json();
-      return data;
-    },
-  });
->>>>>>> ade63ee9994da856dc706dace0ce84d6f8e49ce9
 
   return (
     <div>
@@ -48,8 +27,7 @@ const CategoryLayout = () => {
 
         <div className="drawer-side">
           <label htmlFor="category" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-base-100 text-base-content lg:bg-slate-100">
-<<<<<<< HEAD
+          <ul className="menu p-4 w-80 bg-base-100 text-base-content lg:bg-slate-50">
             <h2 className='font-semibold text-lg pl-4'>Product Categories</h2>
             {
               (!isProductLoading && !isCategoryLoading) &&
@@ -63,21 +41,10 @@ const CategoryLayout = () => {
                 </li>
               )
             }
-=======
-            <h2 className="font-semibold text-lg pl-4">Product Categories</h2>
-            {categories.map((category) => (
-              <li className="m-0 p-0" key={category._id}>
-                <Link to={`/category/${category.categoryName}`}>
-                  {category.categoryName}
-                </Link>
-              </li>
-            ))}
->>>>>>> ade63ee9994da856dc706dace0ce84d6f8e49ce9
           </ul>
         </div>
       </div>
 
-      <Footer></Footer>
     </div>
   );
 };
