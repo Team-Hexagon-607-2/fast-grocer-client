@@ -5,9 +5,10 @@ import { StateContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const {signIn, googleSignIn, resetPassword} = useContext(StateContext);
+    const {signIn, googleSignIn, resetPassword, updateUser} = useContext(StateContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [createdUserEmail, setCreatedUserEmail] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -32,11 +33,24 @@ const Login = () => {
        googleSignIn()
        .then(result => {
         const user = result.user;
-        console.log(user);
-        navigate(from, {replace: true});
+        const userInfo = {
+            role: "buyer"
+        }
+
+        updateUser(userInfo)
+            .then(()=> {
+                saveUser(user.displayName, user.email, userInfo.role);
+                navigate(from, {replace: true});
+            })
+            .catch(err=> console.log(err));
+        
        })
-       .catch(err => console.error(err));
+       .catch(error => {
+        setLoginError(error.message)
+       });
     }
+
+   
 
     const handleResetPassword = (data) => {
         console.log(data.email);
@@ -47,6 +61,22 @@ const Login = () => {
         })
         .catch(err => console.error(err))
     }
+
+    const saveUser = (name, email, role)=> {
+        const user = {name, email, role};
+        fetch('https://fg-server.vercel.app/users',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setCreatedUserEmail(email);
+            })
+    }
+
     
 
     return (

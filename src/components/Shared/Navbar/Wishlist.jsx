@@ -15,7 +15,7 @@ import { StateContext } from "../../../contexts/AuthProvider";
 const Wishlist = () => {
   const { wishListData } = useContext(StateContext);
   return (
-    <Link to="/wishlist" className="flex flex-row">
+    <Link to="/dashboard/my-wishlist" className="flex flex-row">
       <div className="w-[40px] h-[40px] rounded-[50%] hover:text-[#96B240]  bg-[#F2F4EC] flex items-center justify-center ">
         <BsHeart className="text-lg hover:text-[#96B240] " />
       </div>
