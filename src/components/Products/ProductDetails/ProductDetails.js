@@ -25,12 +25,12 @@ const ProductDetails = () => {
           <img src={imageUrl} alt="product img" className='h-[250px] md:h-[350px] mx-auto rounded-t-md' />
         </div>
         <div className="w-full">
-          <p className="text-xl font-semibold">{name}</p>
+          <p className="text-3xl font-semibold">{name}</p>
           <p>Quantity: {qunatity}</p>
           <p>Bundle: {bundle}</p>
           <p>Stock: {stock}</p>
           <div className="flex items-end">
-            <p className="text-[#8ba73b] text-2xl font-bold">৳{price}</p>
+            <p className="text-[#8ba73b] text-3xl font-bold mt-2">৳{price}</p>
             <p className="text-red-400 font-bold mx-1">
               <del>{original_price}</del>
             </p>

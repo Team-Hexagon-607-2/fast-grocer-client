@@ -20,6 +20,7 @@ const AllProducts = () => {
       <div className="flex items-center justify-center  sm:mt-[50px]">
         {isLoading && <Loader />}
       </div>
+      <h2 className="text-center font-semibold text-2xl">All Products</h2>
       <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 mx-auto py-10">
         {AllProducts?.map((product) => (
           <SingleProduct key={product?.id} products={product} />
