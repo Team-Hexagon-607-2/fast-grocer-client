@@ -4,3 +4,13 @@
   background-size: cover;
   text-align: center;
 }
+
+.workImage {
+  background-image: url('../../../assets/images/AboutUs/workProcess.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.findProduct {
+  background: linear-gradient(135deg, #3CB813 0%, #82C341 100%);
+}
