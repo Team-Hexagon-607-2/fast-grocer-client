@@ -26,24 +26,6 @@ const AboutUs = () => {
           We also participate in various charitable events and donation programs throughout the year.</p>
       </div>
 
-      <div className='py-20 my-10 px-5 bg-[#FDF2F7]'>
-        <h2 className="text-4xl font-bold mb-5">Grocery shopping in a few steps</h2>
-        <div className='grid md:grid-cols-3 gap-10'>
-          <div>
-            <h1 className='text-2xl font-semibold'>1. Browse</h1>
-            <p className='text-gray-500'>Go to 'shop' on fast grocer app and explore thousands of product from the shops you love</p>
-          </div>
-          <div>
-            <h1 className='text-2xl font-semibold'>2. Order</h1>
-            <p className='text-gray-500'>Add your shopping faves to your cart review your order, apply vouchers for extra saving</p>
-          </div>
-          <div>
-            <h1 className='text-2xl font-semibold'>3. Enjoy</h1>
-            <p className='text-gray-500'>Check out and enjoy the free time you've saved. We'll be there a flash!</p>
-          </div>
-        </div>
-      </div>
-
       <div className='py-14 px-5 workImage my-10'>
         <p className='text-center text-[#3CB813] text-sm mb-5'>HOW IT WORK</p>
         <h2 className='text-center text-3xl md:text-4xl font-bold mb-8'>Healthy, affordable, delicious</h2>
@@ -65,6 +47,24 @@ const AboutUs = () => {
             <img src={img3} className='mx-auto' alt="" />
             <h4 className='text-2xl font-semibold'>Save time and money</h4>
             <p>Id porta nostra morbi ut letius sed imperdiet potenti habitasse</p>
+          </div>
+        </div>
+      </div>
+
+      <div className='py-20 my-10 px-5 bg-[#FDF2F7]'>
+        <h2 className="text-4xl font-bold mb-5">Grocery shopping in a few steps</h2>
+        <div className='grid md:grid-cols-3 gap-10'>
+          <div>
+            <h1 className='text-2xl font-semibold'>1. Browse</h1>
+            <p className='text-gray-500'>Go to 'shop' on fast grocer app and explore thousands of product from the shops you love</p>
+          </div>
+          <div>
+            <h1 className='text-2xl font-semibold'>2. Order</h1>
+            <p className='text-gray-500'>Add your shopping faves to your cart review your order, apply vouchers for extra saving</p>
+          </div>
+          <div>
+            <h1 className='text-2xl font-semibold'>3. Enjoy</h1>
+            <p className='text-gray-500'>Check out and enjoy the free time you've saved. We'll be there a flash!</p>
           </div>
         </div>
       </div>
