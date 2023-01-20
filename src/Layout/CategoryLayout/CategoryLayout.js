@@ -34,7 +34,7 @@ const CategoryLayout = () => {
                   key={category._id}>
                   <Link to={`/category/${category.categoryName}`} className='flex justify-between'>
                     <span>{category.categoryName}</span>
-                    <span className='bg-[#ddecb0] w-7 h-7 rounded-full flex justify-center items-center text-sm'>({(AllProducts.filter(product => product.category_name === category.categoryName)).length})</span>
+                    <span className='bg-[#ddecb0] text-black w-7 h-7 rounded-full flex justify-center items-center text-sm'>({(AllProducts.filter(product => product.category_name === category.categoryName)).length})</span>
                   </Link>
                 </li>
               )

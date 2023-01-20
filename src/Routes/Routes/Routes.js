@@ -15,6 +15,7 @@ import MyWishlist from "../../Pages/Dashboard/MyWishlist/MyWishlist";
 import Payments from "../../Pages/Dashboard/Payments/Payments";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import AllProducts from "../../components/AllProducts/AllProducts";
+import AboutUs from "../../components/AboutUs/AboutUs/AboutUs";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -38,8 +39,7 @@ const router = createBrowserRouter([
             {
                 path: "/products/:id",
                 element: <ProductDetails></ProductDetails>,
-                loader: ({ params }) =>
-                    fetch(`https://fg-server.vercel.app/products/${params.id}`),
+                loader: ({ params }) => fetch(`https://fg-server.vercel.app/products/${params.id}`),
             },
             {
                 path: "/search",
@@ -60,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <Login></Login>
+            },
+            {
+                path: '/aboutUs',
+                element: <AboutUs />
             }
         ],
     },
