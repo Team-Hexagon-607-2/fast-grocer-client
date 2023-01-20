@@ -59,7 +59,7 @@ const NavLinks = () => {
       </div>
       <Link to="/onsale">Offer</Link>
       <Link to="/aboutUs">About Us</Link>
-      <Link to="/contact">Contact</Link>
+      <Link to="/">Contact</Link>
     </div>
   );
 };

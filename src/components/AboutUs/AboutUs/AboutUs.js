@@ -3,6 +3,7 @@ import './AboutUs.css';
 import img1 from '../../../assets/images/AboutUs/1.png'
 import img2 from '../../../assets/images/AboutUs/2.png'
 import img3 from '../../../assets/images/AboutUs/3.png'
+import { BsArrowRight } from "react-icons/bs";
 
 const AboutUs = () => {
   return (
@@ -14,7 +15,7 @@ const AboutUs = () => {
         </div>
       </div>
 
-      <div className='mt-5 px-5'>
+      <div className='mt-10 px-5'>
         <p>Fast Grocer is a family-owned and operated grocery store that has been serving our community for over 20 years.
           Our mission is to provide fresh, high-quality products at an affordable price, while also being a responsible member of our community.
           We pride ourselves on our wide selection of products, including organic produce, high-quality meats, and specialty items.
@@ -67,7 +68,6 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
