@@ -65,7 +65,7 @@ const Login = () => {
     const saveUser = (name, email, role)=> {
         const user = {name, email, role};
         fetch('https://fg-server.vercel.app/users',{
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -73,7 +73,7 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                setCreatedUserEmail(email);
+                setCreatedUserEmail(user.email);
             })
     }
 
