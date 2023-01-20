@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { StateContext } from "../../contexts/AuthProvider";
 import SingleProduct from "../Home/HomePageProducts/SingleProduct/SingleProduct";
 
 const OfferProducts = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const { AllProducts, isError, isLoading } = useContext(StateContext);
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      const response = await fetch("https://fg-server.vercel.app/products");
-      const data = await response.json();
-      setData(data);
-      setLoading(false);
-    }
-    fetchData();
-  }, []);
-
-  const filter = data?.filter((p) => p?.status == "onsale");
+  const filter = AllProducts?.filter((p) => p?.status == "onsale");
   const Loader = () => {
     return (
       <div
@@ -29,7 +18,7 @@ const OfferProducts = () => {
   };
   return (
     <div>
-      {loading ? (
+      {isLoading ? (
         <div className="flex items-center justify-center m-[100px]">
           <Loader />
         </div>
