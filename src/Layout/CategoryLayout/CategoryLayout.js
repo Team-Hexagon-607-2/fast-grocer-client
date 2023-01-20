@@ -1,20 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import Footer from "../../components/Shared/Footer/Footer";
-import { Navbar } from "../../components/Shared/Navbar";
-import productCategory from "../../assets/images/categoryModalIcon/categoryModalIcon.png";
+import React, { useContext } from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import Footer from '../../components/Shared/Footer/Footer';
+import productCategory from '../../assets/images/categoryModalIcon/categoryModalIcon.png';
+import { StateContext } from '../../contexts/AuthProvider';
 
 const CategoryLayout = () => {
-  // all product categories name
-  const { data: categories = [] } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const res = await fetch("https://fg-server.vercel.app/categories");
-      const data = await res.json();
-      return data;
-    },
-  });
+  const { AllProducts, isLoading: isProductLoading, categories, isCategoryLoading } = useContext(StateContext);
 
   return (
     <div>
@@ -36,20 +27,24 @@ const CategoryLayout = () => {
 
         <div className="drawer-side">
           <label htmlFor="category" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-base-100 text-base-content lg:bg-slate-100">
-            <h2 className="font-semibold text-lg pl-4">Product Categories</h2>
-            {categories.map((category) => (
-              <li className="m-0 p-0" key={category._id}>
-                <Link to={`/category/${category.categoryName}`}>
-                  {category.categoryName}
-                </Link>
-              </li>
-            ))}
+          <ul className="menu p-4 w-80 bg-base-100 text-base-content lg:bg-slate-50">
+            <h2 className='font-semibold text-lg pl-4'>Product Categories</h2>
+            {
+              (!isProductLoading && !isCategoryLoading) &&
+              categories.map(category =>
+                <li className="m-0 p-0"
+                  key={category._id}>
+                  <Link to={`/category/${category.categoryName}`} className='flex justify-between'>
+                    <span>{category.categoryName}</span>
+                    <span className='bg-[#ddecb0] text-black w-7 h-7 rounded-full flex justify-center items-center text-sm'>({(AllProducts.filter(product => product.category_name === category.categoryName)).length})</span>
+                  </Link>
+                </li>
+              )
+            }
           </ul>
         </div>
       </div>
 
-      <Footer></Footer>
     </div>
   );
 };

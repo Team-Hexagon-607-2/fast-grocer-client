@@ -38,16 +38,16 @@ export const ContextProvider = ({ children }) => {
   });
 
   // all product categories name
-  const { data: categories = [], isLoading: categoryProductLoading } = useQuery(
-    {
-      queryKey: ["categories"],
-      queryFn: async () => {
-        const res = await fetch("https://fg-server.vercel.app/categories");
-        const data = await res.json();
-        return data;
-      },
+  const { data: categories = [], isLoading: isCategoryLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const res = await fetch('https://fg-server.vercel.app/categories');
+      const data = await res.json();
+      return data;
     }
+  }
   );
+
   //wishList
   const {
     data: wishListData,
@@ -168,7 +168,9 @@ export const ContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+
   const totalQuantity = cart?.reduce((total, item) => total + item.qunatity, 0);
+
   const totalPrice = cart.reduce(
     (acc, item) => acc + item.qunatity * item.price,
     0
@@ -183,7 +185,7 @@ export const ContextProvider = ({ children }) => {
         setSearchText,
         AllProducts,
         categories,
-        categoryProductLoading,
+        isCategoryLoading,
         isLoading,
         isError,
         handleDecrement,
