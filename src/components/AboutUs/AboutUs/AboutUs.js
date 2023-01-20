@@ -3,7 +3,6 @@ import './AboutUs.css';
 import img1 from '../../../assets/images/AboutUs/1.png'
 import img2 from '../../../assets/images/AboutUs/2.png'
 import img3 from '../../../assets/images/AboutUs/3.png'
-import { BsArrowRight } from "react-icons/bs";
 
 const AboutUs = () => {
   return (
