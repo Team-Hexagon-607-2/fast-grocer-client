@@ -14,13 +14,9 @@ const SingleProduct = ({ products }) => {
   const { _id, name, imageUrl, price, bundle, original_price, save } = products;
 
   return (
-    <div className="bg-white shadow-lg hover:shadow-2xl rounded-md border border-slate-200/60 duration-300">
-      <div className="h-225px">
-        <img
-          src={imageUrl}
-          alt="product img"
-          className="mx-auto h-[225px] rounded-t-md"
-        />
+    <div className='bg-white hover:shadow-xl rounded-md border border-slate-200/60 duration-300'>
+      <div className='h-225px'>
+        <img src={imageUrl} alt="product img" className='mx-auto h-[225px] rounded-t-md' />
       </div>
       <div className="p-4">
         <span className="flex items-center">
