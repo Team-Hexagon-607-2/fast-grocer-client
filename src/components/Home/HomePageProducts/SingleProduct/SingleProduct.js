@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TbShoppingCartPlus } from "react-icons/tb";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -15,38 +15,42 @@ const SingleProduct = ({ products }) => {
   const { _id, name, imageUrl, price, bundle, original_price, save } = products;
 
   const handleWishlist = (products) => {
-    const data = {
-      productId: products?._id,
-      productName: products?.name,
-      productPrice: products?.price,
-      productOriginalPrice: products?.original_price,
-      productImage: products?.imageUrl,
-      categoryName: products?.category_name,
-      subCategoryName: products?.sub_category,
-      userName: user?.displayName,
-      userEmail: user?.email,
-      createdAt: new Date(),
-    };
+    if (!user) {
+      toast.error("Please Log In");
+    } else {
+      const data = {
+        productId: products?._id,
+        productName: products?.name,
+        productPrice: products?.price,
+        productOriginalPrice: products?.original_price,
+        productImage: products?.imageUrl,
+        categoryName: products?.category_name,
+        subCategoryName: products?.sub_category,
+        userName: user?.displayName,
+        userEmail: user?.email,
+        createdAt: new Date(),
+      };
 
-    setLoading(true);
-    fetch("https://fg-server.vercel.app/wishlist", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === true) {
-          setLoading(false);
-          toast.success(`${data.message}`);
-        } else {
-          toast.error("Already Added on Wishlist Page");
-        }
+      setLoading(true);
+      fetch("https://fg-server.vercel.app/wishlist", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
       })
-      .catch((error) => console.log(error));
-    setLoading(false);
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === true) {
+            setLoading(false);
+            toast.success(`${data.message}`);
+          } else {
+            toast.error("Already Added on Wishlist Page");
+          }
+        })
+        .catch((error) => console.log(error));
+      setLoading(false);
+    }
   };
   return (
     <div className="bg-white shadow-lg hover:shadow-2xl rounded-md border border-slate-200/60 duration-300">
