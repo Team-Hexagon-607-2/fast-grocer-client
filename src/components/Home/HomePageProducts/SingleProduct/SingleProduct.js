@@ -27,7 +27,8 @@ const SingleProduct = ({ products }) => {
         categoryName: products?.category_name,
         subCategoryName: products?.sub_category,
         userName: user?.displayName,
-        userEmail: user?.email,
+        email: user?.email,
+        bundle: products?.bundle,
         createdAt: new Date(),
       };
 
