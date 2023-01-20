@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "../../components/Shared/Footer/Footer";
 import Navbar from "../../components/Shared/Navbar/Navbar";
+import { StateContext } from "../../contexts/AuthProvider";
+import useFindAdmin from "../../hooks/useFindAdmin";
+import useFindBuyer from "../../hooks/useFindBuyer";
+import useFindDeliveryman from "../../hooks/useFindDeliveryman";
 
 const DashboardLayout = () => {
+
+  const { user } = useContext(StateContext);
+    const [isAdmin] = useFindAdmin(user?.email);
+    const [isBuyer] = useFindBuyer(user?.email);
+    const [isDeliverymen] = useFindDeliveryman(user?.email);
+
   return (
     <div>
-      <Navbar></Navbar>
       <div className="drawer drawer-mobile lg:w-11/12 mx-auto">
         <input
           id="dashboard-drawer"
@@ -27,58 +36,73 @@ const DashboardLayout = () => {
                 My Profile
               </Link>
             </li>
-            <li>
-              <Link
-                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
-                to="/dashboard/all-buyers"
-              >
-                All Buyers
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
-                to="/dashboard/all-deliveryman"
-              >
-                Delivery Men
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
-                to="/dashboard/my-orders"
-              >
-                My Orders
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
-                to="/dashboard/my-wishlist"
-              >
-                My Wishlist
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
-                to="/dashboard/payments"
-              >
-                Payments
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
-                to="/dashboard/my-reviews"
-              >
-                My Reviews
-              </Link>
-            </li>
+
+            {/* Admin Dashboard */}
+
+            {
+              isAdmin && <>
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/all-buyers"
+                  >
+                    All Buyers
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/all-deliveryman"
+                  >
+                    Delivery Men
+                  </Link>
+                </li>
+            </>}
+
+            {/* Buyer Dashboard */}
+
+            {
+              isBuyer && <>
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/my-orders"
+                  >
+                    My Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/my-wishlist"
+                  >
+                    My Wishlist
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/payments"
+                  >
+                    Payments
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/my-reviews"
+                  >
+                    My Reviews
+                  </Link>
+                </li>
+            </>}
+
+            {/* Buyer Dashboard */}
+
+
           </ul>
         </div>
       </div>
-      <Footer></Footer>
     </div>
   );
 };
