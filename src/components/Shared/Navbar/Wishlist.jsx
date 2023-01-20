@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const Wishlist = () => {
   return (
-    <Link to="/wishlist" className="flex flex-row">
+    <Link to="/dashboard/my-wishlist" className="flex flex-row">
       <div className="w-[40px] h-[40px] rounded-[50%] hover:text-[#96B240]  bg-[#F2F4EC] flex items-center justify-center ">
         <BsHeart className="text-lg hover:text-[#96B240] " />
       </div>

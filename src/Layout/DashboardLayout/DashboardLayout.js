@@ -18,10 +18,10 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu mt-24 p-4 w-80 bg-white text-base-100">
-            <li>
-            <Link
-                className="border-2 mb-2 bg-primary"
+          <ul className="menu mt-[77px] p-4 w-56 bg-white text-base-100">
+            <li className="rounded-none">
+              <Link
+                className="border-y text-slate-700 h-[30px] py-5 !rounded-none"
                 to="/dashboard"
               >
                 My Profile
@@ -29,7 +29,7 @@ const DashboardLayout = () => {
             </li>
             <li>
               <Link
-                className="border-2 mb-2 bg-primary"
+                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
                 to="/dashboard/all-buyers"
               >
                 All Buyers
@@ -37,10 +37,42 @@ const DashboardLayout = () => {
             </li>
             <li>
               <Link
-                className="border-2 bg-primary"
+                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
                 to="/dashboard/all-deliveryman"
               >
                 Delivery Men
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                to="/dashboard/my-orders"
+              >
+                My Orders
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                to="/dashboard/my-wishlist"
+              >
+                My Wishlist
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                to="/dashboard/payments"
+              >
+                Payments
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                to="/dashboard/my-reviews"
+              >
+                My Reviews
               </Link>
             </li>
           </ul>
