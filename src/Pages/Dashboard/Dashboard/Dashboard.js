@@ -27,13 +27,16 @@ const Dashboard = () => {
                     </div>
                     <div className='mb-5'>
                         <p className='font-semibold'><small>Contact No.</small></p>
-                        <p></p>
+                        <p>N/A</p>
                     </div>
                     {
                         isDeliverymen && <div className='mb-5'>
                         <p className='font-semibold'><small>Work Permit</small></p>
                         <p>Not Allowed</p>
                     </div>
+                    }
+                    {
+                        isDeliverymen && <button className='bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3'>Request for Work Permit</button>
                     }
                 </div>
             </div>

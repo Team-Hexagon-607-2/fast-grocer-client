@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AiOutlineHeart, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
-import {FiUsers} from 'react-icons/fi';
+import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "../../components/Shared/Footer/Footer";
@@ -13,9 +13,9 @@ import useFindDeliveryman from "../../hooks/useFindDeliveryman";
 const DashboardLayout = () => {
 
   const { user } = useContext(StateContext);
-    const [isAdmin] = useFindAdmin(user?.email);
-    const [isBuyer] = useFindBuyer(user?.email);
-    const [isDeliverymen] = useFindDeliveryman(user?.email);
+  const [isAdmin] = useFindAdmin(user?.email);
+  const [isBuyer] = useFindBuyer(user?.email);
+  const [isDeliverymen] = useFindDeliveryman(user?.email);
 
   return (
     <div>
@@ -37,7 +37,7 @@ const DashboardLayout = () => {
                 className="text-slate-700"
                 to="/dashboard"
               >
-                <AiOutlineUser/> My Profile
+                <AiOutlineUser /> My Profile
               </Link>
             </li>
 
@@ -50,7 +50,7 @@ const DashboardLayout = () => {
                     className="text-slate-700"
                     to="/dashboard/all-buyers"
                   >
-                    All Buyers
+                    <FiUsers /> All Buyers
                   </Link>
                 </li>
                 <li>
@@ -58,10 +58,10 @@ const DashboardLayout = () => {
                     className="text-slate-700"
                     to="/dashboard/all-deliveryman"
                   >
-                   <FiUsers/> Delivery Men
+                    <FiUsers /> Delivery Men
                   </Link>
                 </li>
-            </>}
+              </>}
 
             {/* Buyer Dashboard */}
 
@@ -72,7 +72,7 @@ const DashboardLayout = () => {
                     className="text-slate-700"
                     to="/dashboard/my-orders"
                   >
-                    <AiOutlineUnorderedList/>My Orders
+                    <AiOutlineUnorderedList />My Orders
                   </Link>
                 </li>
                 <li>
@@ -80,7 +80,7 @@ const DashboardLayout = () => {
                     className="text-slate-700"
                     to="/dashboard/my-wishlist"
                   >
-                    <AiOutlineHeart/>My Wishlist
+                    <AiOutlineHeart />My Wishlist
                   </Link>
                 </li>
                 <li>
@@ -88,7 +88,7 @@ const DashboardLayout = () => {
                     className="text-slate-700"
                     to="/dashboard/payments"
                   >
-                    <BsCash/>Payments
+                    <BsCash />Payments
                   </Link>
                 </li>
                 <li>
@@ -96,10 +96,10 @@ const DashboardLayout = () => {
                     className="text-slate-700"
                     to="/dashboard/my-reviews"
                   >
-                    <AiOutlineStar/>My Reviews
+                    <AiOutlineStar />My Reviews
                   </Link>
                 </li>
-            </>}
+              </>}
 
             {/* Buyer Dashboard */}
 
