@@ -31,7 +31,7 @@ const NewsLetter = () => {
     <div className="bg text-center flex items-center justify-center px-4 mt-10">
       <div className="w-[500px]">
         <h2 className="text-xl md:text-3xl text-center font-bold py-5 mb-20 md:mb-0">
-          NEWSLETTER{" "}
+          Newsletter{" "}
         </h2>
         <p className="text-slate-500 mt-5">
           Subscribe to the weekly newsletter for all the latest OFFERS!!

@@ -100,7 +100,7 @@ const SingleProduct = ({ products }) => {
           </button>
           <button
             onClick={() => handleWishlist(products)}
-            className="bg-#8ba73b px-3 rounded-md bg-[#ff00001c] hover:bg-[#ff00002e] duration-300 flex items-center justify-center"
+            className="bg-#8ba73b px-2 rounded-md bg-[#ff00001c] hover:bg-[#ff00002e] duration-300 flex items-center justify-center"
           >
             <AiFillHeart className="text-red-600 mr-2" />
             Wishlist

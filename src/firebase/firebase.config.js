@@ -10,10 +10,9 @@ const firebaseConfig = {
   projectId: "fast-grocer-01",
   storageBucket: "fast-grocer-01.appspot.com",
   messagingSenderId: "491886969293",
-  appId: "1:491886969293:web:51676c23de0da2a5aec484"
+  appId: "1:491886969293:web:700646cd716f3d1aaec484"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 export default app;

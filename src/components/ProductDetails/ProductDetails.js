@@ -22,7 +22,7 @@ const ProductDetails = () => {
     <div className='w-10/12 mx-auto my-20'>
       <div className='flex flex-col md:flex-row items-center mb-10'>
         <div className='max-h-[350px] w-full mb-10 md:mb-0'>
-          <img src={imageUrl} alt="product img" className='h-[250px] md:h-[350px] mx-auto rounded-t-md' />
+          <img src={imageUrl} alt="product img" className='h-[250px] md:h-[350px] mx-auto border rounded-md' />
         </div>
         <div className="w-full">
           <p className="text-3xl font-semibold">{name}</p>
