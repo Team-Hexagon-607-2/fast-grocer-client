@@ -1,4 +1,7 @@
 import React, { useContext } from "react";
+import { AiOutlineHeart, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
+import {FiUsers} from 'react-icons/fi';
+import { BsCash } from "react-icons/bs";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "../../components/Shared/Footer/Footer";
 import Navbar from "../../components/Shared/Navbar/Navbar";
@@ -27,14 +30,14 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-56 bg-slate-100 text-base-100">
+          <ul className="menu py-4 w-56 bg-slate-100 text-base-100">
             <img className="w-16 h-16 mx-auto my-10 rounded-full" src={user?.photoURL || 'https://picsum.photos/200/300'} alt="" />
-            <li className="rounded-none">
+            <li>
               <Link
-                className="border-y text-slate-700 h-[30px] py-5 !rounded-none"
+                className="text-slate-700"
                 to="/dashboard"
               >
-                My Profile
+                <AiOutlineUser/> My Profile
               </Link>
             </li>
 
@@ -44,7 +47,7 @@ const DashboardLayout = () => {
               isAdmin && <>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/all-buyers"
                   >
                     All Buyers
@@ -52,10 +55,10 @@ const DashboardLayout = () => {
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/all-deliveryman"
                   >
-                    Delivery Men
+                   <FiUsers/> Delivery Men
                   </Link>
                 </li>
             </>}
@@ -66,34 +69,34 @@ const DashboardLayout = () => {
               isBuyer && <>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/my-orders"
                   >
-                    My Orders
+                    <AiOutlineUnorderedList/>My Orders
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/my-wishlist"
                   >
-                    My Wishlist
+                    <AiOutlineHeart/>My Wishlist
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/payments"
                   >
-                    Payments
+                    <BsCash/>Payments
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/my-reviews"
                   >
-                    My Reviews
+                    <AiOutlineStar/>My Reviews
                   </Link>
                 </li>
             </>}

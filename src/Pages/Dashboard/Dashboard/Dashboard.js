@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { StateContext } from '../../../contexts/AuthProvider';
+import useFindDeliveryman from '../../../hooks/useFindDeliveryman';
 
 const Dashboard = () => {
     const { user } = useContext(StateContext);
+    const [isDeliverymen] = useFindDeliveryman(user?.email);
     return (
         <div className=''>
             <h2 className="text-2xl font-bold mb-4">My Profile</h2>
@@ -27,10 +29,12 @@ const Dashboard = () => {
                         <p className='font-semibold'><small>Contact No.</small></p>
                         <p></p>
                     </div>
-                    <div className='mb-5'>
+                    {
+                        isDeliverymen && <div className='mb-5'>
                         <p className='font-semibold'><small>Work Permit</small></p>
                         <p>Not Allowed</p>
                     </div>
+                    }
                 </div>
             </div>
 
