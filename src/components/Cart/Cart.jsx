@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { StateContext } from "../../contexts/AuthProvider";
 import CartItem from "./CartItem";
 
@@ -45,9 +46,11 @@ const Cart = () => {
                 <button className="text-xl  font-bold">
                   Total : ৳{totalPrice}
                 </button>
-                <button className="btn btn-primary mt-4 mb-10">
-                  Place Order
-                </button>
+                <Link to="/place-order">
+                  <button className="btn btn-primary mt-4 mb-10">
+                    Place Order
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

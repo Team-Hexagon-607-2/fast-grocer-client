@@ -24,6 +24,8 @@ export const ContextProvider = ({ children }) => {
   const [searchText, setSearchText] = useState("");
   const [cart, setCart] = useState(cartFromLocalStorage);
   const [loading, setLoading] = useState(true);
+  const [order, setOrder] = useState({});
+  const [address, setAddress] = useState({});
 
   // all products
   const {
@@ -39,14 +41,13 @@ export const ContextProvider = ({ children }) => {
 
   // all product categories name
   const { data: categories = [], isLoading: isCategoryLoading } = useQuery({
-    queryKey: ['categories'],
+    queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch('https://fg-server.vercel.app/categories');
+      const res = await fetch("https://fg-server.vercel.app/categories");
       const data = await res.json();
       return data;
-    }
-  }
-  );
+    },
+  });
 
   //wishList
   const {
@@ -175,7 +176,7 @@ export const ContextProvider = ({ children }) => {
     (acc, item) => acc + item.qunatity * item.price,
     0
   );
-  console.log(user);
+
   return (
     <StateContext.Provider
       value={{
@@ -206,6 +207,8 @@ export const ContextProvider = ({ children }) => {
         wishListData,
         wishlistLoading,
         wishlistRefetch,
+        order,
+        setOrder,
       }}
     >
       {children}

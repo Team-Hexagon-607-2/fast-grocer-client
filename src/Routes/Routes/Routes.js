@@ -16,6 +16,8 @@ import Payments from "../../Pages/Dashboard/Payments/Payments";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import AllProducts from "../../components/AllProducts/AllProducts";
 import AboutUs from "../../components/AboutUs/AboutUs/AboutUs";
+import PlaceOrder from "../../components/PlaceOrder/PlaceOrder";
+import Payment from "../../components/PlaceOrder/Payment";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -55,6 +57,14 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
+        path: "/place-order",
+        element: <PlaceOrder />,
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
+      },
+      {
         path: "/signup",
         element: <SignUp></SignUp>,
       },
@@ -64,7 +74,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/aboutUs",
-        element: <AboutUs></AboutUs>
+        element: <AboutUs></AboutUs>,
       },
 
       {
