@@ -8,8 +8,8 @@ const Dashboard = () => {
     return (
         <div className=''>
             <h2 className="text-2xl font-bold mb-4">My Profile</h2>
-            <div className='flex justify-start'>
-                <div className='mr-10 flex flex-col justify-center mx-20'>
+            <div className='flex flex-col md:flex-row items-start'>
+                <div className='mr-10 flex flex-col justify-center px-20 mx-auto md:mx-0'>
                     <img
                         className="mb-1 h-32 w-32 mx-auto rounded-full shadow-lg" src={user?.photoURL || 'https://picsum.photos/200/300'}
                         alt='' />
