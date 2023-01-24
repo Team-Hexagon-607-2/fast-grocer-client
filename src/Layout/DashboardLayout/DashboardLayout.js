@@ -8,11 +8,10 @@ import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
 
 const DashboardLayout = () => {
-
   const { user } = useContext(StateContext);
-    const [isAdmin] = useFindAdmin(user?.email);
-    const [isBuyer] = useFindBuyer(user?.email);
-    const [isDeliverymen] = useFindDeliveryman(user?.email);
+  const [isAdmin] = useFindAdmin(user?.email);
+  const [isBuyer] = useFindBuyer(user?.email);
+  const [isDeliverymen] = useFindDeliveryman(user?.email);
 
   return (
     <div>
@@ -39,8 +38,8 @@ const DashboardLayout = () => {
 
             {/* Admin Dashboard */}
 
-            {
-              isAdmin && <>
+            {isAdmin && (
+              <>
                 <li>
                   <Link
                     className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
@@ -57,12 +56,21 @@ const DashboardLayout = () => {
                     Delivery Men
                   </Link>
                 </li>
-            </>}
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/all-order"
+                  >
+                    All Orders
+                  </Link>
+                </li>
+              </>
+            )}
 
             {/* Buyer Dashboard */}
 
-            {
-              isBuyer && <>
+            {isBuyer && (
+              <>
                 <li>
                   <Link
                     className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
@@ -95,11 +103,10 @@ const DashboardLayout = () => {
                     My Reviews
                   </Link>
                 </li>
-            </>}
+              </>
+            )}
 
             {/* Buyer Dashboard */}
-
-
           </ul>
         </div>
       </div>
