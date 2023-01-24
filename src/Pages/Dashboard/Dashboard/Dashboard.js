@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useState } from 'react';
 import ConfirmModal from '../../../components/Modal/ConfirmModal/ConfirmModal';
 import { StateContext } from '../../../contexts/AuthProvider';
 import useFindDeliveryman from '../../../hooks/useFindDeliveryman';
@@ -6,6 +7,7 @@ import useFindDeliveryman from '../../../hooks/useFindDeliveryman';
 const Dashboard = () => {
     const { user } = useContext(StateContext);
     const [isDeliverymen] = useFindDeliveryman(user?.email);
+    const [processing, setProcessing] = useState(false);
 
     return (
         <div className=''>
@@ -43,7 +45,7 @@ const Dashboard = () => {
                 </div>
             </div>
                 {
-                    isDeliverymen && <ConfirmModal useremail = {user?.email}></ConfirmModal>
+                    (isDeliverymen && !processing) && <ConfirmModal setProcessing={setProcessing}></ConfirmModal>
                 }
         </div>
     );
