@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useState } from 'react';
 import ConfirmModal from '../../../components/Modal/ConfirmModal/ConfirmModal';
@@ -8,6 +9,14 @@ const Dashboard = () => {
     const { user } = useContext(StateContext);
     const [isDeliverymen] = useFindDeliveryman(user?.email);
     const [processing, setProcessing] = useState(false);
+    const {data: deliverymanData} = useQuery({
+        queryKey: ['working-status'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/deliveryman-work-status?email=${user?.email}`);
+            const data = await res.json();
+            return data;
+        }
+    })
 
     return (
         <div className=''>
@@ -33,19 +42,23 @@ const Dashboard = () => {
                         <p className='font-semibold'><small>Contact No.</small></p>
                         <p>N/A</p>
                     </div>
+                    <div className='mb-5'>
+                        <p className='font-semibold'><small>Account Verification</small></p>
+                        <p>{deliverymanData?.verified ? "Verified" : 'Not Verified'}</p>
+                    </div>
                     {
                         isDeliverymen && <div className='mb-5'>
                         <p className='font-semibold'><small>Work Permit</small></p>
-                        <p>Not Allowed</p>
+                        <p>{deliverymanData?.workPermitStatus ? deliverymanData?.workPermitStatus : 'Not Allowed'}</p>
                     </div>
                     }
                     {
-                        isDeliverymen && <label htmlFor="deliveryman-modal" className='bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3'>Request for Work Permit</label>
+                        isDeliverymen && <label htmlFor="deliveryman-modal" className={`bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3 ${deliverymanData?.verified ? 'disabled' : 'disabled'}`}>Request for Work Permit</label>
                     }
                 </div>
             </div>
                 {
-                    (isDeliverymen && !processing) && <ConfirmModal setProcessing={setProcessing}></ConfirmModal>
+                    (isDeliverymen && !processing) && <ConfirmModal setProcessing={setProcessing} workPermitStatus={deliverymanData?.workPermitStatus}></ConfirmModal>
                 }
         </div>
     );

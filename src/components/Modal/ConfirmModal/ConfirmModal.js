@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { StateContext } from '../../../contexts/AuthProvider';
 
-const ConfirmModal = ({setProcessing}) => {
+const ConfirmModal = ({setProcessing, workPermitStatus}) => {
   const { user } = useContext(StateContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -26,7 +26,7 @@ const ConfirmModal = ({setProcessing}) => {
         console.log(imageData);
         if (imageData.success) {
           const imageUrl = {
-            photo: imageData.data.url
+            certification: imageData.data.url
           }
           fetch(`http://localhost:5000/deliveryman?email=${user?.email}`, {
             method: 'PUT',
@@ -76,7 +76,7 @@ const ConfirmModal = ({setProcessing}) => {
               </label>
               <input type='text' name='contact'
                 {...register("contact", { required: "Contact Number is required" })}
-                className="input input-bordered w-full" />
+                className="input input-bordered w-full" disabled={workPermitStatus}/>
               {errors.email && <p className='text-red-600'>{errors.contact?.message}</p>}
             </div>
 
@@ -84,10 +84,10 @@ const ConfirmModal = ({setProcessing}) => {
               <label className="label">
                 <span className="label-text">NID/Birth Certificate</span>
               </label>
-              <input type="file" name='photo' {...register("photo", { required: "Nid/Birth Certificate is required" })} className="file-input file-input-bordered w-full" />
+              <input type="file" name='photo' {...register("photo", { required: "Nid/Birth Certificate is required" })} className="file-input file-input-bordered w-full" disabled={workPermitStatus}/>
               {errors.photo && <p className='text-red-600'>{errors.photo?.message}</p>}
             </div>
-            <button type="submit" className='bg-[#9acd5e] hover:bg-[#80b248] py-2 duration-300 rounded-md px-3 w-full'>Submit</button>
+            <button type="submit" className='bg-[#9acd5e] hover:bg-[#80b248] py-2 duration-300 rounded-md px-3 w-full' disabled={workPermitStatus}>Submit</button>
           </form>
         </div>
       </div>
