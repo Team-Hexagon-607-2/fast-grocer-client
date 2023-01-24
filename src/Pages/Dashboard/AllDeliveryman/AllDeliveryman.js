@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { toast } from 'react-hot-toast';
 
 const AllDeliveryman = () => {
@@ -48,7 +49,7 @@ const AllDeliveryman = () => {
                     <tbody>
                         {
                             users?.map((user, i) =>
-                                <tr>
+                                <tr key={i}>
                                     <td>
                                         <div className="font-bold">{i + 1}</div>
                                     </td>
@@ -65,7 +66,11 @@ const AllDeliveryman = () => {
                                     </td>
                                     <td>
                                         {
-                                            user?.workPermitStatus && <img src={user?.certification} alt="" />
+                                            user?.certification && <PhotoProvider>
+                                                <PhotoView src={user?.certification}>
+                                                    <img src={user?.certification} alt="" />
+                                                </PhotoView>
+                                            </PhotoProvider>
                                         }
                                     </td>
                                     <th>
