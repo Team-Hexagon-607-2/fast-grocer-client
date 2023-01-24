@@ -64,6 +64,22 @@ const DashboardLayout = () => {
                     All Orders
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/add-product"
+                  >
+                    Add Product
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/edit-product"
+                  >
+                    Edit Products
+                  </Link>
+                </li>
               </>
             )}
 
