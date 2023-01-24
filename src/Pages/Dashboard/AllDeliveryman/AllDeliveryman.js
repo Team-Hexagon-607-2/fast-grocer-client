@@ -18,13 +18,13 @@ const AllDeliveryman = () => {
         fetch(`https://fg-server.vercel.app/users/${user._id}`, {
             method: 'DELETE'
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.deletedCount > 0){
-                refetch();
-                toast.success(`${user.name} deleted successfully`)
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`${user.name} deleted successfully`)
+                }
+            })
     }
 
     return (
@@ -38,6 +38,9 @@ const AllDeliveryman = () => {
                             <th>Serial</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Verification</th>
+                            <th>Documents</th>
+                            <th>Verify Action</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -55,8 +58,26 @@ const AllDeliveryman = () => {
                                     <td>
                                         {user.email}
                                     </td>
+                                    <td>
+                                        {
+                                            user?.workPermitStatus ? <small>{user?.workPermitStatus}</small> : <small>Not Requested</small>
+                                        }
+                                    </td>
+                                    <td>
+                                        {
+                                            user?.workPermitStatus && <img src={user?.certification} alt="" />
+                                        }
+                                    </td>
                                     <th>
-                                        <button onClick={()=> handleDelete(user)} className="btn  bg-red-600 btn-xs">Delete</button>
+                                        {
+                                            user?.workPermitStatus && <>
+                                                <button className='btn btn-xs btn-primary'>Accept</button> <br />
+                                                <button className='btn btn-xs btn-error'>Reject</button>
+                                            </>
+                                        }
+                                    </th>
+                                    <th>
+                                        <button onClick={() => handleDelete(user)} className="btn  bg-red-600 btn-xs">Delete</button>
                                     </th>
                                 </tr>)
                         }
