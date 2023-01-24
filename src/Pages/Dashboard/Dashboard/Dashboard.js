@@ -1,25 +1,11 @@
 import React, { useContext } from 'react';
-import { toast } from 'react-hot-toast';
+import ConfirmModal from '../../../components/Modal/ConfirmModal/ConfirmModal';
 import { StateContext } from '../../../contexts/AuthProvider';
 import useFindDeliveryman from '../../../hooks/useFindDeliveryman';
 
 const Dashboard = () => {
     const { user } = useContext(StateContext);
     const [isDeliverymen] = useFindDeliveryman(user?.email);
-
-    const handleRequestPermition = () =>{
-        fetch(`http://localhost:5000/deliveryman?email=${user?.email}`, {
-            method: 'PUT',
-        })
-        .then(res => res.json())
-        .then(data =>{
-            if(data.modifiedCount > 0){
-                toast.success('Requsted successfully');
-            }
-        })
-        .catch(err => toast.error(err))
-
-    }
 
     return (
         <div className=''>
@@ -52,11 +38,13 @@ const Dashboard = () => {
                     </div>
                     }
                     {
-                        isDeliverymen && <button onClick={handleRequestPermition} className='bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3'>Request for Work Permit</button>
+                        isDeliverymen && <label htmlFor="deliveryman-modal" className='bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3'>Request for Work Permit</label>
                     }
                 </div>
             </div>
-
+                {
+                    isDeliverymen && <ConfirmModal useremail = {user?.email}></ConfirmModal>
+                }
         </div>
     );
 };
