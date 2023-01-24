@@ -8,7 +8,7 @@ import Loader from "../../../components/Loader/Loader";
 const MyOrders = () => {
   const { user } = useContext(StateContext);
   const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["order", user?.email],
+    queryKey: ["order", user?.email, "cancel-order"],
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/order/${user?.email}`).then((res) =>
         res.json()
@@ -26,7 +26,7 @@ const MyOrders = () => {
   console.log(data?.data);
   const handleCancelRequest = (id) => {
     const cancel = "Cancel Request Sent";
-    fetch(`http://localhost:5000/cancel-order/${id}`, {
+    fetch(`https://fg-server.vercel.app/cancel-order/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cancel }),
