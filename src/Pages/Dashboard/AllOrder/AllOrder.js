@@ -6,9 +6,9 @@ import { toast } from "react-hot-toast";
 
 const AllOrder = () => {
   const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["order"],
+    queryKey: ["order", "cancel-order"],
     queryFn: () =>
-      fetch(`http://localhost:5000/order`).then((res) => res.json()),
+      fetch(`https://fg-server.vercel.app/order`).then((res) => res.json()),
   });
 
   //   const { data: cancel_data, refetch: cancelRefetch } = useQuery({
@@ -19,7 +19,7 @@ const AllOrder = () => {
 
   const handleConfirmOrder = (id) => {
     const status = "Confirmed Order";
-    fetch(`http://localhost:5000/order/${id}`, {
+    fetch(`https://fg-server.vercel.app/order/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
@@ -35,8 +35,8 @@ const AllOrder = () => {
   };
 
   const handleReadyToShipOrder = (id) => {
-    const status = " Ready To Ship";
-    fetch(`http://localhost:5000/order/${id}`, {
+    const status = "Ready To Ship";
+    fetch(`https://fg-server.vercel.app/order/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
@@ -53,7 +53,7 @@ const AllOrder = () => {
 
   const handleCancelRequestReceived = (id) => {
     const cancel = "Cancel Request Received";
-    fetch(`http://localhost:5000/cancel-order/${id}`, {
+    fetch(`https://fg-server.vercel.app/cancel-order/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cancel }),
