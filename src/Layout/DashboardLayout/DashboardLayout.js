@@ -19,7 +19,7 @@ const DashboardLayout = () => {
 
   return (
     <div>
-      <div className="drawer h-auto drawer-mobile lg:w-11/12 mx-auto">
+      <div className="drawer drawer-mobile lg:w-11/12 mx-auto">
         <input
           id="dashboard-drawer"
           type="checkbox"
