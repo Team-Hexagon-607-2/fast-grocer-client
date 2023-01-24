@@ -70,9 +70,9 @@ const SingleProduct = ({ products }) => {
         <div className="md:h-[60px]">
           <Link to={`/products/${_id}`}>
             <p
-              className={`text-[17px] font-semibold text-zinc-700 hover:underline cursor-pointer`}
+              className={`text-[16px] font-semibold text-zinc-700 hover:underline cursor-pointer`}
             >
-              {name.length > 50 ? name.slice(0, 50) + "..." : name}
+              {name.length > 45 ? name.slice(0, 45) + "..." : name}
             </p>
           </Link>
         </div>

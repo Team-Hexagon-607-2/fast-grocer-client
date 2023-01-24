@@ -30,7 +30,7 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu py-4 w-56 bg-slate-100 text-base-100">
+          <ul className="menu py-4 w-64 bg-slate-100 text-base-100">
             <img className="w-16 h-16 mx-auto my-10 rounded-full" src={user?.photoURL || 'https://picsum.photos/200/300'} alt="" />
             <li>
               <Link
