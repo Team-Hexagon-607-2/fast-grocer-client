@@ -99,6 +99,7 @@ const CheckoutForm = ({ order }) => {
             setSuccess("Congrats! your payment completed");
             setTransactionId(paymentIntent?.id);
             toast.success("order success");
+            localStorage.removeItem("cart");
           }
         });
     }

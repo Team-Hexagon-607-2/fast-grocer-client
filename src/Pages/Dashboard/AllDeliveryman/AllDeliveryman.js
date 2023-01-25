@@ -15,7 +15,7 @@ const AllDeliveryman = () => {
 
     const handleAcceptRequest = (email) =>{
         console.log(email);
-        fetch(`http://localhost:5000/deliveryman-request-accept?email=${email}`,{
+        fetch(`https://fg-server.vercel.app/deliveryman-request-accept?email=${email}`,{
             method: 'PUT'
         })
         .then(res => res.json())
@@ -27,7 +27,7 @@ const AllDeliveryman = () => {
     
     const handleRejectRequest = (email) =>{
         console.log(email);
-        fetch(`http://localhost:5000/deliveryman-request-reject?email=${email}`,{
+        fetch(`https://fg-server.vercel.app/deliveryman-request-reject?email=${email}`,{
             method: 'PUT'
         })
         .then(res => res.json())

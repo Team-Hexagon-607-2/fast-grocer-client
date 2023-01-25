@@ -12,7 +12,7 @@ const Dashboard = () => {
     const { data: deliverymanData, refetch } = useQuery({
         queryKey: ['working-status'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/deliveryman-work-status?email=${user?.email}`);
+            const res = await fetch(`https://fg-server.vercel.app/deliveryman-work-status?email=${user?.email}`);
             const data = await res.json();
             return data;
         }

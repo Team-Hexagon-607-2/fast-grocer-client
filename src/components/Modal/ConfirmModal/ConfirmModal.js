@@ -28,7 +28,7 @@ const ConfirmModal = ({setProcessing, workPermitStatus}) => {
           const imageUrl = {
             certification: imageData.data.url
           }
-          fetch(`http://localhost:5000/deliveryman?email=${user?.email}`, {
+          fetch(`https://fg-server.vercel.app/deliveryman?email=${user?.email}`, {
             method: 'PUT',
             headers: {
               'content-type': 'application/json'
