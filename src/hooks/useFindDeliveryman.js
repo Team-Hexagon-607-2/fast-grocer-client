@@ -9,7 +9,7 @@ const useFindDeliveryman = email => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
-                    setIsDeliveryman(data.isSeller);
+                    setIsDeliveryman(data?.isDeliveryman);
                     setIsDeliverymanLoading(false);
                 })
         }

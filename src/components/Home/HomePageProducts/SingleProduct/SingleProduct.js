@@ -70,9 +70,9 @@ const SingleProduct = ({ products }) => {
         <div className="md:h-[60px]">
           <Link to={`/products/${_id}`}>
             <p
-              className={`text-[17px] font-semibold text-zinc-700 hover:underline cursor-pointer`}
+              className={`text-[16px] font-semibold text-zinc-700 hover:underline cursor-pointer`}
             >
-              {name.length > 50 ? name.slice(0, 50) + "..." : name}
+              {name.length > 45 ? name.slice(0, 45) + "..." : name}
             </p>
           </Link>
         </div>
@@ -100,7 +100,7 @@ const SingleProduct = ({ products }) => {
           </button>
           <button
             onClick={() => handleWishlist(products)}
-            className="bg-#8ba73b px-3 rounded-md bg-[#ff00001c] hover:bg-[#ff00002e] duration-300 flex items-center justify-center"
+            className="bg-#8ba73b px-2 rounded-md bg-[#ff00001c] hover:bg-[#ff00002e] duration-300 flex items-center justify-center"
           >
             <AiFillHeart className="text-red-600 mr-2" />
             Wishlist

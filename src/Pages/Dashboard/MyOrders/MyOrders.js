@@ -14,7 +14,15 @@ const MyOrders = () => {
         res.json()
       ),
   });
-
+  // const {
+  //   data: cancel_data,
+  //   isLoading: cancelLoading,
+  //   refetch: cancelRefetch,
+  // } = useQuery({
+  //   queryKey: ["cancel-order"],
+  //   queryFn: () =>
+  //     fetch(`http://localhost:5000/cancel-order`).then((res) => res.json()),
+  // });
   console.log(data?.data);
   const handleCancelRequest = (id) => {
     const cancel = "Cancel Request Sent";
@@ -33,10 +41,9 @@ const MyOrders = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="my-10">
-      <h2 className="text-3xl text-yellow-700 text-center mb-4">My Orders</h2>
-
-      <div className="overflow-x-auto overflow-y-auto w-full">
+    <div className="">
+      <h2 className="text-2xl font-bold mb-4">My Orders</h2>
+      <div className="overflow-x-auto w-full">
         <div>{isLoading && <Loader />}</div>
         <table className="table w-full">
           <thead>
