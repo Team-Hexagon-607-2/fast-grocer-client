@@ -19,6 +19,10 @@ import AboutUs from "../../components/AboutUs/AboutUs/AboutUs";
 import PlaceOrder from "../../components/PlaceOrder/PlaceOrder";
 import Payment from "../../components/PlaceOrder/Payment";
 import AllOrder from "./../../Pages/Dashboard/AllOrder/AllOrder";
+import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
+import EditProduct from "../../Pages/Dashboard/EditProduct/EditProduct";
+import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderForDeliverMan";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -90,7 +94,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
           {
             path: "/dashboard",
@@ -113,6 +117,10 @@ const router = createBrowserRouter([
             element: <AllOrder />,
           },
           {
+            path: "/dashboard/delivery-man-order",
+            element: <OrderForDeliverMan />,
+          },
+          {
             path: "/dashboard/my-wishlist",
             element: <MyWishlist></MyWishlist>,
           },
@@ -123,6 +131,14 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/my-reviews",
             element: <MyReviews></MyReviews>,
+          },
+          {
+            path: "/dashboard/add-product",
+            element: <AddProduct></AddProduct>,
+          },
+          {
+            path: "/dashboard/edit-product",
+            element: <EditProduct></EditProduct>,
           },
         ],
       },

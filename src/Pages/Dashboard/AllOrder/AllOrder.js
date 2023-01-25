@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../components/Loader/Loader";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 const AllOrder = () => {
+  const [selectedValue, setSelectedValue] = useState({});
+
   const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["order"],
+    queryKey: ["order", "cancel-order"],
     queryFn: () =>
-      fetch(`http://localhost:5000/order`).then((res) => res.json()),
+      fetch(`https://fg-server.vercel.app/order`).then((res) => res.json()),
   });
 
-  //   const { data: cancel_data, refetch: cancelRefetch } = useQuery({
-  //     queryKey: ["cancel-order"],
-  //     queryFn: () =>
-  //       fetch(`http://localhost:5000/cancel-order`).then((res) => res.json()),
-  //   });
+  const { data: AllUsers, isLoading: DeliveryLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: () =>
+      fetch(`https://fg-server.vercel.app/users`).then((res) => res.json()),
+  });
 
+  const deliveryMan = AllUsers?.filter(
+    (person) => person?.role === "delivery man"
+  );
+  function handleChange(event) {
+    const selectedOption = deliveryMan.find(
+      (option) => option.email === event.target.value
+    );
+    setSelectedValue(selectedOption);
+  }
   const handleConfirmOrder = (id) => {
     const status = "Confirmed Order";
-    fetch(`http://localhost:5000/order/${id}`, {
+    fetch(`https://fg-server.vercel.app/order/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
@@ -35,8 +46,8 @@ const AllOrder = () => {
   };
 
   const handleReadyToShipOrder = (id) => {
-    const status = " Ready To Ship";
-    fetch(`http://localhost:5000/order/${id}`, {
+    const status = "Ready To Ship";
+    fetch(`https://fg-server.vercel.app/order/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
@@ -53,7 +64,7 @@ const AllOrder = () => {
 
   const handleCancelRequestReceived = (id) => {
     const cancel = "Cancel Request Received";
-    fetch(`http://localhost:5000/cancel-order/${id}`, {
+    fetch(`https://fg-server.vercel.app/cancel-order/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cancel }),
@@ -62,6 +73,28 @@ const AllOrder = () => {
       .then((data) => {
         if (data?.status === true) {
           toast.success("Cancel Request Received");
+          refetch();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleDeliveryManAssignOrder = (e, id) => {
+    e.preventDefault();
+    const data = {
+      deliveryManEmail: selectedValue.email,
+      deliveryManName: selectedValue.name,
+    };
+
+    fetch(`https://fg-server.vercel.app/update-delivery-order/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.status === true) {
+          toast.success("Assign Delivery man updated");
           refetch();
         }
       })
@@ -84,6 +117,7 @@ const AllOrder = () => {
               <th>Paid</th>
               <th>Condition</th>
               <th>Cancel Request</th>
+              <th>Assign Delivery Man</th>
             </tr>
           </thead>
           <tbody>
@@ -123,7 +157,7 @@ const AllOrder = () => {
                 <td>
                   <div className="flex flex-col items-center gap-3">
                     <p className="text-md font-semibold ">{item?.status}</p>
-                    {item.status === "pending" && (
+                    {item?.status === "pending" && (
                       <button
                         onClick={() => handleConfirmOrder(item?._id)}
                         className="p-3 
@@ -134,7 +168,7 @@ const AllOrder = () => {
                         Confirm Order
                       </button>
                     )}
-                    {item.status === "Confirmed Order" && (
+                    {item?.status === "Confirmed Order" && (
                       <button
                         onClick={() => handleReadyToShipOrder(item?._id)}
                         className="p-3 
@@ -169,7 +203,44 @@ const AllOrder = () => {
                     </div>
                   </div>
                 </th>
-                <th></th>
+                <th>
+                  <p>{item.deliveryManName}</p>
+                  <p>{item?.pick}</p>
+                  {!item.deliveryManEmail && (
+                    <form
+                      onSubmit={(e) =>
+                        handleDeliveryManAssignOrder(e, item?._id)
+                      }
+                      className="flex flex-col gap-2"
+                    >
+                      <select
+                        onChange={handleChange}
+                        value={selectedValue.email}
+                        name="deliveryValue"
+                        className="select select-bordered w-full max-w-xs"
+                      >
+                        <option disabled selected>
+                          Select Delivery Man
+                        </option>
+                        {deliveryMan?.map((man, i) => (
+                          <option key={i} value={man.email}>
+                            {man?.name}
+                          </option>
+                        ))}
+                      </select>
+
+                      <button
+                        type="submit"
+                        className="py-3 px-3 text-center justify-center
+                   cursor-pointer hover:bg-slate-400 
+                   flex items-center rounded-full text-sm
+                    bg-blue-300  font-bold "
+                      >
+                        Assign
+                      </button>
+                    </form>
+                  )}
+                </th>
               </tr>
             ))}
           </tbody>
