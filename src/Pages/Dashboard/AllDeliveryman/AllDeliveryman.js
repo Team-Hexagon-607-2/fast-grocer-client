@@ -85,7 +85,7 @@ const AllDeliveryman = () => {
                                     </td>
                                     <td>
                                         {
-                                            user?.workPermitStatus ? <small>{user?.workPermitStatus}</small> : <small>Not Requested</small>
+                                            user?.workPermitStatus ? <p className='text-center'>{((user?.workPermitStatus === 'Accepted' && <small className='bg-blue-500 text-white rounded-full py-[3px] px-3 font-semibold'>{user?.workPermitStatus}</small>) || (user?.workPermitStatus === 'Rejected' && <small className='bg-red-500 text-white rounded-full py-[3px] px-3 font-semibold'>{user?.workPermitStatus}</small>))}</p> : <small>Not Requested</small>
                                         }
                                     </td>
                                     <td>
@@ -99,14 +99,14 @@ const AllDeliveryman = () => {
                                             </>
                                         }
                                     </td>
-                                    <th>
+                                    <td>
                                         {
                                             (!user?.verified && user?.workPermitStatus) ? <>
                                                 <button onClick={() => handleAcceptRequest(user?.email)} className='btn btn-xs btn-primary'>Accept</button> <br />
                                                 <button onClick={() => handleRejectRequest(user?.email)} className='btn btn-xs btn-error'>Reject</button>
-                                            </> : <p><small>Not Available</small></p>
+                                            </> : (user?.verified ? <p className='bg-blue-500 text-center text-white font-semibold rounded-full'><small>Verified</small></p> : <p><small>Not Available</small></p>)
                                         }
-                                    </th>
+                                    </td>
                                     <th>
                                         <button onClick={() => handleDelete(user)} className="btn  bg-red-600 btn-xs">Delete</button>
                                     </th>
