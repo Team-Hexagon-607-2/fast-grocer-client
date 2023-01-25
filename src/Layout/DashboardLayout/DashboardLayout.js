@@ -9,12 +9,13 @@ import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
 import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
+import Dashboard from "./../../Pages/Dashboard/Dashboard/Dashboard";
 
 const DashboardLayout = () => {
   const { user } = useContext(StateContext);
   const [isAdmin] = useFindAdmin(user?.email);
   const [isBuyer] = useFindBuyer(user?.email);
-  const [isDeliverymen] = useFindDeliveryman(user?.email);
+  const [isDeliveryman] = useFindDeliveryman(user?.email);
 
   return (
     <div>
@@ -126,7 +127,19 @@ const DashboardLayout = () => {
               </>
             )}
 
-            {/* Buyer Dashboard */}
+            {/* Delivery man Dashboard */}
+            {isDeliveryman && (
+              <>
+                <li>
+                  <Link
+                    to="/dashboard/delivery-man-order"
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                  >
+                    My Assign Order
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

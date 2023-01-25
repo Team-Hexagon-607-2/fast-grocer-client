@@ -21,6 +21,7 @@ import Payment from "../../components/PlaceOrder/Payment";
 import AllOrder from "./../../Pages/Dashboard/AllOrder/AllOrder";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import EditProduct from "../../Pages/Dashboard/EditProduct/EditProduct";
+import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderForDeliverMan";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/all-order",
             element: <AllOrder />,
+          },
+          {
+            path: "/dashboard/delivery-man-order",
+            element: <OrderForDeliverMan />,
           },
           {
             path: "/dashboard/my-wishlist",
