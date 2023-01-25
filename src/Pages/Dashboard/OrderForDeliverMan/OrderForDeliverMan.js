@@ -56,12 +56,16 @@ const OrderForDeliverMan = () => {
     <div className="my-10">
       <h2 className="text-3xl text-yellow-700 text-center mb-4">All Orders</h2>
 
-      <div className="overflow-x-auto overflow-y-auto w-full">
+      <div className="overflow-x-auto  w-full">
         <div>{isLoading && <Loader />}</div>
         <table className="table w-full">
           <thead>
             <tr>
               <th>S/N</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>address</th>
+
               <th>Picked This Order</th>
               <th>Product Info</th>
               <th>Total Price</th>
@@ -75,6 +79,9 @@ const OrderForDeliverMan = () => {
             {data?.data?.map((item, index) => (
               <tr key={item?._id}>
                 <td>{index + 1}</td>
+                <td>{item?.name}</td>
+                <td>{item?.address}</td>
+                <td>{item?.number}</td>
                 <td>
                   <div>
                     {item?.pick}
@@ -129,6 +136,13 @@ const OrderForDeliverMan = () => {
                 <th>{item?.condition}</th>
                 <th>
                   <div className="flex flex-col items-center gap-3">
+                    {item?.deliver === true && (
+                      <p className="text-md text-black font-semibold">
+                        {" "}
+                        Item Delivered
+                      </p>
+                    )}
+
                     {item?.pick === "Already Picked" && (
                       <button
                         onClick={() => handleDeliveryItem(item?._id)}
