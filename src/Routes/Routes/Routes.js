@@ -1,3 +1,4 @@
+import Login from "../../components/Login/Login";
 import ProductDetails from "../../components/Products/ProductDetails/ProductDetails";
 import Products from "../../components/Products/Products";
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
                 path: '/products/:id',
                 element: <ProductDetails></ProductDetails>,
                 loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
             }
         ]        
     }
