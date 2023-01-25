@@ -1,13 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ContextProvider } from "./contexts/AuthProvider";
+import { Toaster } from "react-hot-toast";
+import 'react-photo-view/dist/react-photo-view.css';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <ContextProvider>
+        <Toaster position="top-center" reverseOrder={false} />
+        <App />
+      </ContextProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

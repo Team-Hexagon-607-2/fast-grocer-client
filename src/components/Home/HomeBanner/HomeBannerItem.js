@@ -19,7 +19,7 @@ const {image,id,prev,next} =slide;
                   
                 </div>
                 <div className="absolute flex justify-start transform -translate-y-1/2 left-24 w-2/5 top-3/4">
-                   <Link to={'/products'}><button className="btn btn-active btn-accent px-7">Browse Products</button></Link>
+                   <Link to={'/allproducts'}><button className="btn btn-active btn-info px-7">Browse Products</button></Link>
                 </div>
                 <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
                     <a href={`#slide${prev}`} className="btn btn-circle mr-5">❮</a>

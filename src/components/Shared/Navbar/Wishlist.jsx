@@ -8,17 +8,21 @@
 
 import React from "react";
 import { BsHeart } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { StateContext } from "../../../contexts/AuthProvider";
 
 const Wishlist = () => {
+  const { wishListData } = useContext(StateContext);
   return (
-    <div className="flex flex-row">
-      <div className="w-[45px] h-[45px] rounded-[50%] hover:text-[#96B240]  bg-[#F2F4EC] flex items-center justify-center ">
-        <BsHeart className="text-xl hover:text-[#96B240] " />
+    <Link to="/dashboard/my-wishlist" className="flex flex-row">
+      <div className="w-[40px] h-[40px] rounded-[50%] hover:text-[#96B240]  bg-[#F2F4EC] flex items-center justify-center ">
+        <BsHeart className="text-lg hover:text-[#96B240] " />
       </div>
       <div className="badge -ml-[8px] bg-[#F6A64D] border-none rounded-full w-[25px] h-[25px] font-bold">
-        0
+        {wishListData?.data?.length}
       </div>
-    </div>
+    </Link>
   );
 };
 
