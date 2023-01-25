@@ -1,15 +1,28 @@
-import React, { useContext } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
-import { StateContext } from "../../contexts/AuthProvider";
 import SingleProduct from "../Home/HomePageProducts/SingleProduct/SingleProduct";
 
 const AllProducts = () => {
-  const { AllProducts, isLoading } = useContext(StateContext);
+  const [AllProducts, setAllProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [size, setSize] = useState(10);
+  const [totalProducts, setTotalProducts] = useState(null);
+  const [size, setSize] = useState(20);
   const [page, setPage] = useState(0);
-  const pages = Math.ceil(76 / parseInt(size));
+
+  const pages = Math.ceil(totalProducts / parseInt(size));
   const array = [...Array(pages).keys()];
+
+  useEffect(() => {
+    fetch(`https://fg-server.vercel.app/AllProducts?page=${page}&size=${size}`)
+      .then(res => res.json())
+      .then(data => {
+        const { products, count } = data;
+        setTotalProducts(count);
+        setAllProducts(products);
+        setIsLoading(false)
+      })
+  }, [page, size]);
 
   const Loader = () => {
     return (
@@ -34,11 +47,11 @@ const AllProducts = () => {
         array.map(number => <button key={number.index} onClick={() => setPage(number)} className='bg-slate-200 mx-1 w-10 h-10 rounded-full'>{number + 1}</button>)
       }
 
-      <select onChange={(e) => setSize(e.target.value)}>
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
+      <select onChange={(e) => setSize(e.target.value)} className='border px-2 py-1'>
         <option value="20">20</option>
+        <option value="40">40</option>
+        <option value="60">60</option>
+        <option value="80">80</option>
       </select>
     </>
   );
