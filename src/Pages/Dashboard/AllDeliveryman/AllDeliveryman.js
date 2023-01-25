@@ -21,11 +21,20 @@ const AllDeliveryman = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data);
+            refetch();
         })
     }
-
-    const handleRejectRequest = () =>{
-
+    
+    const handleRejectRequest = (email) =>{
+        console.log(email);
+        fetch(`http://localhost:5000/deliveryman-request-reject?email=${email}`,{
+            method: 'PUT'
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            refetch()
+        })
     }
 
 
@@ -94,7 +103,7 @@ const AllDeliveryman = () => {
                                         {
                                             user?.workPermitStatus && <>
                                                 <button onClick={() => handleAcceptRequest(user?.email)} className='btn btn-xs btn-primary'>Accept</button> <br />
-                                                <button onClick={handleRejectRequest} className='btn btn-xs btn-error'>Reject</button>
+                                                <button onClick={() => handleRejectRequest(user?.email)} className='btn btn-xs btn-error'>Reject</button>
                                             </>
                                         }
                                     </th>

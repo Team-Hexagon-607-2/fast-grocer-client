@@ -76,7 +76,7 @@ const ConfirmModal = ({setProcessing, workPermitStatus}) => {
               </label>
               <input type='text' name='contact'
                 {...register("contact", { required: "Contact Number is required" })}
-                className="input input-bordered w-full" disabled={workPermitStatus}/>
+                className="input input-bordered w-full" disabled={workPermitStatus === 'Pending' || workPermitStatus === 'Accepted'}/>
               {errors.email && <p className='text-red-600'>{errors.contact?.message}</p>}
             </div>
 
@@ -84,10 +84,10 @@ const ConfirmModal = ({setProcessing, workPermitStatus}) => {
               <label className="label">
                 <span className="label-text">NID/Birth Certificate</span>
               </label>
-              <input type="file" name='photo' {...register("photo", { required: "Nid/Birth Certificate is required" })} className="file-input file-input-bordered w-full" disabled={workPermitStatus}/>
+              <input type="file" name='photo' {...register("photo", { required: "Nid/Birth Certificate is required" })} className="file-input file-input-bordered w-full" disabled={workPermitStatus === 'Pending' || workPermitStatus === 'Accepted'}/>
               {errors.photo && <p className='text-red-600'>{errors.photo?.message}</p>}
             </div>
-            <button type="submit" className='bg-[#9acd5e] hover:bg-[#80b248] py-2 duration-300 rounded-md px-3 w-full' disabled={workPermitStatus}>Submit</button>
+            <button type="submit" className='bg-[#9acd5e] hover:bg-[#80b248] py-2 duration-300 rounded-md px-3 w-full disabled:bg-gray-400' disabled={workPermitStatus === 'Pending' || workPermitStatus === 'Accepted'}>Submit</button>
           </form>
         </div>
       </div>

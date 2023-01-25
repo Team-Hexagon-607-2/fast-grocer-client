@@ -9,7 +9,7 @@ const Dashboard = () => {
     const { user } = useContext(StateContext);
     const [isDeliverymen] = useFindDeliveryman(user?.email);
     const [processing, setProcessing] = useState(false);
-    const { data: deliverymanData } = useQuery({
+    const { data: deliverymanData, refetch } = useQuery({
         queryKey: ['working-status'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/deliveryman-work-status?email=${user?.email}`);
@@ -17,6 +17,8 @@ const Dashboard = () => {
             return data;
         }
     })
+
+    refetch();
 
     return (
         <div className=''>
@@ -55,7 +57,7 @@ const Dashboard = () => {
                         </div>
                     }
                     {
-                        (isDeliverymen && !deliverymanData?.workPermitStatus === "Accepted") && <label htmlFor="deliveryman-modal" className={`bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3 ${deliverymanData?.verified ? 'disabled' : 'disabled'}`}>Request for Work Permit</label>
+                        (isDeliverymen || !deliverymanData?.workPermitStatus === "Accepted" || !deliverymanData?.verified) && <label htmlFor="deliveryman-modal" className={`bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3 ${deliverymanData?.verified ? 'disabled' : 'disabled'}`}>Request for Work Permit</label>
                     }
                 </div>
             </div>
