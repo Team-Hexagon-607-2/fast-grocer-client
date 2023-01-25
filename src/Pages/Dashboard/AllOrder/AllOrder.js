@@ -14,7 +14,7 @@ const AllOrder = () => {
   //   const { data: cancel_data, refetch: cancelRefetch } = useQuery({
   //     queryKey: ["cancel-order"],
   //     queryFn: () =>
-  //       fetch(`http://localhost:5000/cancel-order`).then((res) => res.json()),
+  //       fetch(`https://fg-server.vercel.app/cancel-order`).then((res) => res.json()),
   //   });
 
   const handleConfirmOrder = (id) => {

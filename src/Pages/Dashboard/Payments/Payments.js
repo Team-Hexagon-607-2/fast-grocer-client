@@ -2,8 +2,8 @@ import React from 'react';
 
 const Payments = () => {
   return (
-    <div className='my-10'>
-      <h2 className="text-3xl text-yellow-700 text-center mb-4">Payment</h2>
+    <div className=''>
+      <h2 className="text-2xl font-bold mb-4">Payments</h2>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead>
