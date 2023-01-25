@@ -1,40 +1,60 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { StateContext } from "../../../contexts/AuthProvider";
-import { FcCancel } from "react-icons/fc";
+import React from "react";
+import { useContext } from "react";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
-const MyOrders = () => {
+import { StateContext } from "../../../contexts/AuthProvider";
+
+const OrderForDeliverMan = () => {
   const { user } = useContext(StateContext);
   const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["order", user?.email, "cancel-order"],
+    queryKey: ["delivery-order", user?.email],
     queryFn: () =>
-      fetch(`https://fg-server.vercel.app/order/${user?.email}`).then((res) =>
-        res.json()
+      fetch(`https://fg-server.vercel.app/delivery-order/${user?.email}`).then(
+        (res) => res.json()
       ),
   });
 
-  console.log(data?.data);
-  const handleCancelRequest = (id) => {
-    const cancel = "Cancel Request Sent";
-    fetch(`https://fg-server.vercel.app/cancel-order/${id}`, {
+  const handlePickItem = (id) => {
+    const picked = "Already Picked";
+
+    fetch(`https://fg-server.vercel.app/delivery-order/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cancel }),
+      body: JSON.stringify({ picked }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data?.status === true) {
-          toast.success("Cancel Request Sent");
+          toast.success("Picked Item Successfully");
           refetch();
         }
       })
       .catch((err) => console.log(err));
   };
+
+  const handleDeliveryItem = (id) => {
+    const status = "Product Delivery Completed";
+
+    fetch(`https://fg-server.vercel.app/delivery-complete/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.status === true) {
+          toast.success("Picked Item Successfully");
+          refetch();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="my-10">
-      <h2 className="text-3xl text-yellow-700 text-center mb-4">My Orders</h2>
+      <h2 className="text-3xl text-yellow-700 text-center mb-4">All Orders</h2>
 
       <div className="overflow-x-auto overflow-y-auto w-full">
         <div>{isLoading && <Loader />}</div>
@@ -42,12 +62,13 @@ const MyOrders = () => {
           <thead>
             <tr>
               <th>S/N</th>
+              <th>Picked This Order</th>
               <th>Product Info</th>
               <th>Total Price</th>
               <th>Status</th>
               <th>Paid</th>
               <th>Condition</th>
-              <th>Cancel</th>
+              <th>Delivery</th>
             </tr>
           </thead>
           <tbody>
@@ -55,9 +76,23 @@ const MyOrders = () => {
               <tr key={item?._id}>
                 <td>{index + 1}</td>
                 <td>
+                  <div>
+                    {item?.pick}
+                    {!item.pick && (
+                      <button
+                        onClick={() => handlePickItem(item?._id)}
+                        className="btn btn-info text-white"
+                      >
+                        Pick This Item
+                      </button>
+                    )}
+                  </div>
+                </td>
+                <td>
                   <div className="flex items-center flex-col space-x-3">
                     {item?.order_products?.map((product) => (
                       <Link
+                        key={product?._id}
                         to={`/products/${product?._id}`}
                         className="flex flex-row items-center w-[300px] hover:bg-blue-200"
                       >
@@ -84,25 +119,25 @@ const MyOrders = () => {
                   </p>
                 </td>
                 <td>
-                  <p className="text-md ">{item?.status}</p>
+                  <div className="flex flex-col items-center gap-3">
+                    <p className="text-md font-semibold ">{item?.status}</p>
+                  </div>
                 </td>
                 <th className={`${item?.paid === false && "text-red-500"}`}>
                   {item?.paid === false ? "Not Paid" : "Already Paid"}
                 </th>
                 <th>{item?.condition}</th>
                 <th>
-                  <p>{item?.cancel}</p>
-                  {!item?.cancel && (
-                    <div
-                      onClick={() => handleCancelRequest(item?._id)}
-                      className="p-3 cursor-pointer
-                       hover:bg-slate-400 flex items-center rounded-full text-sm bg-slate-200"
-                    >
-                      {isLoading && <span className="">Loading..</span>}
-                      <FcCancel size={25} />
-                      <button className="">Cancel</button>
-                    </div>
-                  )}
+                  <div className="flex flex-col items-center gap-3">
+                    {item?.pick === "Already Picked" && (
+                      <button
+                        onClick={() => handleDeliveryItem(item?._id)}
+                        className="btn btn-info text-white"
+                      >
+                        Deliver This Item
+                      </button>
+                    )}
+                  </div>
                 </th>
               </tr>
             ))}
@@ -113,4 +148,4 @@ const MyOrders = () => {
   );
 };
 
-export default MyOrders;
+export default OrderForDeliverMan;
