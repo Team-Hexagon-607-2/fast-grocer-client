@@ -101,10 +101,10 @@ const AllDeliveryman = () => {
                                     </td>
                                     <th>
                                         {
-                                            user?.workPermitStatus && <>
+                                            (!user?.verified && user?.workPermitStatus) ? <>
                                                 <button onClick={() => handleAcceptRequest(user?.email)} className='btn btn-xs btn-primary'>Accept</button> <br />
                                                 <button onClick={() => handleRejectRequest(user?.email)} className='btn btn-xs btn-error'>Reject</button>
-                                            </>
+                                            </> : <p><small>Not Available</small></p>
                                         }
                                     </th>
                                     <th>
