@@ -13,6 +13,21 @@ const AllDeliveryman = () => {
         }
     })
 
+    const handleAcceptRequest = (email) =>{
+        console.log(email);
+        fetch(`http://localhost:5000/deliveryman-request-accept?email=${email}`,{
+            method: 'PUT'
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+    }
+
+    const handleRejectRequest = () =>{
+
+    }
+
 
     const handleDelete = user => {
         console.log(user._id);
@@ -29,8 +44,8 @@ const AllDeliveryman = () => {
     }
 
     return (
-        <div className='my-10'>
-            <h2 className="text-3xl text-yellow-700 text-center mb-4">All Deliveryman</h2>
+        <div className=''>
+            <h2 className="text-2xl font-bold mb-4">All Delivery Mans</h2>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
 
@@ -66,18 +81,20 @@ const AllDeliveryman = () => {
                                     </td>
                                     <td>
                                         {
-                                            user?.certification && <PhotoProvider>
-                                                <PhotoView src={user?.certification}>
-                                                    <img src={user?.certification} alt="" />
-                                                </PhotoView>
-                                            </PhotoProvider>
+                                            user?.certification && <>
+                                                <PhotoProvider>
+                                                    <PhotoView src={user?.certification}>
+                                                        <img src={user?.certification} alt="" className='cursor-pointer'/>
+                                                    </PhotoView>
+                                                </PhotoProvider>
+                                            </>
                                         }
                                     </td>
                                     <th>
                                         {
                                             user?.workPermitStatus && <>
-                                                <button className='btn btn-xs btn-primary'>Accept</button> <br />
-                                                <button className='btn btn-xs btn-error'>Reject</button>
+                                                <button onClick={() => handleAcceptRequest(user?.email)} className='btn btn-xs btn-primary'>Accept</button> <br />
+                                                <button onClick={handleRejectRequest} className='btn btn-xs btn-error'>Reject</button>
                                             </>
                                         }
                                     </th>
