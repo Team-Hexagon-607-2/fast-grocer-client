@@ -23,7 +23,6 @@ import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import EditProduct from "../../Pages/Dashboard/EditProduct/EditProduct";
 import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderForDeliverMan";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -80,7 +79,7 @@ const router = createBrowserRouter([
       {
         path: "/aboutUs",
         element: <AboutUs></AboutUs>,
-      },
+      },      
 
       {
         path: "/category",

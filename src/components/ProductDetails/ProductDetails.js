@@ -3,9 +3,12 @@ import { AiFillHeart } from "react-icons/ai";
 import { TbShoppingCartPlus } from "react-icons/tb";
 import { useLoaderData } from "react-router";
 import { StateContext } from "../../contexts/AuthProvider";
+import AddReview from "../Review/AddReview";
+import ProductReview from "../Review/ProductReview";
 
 const ProductDetails = () => {
   const product = useLoaderData();
+  // console.log(product);
   const { handleAddToCart } = useContext(StateContext);
   const {
     name,
@@ -17,6 +20,7 @@ const ProductDetails = () => {
     stock,
     bundle,
     save,
+    _id,
   } = product;
   return (
     <div className='w-10/12 mx-auto my-20'>
@@ -67,6 +71,19 @@ const ProductDetails = () => {
           <p>{description}</p>
         </div>
       )}
+
+      <div>
+        <ProductReview
+        id= {_id}
+        ></ProductReview>
+      </div>
+        
+      <div>
+      <AddReview
+        name={name}
+        id={_id}
+      ></AddReview>
+      </div>
     </div>
   );
 };
