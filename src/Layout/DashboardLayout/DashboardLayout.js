@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AiOutlineHeart, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineHeart, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
 import { Link, Outlet } from "react-router-dom";
@@ -9,6 +9,7 @@ import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
 import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
+import { BiListPlus } from "react-icons/bi";
 
 const DashboardLayout = () => {
   const { user } = useContext(StateContext);
@@ -62,26 +63,26 @@ const DashboardLayout = () => {
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/all-order"
                   >
-                    All Orders
+                    <AiOutlineUnorderedList/>All Orders
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/add-product"
                   >
-                    Add Product
+                    <BiListPlus/>Add Product
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/edit-product"
                   >
-                    Edit Products
+                    <AiOutlineEdit/>Edit Products
                   </Link>
                 </li>
               </>

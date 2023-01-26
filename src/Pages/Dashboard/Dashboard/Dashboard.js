@@ -57,7 +57,7 @@ const Dashboard = () => {
                         </div>
                     }
                     {
-                        ((isDeliverymen && !deliverymanData?.workPermitStatus === "Accepted") || !deliverymanData?.verified) && <label htmlFor="deliveryman-modal" className={`bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3`}>Request for Work Permit</label>
+                        ((isDeliverymen && !deliverymanData?.workPermitStatus === "Accepted") || (isDeliverymen && !deliverymanData?.verified)) && <label htmlFor="deliveryman-modal" className={`bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3`}>Request for Work Permit</label>
                     }
                 </div>
             </div>
