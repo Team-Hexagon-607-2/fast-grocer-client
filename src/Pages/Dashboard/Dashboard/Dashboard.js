@@ -22,7 +22,7 @@ const Dashboard = () => {
 
     return (
         <div className=''>
-            <h2 className="text-2xl font-bold mb-4">My Profile</h2>
+            <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">My Profile</h2>
             <div className='flex flex-col md:flex-row items-start'>
                 <div className='mr-10 flex flex-col justify-center px-20 mx-auto md:mx-0'>
                     <img
@@ -57,7 +57,7 @@ const Dashboard = () => {
                         </div>
                     }
                     {
-                        ((isDeliverymen && !deliverymanData?.workPermitStatus === "Accepted") || !deliverymanData?.verified) && <label htmlFor="deliveryman-modal" className={`bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3`}>Request for Work Permit</label>
+                        ((isDeliverymen && !deliverymanData?.workPermitStatus === "Accepted") || (isDeliverymen && !deliverymanData?.verified)) && <label htmlFor="deliveryman-modal" className={`bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3`}>Request for Work Permit</label>
                     }
                 </div>
             </div>
