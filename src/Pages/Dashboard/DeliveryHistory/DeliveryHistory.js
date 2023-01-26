@@ -9,7 +9,7 @@ const DeliveryHistory = () => {
   const {data: deliveredOrder = []} = useQuery({
     queryKey: ["delivered"],
     queryFn: async () =>{
-      const res = await fetch(`http://localhost:5000/delivered-orders?email=${user?.email}`)
+      const res = await fetch(`https://fg-server.vercel.app/delivered-orders?email=${user?.email}`)
       const data = res.json();
       return data;
     }
