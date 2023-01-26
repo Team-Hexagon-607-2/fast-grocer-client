@@ -77,83 +77,83 @@ const OrderForDeliverMan = () => {
           </thead>
           <tbody>
             {data?.data?.map((item, index) => (
-              <tr key={item?._id}>
-                <td>{index + 1}</td>
-                <td>{item?.name}</td>
-                <td>{item?.address}</td>
-                <td>{item?.number}</td>
-                <td>
-                  <div>
-                    {item?.pick}
-                    {!item.pick && (
-                      <button
-                        onClick={() => handlePickItem(item?._id)}
-                        className="btn btn-info text-white"
-                      >
-                        Pick This Item
-                      </button>
-                    )}
-                  </div>
-                </td>
-                <td>
-                  <div className="flex items-center flex-col space-x-3">
-                    {item?.order_products?.map((product) => (
-                      <Link
-                        key={product?._id}
-                        to={`/products/${product?._id}`}
-                        className="flex flex-row items-center w-[300px] hover:bg-blue-200"
-                      >
-                        <div className="w-[80px] h-[80px]">
-                          <img
-                            src={product?.imageUrl}
-                            className="object-fit w-full h-full" alt=""
-                          />
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold">
-                            {product.name?.slice(0, 30)}
-                          </p>
-                          <p>{product?.bundle}</p>
-                          <p>Quantity: {product?.qunatity}</p>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </td>
-                <td>
-                  <p className="font-semibold font-sm">
-                    Total Price: ৳{item?.total_price}
-                  </p>
-                </td>
-                <td>
-                  <div className="flex flex-col items-center gap-3">
-                    <p className="text-md font-semibold ">{item?.status}</p>
-                  </div>
-                </td>
-                <th className={`${item?.paid === false && "text-red-500"}`}>
-                  {item?.paid === false ? "Not Paid" : "Already Paid"}
-                </th>
-                <th>{item?.condition}</th>
-                <th>
-                  <div className="flex flex-col items-center gap-3">
-                    {item?.deliver === true && (
-                      <p className="text-md text-black font-semibold">
-                        {" "}
-                        Item Delivered
-                      </p>
-                    )}
+              !item.deliver && <tr key={item?._id}>
+              <td>{index + 1}</td>
+              <td>{item?.name}</td>
+              <td>{item?.address}</td>
+              <td>{item?.number}</td>
+              <td>
+                <div>
+                  {item?.pick}
+                  {!item.pick && (
+                    <button
+                      onClick={() => handlePickItem(item?._id)}
+                      className="btn btn-info text-white"
+                    >
+                      Pick This Item
+                    </button>
+                  )}
+                </div>
+              </td>
+              <td>
+                <div className="flex items-center flex-col space-x-3">
+                  {item?.order_products?.map((product) => (
+                    <Link
+                      key={product?._id}
+                      to={`/products/${product?._id}`}
+                      className="flex flex-row items-center w-[300px] hover:bg-blue-200"
+                    >
+                      <div className="w-[80px] h-[80px]">
+                        <img
+                          src={product?.imageUrl}
+                          className="object-fit w-full h-full" alt=""
+                        />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold">
+                          {product.name?.slice(0, 30)}
+                        </p>
+                        <p>{product?.bundle}</p>
+                        <p>Quantity: {product?.qunatity}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </td>
+              <td>
+                <p className="font-semibold font-sm">
+                  Total Price: ৳{item?.total_price}
+                </p>
+              </td>
+              <td>
+                <div className="flex flex-col items-center gap-3">
+                  <p className="text-md font-semibold ">{item?.status}</p>
+                </div>
+              </td>
+              <th className={`${item?.paid === false && "text-red-500"}`}>
+                {item?.paid === false ? "Not Paid" : "Already Paid"}
+              </th>
+              <th>{item?.condition}</th>
+              <th>
+                <div className="flex flex-col items-center gap-3">
+                  {item?.deliver === true && (
+                    <p className="text-md text-black font-semibold">
+                      {" "}
+                      Item Delivered
+                    </p>
+                  )}
 
-                    {item?.pick === "Already Picked" && (
-                      <button
-                        onClick={() => handleDeliveryItem(item?._id)}
-                        className="btn btn-info text-white"
-                      >
-                        Deliver This Item
-                      </button>
-                    )}
-                  </div>
-                </th>
-              </tr>
+                  {item?.pick === "Already Picked" && (
+                    <button
+                      onClick={() => handleDeliveryItem(item?._id)}
+                      className="btn btn-info text-white"
+                    >
+                      Deliver This Item
+                    </button>
+                  )}
+                </div>
+              </th>
+            </tr>
             ))}
           </tbody>
         </table>
