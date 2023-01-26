@@ -2,20 +2,19 @@ import React, { useContext } from "react";
 import { AiOutlineEdit, AiOutlineHeart, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
+import { BiListPlus } from "react-icons/bi";
 import { Link, Outlet } from "react-router-dom";
-import Footer from "../../components/Shared/Footer/Footer";
-import Navbar from "../../components/Shared/Navbar/Navbar";
 import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
 import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
-import { BiListPlus } from "react-icons/bi";
+import Dashboard from "./../../Pages/Dashboard/Dashboard/Dashboard";
 
 const DashboardLayout = () => {
   const { user } = useContext(StateContext);
   const [isAdmin] = useFindAdmin(user?.email);
   const [isBuyer] = useFindBuyer(user?.email);
-  const [isDeliverymen] = useFindDeliveryman(user?.email);
+  const [isDeliveryman] = useFindDeliveryman(user?.email);
 
   return (
     <div>
@@ -127,7 +126,19 @@ const DashboardLayout = () => {
               </>
             )}
 
-            {/* Buyer Dashboard */}
+            {/* Delivery man Dashboard */}
+            {isDeliveryman && (
+              <>
+                <li>
+                  <Link
+                    to="/dashboard/delivery-man-order"
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                  >
+                    My Assign Order
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

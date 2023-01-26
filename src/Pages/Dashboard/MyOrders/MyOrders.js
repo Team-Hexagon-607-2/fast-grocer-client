@@ -21,7 +21,7 @@ const MyOrders = () => {
   // } = useQuery({
   //   queryKey: ["cancel-order"],
   //   queryFn: () =>
-  //     fetch(`https://fg-server.vercel.app/cancel-order`).then((res) => res.json()),
+  //     fetch(`http://localhost:5000/cancel-order`).then((res) => res.json()),
   // });
   console.log(data?.data);
   const handleCancelRequest = (id) => {
@@ -41,10 +41,10 @@ const MyOrders = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <div className=''>
+    <div className="">
       <h2 className="text-2xl font-bold mb-4">My Orders</h2>
       <div className="overflow-x-auto w-full">
-      <div>{isLoading && <Loader />}</div>
+        <div>{isLoading && <Loader />}</div>
         <table className="table w-full">
           <thead>
             <tr>

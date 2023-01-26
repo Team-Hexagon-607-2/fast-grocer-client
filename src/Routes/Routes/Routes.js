@@ -21,7 +21,8 @@ import Payment from "../../components/PlaceOrder/Payment";
 import AllOrder from "./../../Pages/Dashboard/AllOrder/AllOrder";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import EditProduct from "../../Pages/Dashboard/EditProduct/EditProduct";
-
+import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderForDeliverMan";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -78,7 +79,7 @@ const router = createBrowserRouter([
       {
         path: "/aboutUs",
         element: <AboutUs></AboutUs>,
-      },
+      },      
 
       {
         path: "/category",
@@ -92,7 +93,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
           {
             path: "/dashboard",
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/all-order",
             element: <AllOrder />,
+          },
+          {
+            path: "/dashboard/delivery-man-order",
+            element: <OrderForDeliverMan />,
           },
           {
             path: "/dashboard/my-wishlist",
