@@ -7,7 +7,7 @@ const AllProducts = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [totalProducts, setTotalProducts] = useState(null);
-  const [size, setSize] = useState(20);
+  const [size, setSize] = useState(30);
   const [page, setPage] = useState(0);
 
   const pages = Math.ceil(totalProducts / parseInt(size));
@@ -42,17 +42,21 @@ const AllProducts = () => {
         ))}
       </div>
 
-      {/* pagination */}
-      {
-        array.map(number => <button key={number.index} onClick={() => setPage(number)} className='bg-slate-200 mx-1 w-10 h-10 rounded-full'>{number + 1}</button>)
-      }
 
-      <select onChange={(e) => setSize(e.target.value)} className='border px-2 py-1'>
-        <option value="20">20</option>
-        <option value="40">40</option>
-        <option value="60">60</option>
-        <option value="80">80</option>
-      </select>
+      <div className="flex justify-end mr-10 mb-10">
+        <div>
+          {
+            array.map(number => <button key={number.index} onClick={() => setPage(number)} className={(page === number) ? ' mx-1 w-8 h-8 rounded-full bg-[#ddecb0]' : 'bg-slate-200 mx-1 w-8 h-8 rounded-full'}>{number + 1}</button>)
+          }
+        </div>
+
+        <select onChange={(e) => setSize(e.target.value)} className='border px-2 py-1 ml-2 rounded-md'>
+          <option value="30">30</option>
+          <option value="40">40</option>
+          <option value="50">50</option>
+          <option value="60">60</option>
+        </select>
+      </div>
     </>
   );
 };

@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { StateContext } from '../../../contexts/AuthProvider';
 import SingleProduct from '../../Home/HomePageProducts/SingleProduct/SingleProduct';
+import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import { FaListUl } from "react-icons/fa";
 
 const CategoryPageProducts = () => {
   const { AllProducts, isLoading } = useContext(StateContext);
   const { name } = useParams();
+  const [isAsc, setIsAsc] = useState('');
 
   if (isLoading) {
     return <div className='h-[250px flex justify-center items-center]'>
@@ -15,9 +18,33 @@ const CategoryPageProducts = () => {
 
   const categoryProducts = AllProducts.filter(category => category.category_name === name);
 
+  if (isAsc === 'Low Price') {
+    categoryProducts.sort(function (a, b) { return a.price - b.price });
+  }
+  if (isAsc === 'High Price') {
+    categoryProducts.sort(function (a, b) { return b.price - a.price });
+  }
+
   return (
     <div>
-      <h2 className='font-semibold text-xl pl-5 mt-3 mb-2'>{name}</h2>
+      <div className='md:flex justify-between items-center mb-2 mt-3 md:mb-0 md:mt-0'>
+        <h2 className='font-semibold text-2xl pl-5 mt-3 mb-2 text-[#70a138]'>{name}</h2>
+        
+        <div className='flex items-center gap-3 px-5'>
+          <div className='flex items-center'>
+            <p className='text-sm mr-3'>SORT BY</p>
+            <select onChange={(e) => setIsAsc(e.target.value)} className="select select-bordered select-sm w-56 focus:outline-none">
+              <option disabled selected>-- Price --</option>
+              <option>Low Price</option>
+              <option>High Price</option>
+            </select>
+          </div>
+
+          <BsFillGrid3X3GapFill className='w-5 h-5 font-semibold cursor-pointer inline-block' />
+          <FaListUl className='w-5 h-5 font-semibold cursor-pointer inline-block' />
+        </div>
+      </div>
+
       <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10 px-5'>
         {
           categoryProducts.map(categoryProduct => <SingleProduct key={categoryProduct._id} products={categoryProduct}></SingleProduct>)
