@@ -53,8 +53,8 @@ const OrderForDeliverMan = () => {
   };
 
   return (
-    <div className="my-10">
-      <h2 className="text-3xl text-yellow-700 text-center mb-4">All Orders</h2>
+    <div className="">
+      <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">My Delivery Orders</h2>
 
       <div className="overflow-x-auto  w-full">
         <div>{isLoading && <Loader />}</div>
@@ -106,7 +106,7 @@ const OrderForDeliverMan = () => {
                         <div className="w-[80px] h-[80px]">
                           <img
                             src={product?.imageUrl}
-                            className="object-fit w-full h-full"
+                            className="object-fit w-full h-full" alt=""
                           />
                         </div>
                         <div>

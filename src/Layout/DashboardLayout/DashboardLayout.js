@@ -3,6 +3,7 @@ import { AiOutlineEdit, AiOutlineHeart, AiOutlineStar, AiOutlineUnorderedList, A
 import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
 import { BiListPlus } from "react-icons/bi";
+import {GoListUnordered} from "react-icons/go";
 import { Link, Outlet } from "react-router-dom";
 import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
@@ -18,13 +19,13 @@ const DashboardLayout = () => {
 
   return (
     <div>
-      <div className="drawer drawer-mobile lg:w-11/12 mx-auto">
+      <div className="drawer drawer-mobile">
         <input
           id="dashboard-drawer"
           type="checkbox"
           className="drawer-toggle"
         />
-        <div className="drawer-content p-10">
+        <div className="drawer-content">
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
@@ -132,9 +133,9 @@ const DashboardLayout = () => {
                 <li>
                   <Link
                     to="/dashboard/delivery-man-order"
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                   >
-                    My Assign Order
+                    <GoListUnordered/>My Delivery Orders
                   </Link>
                 </li>
               </>
