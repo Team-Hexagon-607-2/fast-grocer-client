@@ -12,7 +12,7 @@ const ProductReview = ({ id }) => {
   } = useQuery({
     queryKey: ["reviews"],
     queryFn: () =>
-      fetch('http://localhost:5000/reviews').then((res) => res.json()),
+      fetch('https://fg-server.vercel.app/reviews').then((res) => res.json()),
   });
 
   // console.log(data);
