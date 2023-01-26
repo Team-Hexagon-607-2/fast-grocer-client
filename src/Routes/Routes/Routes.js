@@ -19,6 +19,7 @@ import AboutUs from "../../components/AboutUs/AboutUs/AboutUs";
 import PlaceOrder from "../../components/PlaceOrder/PlaceOrder";
 import Payment from "../../components/PlaceOrder/Payment";
 import AllOrder from "./../../Pages/Dashboard/AllOrder/AllOrder";
+import AddReview from "../../components/Review/AddReview";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "/aboutUs",
         element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/addreview",
+        element: <AddReview></AddReview>
       },
 
       {
