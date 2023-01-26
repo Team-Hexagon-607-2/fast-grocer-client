@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AiOutlineEdit, AiOutlineHeart, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineHeart, AiOutlineHistory, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
 import { BiListPlus } from "react-icons/bi";
@@ -136,6 +136,14 @@ const DashboardLayout = () => {
                     className="text-slate-700"
                   >
                     <GoListUnordered/>My Delivery Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/delivery-history"
+                    className="text-slate-700"
+                  >
+                    <AiOutlineHistory/>Delivery History
                   </Link>
                 </li>
               </>

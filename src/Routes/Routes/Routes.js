@@ -23,6 +23,7 @@ import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import EditProduct from "../../Pages/Dashboard/EditProduct/EditProduct";
 import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderForDeliverMan";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import DeliveryHistory from "../../Pages/Dashboard/DeliveryHistory/DeliveryHistory";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -118,6 +119,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/delivery-man-order",
             element: <OrderForDeliverMan />,
+          },
+          {
+            path: '/dashboard/delivery-history',
+            element: <DeliveryHistory></DeliveryHistory>
           },
           {
             path: "/dashboard/my-wishlist",
