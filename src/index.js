@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ContextProvider } from "./contexts/AuthProvider";
 import { Toaster } from "react-hot-toast";
+import 'react-photo-view/dist/react-photo-view.css';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));

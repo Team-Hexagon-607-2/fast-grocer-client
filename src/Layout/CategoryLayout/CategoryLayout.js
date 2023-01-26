@@ -19,13 +19,13 @@ const CategoryLayout = () => {
         </label>
       </div>
 
-      <div className="drawer drawer-mobile h-auto">
+      <div className="drawer drawer-mobile h-auto overflow-visible">
         <input id="category" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content overflow-y-auto">
           <Outlet></Outlet>
         </div>
 
-        <div className="drawer-side">
+        <div className="drawer-side sticky top-0">
           <label htmlFor="category" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-base-100 text-base-content lg:bg-slate-50">
             <h2 className='font-semibold text-lg pl-4'>Product Categories</h2>

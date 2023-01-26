@@ -1,4 +1,7 @@
 import React, { useContext } from "react";
+import { AiOutlineHeart, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
+import { FiUsers } from 'react-icons/fi';
+import { BsCash } from "react-icons/bs";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "../../components/Shared/Footer/Footer";
 import Navbar from "../../components/Shared/Navbar/Navbar";
@@ -6,12 +9,13 @@ import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
 import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
+import Dashboard from "./../../Pages/Dashboard/Dashboard/Dashboard";
 
 const DashboardLayout = () => {
   const { user } = useContext(StateContext);
   const [isAdmin] = useFindAdmin(user?.email);
   const [isBuyer] = useFindBuyer(user?.email);
-  const [isDeliverymen] = useFindDeliveryman(user?.email);
+  const [isDeliveryman] = useFindDeliveryman(user?.email);
 
   return (
     <div>
@@ -21,18 +25,19 @@ const DashboardLayout = () => {
           type="checkbox"
           className="drawer-toggle"
         />
-        <div className="drawer-content">
+        <div className="drawer-content p-10">
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu mt-[77px] p-4 w-56 bg-white text-base-100">
-            <li className="rounded-none">
+          <ul className="menu py-4 w-64 bg-slate-100 text-base-100">
+            <img className="w-16 h-16 mx-auto my-10 rounded-full" src={user?.photoURL || 'https://picsum.photos/200/300'} alt="" />
+            <li>
               <Link
-                className="border-y text-slate-700 h-[30px] py-5 !rounded-none"
+                className="text-slate-700"
                 to="/dashboard"
               >
-                My Profile
+                <AiOutlineUser /> My Profile
               </Link>
             </li>
 
@@ -42,18 +47,18 @@ const DashboardLayout = () => {
               <>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/all-buyers"
                   >
-                    All Buyers
+                    <FiUsers /> All Buyers
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/all-deliveryman"
                   >
-                    Delivery Men
+                    <FiUsers /> Delivery Men
                   </Link>
                 </li>
                 <li>
@@ -62,6 +67,22 @@ const DashboardLayout = () => {
                     to="/dashboard/all-order"
                   >
                     All Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/add-product"
+                  >
+                    Add Product
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    to="/dashboard/edit-product"
+                  >
+                    Edit Products
                   </Link>
                 </li>
               </>
@@ -73,40 +94,52 @@ const DashboardLayout = () => {
               <>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/my-orders"
                   >
-                    My Orders
+                    <AiOutlineUnorderedList />My Orders
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/my-wishlist"
                   >
-                    My Wishlist
+                    <AiOutlineHeart />My Wishlist
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/payments"
                   >
-                    Payments
+                    <BsCash />Payments
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/my-reviews"
                   >
-                    My Reviews
+                    <AiOutlineStar />My Reviews
                   </Link>
                 </li>
               </>
             )}
 
-            {/* Buyer Dashboard */}
+            {/* Delivery man Dashboard */}
+            {isDeliveryman && (
+              <>
+                <li>
+                  <Link
+                    to="/dashboard/delivery-man-order"
+                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                  >
+                    My Assign Order
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

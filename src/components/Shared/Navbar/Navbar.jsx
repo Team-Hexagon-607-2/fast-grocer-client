@@ -22,7 +22,7 @@ const Navbar = () => {
   const { user, logOut } = useContext(StateContext);
   const styles = {
     wrapper:
-      "h-[220px] rounded-[10px]  bg-white w-full mx-auto hidden sm:block ",
+      "h-[206px] rounded-[10px]  bg-white w-full mx-auto hidden sm:block ",
     mobileWrapper: " w-full h-[80px] bg-[#92B137]  block sm:hidden",
     flexRow: "flex w-full flex-row border-b-[1px] border-slate-200",
   };
