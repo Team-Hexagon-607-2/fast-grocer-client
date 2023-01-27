@@ -72,7 +72,7 @@ const AllProducts = () => {
         {AllProducts?.map((product) => (<SingleProduct key={product?.id} products={product} />))}
       </div>
 
-      <div className="md:flex justify-between mx-8 mb-10">
+      <div className="md:flex justify-between items-center mx-8 mb-10">
         <p>page {page + 1} of 8</p>
 
         <div className="flex items-center">
