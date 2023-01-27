@@ -30,6 +30,18 @@ const AllProducts = () => {
     );
   };
 
+  function pageIncrease() {
+    if (page <= 6) {
+      setPage(page + 1)
+    }
+  }
+
+  function pageDecrease() {
+    if (page >= 1) {
+      setPage(page - 1)
+    }
+  }
+
   return (
     <>
       <div className="flex items-center justify-center  sm:mt-[50px]">
@@ -37,25 +49,24 @@ const AllProducts = () => {
       </div>
       <h2 className="text-center font-semibold text-2xl">All Products</h2>
       <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 mx-auto py-10">
-        {AllProducts?.map((product) => (
-          <SingleProduct key={product?.id} products={product} />
-        ))}
+        {AllProducts?.map((product) => ( <SingleProduct key={product?.id} products={product} /> ))}
       </div>
 
-
       <div className="flex justify-end mr-10 mb-10">
-        <div>
+        <button className={page === 7 ? 'bg-slate-300  hover:cursor-not-allowed duration-300 px-2 py-1 rounded-md' : 'bg-[#ddecb0] hover:bg-[#b9cc81] duration-300 px-2 py-1 rounded-md'} onClick={pageIncrease}>Next</button>
+        <div className="mx-2">
           {
             array.map(number => <button key={number.index} onClick={() => setPage(number)} className={(page === number) ? ' mx-1 w-8 h-8 rounded-full bg-[#ddecb0]' : 'bg-slate-200 mx-1 w-8 h-8 rounded-full'}>{number + 1}</button>)
           }
         </div>
+        <button className={page === 0 ? 'bg-slate-300  hover:cursor-not-allowed duration-300 px-2 py-1 rounded-md' : 'bg-[#ddecb0] hover:bg-[#b9cc81] duration-300 px-2 py-1 rounded-md'} onClick={pageDecrease}>Previews</button>
 
-        <select onChange={(e) => setSize(e.target.value)} className='border px-2 py-1 ml-2 rounded-md'>
+        {/* <select onChange={(e) => setSize(e.target.value)} className='border px-2 py-1 ml-2 rounded-md'>
           <option value="30">30</option>
           <option value="40">40</option>
           <option value="50">50</option>
           <option value="60">60</option>
-        </select>
+        </select> */}
       </div>
     </>
   );
