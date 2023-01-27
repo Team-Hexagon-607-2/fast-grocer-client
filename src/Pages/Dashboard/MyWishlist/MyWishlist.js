@@ -39,7 +39,7 @@ const MyWishList = () => {
   const wishlist = wishListData?.data;
   return (
     <div className="">
-      <h2 className="text-2xl font-bold mb-4">My Wishlist</h2>
+      <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">My Wishlist</h2>
       <div className="flex items-center justify-center">
         {" "}
         {wishlistLoading && <Loader />}

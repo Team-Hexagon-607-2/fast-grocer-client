@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { AiOutlineHeart, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineHeart, AiOutlineHistory, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
+import { BiListPlus } from "react-icons/bi";
+import {GoListUnordered} from "react-icons/go";
 import { Link, Outlet } from "react-router-dom";
-import Footer from "../../components/Shared/Footer/Footer";
-import Navbar from "../../components/Shared/Navbar/Navbar";
 import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
 import useFindBuyer from "../../hooks/useFindBuyer";
@@ -19,13 +19,13 @@ const DashboardLayout = () => {
 
   return (
     <div>
-      <div className="drawer drawer-mobile lg:w-11/12 mx-auto">
+      <div className="drawer drawer-mobile">
         <input
           id="dashboard-drawer"
           type="checkbox"
           className="drawer-toggle"
         />
-        <div className="drawer-content p-10">
+        <div className="drawer-content">
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
@@ -63,26 +63,26 @@ const DashboardLayout = () => {
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/all-order"
                   >
-                    All Orders
+                    <AiOutlineUnorderedList/>All Orders
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/add-product"
                   >
-                    Add Product
+                    <BiListPlus/>Add Product
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                     to="/dashboard/edit-product"
                   >
-                    Edit Products
+                    <AiOutlineEdit/>Edit Products
                   </Link>
                 </li>
               </>
@@ -133,9 +133,17 @@ const DashboardLayout = () => {
                 <li>
                   <Link
                     to="/dashboard/delivery-man-order"
-                    className="border-b text-slate-700 h-[30px] py-5 !rounded-none"
+                    className="text-slate-700"
                   >
-                    My Assign Order
+                    <GoListUnordered/>My Delivery Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/delivery-history"
+                    className="text-slate-700"
+                  >
+                    <AiOutlineHistory/>Delivery History
                   </Link>
                 </li>
               </>
