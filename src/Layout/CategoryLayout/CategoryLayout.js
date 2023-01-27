@@ -28,7 +28,9 @@ const CategoryLayout = () => {
         <div className="drawer-side sticky top-0">
           <label htmlFor="category" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-base-100 text-base-content lg:bg-slate-50">
-            <h2 className='font-semibold text-lg pl-4'>Product Categories</h2>
+            <div className="divider">
+              <h2 className='font-semibold pl-4 uppercase'>Shop By Categories</h2>
+            </div>
             {
               (!isProductLoading && !isCategoryLoading) &&
               categories.map(category =>
