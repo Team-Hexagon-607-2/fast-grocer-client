@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { StateContext } from "../../../contexts/AuthProvider";
 
 const Cart = () => {
-  const { totalQuantity, totalPrice } = useContext(StateContext);
+  const { totalQuantity } = useContext(StateContext);
 
   return (
     <Link to="/cart" className="flex flex-row">
@@ -19,9 +19,6 @@ const Cart = () => {
         {totalQuantity}
       </div>
       <div>
-        <p className="text-[15px] font-bold text-black ml-1 mt-3">
-          ৳{totalPrice}
-        </p>
       </div>
     </Link>
   );
