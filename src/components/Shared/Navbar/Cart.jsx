@@ -2,7 +2,6 @@
 // This file contain desktop navbar cart
 
 import React from "react";
-import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { StateContext } from "../../../contexts/AuthProvider";

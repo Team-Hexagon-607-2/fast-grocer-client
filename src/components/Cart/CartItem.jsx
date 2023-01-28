@@ -12,7 +12,7 @@ const CartItem = ({ cart }) => {
           <div className="w-[100px] h-[100px]   sm:w-[140px] sm:h-[170px]  ">
             <img
               src={cart?.imageUrl}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain" alt=""
             />
           </div>
 
