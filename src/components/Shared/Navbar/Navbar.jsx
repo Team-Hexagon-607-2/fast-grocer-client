@@ -48,7 +48,7 @@ const Navbar = () => {
                 <img
                   src={logo}
                   alt="Fast_Grocer"
-                  className="w-[125px]"
+                  className="w-[135px]"
                 />
               </p>
             </Link>
