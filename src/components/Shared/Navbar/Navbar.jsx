@@ -79,12 +79,12 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="w-11/12 mx-auto py-5">
+        <div className="w-11/12 mx-auto pb-5">
           <div className="flex justify-between">
             {/* Desktop search */}
             {/* Desktop navbar link such as page home etc */}
 
-            <div className="dropdown dropdown-start font-semibold">
+            <div className="dropdown dropdown-start font-semibold text-[15px]">
               <label
                 tabIndex={0}
                 className="flex cursor-pointer items-center justify-center"
