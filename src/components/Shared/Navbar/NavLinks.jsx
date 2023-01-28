@@ -12,7 +12,7 @@ import { StateContext } from "../../../contexts/AuthProvider";
 const NavLinks = () => {
 
   return (
-    <div className="flex flex-row flex-wrap sm:gap-2 md:gap-5 md:text-md font-bold text-black">
+    <div className="flex flex-row flex-wrap sm:gap-2 md:gap-5 md:text-md font-semibold text-black">
       <div className="dropdown dropdown-end">
         <Link to="/">
           <label
