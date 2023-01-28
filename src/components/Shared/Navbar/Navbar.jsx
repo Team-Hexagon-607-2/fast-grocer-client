@@ -14,15 +14,16 @@ import Wishlist from "./Wishlist";
 import logo from "../../../assets/logo/logo.png";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { RiArrowDownSLine } from "react-icons/ri";
 import { StateContext } from "./../../../contexts/AuthProvider";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(StateContext);
+  const { user, logOut, categories,  } = useContext(StateContext);
   const styles = {
     wrapper:
-      "h-[206px] rounded-[10px]  bg-white w-full mx-auto hidden sm:block ",
-    mobileWrapper: " w-full h-[80px] bg-[#92B137]  block sm:hidden",
-    flexRow: "flex w-full flex-row justify-between border-slate-200 px-5 py-3",
+      "bg-white w-full mx-auto hidden sm:block sticky top-0 z-[9999]",
+    mobileWrapper: " w-full h-[80px] bg-[#92B137] block sm:hidden",
+    flexRow: "flex w-full flex-row justify-between items-center border-slate-200 px-5 py-3",
   };
 
   return (
@@ -77,11 +78,30 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="w-[70%]  flex flex-row">
-          <div className="flex flex-col p-10">
+        <div className="w-[70%] flex flex-row">
+          <div className="flex">
             {/* Desktop search */}
             {/* Desktop navbar link such as page home etc */}
-            <NavLinks />
+
+            <div className="dropdown dropdown-start">
+              <label
+                tabIndex={0}
+                className="flex cursor-pointer items-center justify-center"
+              >
+                Category <RiArrowDownSLine />
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-64"
+              >
+                <div className="h-[300px] overflow-auto">
+                  {
+                    categories.map(category => <li key={category._id}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>)
+                  }
+                </div>
+              </ul>
+            </div>
+          <NavLinks />
           </div>
         </div>
       </div>
