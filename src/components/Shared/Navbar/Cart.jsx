@@ -19,10 +19,10 @@ const Cart = () => {
       </label>
       <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
         <div className="card-body">
-          <span className="font-bold text-lg">{totalQuantity} Items</span>
-          <span className="text-info">Subtotal: ৳{totalPrice}</span>
+          <span className="font-bold text-lg text-center">{totalQuantity} Items</span>
+          <span className="text-dark my-3 text-center">Subtotal: <span className="font-semibold">{totalPrice}</span>৳</span>
           <div className="card-actions">
-            <Link to="/cart" className="flex flex-row"><button className="btn btn-primary btn-block">View cart</button></Link>
+            <Link to="/cart" className="bg-[#8caf2b] hover:bg-[#6A802D] duration-300 w-full p-2 font-semibold text-center text-white rounded-md">View cart</Link>
           </div>
         </div>
       </div>

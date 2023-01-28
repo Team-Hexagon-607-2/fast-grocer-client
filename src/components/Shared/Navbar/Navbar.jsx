@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { StateContext } from "./../../../contexts/AuthProvider";
+import { MdOutlineLogout } from "react-icons/md";
+import { AiOutlineDashboard } from "react-icons/ai";
 
 const Navbar = () => {
   const { user, logOut, categories,  } = useContext(StateContext);
@@ -66,12 +68,11 @@ const Navbar = () => {
                   </label>
                   <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                     <li>
-                      <Link to="/dashboard" className="justify-between">
-                        Dashboard
-                        <span className="badge">New</span>
+                      <Link to="/dashboard">
+                        <AiOutlineDashboard/> Dashboard
                       </Link>
                     </li>
-                    <li><button onClick={logOut}>Logout</button></li>
+                    <li><button onClick={logOut}><MdOutlineLogout/> Logout</button></li>
                   </ul>
                 </div>
               )}
