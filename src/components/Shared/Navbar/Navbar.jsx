@@ -61,30 +61,26 @@ const Navbar = () => {
             </div>
             <div className="flex flex-wrap items-center justify-start">
               <div className=" flex flex-row flex-wrap sm:py-1 gap-3  -mt-[10px] ml-[10px] items-center ">
-                <Login />
                 <Wishlist />
                 <Cart />
+                <Login />
                 {user && (
-                  <div className="w-10 h-10 rounded-full bg-[#F2F4EC]">
-                    <img
-                      className="object-contain"
-                      src={
-                        user?.photoURL ||
-                        "https://cdn1.iconfinder.com/data/icons/website-internet/48/website_-_male_user-512.png"
-                      }
-                      alt={user?.displayName}
-                      title={user?.displayName}
-                    />
-                  </div>
-                )}
-                {user && (
-                  <div>
-                    <button
-                      onClick={logOut}
-                      className=" hover:bg-[#e9ebe4] flex items-center text-md font-bold justify-center gap-1 bg-[#F2F4EC] p-[8px] rounded-full"
-                    >
-                      <BiLogOutCircle color="#92ad3f" size={24} /> Logout
-                    </button>
+                  <div className="dropdown dropdown-end">
+                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                      <div className="w-10 rounded-full">
+                        <img src={user?.photoURL || "https://cdn1.iconfinder.com/data/icons/website-internet/48/website_-_male_user-512.png"} alt=""/>
+                      </div>
+                    </label>
+                    <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                      <li>
+                        <Link to="/dashboard" className="justify-between">
+                          Dashboard
+                          <span className="badge">New</span>
+                        </Link>
+                      </li>
+                      <li><a>Settings</a></li>
+                      <li><button onClick={logOut}>Logout</button></li>
+                    </ul>
                   </div>
                 )}
               </div>

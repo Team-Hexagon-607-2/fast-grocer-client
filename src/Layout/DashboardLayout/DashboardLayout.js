@@ -32,9 +32,9 @@ const DashboardLayout = () => {
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu w-64 bg-slate-100 text-base-100">
             <div className="border-b">
-              <img className="mx-auto my-5 w-[125px]" src={logo} alt="" />
+              <Link to='/'><img className="mx-auto my-7 w-[125px]" src={logo} alt="" /></Link>
             </div>
-            <li>
+            <li className="text-[14px] font-semibold">
               <Link
                 className="text-slate-700"
                 to="/dashboard"
@@ -47,7 +47,7 @@ const DashboardLayout = () => {
 
             {isAdmin && (
               <>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/all-buyers"
@@ -55,7 +55,7 @@ const DashboardLayout = () => {
                     <FiUsers /> All Buyers
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/all-deliveryman"
@@ -63,7 +63,7 @@ const DashboardLayout = () => {
                     <FiUsers /> Delivery Men
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/all-order"
@@ -71,7 +71,7 @@ const DashboardLayout = () => {
                     <AiOutlineUnorderedList />All Orders
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/add-product"
@@ -79,7 +79,7 @@ const DashboardLayout = () => {
                     <BiListPlus />Add Product
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/edit-product"
@@ -94,7 +94,7 @@ const DashboardLayout = () => {
 
             {isBuyer && (
               <>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/my-orders"
@@ -102,7 +102,7 @@ const DashboardLayout = () => {
                     <AiOutlineUnorderedList />My Orders
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/my-wishlist"
@@ -110,7 +110,7 @@ const DashboardLayout = () => {
                     <AiOutlineHeart />My Wishlist
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/payments"
@@ -118,7 +118,7 @@ const DashboardLayout = () => {
                     <BsCash />Payments
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/my-reviews"
@@ -132,7 +132,7 @@ const DashboardLayout = () => {
             {/* Delivery man Dashboard */}
             {isDeliveryman && (
               <>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     to="/dashboard/delivery-man-order"
                     className="text-slate-700"
@@ -140,7 +140,7 @@ const DashboardLayout = () => {
                     <GoListUnordered />My Delivery Orders
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     to="/dashboard/delivery-history"
                     className="text-slate-700"
