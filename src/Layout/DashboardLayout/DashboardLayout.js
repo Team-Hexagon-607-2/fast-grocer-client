@@ -3,13 +3,13 @@ import { AiOutlineEdit, AiOutlineHeart, AiOutlineHistory, AiOutlineStar, AiOutli
 import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
 import { BiListPlus } from "react-icons/bi";
-import {GoListUnordered} from "react-icons/go";
+import { GoListUnordered } from "react-icons/go";
 import { Link, Outlet } from "react-router-dom";
 import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
 import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
-import Dashboard from "./../../Pages/Dashboard/Dashboard/Dashboard";
+import logo from '../../assets/logo/logo.png';
 
 const DashboardLayout = () => {
   const { user } = useContext(StateContext);
@@ -30,9 +30,11 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu py-4 w-64 bg-slate-100 text-base-100">
-            <img className="w-16 h-16 mx-auto my-10 rounded-full" src={user?.photoURL || 'https://picsum.photos/200/300'} alt="" />
-            <li>
+          <ul className="menu w-64 bg-slate-100 text-base-100">
+            <div className="border-b">
+              <Link to='/'><img className="mx-auto my-7 w-[125px]" src={logo} alt="" /></Link>
+            </div>
+            <li className="text-[14px] font-semibold">
               <Link
                 className="text-slate-700"
                 to="/dashboard"
@@ -45,7 +47,7 @@ const DashboardLayout = () => {
 
             {isAdmin && (
               <>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/all-buyers"
@@ -53,7 +55,7 @@ const DashboardLayout = () => {
                     <FiUsers /> All Buyers
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/all-deliveryman"
@@ -61,28 +63,28 @@ const DashboardLayout = () => {
                     <FiUsers /> Delivery Men
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/all-order"
                   >
-                    <AiOutlineUnorderedList/>All Orders
+                    <AiOutlineUnorderedList />All Orders
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/add-product"
                   >
-                    <BiListPlus/>Add Product
+                    <BiListPlus />Add Product
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/edit-product"
                   >
-                    <AiOutlineEdit/>Edit Products
+                    <AiOutlineEdit />Edit Products
                   </Link>
                 </li>
               </>
@@ -92,7 +94,7 @@ const DashboardLayout = () => {
 
             {isBuyer && (
               <>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/my-orders"
@@ -100,7 +102,7 @@ const DashboardLayout = () => {
                     <AiOutlineUnorderedList />My Orders
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/my-wishlist"
@@ -108,7 +110,7 @@ const DashboardLayout = () => {
                     <AiOutlineHeart />My Wishlist
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/payments"
@@ -116,7 +118,7 @@ const DashboardLayout = () => {
                     <BsCash />Payments
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/my-reviews"
@@ -130,20 +132,20 @@ const DashboardLayout = () => {
             {/* Delivery man Dashboard */}
             {isDeliveryman && (
               <>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     to="/dashboard/delivery-man-order"
                     className="text-slate-700"
                   >
-                    <GoListUnordered/>My Delivery Orders
+                    <GoListUnordered />My Delivery Orders
                   </Link>
                 </li>
-                <li>
+                <li className="text-[14px] font-semibold">
                   <Link
                     to="/dashboard/delivery-history"
                     className="text-slate-700"
                   >
-                    <AiOutlineHistory/>Delivery History
+                    <AiOutlineHistory />Delivery History
                   </Link>
                 </li>
               </>
