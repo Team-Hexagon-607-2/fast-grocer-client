@@ -24,6 +24,7 @@ import EditProduct from "../../Pages/Dashboard/EditProduct/EditProduct";
 import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderForDeliverMan";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DeliveryHistory from "../../Pages/Dashboard/DeliveryHistory/DeliveryHistory";
+import FlashSalePage from "../../components/FlashSale/FlashSalePage";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/onsale",
         element: <OnSale />,
+      },
+      {
+        path: "/flashsale",
+        element: <FlashSalePage />,
       },
       {
         path: "/cart",
@@ -96,7 +101,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard",
@@ -123,8 +132,8 @@ const router = createBrowserRouter([
         element: <OrderForDeliverMan />,
       },
       {
-        path: '/dashboard/delivery-history',
-        element: <DeliveryHistory></DeliveryHistory>
+        path: "/dashboard/delivery-history",
+        element: <DeliveryHistory></DeliveryHistory>,
       },
       {
         path: "/dashboard/my-wishlist",

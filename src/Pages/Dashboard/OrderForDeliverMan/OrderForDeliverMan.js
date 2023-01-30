@@ -65,7 +65,6 @@ const OrderForDeliverMan = () => {
               <th>Name</th>
               <th>Phone</th>
               <th>address</th>
-
               <th>Picked This Order</th>
               <th>Product Info</th>
               <th>Total Price</th>

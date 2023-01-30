@@ -37,6 +37,7 @@ export const ContextProvider = ({ children }) => {
     queryKey: ["products"],
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/products`).then((res) => res.json()),
+    keepPreviousData: true,
   });
 
   // all product categories name
@@ -63,6 +64,7 @@ export const ContextProvider = ({ children }) => {
           "content-type": "application/json",
         },
       }).then((res) => res.json()),
+    keepPreviousData: true,
   });
 
   const handleDecrement = (e, id) => {

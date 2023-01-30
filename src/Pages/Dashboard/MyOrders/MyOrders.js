@@ -7,8 +7,8 @@ import { toast } from "react-hot-toast";
 import Loader from "../../../components/Loader/Loader";
 const MyOrders = () => {
   const { user } = useContext(StateContext);
-  const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["order", user?.email, "cancel-order"],
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["order", user?.email],
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/order/${user?.email}`).then((res) =>
         res.json()
@@ -23,10 +23,14 @@ const MyOrders = () => {
   //   queryFn: () =>
   //     fetch(`https://fg-server.vercel.app/cancel-order`).then((res) => res.json()),
   // });
-  console.log(data?.data);
-  const handleCancelRequest = (id) => {
+
+  const handleCancelRequest = (item) => {
+    if (item?.deliver === true) {
+      toast.error("Product Delivered and We don't accept any cancel request");
+      return;
+    }
     const cancel = "Cancel Request Sent";
-    fetch(`https://fg-server.vercel.app/cancel-order/${id}`, {
+    fetch(`https://fg-server.vercel.app/cancel-order/${item?._id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cancel }),
@@ -42,7 +46,9 @@ const MyOrders = () => {
   };
   return (
     <div className="">
-      <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">My Orders</h2>
+      <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">
+        My Orders
+      </h2>
       <div className="overflow-x-auto w-full">
         <div>{isLoading && <Loader />}</div>
         <table className="table w-full">
@@ -101,11 +107,10 @@ const MyOrders = () => {
                   <p>{item?.cancel}</p>
                   {!item?.cancel && (
                     <div
-                      onClick={() => handleCancelRequest(item?._id)}
+                      onClick={() => handleCancelRequest(item)}
                       className="p-3 cursor-pointer
                        hover:bg-slate-400 flex items-center rounded-full text-sm bg-slate-200"
                     >
-                      {isLoading && <span className="">Loading..</span>}
                       <FcCancel size={25} />
                       <button className="">Cancel</button>
                     </div>
