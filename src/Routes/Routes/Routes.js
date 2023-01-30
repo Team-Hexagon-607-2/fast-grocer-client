@@ -22,7 +22,8 @@ import AllOrder from "./../../Pages/Dashboard/AllOrder/AllOrder";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import EditProduct from "../../Pages/Dashboard/EditProduct/EditProduct";
 import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderForDeliverMan";
-
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import DeliveryHistory from "../../Pages/Dashboard/DeliveryHistory/DeliveryHistory";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -91,55 +92,59 @@ const router = createBrowserRouter([
           },
         ],
       },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    children: [
       {
         path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
-        children: [
-          {
-            path: "/dashboard",
-            element: <Dashboard></Dashboard>,
-          },
-          {
-            path: "/dashboard/all-buyers",
-            element: <AllBuyers></AllBuyers>,
-          },
-          {
-            path: "/dashboard/all-deliveryman",
-            element: <AllDeliveryman></AllDeliveryman>,
-          },
-          {
-            path: "/dashboard/my-orders",
-            element: <MyOrders></MyOrders>,
-          },
-          {
-            path: "/dashboard/all-order",
-            element: <AllOrder />,
-          },
-          {
-            path: "/dashboard/delivery-man-order",
-            element: <OrderForDeliverMan />,
-          },
-          {
-            path: "/dashboard/my-wishlist",
-            element: <MyWishlist></MyWishlist>,
-          },
-          {
-            path: "/dashboard/payments",
-            element: <Payments></Payments>,
-          },
-          {
-            path: "/dashboard/my-reviews",
-            element: <MyReviews></MyReviews>,
-          },
-          {
-            path: "/dashboard/add-product",
-            element: <AddProduct></AddProduct>,
-          },
-          {
-            path: "/dashboard/edit-product",
-            element: <EditProduct></EditProduct>,
-          },
-        ],
+        element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "/dashboard/all-buyers",
+        element: <AllBuyers></AllBuyers>,
+      },
+      {
+        path: "/dashboard/all-deliveryman",
+        element: <AllDeliveryman></AllDeliveryman>,
+      },
+      {
+        path: "/dashboard/my-orders",
+        element: <MyOrders></MyOrders>,
+      },
+      {
+        path: "/dashboard/all-order",
+        element: <AllOrder />,
+      },
+      {
+        path: "/dashboard/delivery-man-order",
+        element: <OrderForDeliverMan />,
+      },
+      {
+        path: '/dashboard/delivery-history',
+        element: <DeliveryHistory></DeliveryHistory>
+      },
+      {
+        path: "/dashboard/my-wishlist",
+        element: <MyWishlist></MyWishlist>,
+      },
+      {
+        path: "/dashboard/payments",
+        element: <Payments></Payments>,
+      },
+      {
+        path: "/dashboard/my-reviews",
+        element: <MyReviews></MyReviews>,
+      },
+      {
+        path: "/dashboard/add-product",
+        element: <AddProduct></AddProduct>,
+      },
+      {
+        path: "/dashboard/edit-product",
+        element: <EditProduct></EditProduct>,
       },
     ],
   },

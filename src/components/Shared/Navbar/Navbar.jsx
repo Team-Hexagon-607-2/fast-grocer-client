@@ -4,27 +4,28 @@
  *
  *  */
 
-import React, { useState } from "react";
+import React from "react";
 import Cart from "./Cart";
 import Login from "./Login";
 import MobileNavbar from "./MobileNavbar";
 import NavLinks from "./NavLinks";
-import Offer from "./Offer";
 import Search from "./Search";
 import Wishlist from "./Wishlist";
 import logo from "../../../assets/logo/logo.png";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { RiArrowDownSLine } from "react-icons/ri";
 import { StateContext } from "./../../../contexts/AuthProvider";
-import { BiLogOutCircle } from "react-icons/bi";
+import { MdOutlineLogout } from "react-icons/md";
+import { AiOutlineDashboard } from "react-icons/ai";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(StateContext);
+  const { user, logOut, categories,  } = useContext(StateContext);
   const styles = {
     wrapper:
-      "h-[206px] rounded-[10px]  bg-white w-full mx-auto hidden sm:block ",
-    mobileWrapper: " w-full h-[80px] bg-[#92B137]  block sm:hidden",
-    flexRow: "flex w-full flex-row border-b-[1px] border-slate-200",
+      "bg-white w-full mx-auto hidden sm:block",
+    mobileWrapper: " w-full h-[80px] bg-[#92B137] block sm:hidden",
+    flexRow: "flex w-full flex-row justify-between items-center border-slate-200 px-5 py-3",
   };
 
   return (
@@ -41,54 +42,67 @@ const Navbar = () => {
           <Offer />
         </div> */}
         <div className={`${styles.flexRow}`}>
-          <div className="border-r-[1px]  border-slate-300 w-[30%] flex items-center justify-center">
+          <div className="border-slate-300 flex items-center justify-center">
             <Link to="/">
-              <p className="mr-[20px] text-[40px] font-bold text-[] ml-10 md:p-[10px]">
+              <p className="">
                 <img
                   src={logo}
                   alt="Fast_Grocer"
-                  className="w-[230px] h-full object-fit"
+                  className="w-[135px]"
                 />
               </p>
             </Link>
           </div>
-          <div className="w-[70%]  flex flex-row">
-            <div className="flex flex-col p-10">
-              {/* Desktop search */}
-              <Search />
-              {/* Desktop navbar link such as page home etc */}
-              <NavLinks />
+          <Search />
+          <div className="flex flex-wrap items-center justify-start">
+            <div className=" flex flex-row flex-wrap sm:py-1 gap-3  -mt-[10px] ml-[10px] items-center ">
+              <Wishlist />
+              <Cart />
+              <Login />
+              {user && (
+                <div className="dropdown dropdown-end">
+                  <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                    <div className="w-10 rounded-full">
+                      <img src={user?.photoURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRbiMjUoOxJCAMB9poSO2wLg34m7OxmyaT-A&usqp=CAU"} alt="" />
+                    </div>
+                  </label>
+                  <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                    <li>
+                      <Link to="/dashboard">
+                        <AiOutlineDashboard/> Dashboard
+                      </Link>
+                    </li>
+                    <li><button onClick={logOut}><MdOutlineLogout/> Logout</button></li>
+                  </ul>
+                </div>
+              )}
             </div>
-            <div className="flex flex-wrap items-center justify-start">
-              <div className=" flex flex-row flex-wrap sm:py-1 gap-3  -mt-[10px] ml-[10px] items-center ">
-                <Login />
-                <Wishlist />
-                <Cart />
-                {user && (
-                  <div className="w-10 h-10 rounded-full bg-[#F2F4EC]">
-                    <img
-                      className="object-contain"
-                      src={
-                        user?.photoURL ||
-                        "https://cdn1.iconfinder.com/data/icons/website-internet/48/website_-_male_user-512.png"
-                      }
-                      alt={user?.displayName}
-                      title={user?.displayName}
-                    />
-                  </div>
-                )}
-                {user && (
-                  <div>
-                    <button
-                      onClick={logOut}
-                      className=" hover:bg-[#e9ebe4] flex items-center text-md font-bold justify-center gap-1 bg-[#F2F4EC] p-[8px] rounded-full"
-                    >
-                      <BiLogOutCircle color="#92ad3f" size={24} /> Logout
-                    </button>
-                  </div>
-                )}
-              </div>
+          </div>
+        </div>
+        <div className="w-11/12 mx-auto pb-5">
+          <div className="flex justify-between">
+            {/* Desktop search */}
+            {/* Desktop navbar link such as page home etc */}
+
+            <div className="dropdown dropdown-start font-semibold text-[15px]">
+              <label
+                tabIndex={0}
+                className="flex cursor-pointer items-center justify-center"
+              >
+                Categories <RiArrowDownSLine />
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-md w-64"
+              >
+                <div className="h-[400px] overflow-auto">
+                  {
+                    categories.map(category => <li key={category._id}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>)
+                  }
+                </div>
+              </ul>
             </div>
+          <NavLinks />
           </div>
         </div>
       </div>
