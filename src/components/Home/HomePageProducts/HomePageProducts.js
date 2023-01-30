@@ -5,9 +5,7 @@ import SingleProduct from "./SingleProduct/SingleProduct";
 const HomePageProducts = () => {
   const [products, setProducts] = useState(null);
   const [getAllProducts, setGetAllProducts] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(
-    "Stationery & Office"
-  );
+  const [selectedCategory, setSelectedCategory] = useState("Winter Collection");
   const { categories, AllProducts } = useContext(StateContext);
 
   useEffect(() => {
