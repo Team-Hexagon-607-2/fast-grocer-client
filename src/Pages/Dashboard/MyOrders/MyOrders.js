@@ -61,6 +61,7 @@ const MyOrders = () => {
               <th>Paid</th>
               <th>Condition</th>
               <th>Cancel</th>
+              <th>Return Status</th>
             </tr>
           </thead>
           <tbody>
@@ -78,7 +79,7 @@ const MyOrders = () => {
                           <img
                             src={product?.imageUrl}
                             className="object-fit w-full h-full"
-                          />
+                            alt="" />
                         </div>
                         <div>
                           <p className="text-sm font-semibold">
@@ -105,7 +106,7 @@ const MyOrders = () => {
                 <th>{item?.condition}</th>
                 <th>
                   <p>{item?.cancel}</p>
-                  {!item?.cancel && (
+                  {(!item?.deliver || !item?.cancel) &&
                     <div
                       onClick={() => handleCancelRequest(item)}
                       className="p-3 cursor-pointer
@@ -114,8 +115,14 @@ const MyOrders = () => {
                       <FcCancel size={25} />
                       <button className="">Cancel</button>
                     </div>
-                  )}
+                  }
                 </th>
+                <td>
+                  {
+                    ((item?.deliver && item?.cancel) || (item?.deliver || !item?.cancel)) &&
+                    <button>Return</button>
+                  }
+                </td>
               </tr>
             ))}
           </tbody>

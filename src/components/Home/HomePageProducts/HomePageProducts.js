@@ -38,8 +38,8 @@ const HomePageProducts = () => {
                 onClick={() => handleLoadProducts(category?.categoryName)}
                 className={`mx-5 border-b-2 ${
                   category?.categoryName === selectedCategory
-                    ? "text-[#80B248] text-xl font-bold border-[#80B248]"
-                    : "text-black"
+                    ? "text-[#80B248] font-semibold border-[#80B248]"
+                    : "text-slate-600"
                 }  `}
               >
                 {category?.categoryName}
