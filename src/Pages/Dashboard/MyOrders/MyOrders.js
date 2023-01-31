@@ -106,7 +106,7 @@ const MyOrders = () => {
                 <th>{item?.condition}</th>
                 <th>
                   <p>{item?.cancel}</p>
-                  {(!item?.deliver || !item?.cancel) &&
+                  {(!item?.cancel) &&
                     <div
                       onClick={() => handleCancelRequest(item)}
                       className="p-3 cursor-pointer
