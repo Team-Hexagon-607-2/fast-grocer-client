@@ -14,6 +14,7 @@ const PlaceOrder = () => {
   const [number, setNumber] = useState("");
   const [checked, setChecked] = useState(false);
   const [value, setValue] = useState("");
+
   const handleChange = (event) => {
     setChecked(event.target.checked);
     if (event.target.checked) {
@@ -22,6 +23,7 @@ const PlaceOrder = () => {
       setValue("");
     }
   };
+  
   const navigate = useNavigate();
 
   const handleOrderSubmit = () => {

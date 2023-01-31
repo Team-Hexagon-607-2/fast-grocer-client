@@ -15,7 +15,7 @@ const Address = ({
   return (
     <div>
       {" "}
-      <p className="text-xl font-bold mb-5 ">Your Addresses</p>
+      <p className="text-xl font-bold mb-5 ">Shipping Info</p>
       <div>
         <label htmlFor="">Name</label>
         <input
