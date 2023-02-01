@@ -80,12 +80,12 @@ const MyOrders = () => {
                       {item?.order_products?.map((product) => (
                         <Link key={product?._id}
                           to={`/products/${product?._id}`}
-                          className="flex w-[300px] hover:bg-blue-200 mb-2"
+                          className="flex w-[300px] hover:bg-blue-200 mb-2 rounded-md"
                         >
                           <div className="mr-2">
                             <img
                               src={product?.imageUrl}
-                              className="object-fit w-16 h-16"
+                              className="object-fit w-16 h-16 rounded-md"
                               alt="" />
                           </div>
                           <div>
@@ -113,15 +113,9 @@ const MyOrders = () => {
                   <td>{item?.condition}</td>
                   <td>
                     <p>{item?.cancel}</p>
-                    {(!item?.cancel) &&
-                      <div
-                        onClick={() => handleCancelRequest(item)}
-                        className="p-3 cursor-pointer
-                       hover:bg-slate-400 flex items-center rounded-full text-sm bg-slate-200"
-                      >
-                        <FcCancel size={25} />
-                        <button className="">Cancel</button>
-                      </div>
+                    {(!item?.cancel) && 
+                        <button onClick={() => handleCancelRequest(item)}
+                        className="cursor-pointer rounded-full text-sm bg-red-300 hover:bg-red-400 duration-300 px-3 py-1">Cancel</button>
                     }
                   </td>
                   <td>

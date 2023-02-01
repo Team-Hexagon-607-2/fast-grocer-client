@@ -10,6 +10,7 @@ import useFindAdmin from "../../hooks/useFindAdmin";
 import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
 import logo from '../../assets/logo/logo.png';
+import { useState } from "react";
 
 const DashboardLayout = () => {
   const { user } = useContext(StateContext);
@@ -94,14 +95,16 @@ const DashboardLayout = () => {
 
             {isBuyer && (
               <>
+                <div className="dropdown">
                 <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/my-orders"
                   >
-                    <AiOutlineUnorderedList />My Orders
+                    <AiOutlineUnorderedList/>My Orders
                   </Link>
                 </li>
+                </div>
                 <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
