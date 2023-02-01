@@ -17,7 +17,7 @@ const MyOrders = () => {
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/order/${user?.email}`)
       .then((res) => res.json())
-      
+
   });
   // const {
   //   data: cancel_data,
@@ -74,26 +74,26 @@ const MyOrders = () => {
             <tbody>
               {data?.data?.map((item, index) => (
                 <tr key={item?._id}>
-                  <td>{index + 1}</td>
+                  <th>{index + 1}</th>
                   <td>
-                    <div className="flex items-center flex-col space-x-3">
+                    <div className="flex items-center flex-col">
                       {item?.order_products?.map((product) => (
                         <Link key={product?._id}
                           to={`/products/${product?._id}`}
-                          className="flex flex-row items-center w-[300px] hover:bg-blue-200"
+                          className="flex w-[300px] hover:bg-blue-200 mb-2"
                         >
-                          <div className="w-[80px] h-[80px]">
+                          <div className="mr-2">
                             <img
                               src={product?.imageUrl}
-                              className="object-fit w-full h-full"
+                              className="object-fit w-16 h-16"
                               alt="" />
                           </div>
                           <div>
                             <p className="text-sm font-semibold">
                               {product.name?.slice(0, 30)}
                             </p>
-                            <p>{product?.bundle}</p>
-                            <p>Quantity: {product?.qunatity}</p>
+                            <p className="text-sm">{product?.bundle}</p>
+                            <p className="text-sm">Quantity: {product?.qunatity}</p>
                           </div>
                         </Link>
                       ))}
@@ -107,11 +107,11 @@ const MyOrders = () => {
                   <td>
                     <p className="text-md ">{item?.status}</p>
                   </td>
-                  <th className={`${item?.paid === false && "text-red-500"}`}>
+                  <td className={`${item?.paid === false && "text-red-500"}`}>
                     {item?.paid === false ? "Not Paid" : "Already Paid"}
-                  </th>
-                  <th>{item?.condition}</th>
-                  <th>
+                  </td>
+                  <td>{item?.condition}</td>
+                  <td>
                     <p>{item?.cancel}</p>
                     {(!item?.cancel) &&
                       <div
@@ -123,11 +123,14 @@ const MyOrders = () => {
                         <button className="">Cancel</button>
                       </div>
                     }
-                  </th>
+                  </td>
                   <td>
                     {
-                      ((item?.deliver && item?.cancel) || (item?.deliver || !item?.cancel)) &&
-                      <label htmlFor="return-modal" onClick={() => setOrderId(item?._id)}>Return</label>
+                      ((item?.deliver && item?.cancel) || (item?.deliver || !item?.cancel || !item?.returnRequest)) &&
+                      <label htmlFor="return-modal" onClick={() => setOrderId(item?._id)}>Return</label> 
+                    }
+                    {
+                      item?.returnRequest && <p>Return Requested</p>
                     }
                   </td>
                 </tr>

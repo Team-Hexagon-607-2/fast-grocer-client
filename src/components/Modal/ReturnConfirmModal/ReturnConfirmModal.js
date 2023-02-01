@@ -10,21 +10,23 @@ const ReturnConfirmModal = ({setProcessing, orderId}) => {
 
   const handleReturnRequest = (data) => {
     setProcessing(true);
-    const image = data?.photo[0];
-    const formData = new FormData();
-    formData.append('image', image);
-    fetch(`https://api.imgbb.com/1/upload?key=5ecef3f26027aea9e3fef6c177020bfb`, {
-      method: 'POST',
-      body: formData
-    })
-      .then(res => res.json())
-      .then(imageData => {
-        console.log(imageData);
-        if (imageData.success) {
+
+    // const image = data?.photo[0];
+    // const formData = new FormData();
+    // formData.append('image', image);
+
+    // fetch(`https://api.imgbb.com/1/upload?key=5ecef3f26027aea9e3fef6c177020bfb`, {
+    //   method: 'POST',
+    //   body: formData
+    // })
+    //   .then(res => res.json())
+    //   .then(imageData => {
+    //     console.log(imageData);
+    //     if (imageData.success) {
 
           const returnProduct = {
             returnReason: data?.reason,
-            productPhoto: imageData.data.url,
+            // productPhoto: imageData.data.url,
           }
 
           fetch(`http://localhost:5000/return-request/${orderId}`, {
@@ -47,15 +49,13 @@ const ReturnConfirmModal = ({setProcessing, orderId}) => {
               setProcessing(false);
             })
         }
-      }).catch(err => {
-        toast.error(err.message);
-        setProcessing(false);
-      })
-  }
+      // }).catch(err => {
+      //   toast.error(err.message);
+      //   setProcessing(false);
+      // })
 
   return (
     <div>
-
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="return-modal" className="modal-toggle" />
       <div className="modal">
