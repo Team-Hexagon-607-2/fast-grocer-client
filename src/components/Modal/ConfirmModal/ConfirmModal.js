@@ -23,7 +23,7 @@ const ConfirmModal = ({setProcessing, workPermitStatus}) => {
       .then(res => res.json())
       .then(imageData => {
         
-        console.log(imageData);
+        // console.log(imageData);
         if (imageData.success) {
           const imageUrl = {
             certification: imageData.data.url
@@ -38,7 +38,7 @@ const ConfirmModal = ({setProcessing, workPermitStatus}) => {
             .then(res => res.json())
             .then(data => {
               setProcessing(false);
-              console.log(data);
+              // console.log(data);
               if (data.modifiedCount > 0) {
                 toast.success('Requsted successfully');
               }

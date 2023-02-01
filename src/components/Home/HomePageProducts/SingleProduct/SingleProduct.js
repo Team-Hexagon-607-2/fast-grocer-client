@@ -50,7 +50,9 @@ const SingleProduct = ({ products }) => {
             toast.error("Already Added on Wishlist Page");
           }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          // console.log(error)
+        });
       setLoading(false);
     }
   };
