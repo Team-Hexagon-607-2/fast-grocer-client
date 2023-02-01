@@ -72,7 +72,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/payment",
-        element: <Payment />,
+        element: <PrivateRoute><Payment /></PrivateRoute>
       },
       {
         path: "/signup",
