@@ -48,10 +48,6 @@ const MyOrders = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleReturnRequest = (id) =>{
-    console.log(id);
-  }
-
   return (
     <div className="">
       <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">
@@ -128,7 +124,7 @@ const MyOrders = () => {
                 <td>
                   {
                     ((item?.deliver && item?.cancel) || (item?.deliver || !item?.cancel)) &&
-                    <label htmlFor="return-modal" onClick={() => handleReturnRequest(item?._id)}>Return</label>
+                    <label htmlFor="return-modal">Return</label>
                   }
                 </td>
               </tr>
@@ -136,7 +132,9 @@ const MyOrders = () => {
           </tbody>
         </table>
       </div>
-        {!processing && <ReturnConfirmModal></ReturnConfirmModal>}
+        {!processing && <ReturnConfirmModal
+
+        ></ReturnConfirmModal>}
     </div>
   );
 };

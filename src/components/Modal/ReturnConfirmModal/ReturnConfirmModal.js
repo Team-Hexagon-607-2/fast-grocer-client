@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { StateContext } from '../../../contexts/AuthProvider';
 
-const ReturnConfirmModal = ({setProcessing, workPermitStatus}) => {
+const ReturnConfirmModal = ({setProcessing}) => {
   const { user } = useContext(StateContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
 
-  const handleRequestPermition = (data) => {
+  const handleReturnRequest = (data) => {
     setProcessing(true);
 
     const image = data.photo[0];
@@ -58,36 +58,26 @@ const ReturnConfirmModal = ({setProcessing, workPermitStatus}) => {
       <div className="modal">
         <div className="modal-box relative">
           <label htmlFor="return-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-          <div className='text-center my-3 font-semibold'>Please Provide your Return Reason and Photo</div>
-          <form onSubmit={handleSubmit(handleRequestPermition)}>
+          <div className='text-center my-3 font-semibold'zHHHHH>Please Provide your Return Reason and Photo</div>
+          <form onSubmit={handleSubmit(handleReturnRequest)}>
             <div className="form-control w-full mb-4">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">Return Reason</span>
               </label>
-              <input type='text' name='email'
-                {...register("email", { required: true })}
-                className="input input-bordered w-full" value={user?.email} readOnly />
-              {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
+              <input type='text' name='reason'
+                {...register("reason", { required: "Write return reason"})}
+                className="input input-bordered w-full" placeholder='Write your return reason'/>
+              {errors.reason && <p className='text-red-600'>{errors.reason?.message}</p>}
             </div>
 
             <div className="form-control w-full mb-4">
               <label className="label">
-                <span className="label-text">Contact No.</span>
+                <span className="label-text">Product Photo</span>
               </label>
-              <input type='text' name='contact'
-                {...register("contact", { required: "Contact Number is required" })}
-                className="input input-bordered w-full" disabled={workPermitStatus === 'Pending' || workPermitStatus === 'Accepted'}/>
-              {errors.email && <p className='text-red-600'>{errors.contact?.message}</p>}
-            </div>
-
-            <div className="form-control w-full mb-4">
-              <label className="label">
-                <span className="label-text">NID/Birth Certificate</span>
-              </label>
-              <input type="file" name='photo' {...register("photo", { required: "Nid/Birth Certificate is required" })} className="file-input file-input-bordered w-full" disabled={workPermitStatus === 'Pending' || workPermitStatus === 'Accepted'}/>
+              <input type="file" name='photo' {...register("photo", { required: "Product photo is required" })} className="file-input file-input-bordered w-full"/>
               {errors.photo && <p className='text-red-600'>{errors.photo?.message}</p>}
             </div>
-            <button type="submit" className='bg-[#9acd5e] hover:bg-[#80b248] py-2 duration-300 rounded-md px-3 w-full disabled:bg-gray-400' disabled={workPermitStatus === 'Pending' || workPermitStatus === 'Accepted'}>Submit</button>
+            <button type="submit" className='bg-[#9acd5e] hover:bg-[#80b248] py-2 duration-300 rounded-md px-3 w-full disabled:bg-gray-400'>Submit</button>
           </form>
         </div>
       </div>
