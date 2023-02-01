@@ -3,15 +3,14 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { StateContext } from '../../../contexts/AuthProvider';
-
 const ReturnConfirmModal = ({setProcessing, orderId}) => {
+
   const { user } = useContext(StateContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const handleReturnRequest = (data) => {
-    console.log(orderId);
     setProcessing(true);
-    const image = data.photo[0];
+    const image = data?.photo[0];
     const formData = new FormData();
     formData.append('image', image);
     fetch(`https://api.imgbb.com/1/upload?key=5ecef3f26027aea9e3fef6c177020bfb`, {
@@ -20,32 +19,37 @@ const ReturnConfirmModal = ({setProcessing, orderId}) => {
     })
       .then(res => res.json())
       .then(imageData => {
-        
         console.log(imageData);
         if (imageData.success) {
-          const imageUrl = {
-            certification: imageData.data.url
+
+          const returnProduct = {
+            returnReason: data?.reason,
+            productPhoto: imageData.data.url,
           }
-          fetch(`https://fg-server.vercel.app/return-request/${orderId}`, {
+
+          fetch(`http://localhost:5000/return-request/${orderId}`, {
             method: 'PUT',
             headers: {
               'content-type': 'application/json'
             },
-            body: JSON.stringify(imageUrl)
+            body: JSON.stringify(returnProduct)
           })
             .then(res => res.json())
             .then(data => {
-              setProcessing(false);
               console.log(data);
+              setProcessing(false);
               if (data.modifiedCount > 0) {
                 toast.success('Requsted successfully');
               }
             })
             .catch(err => {
-              toast.error(err);
+              toast.error(err.message);
               setProcessing(false);
             })
         }
+      }).catch(err => {
+        toast.error(err.message);
+        setProcessing(false);
       })
   }
 
