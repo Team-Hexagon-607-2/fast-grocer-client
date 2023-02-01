@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { StateContext } from '../../../contexts/AuthProvider';
 
-const ConfirmModal = ({setProcessing, workPermitStatus}) => {
+const ReturnConfirmModal = ({setProcessing, workPermitStatus}) => {
   const { user } = useContext(StateContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -94,4 +94,4 @@ const ConfirmModal = ({setProcessing, workPermitStatus}) => {
   );
 };
 
-export default ConfirmModal;
+export default ReturnConfirmModal;
