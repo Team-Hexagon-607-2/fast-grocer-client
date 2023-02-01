@@ -54,10 +54,11 @@ const ReturnConfirmModal = ({setProcessing, workPermitStatus}) => {
     <div>
 
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="deliveryman-modal" className="modal-toggle" />
+      <input type="checkbox" id="return-modal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
-          <label htmlFor="deliveryman-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+          <label htmlFor="return-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+          <div className='text-center my-3 font-semibold'>Please Provide your Return Reason and Photo</div>
           <form onSubmit={handleSubmit(handleRequestPermition)}>
             <div className="form-control w-full mb-4">
               <label className="label">

@@ -6,6 +6,7 @@ import { FcCancel } from "react-icons/fc";
 import { toast } from "react-hot-toast";
 import Loader from "../../../components/Loader/Loader";
 import { useState } from "react";
+import ReturnConfirmModal from "../../../components/Modal/ReturnConfirmModal/ReturnConfirmModal";
 const MyOrders = () => {
   const { user } = useContext(StateContext);
   const [processing, setProcessing] = useState(false);
@@ -127,7 +128,7 @@ const MyOrders = () => {
                 <td>
                   {
                     ((item?.deliver && item?.cancel) || (item?.deliver || !item?.cancel)) &&
-                    <button onClick={() => handleReturnRequest(item?._id)}>Return</button>
+                    <label htmlFor="return-modal" onClick={() => handleReturnRequest(item?._id)}>Return</label>
                   }
                 </td>
               </tr>
@@ -135,7 +136,7 @@ const MyOrders = () => {
           </tbody>
         </table>
       </div>
-
+        {!processing && <ReturnConfirmModal></ReturnConfirmModal>}
     </div>
   );
 };
