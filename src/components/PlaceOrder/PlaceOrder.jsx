@@ -115,9 +115,9 @@ const PlaceOrder = () => {
                     </PhotoProvider>
                   </div>
                   <div>
-                    <Link to={`/products/${cartItem._id}`} className='hover:underline'>{cartItem?.name}</Link>
+                    <Link to={`/products/${cartItem._id}`} className='text-sm md:text-md hover:underline'>{cartItem?.name}</Link>
                     <p>Price: ৳{cartItem?.price}</p>
-                    <p className="bg-slate-500 text-white w-5 h-5 rounded-full flex items-center justify-center absolute top-0 left-14"><span className="text-md font-bold">{cartItem?.qunatity}</span></p>
+                    <p className="bg-slate-500 text-white w-5 h-5 rounded-full flex items-center justify-center absolute top-[-10px] left-[60px]"><span className="text-md font-bold">{cartItem?.qunatity}</span></p>
                   </div>
                 </div>
 
@@ -155,7 +155,7 @@ const PlaceOrder = () => {
             {cart?.map((cartItem) => (
               <div key={cartItem._id} className='flex justify-between mb-4 relative'>
                 <div className="flex gap-3">
-                  <div className="w-[70px] h-[70px] border-2 rounded-md">
+                  <div className="w-[70px] h-[70px] border rounded-md">
                     <PhotoProvider>
                       <PhotoView src={cartItem?.imageUrl}>
                         <img src={cartItem?.imageUrl} alt="" className='cursor-pointer' />
@@ -165,7 +165,7 @@ const PlaceOrder = () => {
                   <div>
                     <Link to={`/products/${cartItem._id}`} className='hover:underline'>{cartItem?.name}</Link>
                     <p>Price: ৳{cartItem?.price}</p>
-                    <p className="bg-slate-500 text-white w-5 h-5 rounded-full flex items-center justify-center absolute top-0 left-14"><span className="text-md font-bold">{cartItem?.qunatity}</span></p>
+                    <p className="bg-slate-500 text-white w-5 h-5 rounded-full flex items-center justify-center absolute top-[-10px] left-[60px]"><span className="text-md font-bold">{cartItem?.qunatity}</span></p>
                   </div>
                 </div>
 
@@ -180,43 +180,35 @@ const PlaceOrder = () => {
         </div>
       </div>
 
-      <div className="mt-4 w-full sm:w-9/12 mx-auto rounded-[10px] bg-[#FCFFF6]">
-        <div className="mt-10">
-          <p className="mb-7 font-bold text-xl">Select Payment Method</p>
-          <div className="flex flex-row gap-2 items-center mb-4">
-            <button>
-              {checked ? (
-                <input
-                  type="checkbox"
-                  checked="checked"
-                  onChange={handleChange}
-                  className="checkbox"
-                />
-              ) : (
-                <input
-                  type="checkbox"
-                  checked=""
-                  onChange={handleChange}
-                  className="checkbox"
-                />
-              )}
-            </button>
-            <p>Cash On Delivery</p>
-          </div>
-          <button onClick={handlePayment}>
-            <p className="btn btn-warning">Pay With Card</p>
-          </button>
-        </div>
-      </div>
+      <div className="mt-4 w-full p-5 bg-slate-100 my-10">
+        <h3 className="text-xl font-semibold">Payment</h3>
+        <p className="text-sm">All transactions are secure and encrypted.</p>
 
-      <div className="flex flex-col items-end justify-end m-3">
-        <button
-          disabled={!checked}
-          className="btn btn-primary"
-          onClick={handleOrderSubmit}
-        >
-          Confirm Order
-        </button>
+        <div className="flex flex-row gap-2 items-center mt-4 mb-2">
+          <button>
+            {checked ? (
+              <input
+                type="checkbox"
+                checked="checked"
+                onChange={handleChange}
+                className="checkbox"
+              />
+            ) : (
+              <input
+                type="checkbox"
+                checked=""
+                onChange={handleChange}
+                className="checkbox"
+              />
+            )}
+          </button>
+          <p>Cash On Delivery</p>
+        </div>
+        
+        <div className="flex items-center justify-between">
+          <button onClick={handlePayment} className='border px-3 py-1 rounded-md text-white bg-green-500 hover:bg-green-600 duration-500'>Pay With Card</button>
+          <button onClick={handleOrderSubmit} disabled={!checked} className="btn btn-sm rounded-md btn-primary" > Confirm Order</button>
+        </div>
       </div>
     </>
   );
