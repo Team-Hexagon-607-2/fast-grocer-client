@@ -4,14 +4,13 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { StateContext } from '../../../contexts/AuthProvider';
 
-const ReturnConfirmModal = ({setProcessing}) => {
+const ReturnConfirmModal = ({setProcessing, orderId}) => {
   const { user } = useContext(StateContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-
   const handleReturnRequest = (data) => {
+    console.log(orderId);
     setProcessing(true);
-
     const image = data.photo[0];
     const formData = new FormData();
     formData.append('image', image);
@@ -27,7 +26,7 @@ const ReturnConfirmModal = ({setProcessing}) => {
           const imageUrl = {
             certification: imageData.data.url
           }
-          fetch(`https://fg-server.vercel.app/deliveryman?email=${user?.email}`, {
+          fetch(`https://fg-server.vercel.app/return-request/${orderId}`, {
             method: 'PUT',
             headers: {
               'content-type': 'application/json'
@@ -58,7 +57,7 @@ const ReturnConfirmModal = ({setProcessing}) => {
       <div className="modal">
         <div className="modal-box relative">
           <label htmlFor="return-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-          <div className='text-center my-3 font-semibold'zHHHHH>Please Provide your Return Reason and Photo</div>
+          <div className='text-center my-3 font-semibold'>Please Provide your Return Reason and Photo</div>
           <form onSubmit={handleSubmit(handleReturnRequest)}>
             <div className="form-control w-full mb-4">
               <label className="label">

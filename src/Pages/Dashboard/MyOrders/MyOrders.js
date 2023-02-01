@@ -10,6 +10,7 @@ import ReturnConfirmModal from "../../../components/Modal/ReturnConfirmModal/Ret
 const MyOrders = () => {
   const { user } = useContext(StateContext);
   const [processing, setProcessing] = useState(false);
+  const [orderId, setOrderId] = useState(null)
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["order", user?.email],
     queryFn: () =>
@@ -124,7 +125,7 @@ const MyOrders = () => {
                 <td>
                   {
                     ((item?.deliver && item?.cancel) || (item?.deliver || !item?.cancel)) &&
-                    <label htmlFor="return-modal">Return</label>
+                    <label htmlFor="return-modal" onClick={() => setOrderId(item?._id)}>Return</label>
                   }
                 </td>
               </tr>
@@ -132,9 +133,10 @@ const MyOrders = () => {
           </tbody>
         </table>
       </div>
-        {!processing && <ReturnConfirmModal
-
-        ></ReturnConfirmModal>}
+      {!processing && <ReturnConfirmModal
+        setProcessing={setProcessing}
+        orderId={orderId}
+      ></ReturnConfirmModal>}
     </div>
   );
 };
