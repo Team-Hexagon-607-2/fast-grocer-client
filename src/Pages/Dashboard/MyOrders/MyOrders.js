@@ -121,7 +121,7 @@ const MyOrders = () => {
                   <td>
                     {
                       ((item?.deliver && item?.cancel) || (item?.deliver || !item?.cancel || !item?.returnRequest)) &&
-                      <label htmlFor="return-modal" onClick={() => setOrderId(item?._id)}>Return</label> 
+                      <label htmlFor="return-modal" onClick={() => setOrderId(item?._id)} className="cursor-pointer bg-blue-300 hover:bg-blue-400 duration-300 px-3 py-1 rounded-full">Return</label> 
                     }
                     {
                       item?.returnRequest && <p>Return Requested</p>
