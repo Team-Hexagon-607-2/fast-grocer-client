@@ -2,7 +2,7 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="h-screen">
+    <div className="h-[500px]">
       <div
         className="sm:w-[40px] sm:h-[40px]
          w-[40px] h-[40px] animate-spin bg-white

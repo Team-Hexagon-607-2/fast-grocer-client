@@ -118,8 +118,9 @@ const AllOrder = () => {
               <th>Status</th>
               <th>Paid</th>
               <th>Condition</th>
-              <th>Cancel Request</th>
               <th>Assign Delivery Man</th>
+              <th>Cancel Request</th>
+              <th>Return Request</th>
             </tr>
           </thead>
           <tbody>
@@ -137,7 +138,7 @@ const AllOrder = () => {
                         <div className="w-[80px] h-[80px]">
                           <img
                             src={product?.imageUrl}
-                            className="object-fit w-full h-full"
+                            className="object-fit w-full h-full" alt=""
                           />
                         </div>
                         <div>
@@ -187,24 +188,7 @@ const AllOrder = () => {
                   {item?.paid === false ? "Not Paid" : "Already Paid"}
                 </th>
                 <th>{item?.condition}</th>
-                <th>
-                  <div className="flex flex-col items-center gap-3">
-                    <p> {item?.cancel}</p>
-                    <div>
-                      {item?.cancel === "Cancel Request Sent" && (
-                        <button
-                          onClick={() => handleCancelRequestReceived(item?._id)}
-                          className="p-3 
-                      cursor-pointer hover:bg-slate-400 
-                      flex items-center rounded-full text-sm
-                       bg-blue-300  font-bold "
-                        >
-                          Receive Cancel Request
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </th>
+
                 <th>
                   <p>{item.deliveryManName}</p>
                   <p>{item?.pick}</p>
@@ -225,7 +209,7 @@ const AllOrder = () => {
                           Select Delivery Man
                         </option>
                         {deliveryMan?.map((man, i) => (
-                          <option key={i} value={man.email}>
+                          <option key={i} value={man?.email}>
                             {man?.name}
                           </option>
                         ))}
@@ -243,6 +227,29 @@ const AllOrder = () => {
                     </form>
                   )}
                 </th>
+                <th>
+                  <div className="flex flex-col items-center gap-3">
+                    <p> {item?.cancel}</p>
+                    <div>
+                      {item?.cancel === "Cancel Request Sent" && (
+                        <button
+                          onClick={() => handleCancelRequestReceived(item?._id)}
+                          className="p-3 
+                      cursor-pointer hover:bg-slate-400 
+                      flex items-center rounded-full text-sm
+                       bg-blue-300  font-bold "
+                        >
+                          Receive Cancel Request
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </th>
+                <td>
+                  {item?.returnRequest && "Return Requested"}
+                  <p className="text-sm">{item?.returnReason && item?.returnReason}</p>
+                  {item?.returnRequest && <><button className="text-sm px-3 py-1 bg-blue-300 hover:bg-blue-400 rounded-full duration-300">Accept</button> <button className="text-sm px-3 py-1 bg-red-300 hover:bg-red-400 rounded-full duration-300">Reject</button></>}
+                </td>
               </tr>
             ))}
           </tbody>
