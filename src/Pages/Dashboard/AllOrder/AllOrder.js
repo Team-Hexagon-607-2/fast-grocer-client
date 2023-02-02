@@ -156,25 +156,25 @@ const AllOrder = () => {
               <tr key={item?._id}>
                 <th>{index + 1}</th>
                 <td>
-                  <div className="flex items-center flex-col space-x-3">
+                  <div className="flex items-center flex-col">
                     {item?.order_products?.map((product) => (
                       <Link
                         key={product?._id}
                         to={`/products/${product?._id}`}
-                        className="flex flex-row items-center w-[300px] hover:bg-blue-200"
+                        className="flex w-[300px] hover:bg-blue-200 rounded-md mb-2"
                       >
-                        <div className="w-[80px] h-[80px]">
+                        <div className="mr-2">
                           <img
                             src={product?.imageUrl}
-                            className="object-fit w-full h-full" alt=""
+                            className="object-fit w-16 h-16 rounded-md" alt=""
                           />
                         </div>
                         <div>
                           <p className="text-sm font-semibold">
                             {product.name?.slice(0, 30)}
                           </p>
-                          <p>{product?.bundle}</p>
-                          <p>Quantity: {product?.qunatity}</p>
+                          <p className="text-sm">{product?.bundle}</p>
+                          <p className="text-sm">Quantity: {product?.qunatity}</p>
                         </div>
                       </Link>
                     ))}
