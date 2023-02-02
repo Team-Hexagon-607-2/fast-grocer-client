@@ -25,6 +25,7 @@ import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderFo
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DeliveryHistory from "../../Pages/Dashboard/DeliveryHistory/DeliveryHistory";
 import FlashSalePage from "../../components/FlashSale/FlashSalePage";
+import AdminRoutes from "../AdminRoutes/AdminRoutes";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -101,31 +102,35 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: (
-      <PrivateRoute>
-        <DashboardLayout></DashboardLayout>
-      </PrivateRoute>
-    ),
+    element: (<PrivateRoute> <DashboardLayout /></PrivateRoute>),
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
       },
       {
         path: "/dashboard/all-buyers",
-        element: <AllBuyers></AllBuyers>,
+        element: <AdminRoutes><AllBuyers /></AdminRoutes>
       },
       {
         path: "/dashboard/all-deliveryman",
-        element: <AllDeliveryman></AllDeliveryman>,
+        element: <AdminRoutes><AllDeliveryman /></AdminRoutes>
+      },
+      {
+        path: "/dashboard/all-order",
+        element: <AdminRoutes><AllOrder /></AdminRoutes>,
+      },
+      {
+        path: "/dashboard/add-product",
+        element: <AdminRoutes><AddProduct /></AdminRoutes>,
+      },
+      {
+        path: "/dashboard/edit-product",
+        element: <AdminRoutes><EditProduct /></AdminRoutes>,
       },
       {
         path: "/dashboard/my-orders",
         element: <MyOrders></MyOrders>,
-      },
-      {
-        path: "/dashboard/all-order",
-        element: <AllOrder />,
       },
       {
         path: "/dashboard/delivery-man-order",
@@ -146,14 +151,6 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/my-reviews",
         element: <MyReviews></MyReviews>,
-      },
-      {
-        path: "/dashboard/add-product",
-        element: <AddProduct></AddProduct>,
-      },
-      {
-        path: "/dashboard/edit-product",
-        element: <EditProduct></EditProduct>,
       },
     ],
   },
