@@ -181,20 +181,17 @@ const AllOrder = () => {
                   </div>
                 </td>
                 <td>
-                  <p className="font-semibold font-sm">
-                    Total Price: ৳{item?.total_price}
+                  <p className="font-semibold">
+                    ৳{item?.total_price}
                   </p>
                 </td>
                 <td>
                   <div className="flex flex-col items-center gap-3">
-                    <p className="text-md font-semibold ">{item?.status}</p>
+                    <p className="text-sm font-semibold ">{item?.status}</p>
                     {item?.status === "pending" && (
                       <button
                         onClick={() => handleConfirmOrder(item?._id)}
-                        className="p-3 
-                      cursor-pointer hover:bg-slate-400 
-                      flex items-center rounded-full text-sm
-                       bg-blue-300  font-bold "
+                        className="px-3 py-1 cursor-pointer hover:bg-blue-400 rounded-full text-sm bg-blue-300"
                       >
                         Confirm Order
                       </button>
@@ -212,9 +209,9 @@ const AllOrder = () => {
                     )}
                   </div>
                 </td>
-                <th className={`${item?.paid === false && "text-red-500"}`}>
-                  {item?.paid === false ? "Not Paid" : "Already Paid"}
-                </th>
+                <td className={`${item?.paid === false && ""}`}>
+                  {item?.paid === false ? <p className="bg-red-300 rounded-full text-center text-sm">Not Paid</p> : <p className="bg-green-300 rounded-full text-center text-sm">Already Paid</p>}
+                </td>
                 <th>{item?.condition}</th>
 
                 <th>
