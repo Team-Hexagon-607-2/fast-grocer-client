@@ -104,7 +104,7 @@ const AllOrder = () => {
   // handle return request accept
   const handleReturnAccept = (id) =>{
     console.log(id);
-    fetch(`http://localhost:5000/return-request-accept?id=${id}`, {
+    fetch(`https://fg-server.vercel.app/return-request-accept?id=${id}`, {
       method: "PUT"
     })
     .then(res => res.json())
@@ -118,7 +118,7 @@ const AllOrder = () => {
   // handler for return request reject
   const handleReturnReject = (id) =>{
     console.log(id);
-    fetch(`http://localhost:5000/return-request-reject?id=${id}`, {
+    fetch(`https://fg-server.vercel.app/return-request-reject?id=${id}`, {
       method: "PUT"
     })
     .then(res => res.json())

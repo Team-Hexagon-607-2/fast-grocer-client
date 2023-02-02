@@ -29,7 +29,7 @@ const ReturnConfirmModal = ({setProcessing, orderId}) => {
             // productPhoto: imageData.data.url,
           }
 
-          fetch(`http://localhost:5000/return-request/${orderId}`, {
+          fetch(`https://fg-server.vercel.app/return-request/${orderId}`, {
             method: 'PUT',
             headers: {
               'content-type': 'application/json'
