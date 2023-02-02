@@ -27,6 +27,7 @@ import DeliveryHistory from "../../Pages/Dashboard/DeliveryHistory/DeliveryHisto
 import FlashSalePage from "../../components/FlashSale/FlashSalePage";
 import AdminRoutes from "../AdminRoutes/AdminRoutes";
 import DeliveryRoutes from "../DeliveryRoutes/DeliveryRoutes";
+import BuyerRoutes from "../BuyerRoutes/BuyerRoutes";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -139,19 +140,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/my-orders",
-        element: <MyOrders></MyOrders>,
+        element: <BuyerRoutes><MyOrders /></BuyerRoutes>,
       },
       {
         path: "/dashboard/my-wishlist",
-        element: <MyWishlist></MyWishlist>,
+        element: <BuyerRoutes><MyWishlist /></BuyerRoutes>,
       },
       {
         path: "/dashboard/payments",
-        element: <Payments></Payments>,
+        element: <BuyerRoutes><Payments /></BuyerRoutes>,
       },
       {
         path: "/dashboard/my-reviews",
-        element: <MyReviews></MyReviews>,
+        element: <BuyerRoutes><MyReviews /></BuyerRoutes>,
       },
     ],
   },
