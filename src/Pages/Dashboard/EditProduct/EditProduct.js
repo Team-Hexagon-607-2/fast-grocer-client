@@ -8,25 +8,57 @@ import { StateContext } from '../../../contexts/AuthProvider';
 
 const EditProduct = () => {
     const { AllProducts } = useContext(StateContext);
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const productId = useParams();
     const filterd = AllProducts?.find(product => product?._id === productId?.id);
 
     const handleSubmitEdittedProduct = (data) => {
         // console.log(data);
-        const updatedProductData = {
-            name: data?.name,
-            category_name: data?.category_name,
-            original_price: data?.original_price,
-            save: data?.save,
-            price: data?.price,
-            bundle: data?.bundle, 
-            quantity: data?.quantity,
-            stock: data?.stock,
-            sub_category: data?.sub_category,
-            description: data?.description,
+        if (data?.photo.length > 0) {
+            const image = data?.photo[0];
+            const formData = new FormData();
+            formData.append('image', image);
+
+            fetch(`https://api.imgbb.com/1/upload?key=5ecef3f26027aea9e3fef6c177020bfb`, {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(imageData => {
+                    console.log(imageData?.data?.url);
+                    if (imageData.success) {
+                        const updatedProductData = {
+                            name: data?.name,
+                            category_name: data?.category_name,
+                            original_price: data?.original_price ? parseInt(data?.original_price) : "",
+                            save: data?.save,
+                            price: parseInt(data?.price),
+                            bundle: data?.bundle,
+                            quantity: parseInt(data?.quantity),
+                            stock: parseInt(data?.stock),
+                            sub_category: data?.sub_category,
+                            imageUrl: imageData?.data?.url,
+                            description: data?.description,
+                        }
+                        console.log(updatedProductData)
+                    }
+                })
         }
-        console.log(updatedProductData)
+        else {
+            const updatedProductData = {
+                name: data?.name,
+                category_name: data?.category_name,
+                original_price: data?.original_price ? parseInt(data?.original_price) : "",
+                save: data?.save,
+                price: parseInt(data?.price),
+                bundle: data?.bundle,
+                quantity: parseInt(data?.quantity),
+                stock: parseInt(data?.stock),
+                sub_category: data?.sub_category,
+                description: data?.description,
+            }
+            console.log(updatedProductData)
+        }
     }
 
     return (
@@ -45,7 +77,7 @@ const EditProduct = () => {
                                 type="text"
                                 defaultValue={filterd?.name}
                                 className="input input-bordered w-full "
-                                {...register("name", {required: "Product name is required"})}
+                                {...register("name", { required: "Product name is required" })}
                             />
                             {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
                         </div>
@@ -58,7 +90,7 @@ const EditProduct = () => {
                                 type="text"
                                 defaultValue={filterd?.category_name}
                                 className="input input-bordered w-full "
-                                {...register("category_name", {required: "Category name is required"})}
+                                {...register("category_name", { required: "Category name is required" })}
                             />
                             {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
                         </div>
@@ -97,7 +129,7 @@ const EditProduct = () => {
                                 type="number"
                                 defaultValue={filterd?.price}
                                 className="input input-bordered w-full "
-                                {...register("price", {required: "Set product price"})}
+                                {...register("price", { required: "Set product price" })}
                             />
                             {errors.price && <p className='text-red-600'>{errors.price?.message}</p>}
                         </div>
@@ -111,7 +143,7 @@ const EditProduct = () => {
                                 type="text"
                                 defaultValue={filterd?.bundle}
                                 className="input input-bordered w-full "
-                                {...register("bundle", {required: "Set a bundle"})}
+                                {...register("bundle", { required: "Set a bundle" })}
                             />
                             {errors.bundle && <p className='text-red-600'>{errors.bundle?.message}</p>}
                         </div>
@@ -124,7 +156,7 @@ const EditProduct = () => {
                                 type="number"
                                 defaultValue={filterd?.qunatity}
                                 className="input input-bordered w-full "
-                                {...register("quantity", {required: "Set quantity"})}
+                                {...register("quantity", { required: "Set quantity" })}
                             />
                             {errors.qunatity && <p className='text-red-600'>{errors.qunatity?.message}</p>}
                         </div>
@@ -137,7 +169,7 @@ const EditProduct = () => {
                                 type="text"
                                 defaultValue={filterd?.sub_category}
                                 className="input input-bordered w-full "
-                                {...register("sub_category", {required: "Sub category is required"})}
+                                {...register("sub_category", { required: "Sub category is required" })}
                             />
                             {errors.sub_category && <p className='text-red-600'>{errors.sub_category?.message}</p>}
                         </div>
@@ -150,7 +182,7 @@ const EditProduct = () => {
                                 type="number"
                                 defaultValue={filterd?.stock}
                                 className="input input-bordered w-full "
-                                {...register("stock", {required: "Set total stock products"})}
+                                {...register("stock", { required: "Set total stock products" })}
                             />
                             {errors.stock && <p className='text-red-600'>{errors.stock?.message}</p>}
                         </div>
@@ -158,7 +190,7 @@ const EditProduct = () => {
                             <label className="label">
                                 <span className="label-text font-bold">Product Image</span>
                             </label>
-                            <input type="file" className="file-input file-input-bordered w-full max-w-xs" />
+                            <input type="file" className="file-input file-input-bordered w-full max-w-xs" {...register("photo")} />
                         </div>
                     </div>
                     <div className="form-control w-full mt-4">
@@ -172,7 +204,7 @@ const EditProduct = () => {
                             rows="10"
                             defaultValue={filterd?.description}
                             className="input input-bordered w-full h-20 px-3 py-1"
-                            {...register("description", {required: "Write product description"})}
+                            {...register("description", { required: "Write product description" })}
                         ></textarea>
                         {errors.description && <p className='text-red-600'>{errors.description?.message}</p>}
                     </div>
