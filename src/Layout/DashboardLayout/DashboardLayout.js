@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AiOutlineEdit, AiOutlineHeart, AiOutlineHistory, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
+import { BiLogOut } from "react-icons/bi";
 import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
 import { BiListPlus } from "react-icons/bi";
@@ -10,41 +11,40 @@ import useFindAdmin from "../../hooks/useFindAdmin";
 import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
 import logo from '../../assets/logo/logo.png';
+import Loader from "../../components/Loader/Loader";
 
 const DashboardLayout = () => {
-  const { user } = useContext(StateContext);
-  const [isAdmin] = useFindAdmin(user?.email);
-  const [isBuyer] = useFindBuyer(user?.email);
-  const [isDeliveryman] = useFindDeliveryman(user?.email);
+  const { user, logOut } = useContext(StateContext);
+  const [isAdmin, isAdminLoading] = useFindAdmin(user?.email);
+  const [isBuyer, isBuyerLoading] = useFindBuyer(user?.email);
+  const [isDeliveryman, isDeliverymanLoading] = useFindDeliveryman(user?.email);
+
+  if (isAdminLoading || isBuyerLoading || isDeliverymanLoading) {
+    return <Loader></Loader>
+  }
 
   return (
-    <div>
+    <>
       <div className="drawer drawer-mobile">
-        <input
-          id="dashboard-drawer"
-          type="checkbox"
-          className="drawer-toggle"
-        />
+        <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           <Outlet></Outlet>
         </div>
+
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu w-64 bg-slate-100 text-base-100">
             <div className="border-b">
               <Link to='/'><img className="mx-auto my-7 w-[125px]" src={logo} alt="" /></Link>
             </div>
+
             <li className="text-[14px] font-semibold">
-              <Link
-                className="text-slate-700"
-                to="/dashboard"
-              >
+              <Link className="text-slate-700" to="/dashboard" > 
                 <AiOutlineUser /> My Profile
               </Link>
             </li>
 
             {/* Admin Dashboard */}
-
             {isAdmin && (
               <>
                 <li className="text-[14px] font-semibold">
@@ -91,7 +91,6 @@ const DashboardLayout = () => {
             )}
 
             {/* Buyer Dashboard */}
-
             {isBuyer && (
               <>
                 <li className="text-[14px] font-semibold">
@@ -150,10 +149,16 @@ const DashboardLayout = () => {
                 </li>
               </>
             )}
+
+            <li className="text-[14px] font-semibold">
+              <button onClick={logOut} className="text-slate-700" to="/dashboard" > 
+                <BiLogOut /> Logout
+              </button>
+            </li>
           </ul>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
