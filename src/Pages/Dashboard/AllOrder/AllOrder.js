@@ -154,7 +154,7 @@ const AllOrder = () => {
           <tbody>
             {data?.data?.map((item, index) => (
               <tr key={item?._id}>
-                <td>{index + 1}</td>
+                <th>{index + 1}</th>
                 <td>
                   <div className="flex items-center flex-col space-x-3">
                     {item?.order_products?.map((product) => (
@@ -275,8 +275,10 @@ const AllOrder = () => {
                 </th>
                 <td>
                   {item?.returnRequest && "Return Requested"}
-                  <p className="text-sm">{item?.returnReason && item?.returnReason}</p>
+                  {item?.returnRequest && <p className="text-sm">{item?.returnReason && item?.returnReason}</p>}
                   {item?.returnRequest && <><button onClick={() => handleReturnAccept(item?._id)} className="text-sm px-3 py-1 bg-blue-300 hover:bg-blue-400 rounded-full duration-300">Accept</button> <button onClick={() => handleReturnReject(item?._id)} className="text-sm px-3 py-1 bg-red-300 hover:bg-red-400 rounded-full duration-300">Reject</button></>}
+                  {item?.acceptReturnRequest && <p>Accepted Request</p>}
+                  {item?.acceptReturnRequest === false && <p>Rejected Request</p>}
                 </td>
               </tr>
             ))}
