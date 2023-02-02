@@ -76,13 +76,13 @@ const AllProducts = () => {
         <p>page {page + 1} of 8</p>
 
         <div className="flex items-center">
-          <button className={page === 7 ? 'bg-slate-300  hover:cursor-not-allowed duration-300 px-2 py-1 text-sm rounded-md' : 'bg-[#ddecb0] hover:bg-[#b9cc81] duration-300 px-2 py-1 text-sm rounded-md'} onClick={pageIncrease}>Next</button>
+          <button className={page === 0 ? 'bg-slate-300  hover:cursor-not-allowed duration-300 px-2 py-1 text-sm rounded-md' : 'bg-[#ddecb0] hover:bg-[#b9cc81] duration-300 px-2 py-1 text-sm rounded-md'} onClick={pageDecrease}>Previous</button>
           <div className="mx-2">
             {
               array.map(number => <button key={number.index} onClick={() => setPage(number)} className={(page === number) ? ' mx-1 w-8 h-8 rounded-full bg-[#ddecb0]' : 'bg-slate-200 mx-1 w-8 h-8 rounded-full'}>{number + 1}</button>)
             }
           </div>
-          <button className={page === 0 ? 'bg-slate-300  hover:cursor-not-allowed duration-300 px-2 py-1 text-sm rounded-md' : 'bg-[#ddecb0] hover:bg-[#b9cc81] duration-300 px-2 py-1 text-sm rounded-md'} onClick={pageDecrease}>Previews</button>
+          <button className={page === 7 ? 'bg-slate-300  hover:cursor-not-allowed duration-300 px-2 py-1 text-sm rounded-md' : 'bg-[#ddecb0] hover:bg-[#b9cc81] duration-300 px-2 py-1 text-sm rounded-md'} onClick={pageIncrease}>Next</button>
         </div>
       </div>
     </>

@@ -6,11 +6,11 @@ const HomePageProducts = () => {
   const [products, setProducts] = useState(null);
   const [getAllProducts, setGetAllProducts] = useState(null);
   const { categories, AllProducts } = useContext(StateContext);
-  const [selectedCategory, setSelectedCategory] = useState("Stationery & Office");
+  const [selectedCategory, setSelectedCategory] = useState("Winter Collection");
 
   useEffect(() => {
     const categoryProducts = AllProducts?.filter(
-      (category) => category.category_name === "Stationery & Office"
+      (category) => category.category_name === "Winter Collection"
     );
     setGetAllProducts(categoryProducts);
   }, [AllProducts]);
