@@ -32,6 +32,8 @@ const OperateAllProducts = () => {
     return <Loader />
   }
 
+  refetch();
+
   return (
     <div className=''>
       <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">All Products</h2>
@@ -42,7 +44,7 @@ const OperateAllProducts = () => {
             <tr>
               <th>S/N</th>
               <th>Product Name</th>
-              <th>Category</th>
+              <th>Average Rating</th>
               <th>Available Stock</th>
               <th>Price</th>
               <th>Action</th>
@@ -68,7 +70,7 @@ const OperateAllProducts = () => {
                     </div>
                   </td>
                   <td>
-                    <div className="font-bold">{product.category_name.slice(0, 9)}</div>
+                    <div></div>
                   </td>
                   <td>
                     <div className="font-bold">{product.stock}</div>
@@ -78,8 +80,8 @@ const OperateAllProducts = () => {
                   </td>
 
                   <td>
-                    <button className="btn bg-blue-400 hover:bg-blue-500 btn-xs">Edit</button>
-                    <button onClick={() => handleDelete(product)} className="btn bg-red-600 btn-xs">Delete</button>
+                    <button className="btn bg-blue-400 hover:bg-blue-500 btn-xs border-none mr-2">Edit</button>
+                    <button onClick={() => handleDelete(product)} className="btn bg-red-600 hover:bg-red-700 btn-xs border-none">Delete</button>
                   </td>
                 </tr>)
             }
