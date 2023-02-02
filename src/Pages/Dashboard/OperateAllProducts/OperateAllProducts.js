@@ -55,7 +55,7 @@ const OperateAllProducts = () => {
           <tbody>
             {
               products?.map((product, i) =>
-                <tr>
+                <tr key={i}>
                   <th>{i + 1}</th>
                   <td>
                     <div className="flex items-center space-x-3">

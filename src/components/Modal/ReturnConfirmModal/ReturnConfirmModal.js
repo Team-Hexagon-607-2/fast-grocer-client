@@ -11,22 +11,22 @@ const ReturnConfirmModal = ({setProcessing, orderId}) => {
   const handleReturnRequest = (data) => {
     setProcessing(true);
 
-    // const image = data?.photo[0];
-    // const formData = new FormData();
-    // formData.append('image', image);
+    const image = data?.photo[0];
+    const formData = new FormData();
+    formData.append('image', image);
 
-    // fetch(`https://api.imgbb.com/1/upload?key=5ecef3f26027aea9e3fef6c177020bfb`, {
-    //   method: 'POST',
-    //   body: formData
-    // })
-    //   .then(res => res.json())
-    //   .then(imageData => {
-    //     console.log(imageData);
-    //     if (imageData.success) {
+    fetch(`https://api.imgbb.com/1/upload?key=5ecef3f26027aea9e3fef6c177020bfb`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(res => res.json())
+      .then(imageData => {
+        console.log(imageData);
+        if (imageData.success) {
 
           const returnProduct = {
             returnReason: data?.reason,
-            // productPhoto: imageData.data.url,
+            productPhoto: imageData.data.url,
           }
 
           fetch(`https://fg-server.vercel.app/return-request/${orderId}`, {
@@ -49,11 +49,11 @@ const ReturnConfirmModal = ({setProcessing, orderId}) => {
               setProcessing(false);
             })
         }
-      // }).catch(err => {
-      //   toast.error(err.message);
-      //   setProcessing(false);
-      // })
-
+      }).catch(err => {
+        toast.error(err.message);
+        setProcessing(false);
+      })
+    }
   return (
     <div>
       {/* Put this part before </body> tag */}

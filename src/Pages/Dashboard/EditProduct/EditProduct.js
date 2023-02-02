@@ -8,9 +8,12 @@ import { StateContext } from '../../../contexts/AuthProvider';
 const EditProduct = () => {
     const { AllProducts } = useContext(StateContext)
     const productId = useParams();
-    console.log(productId);
-    const filterd = AllProducts?.find(product => product?._id === productId?.id)
-    console.log(filterd);
+    const filterd = AllProducts?.find(product => product?._id === productId?.id);
+
+    const handleSubmitEdittedProduct = () =>{
+
+    }
+
     return (
         <div className="">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600">
@@ -25,7 +28,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.name}
+                                defaultValue={filterd?.name}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -36,7 +39,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.category_name}
+                                defaultValue={filterd?.category_name}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -47,7 +50,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.price}
+                                defaultValue={filterd?.price}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -58,7 +61,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.original_price}
+                                defaultValue={filterd?.original_price}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -69,7 +72,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.save}
+                                defaultValue={filterd?.save}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -80,7 +83,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.bundle}
+                                defaultValue={filterd?.bundle}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -91,7 +94,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.qunatity}
+                                defaultValue={filterd?.qunatity}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -102,7 +105,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.sub_category}
+                                defaultValue={filterd?.sub_category}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -113,7 +116,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.stock}
+                                defaultValue={filterd?.stock}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -124,7 +127,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.status}
+                                defaultValue={filterd?.status}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -135,7 +138,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                value={filterd?.sell_amount}
+                                defaultValue={filterd?.sell_amount}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -149,7 +152,7 @@ const EditProduct = () => {
                             id=""
                             cols="30"
                             rows="10"
-                            value={filterd?.description}
+                            defaultValue={filterd?.description}
                             className="input input-bordered w-full "
 
                         ></textarea>
@@ -165,7 +168,7 @@ const EditProduct = () => {
                         />
                     </div>
                     <br />
-                    <input className="btn btn-accent w-full mt-6" type="submit" />
+                    <input onClick={handleSubmitEdittedProduct} className="btn btn-accent w-full mt-6" type="submit" />
                 </form>
             </div>
         </div>
