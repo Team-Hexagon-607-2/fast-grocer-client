@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import Loader from '../../../components/Loader/Loader';
 
 const OperateAllProducts = () => {
@@ -15,8 +16,8 @@ const OperateAllProducts = () => {
 
 
   const handleDelete = product => {
-    console.log(product._id);
-    fetch(`https://fg-server.vercel.app/products/${product._id}`, {
+    console.log(product?._id);
+    fetch(`https://fg-server.vercel.app/products/${product?._id}`, {
       method: 'DELETE'
     })
       .then(res => res.json())
@@ -76,19 +77,16 @@ const OperateAllProducts = () => {
                     <div className="font-bold">{product.stock}</div>
                   </td>
                   <td>
-                    <div className="font-bold">{product.price}</div>
+                    <div className="font-bold">৳ {product.price}</div>
                   </td>
 
                   <td>
-                    <button className="btn bg-blue-400 hover:bg-blue-500 btn-xs border-none mr-2">Edit</button>
+                    <Link to={`/dashboard/edit-product/${product?._id}`}><button className="btn bg-blue-400 hover:bg-blue-500 btn-xs border-none mr-2">Edit</button></Link>
                     <button onClick={() => handleDelete(product)} className="btn bg-red-600 hover:bg-red-700 btn-xs border-none">Delete</button>
                   </td>
                 </tr>)
             }
           </tbody>
-
-
-
         </table>
       </div>
     </div>

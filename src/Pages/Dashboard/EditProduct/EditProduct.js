@@ -3,79 +3,174 @@ import React from 'react';
 import { toast } from 'react-hot-toast';
 
 const EditProduct = () => {
-
-        const { data: products, isLoading, refetch } = useQuery({
-            queryKey: ['name'],
-            queryFn: async () => {
-                const res = await fetch('https://fg-server.vercel.app/products');
-                const data = await res.json();
-                return data;
-            }
-        })
-    
-        
-        const handleDelete = product => {
-            console.log(product._id);
-            fetch(`https://fg-server.vercel.app/products/${product._id}`, {
-                method: 'DELETE'
-            })
-            .then(res => res.json())
-            .then(data => {
-                if(data.deletedCount > 0){
-                    refetch();
-                    toast.success(`${product.name} deleted successfully`)
-                }
-            })
-        }
-
-
     return (
-        <div className=''>
-            <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">Edit Products</h2>
-            <div className="overflow-x-auto w-full">
-                <table className="table w-full">
+        <div className="">
+            <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600">
+                <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">Edit Product</h2>
 
-                    <thead>
-                        <tr>
-                            <th>Serial</th>
-                            <th>Product Name</th>
-                            <th>Category</th>
-                            <th>Available Stock</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
+                <form>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">Name</span>
+                            </label>
 
-                    <tbody>
-                        {
-                           products?.map((product, i) =>
-                                <tr>
-                                    <td>
-                                        <div className="font-bold">{i + 1}</div>
-                                    </td>
-                                    <td>
-                                        <div className="font-bold">{product.name.slice(0,18)}..</div>
-                                    </td>
-                                    <td>
-                                        <div className="font-bold">{product.category_name.slice(0,9)}</div>
-                                    </td>
-                                    <td>
-                                        <div className="font-bold">{product.stock}</div>
-                                    </td>
-                                    <td>
-                                        <div className="font-bold">{product.price}</div>
-                                    </td>
-                                    
-                                    <th>
-                                        <button onClick={()=> handleDelete(product)}  className="btn bg-red-600 btn-xs">Delete</button>
-                                    </th>
-                                </tr>)
-                        }
-                    </tbody>
+                            <input
+                                type="text"
+                                placeholder="name"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">category_name</span>
+                            </label>
+
+                            <input
+                                type="text"
+
+                                placeholder="category_name"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">Price</span>
+                            </label>
+
+                            <input
+                                type="text"
+
+                                placeholder="price"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">Original Price</span>
+                            </label>
+
+                            <input
+                                type="text"
+
+                                placeholder="Original Price"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">save</span>
+                            </label>
+
+                            <input
+                                type="text"
+
+                                placeholder="save"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">bundle</span>
+                            </label>
+
+                            <input
+                                type="text"
+
+                                placeholder="bundle"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">qunatity</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="quantity"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">sub_category</span>
+                            </label>
+
+                            <input
+                                type="text"
+
+                                placeholder="sub_category"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">stock</span>
+                            </label>
+
+                            <input
+                                type="text"
+
+                                placeholder="stock"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">status</span>
+                            </label>
+
+                            <input
+                                type="text"
+
+                                placeholder="status"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">sell_amount</span>
+                            </label>
+
+                            <input
+                                type="text"
+
+                                placeholder="sell_amount"
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                    </div>
+                    <div className="form-control w-full mt-4">
+                        <label className="label">
+                            <span className="label-text font-bold">Prodcut Description</span>
+                        </label>
+                        <textarea
+                            name="description"
+                            id=""
+                            cols="30"
+                            rows="10"
+                            placeholder="Product Description"
+                            className="input input-bordered w-full "
+
+                        ></textarea>
+                    </div>
+                    <div className="form-control w-full ">
+                        <label className="label">
+                            <span className="label-text font-bold">Product Image</span>
+                        </label>
+
+                        <input
+                            type="file"
 
 
-
-                </table>
+                            placeholder="Enter Your Name"
+                            className="input input-bordered w-full py-2 "
+                        />
+                    </div>
+                    <br />
+                    <input className="btn btn-accent w-full mt-6" type="submit" />
+                </form>
             </div>
         </div>
     );

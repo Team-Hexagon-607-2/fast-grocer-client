@@ -156,6 +156,10 @@ const router = createBrowserRouter([
         path: "/dashboard/all-products",
         element: <OperateAllProducts></OperateAllProducts>,
       },
+      {
+        path: "/dashboard/edit-product/:id",
+        element: <EditProduct></EditProduct>
+      }
     ],
   },
 ]);

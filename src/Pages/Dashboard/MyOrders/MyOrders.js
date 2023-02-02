@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { StateContext } from "../../../contexts/AuthProvider";
-import { FcCancel } from "react-icons/fc";
 import { toast } from "react-hot-toast";
 import Loader from "../../../components/Loader/Loader";
 import { useState } from "react";
