@@ -1,8 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { useContext } from 'react';
 import { toast } from 'react-hot-toast';
+import { useParams } from 'react-router-dom';
+import { StateContext } from '../../../contexts/AuthProvider';
 
 const EditProduct = () => {
+    const { AllProducts } = useContext(StateContext)
+    const productId = useParams();
+    console.log(productId);
+    const filterd = AllProducts?.find(product => product?._id === productId?.id)
+    console.log(filterd);
     return (
         <div className="">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600">
