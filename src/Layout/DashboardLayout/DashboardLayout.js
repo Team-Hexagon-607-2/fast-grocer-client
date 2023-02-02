@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { AiOutlineEdit, AiOutlineHeart, AiOutlineHistory, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
-import { BiListPlus } from "react-icons/bi";
-import { GoListUnordered } from "react-icons/go";
+import { BiListCheck, BiListPlus } from "react-icons/bi";
+import { GoListUnordered, GoTasklist } from "react-icons/go";
 import { Link, Outlet } from "react-router-dom";
 import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
@@ -11,6 +11,7 @@ import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
 import logo from '../../assets/logo/logo.png';
 import { useState } from "react";
+import { TbPlaylistAdd } from "react-icons/tb";
 
 const DashboardLayout = () => {
   const { user } = useContext(StateContext);
@@ -75,17 +76,17 @@ const DashboardLayout = () => {
                 <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
-                    to="/dashboard/add-product"
+                    to="/dashboard/all-products"
                   >
-                    <BiListPlus />Add Product
+                    <GoTasklist />All Products
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
-                    to="/dashboard/edit-product"
+                    to="/dashboard/add-product"
                   >
-                    <AiOutlineEdit />Edit Products
+                    <TbPlaylistAdd />Add Product
                   </Link>
                 </li>
               </>
