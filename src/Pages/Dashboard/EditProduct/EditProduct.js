@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
@@ -12,6 +11,7 @@ const EditProduct = () => {
     const productId = useParams();
     const filterd = AllProducts?.find(product => product?._id === productId?.id);
 
+    
     const handleSubmitEdittedProduct = (data) => {
         // console.log(data);
         if (data?.photo.length > 0) {
@@ -41,6 +41,19 @@ const EditProduct = () => {
                             description: data?.description,
                         }
                         console.log(updatedProductData)
+                        fetch(`https://fg-server.vercel.app/product/${filterd?._id}`, {
+                            method: "PUT",
+                            headers: {
+                                "content-type": "application/json"
+                            },
+                            body: JSON.stringify(updatedProductData)
+                        }).then(res => res.json())
+                            .then(data => {
+                                if (data?.modifiedCount > 0) {
+                                    console.log(data);
+                                    toast.success(`${filterd?.name} updated successfully`);
+                                }
+                            })
                     }
                 })
         }
@@ -58,6 +71,19 @@ const EditProduct = () => {
                 description: data?.description,
             }
             console.log(updatedProductData)
+            fetch(`https://fg-server.vercel.app/product/${filterd?._id}`, {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(updatedProductData)
+            }).then(res => res.json())
+                .then(data => {
+                    if (data?.modifiedCount > 0) {
+                        console.log(data);
+                        toast.success(`${filterd?.name} updated successfully`);
+                    }
+                })
         }
     }
 
@@ -76,7 +102,7 @@ const EditProduct = () => {
                             <input
                                 type="text"
                                 defaultValue={filterd?.name}
-                                className="input input-bordered w-full "
+                                className="input input-bordered w-full"
                                 {...register("name", { required: "Product name is required" })}
                             />
                             {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
