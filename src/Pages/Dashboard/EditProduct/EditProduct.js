@@ -1,25 +1,40 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const EditProduct = () => {
-    const { AllProducts } = useContext(StateContext)
+    const { AllProducts } = useContext(StateContext);
+    const {register, handleSubmit, formState: {errors}} = useForm();
     const productId = useParams();
     const filterd = AllProducts?.find(product => product?._id === productId?.id);
 
-    const handleSubmitEdittedProduct = () =>{
-
+    const handleSubmitEdittedProduct = (data) => {
+        // console.log(data);
+        const updatedProductData = {
+            name: data?.name,
+            category_name: data?.category_name,
+            original_price: data?.original_price,
+            save: data?.save,
+            price: data?.price,
+            bundle: data?.bundle, 
+            quantity: data?.quantity,
+            stock: data?.stock,
+            sub_category: data?.sub_category,
+            description: data?.description,
+        }
+        console.log(updatedProductData)
     }
 
     return (
         <div className="">
-            <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600">
+            <div className="px-6">
                 <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">Edit Product</h2>
 
-                <form>
+                <form onSubmit={handleSubmit(handleSubmitEdittedProduct)}>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div className="form-control w-full ">
                             <label className="label">
@@ -30,7 +45,9 @@ const EditProduct = () => {
                                 type="text"
                                 defaultValue={filterd?.name}
                                 className="input input-bordered w-full "
+                                {...register("name", {required: "Product name is required"})}
                             />
+                            {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
@@ -41,18 +58,9 @@ const EditProduct = () => {
                                 type="text"
                                 defaultValue={filterd?.category_name}
                                 className="input input-bordered w-full "
+                                {...register("category_name", {required: "Category name is required"})}
                             />
-                        </div>
-                        <div className="form-control w-full ">
-                            <label className="label">
-                                <span className="label-text font-bold">Price</span>
-                            </label>
-
-                            <input
-                                type="text"
-                                defaultValue={filterd?.price}
-                                className="input input-bordered w-full "
-                            />
+                            {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
@@ -60,22 +68,40 @@ const EditProduct = () => {
                             </label>
 
                             <input
-                                type="text"
+                                type="number"
                                 defaultValue={filterd?.original_price}
-                                className="input input-bordered w-full "
+                                className="input input-bordered w-full"
+                                {...register("original_price")}
                             />
                         </div>
+
                         <div className="form-control w-full ">
                             <label className="label">
-                                <span className="label-text font-bold">save</span>
+                                <span className="label-text font-bold">Discount (%)</span>
                             </label>
 
                             <input
                                 type="text"
                                 defaultValue={filterd?.save}
-                                className="input input-bordered w-full "
+                                className="input input-bordered w-full"
+                                {...register("save")}
                             />
                         </div>
+
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text font-bold">Price</span>
+                            </label>
+
+                            <input
+                                type="number"
+                                defaultValue={filterd?.price}
+                                className="input input-bordered w-full "
+                                {...register("price", {required: "Set product price"})}
+                            />
+                            {errors.price && <p className='text-red-600'>{errors.price?.message}</p>}
+                        </div>
+
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text font-bold">bundle</span>
@@ -85,7 +111,9 @@ const EditProduct = () => {
                                 type="text"
                                 defaultValue={filterd?.bundle}
                                 className="input input-bordered w-full "
+                                {...register("bundle", {required: "Set a bundle"})}
                             />
+                            {errors.bundle && <p className='text-red-600'>{errors.bundle?.message}</p>}
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
@@ -93,10 +121,12 @@ const EditProduct = () => {
                             </label>
 
                             <input
-                                type="text"
+                                type="number"
                                 defaultValue={filterd?.qunatity}
                                 className="input input-bordered w-full "
+                                {...register("quantity", {required: "Set quantity"})}
                             />
+                            {errors.qunatity && <p className='text-red-600'>{errors.qunatity?.message}</p>}
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
@@ -107,40 +137,28 @@ const EditProduct = () => {
                                 type="text"
                                 defaultValue={filterd?.sub_category}
                                 className="input input-bordered w-full "
+                                {...register("sub_category", {required: "Sub category is required"})}
                             />
+                            {errors.sub_category && <p className='text-red-600'>{errors.sub_category?.message}</p>}
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
-                                <span className="label-text font-bold">stock</span>
+                                <span className="label-text font-bold">Stock</span>
                             </label>
 
                             <input
-                                type="text"
+                                type="number"
                                 defaultValue={filterd?.stock}
                                 className="input input-bordered w-full "
+                                {...register("stock", {required: "Set total stock products"})}
                             />
+                            {errors.stock && <p className='text-red-600'>{errors.stock?.message}</p>}
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
-                                <span className="label-text font-bold">status</span>
+                                <span className="label-text font-bold">Product Image</span>
                             </label>
-
-                            <input
-                                type="text"
-                                defaultValue={filterd?.status}
-                                className="input input-bordered w-full "
-                            />
-                        </div>
-                        <div className="form-control w-full ">
-                            <label className="label">
-                                <span className="label-text font-bold">sell_amount</span>
-                            </label>
-
-                            <input
-                                type="text"
-                                defaultValue={filterd?.sell_amount}
-                                className="input input-bordered w-full "
-                            />
+                            <input type="file" className="file-input file-input-bordered w-full max-w-xs" />
                         </div>
                     </div>
                     <div className="form-control w-full mt-4">
@@ -150,25 +168,16 @@ const EditProduct = () => {
                         <textarea
                             name="description"
                             id=""
-                            cols="30"
+                            cols="50"
                             rows="10"
                             defaultValue={filterd?.description}
-                            className="input input-bordered w-full "
-
+                            className="input input-bordered w-full h-20 px-3 py-1"
+                            {...register("description", {required: "Write product description"})}
                         ></textarea>
-                    </div>
-                    <div className="form-control w-full ">
-                        <label className="label">
-                            <span className="label-text font-bold">Product Image</span>
-                        </label>
-
-                        <input
-                            type="file"
-                            className="input input-bordered w-full py-2 "
-                        />
+                        {errors.description && <p className='text-red-600'>{errors.description?.message}</p>}
                     </div>
                     <br />
-                    <input onClick={handleSubmitEdittedProduct} className="btn btn-accent w-full mt-6" type="submit" />
+                    <button className='btn w-full' type='submit'>Edit</button>
                 </form>
             </div>
         </div>

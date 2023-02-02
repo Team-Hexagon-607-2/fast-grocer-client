@@ -30,7 +30,7 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu w-64 bg-slate-100 text-base-100">
+          <ul className="menu w-56 bg-slate-100 text-base-100">
             <div className="border-b">
               <Link to='/'><img className="mx-auto my-7 w-[125px]" src={logo} alt="" /></Link>
             </div>
