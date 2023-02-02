@@ -25,7 +25,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-                                placeholder="name"
+                                value={filterd?.name}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -36,8 +36,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-
-                                placeholder="category_name"
+                                value={filterd?.category_name}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -48,8 +47,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-
-                                placeholder="price"
+                                value={filterd?.price}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -60,8 +58,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-
-                                placeholder="Original Price"
+                                value={filterd?.original_price}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -72,8 +69,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-
-                                placeholder="save"
+                                value={filterd?.save}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -84,19 +80,18 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-
-                                placeholder="bundle"
+                                value={filterd?.bundle}
                                 className="input input-bordered w-full "
                             />
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
-                                <span className="label-text font-bold">qunatity</span>
+                                <span className="label-text font-bold">quantity</span>
                             </label>
 
                             <input
                                 type="text"
-                                placeholder="quantity"
+                                value={filterd?.qunatity}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -107,8 +102,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-
-                                placeholder="sub_category"
+                                value={filterd?.sub_category}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -119,8 +113,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-
-                                placeholder="stock"
+                                value={filterd?.stock}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -131,8 +124,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-
-                                placeholder="status"
+                                value={filterd?.status}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -143,8 +135,7 @@ const EditProduct = () => {
 
                             <input
                                 type="text"
-
-                                placeholder="sell_amount"
+                                value={filterd?.sell_amount}
                                 className="input input-bordered w-full "
                             />
                         </div>
@@ -158,7 +149,7 @@ const EditProduct = () => {
                             id=""
                             cols="30"
                             rows="10"
-                            placeholder="Product Description"
+                            value={filterd?.description}
                             className="input input-bordered w-full "
 
                         ></textarea>
@@ -170,9 +161,6 @@ const EditProduct = () => {
 
                         <input
                             type="file"
-
-
-                            placeholder="Enter Your Name"
                             className="input input-bordered w-full py-2 "
                         />
                     </div>
