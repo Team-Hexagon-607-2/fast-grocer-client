@@ -101,6 +101,34 @@ const AllOrder = () => {
       .catch((err) => console.log(err));
   };
 
+  // handle return request accept
+  const handleReturnAccept = (id) =>{
+    console.log(id);
+    fetch(`http://localhost:5000/return-request-accept?id=${id}`, {
+      method: "PUT"
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data?.modifiedCount > 0){
+        toast.success("Request Accepted");
+      }
+    })
+  }
+  
+  // handler for return request reject
+  const handleReturnReject = (id) =>{
+    console.log(id);
+    fetch(`http://localhost:5000/return-request-reject?id=${id}`, {
+      method: "PUT"
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data?.modifiedCount > 0){
+        toast.error("Request Rejected");
+      }
+    })
+  }
+
   return (
     <div className="">
       <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">
@@ -201,8 +229,8 @@ const AllOrder = () => {
                     >
                       <select
                         onChange={handleChange}
-                        value={selectedValue.email}
-                        name="deliveryValue"
+                        // value={selectedValue.email}
+                        // name="deliveryValue"
                         className="select select-bordered w-full max-w-xs"
                       >
                         <option disabled selected>
@@ -248,7 +276,7 @@ const AllOrder = () => {
                 <td>
                   {item?.returnRequest && "Return Requested"}
                   <p className="text-sm">{item?.returnReason && item?.returnReason}</p>
-                  {item?.returnRequest && <><button className="text-sm px-3 py-1 bg-blue-300 hover:bg-blue-400 rounded-full duration-300">Accept</button> <button className="text-sm px-3 py-1 bg-red-300 hover:bg-red-400 rounded-full duration-300">Reject</button></>}
+                  {item?.returnRequest && <><button onClick={() => handleReturnAccept(item?._id)} className="text-sm px-3 py-1 bg-blue-300 hover:bg-blue-400 rounded-full duration-300">Accept</button> <button onClick={() => handleReturnReject(item?._id)} className="text-sm px-3 py-1 bg-red-300 hover:bg-red-400 rounded-full duration-300">Reject</button></>}
                 </td>
               </tr>
             ))}
