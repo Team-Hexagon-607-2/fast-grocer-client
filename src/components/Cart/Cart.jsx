@@ -16,18 +16,21 @@ const Cart = () => {
         </div>
       )}
 
-      <div className="flex justify-between mb-5">
-        <h2 className="text-2xl font-semibold text-slate-700">My Cart:</h2>
-        <div className="flex items-center gap-4">
-          <p className="underline text-slate-700 text-lg font-semibold">{totalQuantity} Item</p>
-          <button onClick={clearCart} className="btn btn-sm bg-red-500 border-none"> Clear Cart </button>
+      {
+        cart.length !== 0 &&
+        <div className="flex justify-between mb-5">
+          <h2 className="text-2xl font-semibold text-slate-700">My Cart:</h2>
+          <div className="flex items-center gap-4">
+            <p className="underline text-slate-700 text-lg font-semibold">{totalQuantity} Item</p>
+            <button onClick={clearCart} className="btn btn-sm bg-red-500 border-none"> Clear Cart </button>
+          </div>
         </div>
-      </div>
+      }
 
       <div className="flex flex-col">
         {cart.length > 0 && cart.length && (
           <div>
-            <div className="flex flex-col gap-10">
+            <div className="flex flex-col gap-5">
               {cart?.map((cart) => (<CartItem cart={cart} key={cart._id} />))}
             </div>
 
