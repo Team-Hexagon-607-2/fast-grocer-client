@@ -145,7 +145,7 @@ const AllOrder = () => {
               <th>Total Price</th>
               <th>Status</th>
               <th>Paid</th>
-              <th>Condition</th>
+              <th>Payment Method</th>
               <th>Assign Delivery Man</th>
               <th>Cancel Request</th>
               <th>Return Request</th>
@@ -210,11 +210,11 @@ const AllOrder = () => {
                   </div>
                 </td>
                 <td className={`${item?.paid === false && ""}`}>
-                  {item?.paid === false ? <p className="bg-red-300 rounded-full text-center text-sm">Not Paid</p> : <p className="bg-green-300 rounded-full text-center text-sm">Already Paid</p>}
+                  {item?.paid === false ? <p className="bg-red-300 rounded-full text-center text-sm">Not Paid</p> : <p className="bg-green-300 rounded-full text-center text-sm px-2">Already Paid</p>}
                 </td>
-                <th>{item?.condition}</th>
+                <td className="text-sm text-center font-semibold">{item?.condition}</td>
 
-                <th>
+                <td>
                   <p>{item.deliveryManName}</p>
                   <p>{item?.pick}</p>
                   {!item.deliveryManEmail && (
@@ -228,7 +228,7 @@ const AllOrder = () => {
                         onChange={handleChange}
                         // value={selectedValue.email}
                         // name="deliveryValue"
-                        className="select select-bordered w-full max-w-xs"
+                        className="select select-bordered select-sm"
                       >
                         <option disabled selected>
                           Select Delivery Man
@@ -242,16 +242,15 @@ const AllOrder = () => {
 
                       <button
                         type="submit"
-                        className="py-3 px-3 text-center justify-center
-                   cursor-pointer hover:bg-slate-400 
-                   flex items-center rounded-full text-sm
-                    bg-blue-300  font-bold "
+                        className="py-1 px-3 text-center
+                   cursor-pointer hover:bg-blue-400 rounded-full text-sm
+                    bg-blue-300 font-semibold"
                       >
                         Assign
                       </button>
                     </form>
                   )}
-                </th>
+                </td>
                 <th>
                   <div className="flex flex-col items-center gap-3">
                     <p> {item?.cancel}</p>
