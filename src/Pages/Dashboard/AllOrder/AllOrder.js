@@ -251,30 +251,26 @@ const AllOrder = () => {
                     </form>
                   )}
                 </td>
-                <th>
+                <td>
                   <div className="flex flex-col items-center gap-3">
-                    <p> {item?.cancel}</p>
+                    <p className="text-sm"> {item?.cancel}</p>
                     <div>
                       {item?.cancel === "Cancel Request Sent" && (
                         <button
                           onClick={() => handleCancelRequestReceived(item?._id)}
-                          className="p-3 
-                      cursor-pointer hover:bg-slate-400 
-                      flex items-center rounded-full text-sm
-                       bg-blue-300  font-bold "
-                        >
-                          Receive Cancel Request
+                          className="px-3 py-1 cursor-pointer bg-red-300 hover:bg-red-400 rounded-full text-sm">
+                          Receive Request
                         </button>
                       )}
                     </div>
                   </div>
-                </th>
+                </td>
                 <td>
                   {item?.returnRequest && "Return Requested"}
                   {item?.returnRequest && <p className="text-sm">{item?.returnReason && item?.returnReason}</p>}
                   {item?.returnRequest && <><button onClick={() => handleReturnAccept(item?._id)} className="text-sm px-3 py-1 bg-blue-300 hover:bg-blue-400 rounded-full duration-300">Accept</button> <button onClick={() => handleReturnReject(item?._id)} className="text-sm px-3 py-1 bg-red-300 hover:bg-red-400 rounded-full duration-300">Reject</button></>}
-                  {item?.acceptReturnRequest && <p>Accepted Request</p>}
-                  {item?.acceptReturnRequest === false && <p>Rejected Request</p>}
+                  {item?.acceptReturnRequest && <p className="text-sm bg-green-300 rounded-full px-2 font-semibold">Accepted Request</p>}
+                  {item?.acceptReturnRequest === false && <p className="text-sm bg-red-300 rounded-full px-2 font-semibold">Rejected Request</p>}
                 </td>
               </tr>
             ))}
