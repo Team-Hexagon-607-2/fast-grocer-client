@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../contexts/AuthProvider';
 
@@ -24,7 +25,7 @@ const Login = () => {
             
         })
         .catch(error => {
-            console.log(error.message);
+            // console(error.message);
             setLoginError(error.message)
         })
     }
@@ -42,7 +43,9 @@ const Login = () => {
                 saveUser(user.displayName, user.email, userInfo.role);
                 navigate(from, {replace: true});
             })
-            .catch(err=> console.log(err));
+            .catch(err => {
+                toast.error(err.message)
+            });
         
        })
        .catch(error => {
@@ -57,7 +60,7 @@ const Login = () => {
         resetPassword()
         .then(result => {
             const user = result.user;
-            console.log(user);
+            // console.log(user);
         })
         .catch(err => console.error(err))
     }

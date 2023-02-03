@@ -1,9 +1,3 @@
-/**
- * author: Md Atiqul Islam
- *Full mobile and desktop Navbar here
- *
- *  */
-
 import React from "react";
 import Cart from "./Cart";
 import Login from "./Login";
@@ -16,14 +10,13 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { StateContext } from "./../../../contexts/AuthProvider";
-import { MdOutlineLogout } from "react-icons/md";
+import { BiLogOut } from "react-icons/bi";
 import { AiOutlineDashboard } from "react-icons/ai";
 
 const Navbar = () => {
   const { user, logOut, categories,  } = useContext(StateContext);
   const styles = {
-    wrapper:
-      "bg-white w-full mx-auto hidden sm:block",
+    wrapper: "bg-white w-full mx-auto hidden sm:block",
     mobileWrapper: " w-full h-[80px] bg-[#92B137] block sm:hidden",
     flexRow: "flex w-full flex-row justify-between items-center border-slate-200 px-5 py-3",
   };
@@ -38,9 +31,6 @@ const Navbar = () => {
 
       {/* Desktop Nav */}
       <div className={styles.wrapper}>
-        {/* <div className="border-b-[1px] border-slate-300">
-          <Offer />
-        </div> */}
         <div className={`${styles.flexRow}`}>
           <div className="border-slate-300 flex items-center justify-center">
             <Link to="/">
@@ -72,7 +62,7 @@ const Navbar = () => {
                         <AiOutlineDashboard/> Dashboard
                       </Link>
                     </li>
-                    <li><button onClick={logOut}><MdOutlineLogout/> Logout</button></li>
+                    <li><button onClick={logOut}><BiLogOut/> Logout</button></li>
                   </ul>
                 </div>
               )}
