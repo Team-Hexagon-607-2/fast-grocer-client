@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import SingleProduct from "../Home/HomePageProducts/SingleProduct/SingleProduct";
 import sortImg from '../../assets/images/categoryModalIcon/sort.png'
+import Loader from "../Loader/Loader";
+import { toast } from "react-hot-toast";
 
 const AllProducts = () => {
   const [AllProducts, setAllProducts] = useState([]);
@@ -21,15 +23,14 @@ const AllProducts = () => {
         const { products, count } = data;
         setTotalProducts(count);
         setAllProducts(products);
-        setIsLoading(false)
+        setIsLoading(false);
+      })
+      .catch(err => {
+        toast.error(err.message);
+        setIsLoading(false);
       })
   }, [page, size]);
 
-  const Loader = () => {
-    return (
-      <div className="sm:w-[80px]  sm:h-[80px] w-[40px] h-[40px]  animate-spin bg-white text-white border-dashed border-4 sm:border-8 border-[#92B137] rounded-[50%]" ></div>
-    );
-  };
 
   if (isAsc === 'Low Price') {
     AllProducts.sort(function (a, b) { return a.price - b.price });
@@ -50,6 +51,10 @@ const AllProducts = () => {
     }
   }
 
+  if(isLoading){
+    return <Loader />
+  }
+
   return (
     <>
       <h2 className="text-center font-semibold text-2xl my-5">All Products</h2>
@@ -62,10 +67,6 @@ const AllProducts = () => {
           <option>High Price</option>
         </select>
         <img src={sortImg} alt="" />
-      </div>
-
-      <div className="flex items-center justify-center">
-        {isLoading && <Loader />}
       </div>
 
       <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-[95%] mx-auto py-5">

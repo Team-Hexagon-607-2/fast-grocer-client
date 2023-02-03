@@ -81,7 +81,7 @@ const OperateAllProducts = () => {
                   </td>
 
                   <td>
-                    <Link to={`/dashboard/edit-product/${product?._id}`}><button className="btn bg-blue-400 hover:bg-blue-500 btn-xs border-none mr-2">Edit</button></Link>
+                    <Link to={`/dashboard/edit-product/${product?._id}`}><button className="btn bg-blue-500 hover:bg-blue-600 btn-xs border-none mr-2">Edit</button></Link>
                     <button onClick={() => handleDelete(product)} className="btn bg-red-600 hover:bg-red-700 btn-xs border-none">Delete</button>
                   </td>
                 </tr>)

@@ -1,11 +1,8 @@
 import React from 'react';
-import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { StateContext } from '../../../contexts/AuthProvider';
 const ReturnConfirmModal = ({setProcessing, orderId}) => {
 
-  const { user } = useContext(StateContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const handleReturnRequest = (data) => {
@@ -29,7 +26,7 @@ const ReturnConfirmModal = ({setProcessing, orderId}) => {
             productPhoto: imageData.data.url,
           }
 
-          fetch(`https://fg-server.vercel.app/return-request/${orderId}`, {
+          fetch(`http://localhost:5000/return-request/${orderId}`, {
             method: 'PUT',
             headers: {
               'content-type': 'application/json'

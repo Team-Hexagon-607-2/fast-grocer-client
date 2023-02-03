@@ -216,7 +216,7 @@ const EditProduct = () => {
                             <label className="label">
                                 <span className="label-text font-bold">Product Image</span>
                             </label>
-                            <input type="file" className="file-input file-input-bordered w-full max-w-xs" {...register("photo")} />
+                            <input type="file" className="file-input file-input-bordered w-full max-w-xs" {...register("photo")} multiple="multiple"/>
                         </div>
                     </div>
                     <div className="form-control w-full mt-4">

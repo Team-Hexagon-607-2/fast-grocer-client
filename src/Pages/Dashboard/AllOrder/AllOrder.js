@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../components/Loader/Loader";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
 const AllOrder = () => {
   const [selectedValue, setSelectedValue] = useState({});
@@ -102,31 +103,31 @@ const AllOrder = () => {
   };
 
   // handle return request accept
-  const handleReturnAccept = (id) =>{
+  const handleReturnAccept = (id) => {
     console.log(id);
     fetch(`https://fg-server.vercel.app/return-request-accept?id=${id}`, {
       method: "PUT"
     })
-    .then(res => res.json())
-    .then(data => {
-      if(data?.modifiedCount > 0){
-        toast.success("Request Accepted");
-      }
-    })
+      .then(res => res.json())
+      .then(data => {
+        if (data?.modifiedCount > 0) {
+          toast.success("Request Accepted");
+        }
+      })
   }
-  
+
   // handler for return request reject
-  const handleReturnReject = (id) =>{
+  const handleReturnReject = (id) => {
     console.log(id);
     fetch(`https://fg-server.vercel.app/return-request-reject?id=${id}`, {
       method: "PUT"
     })
-    .then(res => res.json())
-    .then(data => {
-      if(data?.modifiedCount > 0){
-        toast.error("Request Rejected");
-      }
-    })
+      .then(res => res.json())
+      .then(data => {
+        if (data?.modifiedCount > 0) {
+          toast.error("Request Rejected");
+        }
+      })
   }
 
   return (
@@ -266,11 +267,19 @@ const AllOrder = () => {
                   </div>
                 </td>
                 <td>
-                  {item?.returnRequest && "Return Requested"}
-                  {item?.returnRequest && <p className="text-sm">{item?.returnReason && item?.returnReason}</p>}
-                  {item?.returnRequest && <><button onClick={() => handleReturnAccept(item?._id)} className="text-sm px-3 py-1 bg-blue-300 hover:bg-blue-400 rounded-full duration-300">Accept</button> <button onClick={() => handleReturnReject(item?._id)} className="text-sm px-3 py-1 bg-red-300 hover:bg-red-400 rounded-full duration-300">Reject</button></>}
-                  {item?.acceptReturnRequest && <p className="text-sm bg-green-300 rounded-full px-2 font-semibold">Accepted Request</p>}
-                  {item?.acceptReturnRequest === false && <p className="text-sm bg-red-300 rounded-full px-2 font-semibold">Rejected Request</p>}
+                  <div className="w-auto">
+                    {item?.returnRequest && <p className="text-center">Return Requested</p>}
+                    {item?.returnRequest &&
+                      <PhotoProvider>
+                        <PhotoView src={item?.returnProductPhoto}>
+                          <img src={item?.returnProductPhoto} alt="Returned proudct" className="h-16 w-16 mx-auto cursor-pointer" />
+                        </PhotoView>
+                      </PhotoProvider>}
+                    {item?.returnRequest && <p className="text-sm">{item?.returnReason && item?.returnReason}</p>}
+                    {item?.returnRequest && <div className="mx-auto w-36"><button onClick={() => handleReturnAccept(item?._id)} className="text-sm px-3 py-1 bg-blue-300 hover:bg-blue-400 rounded-full duration-300">Accept</button> <button onClick={() => handleReturnReject(item?._id)} className="text-sm px-3 py-1 bg-red-300 hover:bg-red-400 rounded-full duration-300">Reject</button></div>}
+                    {item?.acceptReturnRequest && <p className="text-sm bg-green-300 rounded-full text-center font-semibold">Accepted Request</p>}
+                    {item?.acceptReturnRequest === false && <p className="text-sm bg-red-300 rounded-full text-center font-semibold">Rejected Request</p>}
+                  </div>
                 </td>
               </tr>
             ))}
