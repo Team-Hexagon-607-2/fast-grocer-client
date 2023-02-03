@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AiOutlineHeart, AiOutlineHistory, AiOutlineStar, AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
+import { RiCoupon2Line } from "react-icons/ri";
 import { GoListUnordered, GoTasklist } from "react-icons/go";
 import { Link, Outlet } from "react-router-dom";
 import { StateContext } from "../../contexts/AuthProvider";
@@ -85,6 +86,14 @@ const DashboardLayout = () => {
                     to="/dashboard/add-product"
                   >
                     <TbPlaylistAdd />Add Product
+                  </Link>
+                </li>
+                <li className="text-[14px] font-semibold">
+                  <Link
+                    className="text-slate-700"
+                    to="/dashboard/coupon"
+                  >
+                    <RiCoupon2Line />Coupon
                   </Link>
                 </li>
               </>
