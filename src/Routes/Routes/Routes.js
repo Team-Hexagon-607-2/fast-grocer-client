@@ -25,6 +25,11 @@ import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderFo
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DeliveryHistory from "../../Pages/Dashboard/DeliveryHistory/DeliveryHistory";
 import FlashSalePage from "../../components/FlashSale/FlashSalePage";
+import AdminRoutes from "../AdminRoutes/AdminRoutes";
+import DeliveryRoutes from "../DeliveryRoutes/DeliveryRoutes";
+import BuyerRoutes from "../BuyerRoutes/BuyerRoutes";
+import OperateAllProducts from "../../Pages/Dashboard/OperateAllProducts/OperateAllProducts";
+import Coupon from "../../Pages/Coupon/Coupon";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -68,11 +73,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/place-order",
-        element: <PlaceOrder />,
+        element: <PrivateRoute><PlaceOrder /></PrivateRoute>
       },
       {
         path: "/payment",
-        element: <Payment />,
+        element: <PrivateRoute><Payment /></PrivateRoute>
       },
       {
         path: "/signup",
@@ -101,60 +106,68 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: (
-      <PrivateRoute>
-        <DashboardLayout></DashboardLayout>
-      </PrivateRoute>
-    ),
+    element: (<PrivateRoute> <DashboardLayout /></PrivateRoute>),
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
       },
       {
         path: "/dashboard/all-buyers",
-        element: <AllBuyers></AllBuyers>,
+        element: <AdminRoutes><AllBuyers /></AdminRoutes>
       },
       {
         path: "/dashboard/all-deliveryman",
-        element: <AllDeliveryman></AllDeliveryman>,
-      },
-      {
-        path: "/dashboard/my-orders",
-        element: <MyOrders></MyOrders>,
+        element: <AdminRoutes><AllDeliveryman /></AdminRoutes>
       },
       {
         path: "/dashboard/all-order",
-        element: <AllOrder />,
-      },
-      {
-        path: "/dashboard/delivery-man-order",
-        element: <OrderForDeliverMan />,
-      },
-      {
-        path: "/dashboard/delivery-history",
-        element: <DeliveryHistory></DeliveryHistory>,
-      },
-      {
-        path: "/dashboard/my-wishlist",
-        element: <MyWishlist></MyWishlist>,
-      },
-      {
-        path: "/dashboard/payments",
-        element: <Payments></Payments>,
-      },
-      {
-        path: "/dashboard/my-reviews",
-        element: <MyReviews></MyReviews>,
+        element: <AdminRoutes><AllOrder /></AdminRoutes>,
       },
       {
         path: "/dashboard/add-product",
-        element: <AddProduct></AddProduct>,
+        element: <AdminRoutes><AddProduct /></AdminRoutes>,
       },
       {
         path: "/dashboard/edit-product",
-        element: <EditProduct></EditProduct>,
+        element: <AdminRoutes><EditProduct /></AdminRoutes>,
       },
+      {
+        path: "/dashboard/delivery-man-order",
+        element: <DeliveryRoutes><OrderForDeliverMan /></DeliveryRoutes>,
+      },
+      {
+        path: "/dashboard/delivery-history",
+        element: <DeliveryRoutes><DeliveryHistory /></DeliveryRoutes>,
+      },
+      {
+        path: "/dashboard/my-orders",
+        element: <BuyerRoutes><MyOrders /></BuyerRoutes>,
+      },
+      {
+        path: "/dashboard/my-wishlist",
+        element: <BuyerRoutes><MyWishlist /></BuyerRoutes>,
+      },
+      {
+        path: "/dashboard/payments",
+        element: <BuyerRoutes><Payments /></BuyerRoutes>,
+      },
+      {
+        path: "/dashboard/my-reviews",
+        element: <BuyerRoutes><MyReviews /></BuyerRoutes>,
+      },
+      {
+        path: "/dashboard/all-products",
+        element: <OperateAllProducts></OperateAllProducts>,
+      },
+      {
+        path: "/dashboard/edit-product/:id",
+        element: <EditProduct></EditProduct>
+      },
+      {
+        path: "/dashboard/coupon",
+        element: <Coupon></Coupon>
+      }
     ],
   },
 ]);
