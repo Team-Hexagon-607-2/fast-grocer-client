@@ -3,8 +3,8 @@ import { AiOutlineEdit, AiOutlineHeart, AiOutlineHistory, AiOutlineStar, AiOutli
 import { BiLogOut } from "react-icons/bi";
 import { FiUsers } from 'react-icons/fi';
 import { BsCash } from "react-icons/bs";
-import { BiListPlus } from "react-icons/bi";
-import { GoListUnordered } from "react-icons/go";
+import { RiCoupon2Line } from "react-icons/ri";
+import { GoListUnordered, GoTasklist } from "react-icons/go";
 import { Link, Outlet } from "react-router-dom";
 import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
@@ -12,6 +12,7 @@ import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
 import logo from '../../assets/logo/logo.png';
 import Loader from "../../components/Loader/Loader";
+import { TbPlaylistAdd } from "react-icons/tb";
 
 const DashboardLayout = () => {
   const { user, logOut } = useContext(StateContext);
@@ -33,7 +34,7 @@ const DashboardLayout = () => {
 
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu w-64 bg-slate-100 text-base-100">
+          <ul className="menu w-56 bg-slate-100 text-base-100">
             <div className="border-b">
               <Link to='/'><img className="mx-auto my-7 w-[125px]" src={logo} alt="" /></Link>
             </div>
@@ -74,17 +75,25 @@ const DashboardLayout = () => {
                 <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
-                    to="/dashboard/add-product"
+                    to="/dashboard/all-products"
                   >
-                    <BiListPlus />Add Product
+                    <GoTasklist />All Products
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
-                    to="/dashboard/edit-product"
+                    to="/dashboard/add-product"
                   >
-                    <AiOutlineEdit />Edit Products
+                    <TbPlaylistAdd />Add Product
+                  </Link>
+                </li>
+                <li className="text-[14px] font-semibold">
+                  <Link
+                    className="text-slate-700"
+                    to="/dashboard/coupon"
+                  >
+                    <RiCoupon2Line />Coupon
                   </Link>
                 </li>
               </>
@@ -93,14 +102,16 @@ const DashboardLayout = () => {
             {/* Buyer Dashboard */}
             {isBuyer && (
               <>
+                <div className="dropdown">
                 <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"
                     to="/dashboard/my-orders"
                   >
-                    <AiOutlineUnorderedList />My Orders
+                    <AiOutlineUnorderedList/>My Orders
                   </Link>
                 </li>
+                </div>
                 <li className="text-[14px] font-semibold">
                   <Link
                     className="text-slate-700"

@@ -56,7 +56,7 @@ const AllDeliveryman = () => {
         <div className=''>
             <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">All Delivery Mans</h2>
             <div className="overflow-x-auto w-full">
-                <table className="table w-full">
+                <table className="table table-compact w-full">
 
                     <thead>
                         <tr>
@@ -93,7 +93,7 @@ const AllDeliveryman = () => {
                                             user?.certification && <>
                                                 <PhotoProvider>
                                                     <PhotoView src={user?.certification}>
-                                                        <img src={user?.certification} alt="" className='cursor-pointer'/>
+                                                        <img src={user?.certification} alt="" className='cursor-pointer w-16 h-16'/>
                                                     </PhotoView>
                                                 </PhotoProvider>
                                             </>

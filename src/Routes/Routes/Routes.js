@@ -28,6 +28,8 @@ import FlashSalePage from "../../components/FlashSale/FlashSalePage";
 import AdminRoutes from "../AdminRoutes/AdminRoutes";
 import DeliveryRoutes from "../DeliveryRoutes/DeliveryRoutes";
 import BuyerRoutes from "../BuyerRoutes/BuyerRoutes";
+import OperateAllProducts from "../../Pages/Dashboard/OperateAllProducts/OperateAllProducts";
+import Coupon from "../../Pages/Coupon/Coupon";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -154,6 +156,18 @@ const router = createBrowserRouter([
         path: "/dashboard/my-reviews",
         element: <BuyerRoutes><MyReviews /></BuyerRoutes>,
       },
+      {
+        path: "/dashboard/all-products",
+        element: <OperateAllProducts></OperateAllProducts>,
+      },
+      {
+        path: "/dashboard/edit-product/:id",
+        element: <EditProduct></EditProduct>
+      },
+      {
+        path: "/dashboard/coupon",
+        element: <Coupon></Coupon>
+      }
     ],
   },
 ]);
