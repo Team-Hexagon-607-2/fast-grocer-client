@@ -13,6 +13,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+
 export const StateContext = createContext();
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();

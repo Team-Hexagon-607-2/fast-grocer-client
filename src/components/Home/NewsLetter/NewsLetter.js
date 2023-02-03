@@ -17,12 +17,12 @@ const NewsLetter = () => {
       .send("service_f25l0nk", "template_f9u1z6j", values, "N6uKPOggiBYhG0TQ-")
       .then(
         function (response) {
-          console.log("SUCCESS!", response.status, response.text);
+          // toast.success("SUCCESS!", response.status, response.text);
           e.target.reset();
-          toast('You have subscribed successfully!');
+          toast.success('You have subscribed successfully!');
         },
         function (error) {
-          console.log("FAILED...", error);
+          toast.error("FAILED...", error);
         }
       );
   };
