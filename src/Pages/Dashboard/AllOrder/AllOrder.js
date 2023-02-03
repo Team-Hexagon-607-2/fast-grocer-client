@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../components/Loader/Loader";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
 const AllOrder = () => {
   const [selectedValue, setSelectedValue] = useState({});
@@ -101,6 +102,34 @@ const AllOrder = () => {
       .catch((err) => console.log(err));
   };
 
+  // handle return request accept
+  const handleReturnAccept = (id) => {
+    console.log(id);
+    fetch(`https://fg-server.vercel.app/return-request-accept?id=${id}`, {
+      method: "PUT"
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data?.modifiedCount > 0) {
+          toast.success("Request Accepted");
+        }
+      })
+  }
+
+  // handler for return request reject
+  const handleReturnReject = (id) => {
+    console.log(id);
+    fetch(`https://fg-server.vercel.app/return-request-reject?id=${id}`, {
+      method: "PUT"
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data?.modifiedCount > 0) {
+          toast.error("Request Rejected");
+        }
+      })
+  }
+
   return (
     <div className="">
       <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">
@@ -117,55 +146,53 @@ const AllOrder = () => {
               <th>Total Price</th>
               <th>Status</th>
               <th>Paid</th>
-              <th>Condition</th>
-              <th>Cancel Request</th>
+              <th>Payment Method</th>
               <th>Assign Delivery Man</th>
+              <th>Cancel Request</th>
+              <th>Return Request</th>
             </tr>
           </thead>
           <tbody>
             {data?.data?.map((item, index) => (
               <tr key={item?._id}>
-                <td>{index + 1}</td>
+                <th>{index + 1}</th>
                 <td>
-                  <div className="flex items-center flex-col space-x-3">
+                  <div className="flex items-center flex-col">
                     {item?.order_products?.map((product) => (
                       <Link
                         key={product?._id}
                         to={`/products/${product?._id}`}
-                        className="flex flex-row items-center w-[300px] hover:bg-blue-200"
+                        className="flex w-[300px] hover:bg-blue-200 rounded-md mb-2"
                       >
-                        <div className="w-[80px] h-[80px]">
+                        <div className="mr-2">
                           <img
                             src={product?.imageUrl}
-                            className="object-fit w-full h-full"
+                            className="object-fit w-16 h-16 rounded-md" alt=""
                           />
                         </div>
                         <div>
                           <p className="text-sm font-semibold">
                             {product.name?.slice(0, 30)}
                           </p>
-                          <p>{product?.bundle}</p>
-                          <p>Quantity: {product?.qunatity}</p>
+                          <p className="text-sm">{product?.bundle}</p>
+                          <p className="text-sm">Quantity: {product?.qunatity}</p>
                         </div>
                       </Link>
                     ))}
                   </div>
                 </td>
                 <td>
-                  <p className="font-semibold font-sm">
-                    Total Price: ৳{item?.total_price}
+                  <p className="font-semibold">
+                    ৳{item?.total_price}
                   </p>
                 </td>
                 <td>
                   <div className="flex flex-col items-center gap-3">
-                    <p className="text-md font-semibold ">{item?.status}</p>
+                    <p className="text-sm font-semibold ">{item?.status}</p>
                     {item?.status === "pending" && (
                       <button
                         onClick={() => handleConfirmOrder(item?._id)}
-                        className="p-3 
-                      cursor-pointer hover:bg-slate-400 
-                      flex items-center rounded-full text-sm
-                       bg-blue-300  font-bold "
+                        className="px-3 py-1 cursor-pointer hover:bg-blue-400 rounded-full text-sm bg-blue-300"
                       >
                         Confirm Order
                       </button>
@@ -183,29 +210,12 @@ const AllOrder = () => {
                     )}
                   </div>
                 </td>
-                <th className={`${item?.paid === false && "text-red-500"}`}>
-                  {item?.paid === false ? "Not Paid" : "Already Paid"}
-                </th>
-                <th>{item?.condition}</th>
-                <th>
-                  <div className="flex flex-col items-center gap-3">
-                    <p> {item?.cancel}</p>
-                    <div>
-                      {item?.cancel === "Cancel Request Sent" && (
-                        <button
-                          onClick={() => handleCancelRequestReceived(item?._id)}
-                          className="p-3 
-                      cursor-pointer hover:bg-slate-400 
-                      flex items-center rounded-full text-sm
-                       bg-blue-300  font-bold "
-                        >
-                          Receive Cancel Request
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </th>
-                <th>
+                <td className={`${item?.paid === false && ""}`}>
+                  {item?.paid === false ? <p className="bg-red-300 rounded-full text-center text-sm">Not Paid</p> : <p className="bg-green-300 rounded-full text-center text-sm px-2">Already Paid</p>}
+                </td>
+                <td className="text-sm text-center font-semibold">{item?.condition}</td>
+
+                <td>
                   <p>{item.deliveryManName}</p>
                   <p>{item?.pick}</p>
                   {!item.deliveryManEmail && (
@@ -217,15 +227,15 @@ const AllOrder = () => {
                     >
                       <select
                         onChange={handleChange}
-                        value={selectedValue.email}
-                        name="deliveryValue"
-                        className="select select-bordered w-full max-w-xs"
+                        // value={selectedValue.email}
+                        // name="deliveryValue"
+                        className="select select-bordered select-sm"
                       >
                         <option disabled selected>
                           Select Delivery Man
                         </option>
                         {deliveryMan?.map((man, i) => (
-                          <option key={i} value={man.email}>
+                          <option key={i} value={man?.email}>
                             {man?.name}
                           </option>
                         ))}
@@ -233,16 +243,44 @@ const AllOrder = () => {
 
                       <button
                         type="submit"
-                        className="py-3 px-3 text-center justify-center
-                   cursor-pointer hover:bg-slate-400 
-                   flex items-center rounded-full text-sm
-                    bg-blue-300  font-bold "
+                        className="py-1 px-3 text-center
+                   cursor-pointer hover:bg-blue-400 rounded-full text-sm
+                    bg-blue-300 font-semibold"
                       >
                         Assign
                       </button>
                     </form>
                   )}
-                </th>
+                </td>
+                <td>
+                  <div className="flex flex-col items-center gap-3">
+                    <p className="text-sm"> {item?.cancel}</p>
+                    <div>
+                      {item?.cancel === "Cancel Request Sent" && (
+                        <button
+                          onClick={() => handleCancelRequestReceived(item?._id)}
+                          className="px-3 py-1 cursor-pointer bg-red-300 hover:bg-red-400 rounded-full text-sm">
+                          Receive Request
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div className="w-auto">
+                    {item?.returnRequest && <p className="text-center">Return Requested</p>}
+                    {item?.returnRequest &&
+                      <PhotoProvider>
+                        <PhotoView src={item?.returnProductPhoto}>
+                          <img src={item?.returnProductPhoto} alt="Returned proudct" className="h-16 w-16 mx-auto cursor-pointer" />
+                        </PhotoView>
+                      </PhotoProvider>}
+                    {item?.returnRequest && <p className="text-sm">{item?.returnReason && item?.returnReason}</p>}
+                    {item?.returnRequest && <div className="mx-auto w-36"><button onClick={() => handleReturnAccept(item?._id)} className="text-sm px-3 py-1 bg-blue-300 hover:bg-blue-400 rounded-full duration-300">Accept</button> <button onClick={() => handleReturnReject(item?._id)} className="text-sm px-3 py-1 bg-red-300 hover:bg-red-400 rounded-full duration-300">Reject</button></div>}
+                    {item?.acceptReturnRequest && <p className="text-sm bg-green-300 rounded-full text-center font-semibold">Accepted Request</p>}
+                    {item?.acceptReturnRequest === false && <p className="text-sm bg-red-300 rounded-full text-center font-semibold">Rejected Request</p>}
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

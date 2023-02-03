@@ -25,6 +25,8 @@ import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderFo
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DeliveryHistory from "../../Pages/Dashboard/DeliveryHistory/DeliveryHistory";
 import FlashSalePage from "../../components/FlashSale/FlashSalePage";
+import OperateAllProducts from "../../Pages/Dashboard/OperateAllProducts/OperateAllProducts";
+import Coupon from "../../Pages/Coupon/Coupon";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -152,9 +154,17 @@ const router = createBrowserRouter([
         element: <AddProduct></AddProduct>,
       },
       {
-        path: "/dashboard/edit-product",
-        element: <EditProduct></EditProduct>,
+        path: "/dashboard/all-products",
+        element: <OperateAllProducts></OperateAllProducts>,
       },
+      {
+        path: "/dashboard/edit-product/:id",
+        element: <EditProduct></EditProduct>
+      },
+      {
+        path: "/dashboard/coupon",
+        element: <Coupon></Coupon>
+      }
     ],
   },
 ]);
