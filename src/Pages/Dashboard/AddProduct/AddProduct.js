@@ -15,12 +15,10 @@ const AddProduct = () => {
               <label className="label">
                 <span className="label-text font-bold">Name</span>
               </label>
-  
+
               <input
                 type="text"
-                
                 placeholder="name"
-               
                 className="input input-bordered w-full "
               />
             </div>
