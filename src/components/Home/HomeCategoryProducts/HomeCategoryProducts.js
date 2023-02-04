@@ -18,7 +18,7 @@ const HomeCategoryProducts = () => {
 
   return (
     <div className='my-10 px-5'>
-      <h2 className='text-xl mb-2'>Browse Categories</h2>
+      <h2 className='text-xl md:text-3xl text-center font-bold py-5'>Browse Categories</h2>
       <Swiper
         style={{
           "--swiper-navigation-size": "22px",
@@ -45,12 +45,12 @@ const HomeCategoryProducts = () => {
           enabled: true,
         }}
         autoplay={{
-          delay: 3000,
+          delay: 2000,
           disableOnInteraction: false,
         }}
         navigation={true}
         modules={[Autoplay, Navigation, FreeMode, Keyboard]}
-        className="w-full h-[200px] border rounded-md swiper"
+        className="w-full h-[180px] border rounded-md swiper"
       >
         <div>
           {

@@ -24,7 +24,7 @@ const Search = () => {
     <div>
       <div className="bg-white">
         <input
-          className="px-3 py-2 border-2 border-slate-300 w-[600px] text-inherit outline-none focus:border-[#6A802D] rounded-l-md"
+          className="px-3 py-2 border border-slate-300 w-[500px] text-inherit outline-none focus:border-[#6A802D] rounded-l-md"
           type="text"
           name="name"
           placeholder="Search for products(e.g. fish, tomato)"
@@ -35,7 +35,7 @@ const Search = () => {
         <button
           disabled={!searchText}
           onClick={handleSearch}
-          className="rounded-r-md px-5 py-[10px] bg-[#8caf2b] text-white hover:bg-[#6A802D] transition duration-500 cursor-pointer"
+          className="rounded-r-md px-5 py-2 border border-[#8caf2b] bg-[#8caf2b] text-white hover:bg-[#6A802D] transition duration-500 cursor-pointer"
         >
           Search
         </button>
