@@ -12,6 +12,7 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import { StateContext } from "./../../../contexts/AuthProvider";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineDashboard } from "react-icons/ai";
+import { FaThList } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut, categories,  } = useContext(StateContext);
@@ -69,17 +70,18 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="w-11/12 mx-auto pb-5">
-          <div className="flex justify-between">
+        <div className="bg-slate-800">
+          <div className="flex justify-betwee w-11/12 mx-auto">
             {/* Desktop search */}
             {/* Desktop navbar link such as page home etc */}
 
-            <div className="dropdown dropdown-start font-semibold text-[15px]">
+            <div className="dropdown dropdown-start text-[14px] w-52 bg-slate-800 py-2 px-2">
               <label
                 tabIndex={0}
-                className="flex cursor-pointer items-center justify-center"
+                className="cursor-pointer text-white w-52"
               >
-                Categories <RiArrowDownSLine />
+                <FaThList className="inline-block mr-3"/>
+                Categories <RiArrowDownSLine className="inline-block"/>
               </label>
               <ul
                 tabIndex={0}

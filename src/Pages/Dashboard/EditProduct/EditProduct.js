@@ -91,7 +91,6 @@ const EditProduct = () => {
         <div className="">
             <div className="px-6">
                 <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">Edit Product</h2>
-
                 <form onSubmit={handleSubmit(handleSubmitEdittedProduct)}>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div className="form-control w-full ">
