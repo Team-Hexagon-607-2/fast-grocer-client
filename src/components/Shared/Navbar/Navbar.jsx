@@ -75,7 +75,7 @@ const Navbar = () => {
             {/* Desktop search */}
             {/* Desktop navbar link such as page home etc */}
 
-            <div className="dropdown dropdown-start text-[14px] w-52 bg-[#7e9d27] py-2 px-3">
+            <div className="dropdown dropdown-start text-[14px] w-52 bg-[#84b840] py-2 px-3">
               <label
                 tabIndex={0}
                 className="cursor-pointer text-white"
