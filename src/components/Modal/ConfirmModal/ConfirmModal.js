@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -23,7 +22,7 @@ const ConfirmModal = ({setProcessing, workPermitStatus}) => {
       .then(res => res.json())
       .then(imageData => {
         
-        console.log(imageData);
+        // console.log(imageData);
         if (imageData.success) {
           const imageUrl = {
             certification: imageData.data.url
@@ -38,7 +37,7 @@ const ConfirmModal = ({setProcessing, workPermitStatus}) => {
             .then(res => res.json())
             .then(data => {
               setProcessing(false);
-              console.log(data);
+              // console.log(data);
               if (data.modifiedCount > 0) {
                 toast.success('Requsted successfully');
               }

@@ -1,0 +1,8 @@
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: gray;
+    color: white; 
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}

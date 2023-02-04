@@ -5,8 +5,8 @@ import SingleProduct from "./SingleProduct/SingleProduct";
 const HomePageProducts = () => {
   const [products, setProducts] = useState(null);
   const [getAllProducts, setGetAllProducts] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("Winter Collection");
   const { categories, AllProducts } = useContext(StateContext);
+  const [selectedCategory, setSelectedCategory] = useState("Winter Collection");
 
   useEffect(() => {
     const categoryProducts = AllProducts?.filter(
@@ -38,8 +38,8 @@ const HomePageProducts = () => {
                 onClick={() => handleLoadProducts(category?.categoryName)}
                 className={`mx-5 border-b-2 ${
                   category?.categoryName === selectedCategory
-                    ? "text-[#80B248] text-xl font-bold border-[#80B248]"
-                    : "text-black"
+                    ? "text-[#80B248] font-semibold border-[#80B248]"
+                    : "text-slate-600"
                 }  `}
               >
                 {category?.categoryName}
