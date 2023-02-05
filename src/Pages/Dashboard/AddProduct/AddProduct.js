@@ -1,15 +1,21 @@
 import React from 'react';
-import { Form } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 const AddProduct = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const handleAddProduct = () =>{
+
+  }
+
     return (
         <div className="">
-        <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600">
-            <h1 className="mb-5 text-3xl font-semibold text-center text-indigo-700 underline uppercase decoration-wavy">
+        <div className="px-6">
+            <h1 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">
                Add Product
             </h1>
   
-        <form>
+        <form onSubmit={handleSubmit(handleAddProduct)}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="form-control w-full ">
               <label className="label">
@@ -20,18 +26,19 @@ const AddProduct = () => {
                 type="text"
                 placeholder="name"
                 className="input input-bordered w-full "
+                {...register("name", { required: "Product name is required" })}
               />
             </div>
             <div className="form-control w-full ">
               <label className="label">
-                <span className="label-text font-bold">category_name</span>
+                <span className="label-text font-bold">Category Name</span>
               </label>
   
               <input
                 type="text"
-               
                 placeholder="category_name"
                 className="input input-bordered w-full "
+                {...register("category_name", { required: "Category name is required" })}
               />
             </div>
             <div className="form-control w-full ">
@@ -44,6 +51,7 @@ const AddProduct = () => {
               
                 placeholder="price"
                 className="input input-bordered w-full "
+                {...register("price", { required: "Set product price" })}
               />
             </div>
             <div className="form-control w-full ">
@@ -56,18 +64,19 @@ const AddProduct = () => {
                 
                 placeholder="Original Price"
                 className="input input-bordered w-full "
+                {...register("original_price")}
               />
             </div>
             <div className="form-control w-full ">
               <label className="label">
-                <span className="label-text font-bold">save</span>
+                <span className="label-text font-bold">Discount</span>
               </label>
   
               <input
                 type="text"
-                
                 placeholder="save"
                 className="input input-bordered w-full "
+                {...register("save")}
               />
             </div>
             <div className="form-control w-full ">
@@ -131,7 +140,7 @@ const AddProduct = () => {
             </div>
             <div className="form-control w-full ">
               <label className="label">
-                <span className="label-text font-bold">sell_amount</span>
+                <span className="label-text font-bold">Sell Amount</span>
               </label>
   
               <input
@@ -139,6 +148,7 @@ const AddProduct = () => {
                 
                 placeholder="sell_amount"
                 className="input input-bordered w-full "
+                {...register("price", { required: "Set product price" })}
               />
             </div>
           </div>

@@ -108,7 +108,7 @@ const EditProduct = () => {
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
-                                <span className="label-text font-bold">category_name</span>
+                                <span className="label-text font-bold">Category Name</span>
                             </label>
 
                             <input
