@@ -78,7 +78,7 @@ const SingleProduct = ({ products }) => {
             </p>
           </div>
           <p className="text-zinc-700 font-semibold">
-            <small>{bundle ? bundle : "As Product"}</small>
+            <small>{bundle ? bundle : "As Picture"}</small>
           </p>
           <div className="flex items-end">
             <p className="text-[#84b840] text-2xl font-bold">৳{price}</p>
