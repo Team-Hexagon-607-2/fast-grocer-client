@@ -1,7 +1,10 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { StateContext } from '../../../contexts/AuthProvider';
 
 const AddProduct = () => {
+  const {categories} = useContext(StateContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const handleAddProduct = () => {
@@ -28,18 +31,18 @@ const AddProduct = () => {
                 className="input input-bordered w-full "
                 {...register("name", { required: "Product name is required" })}
               />
+              {errors.name && <p className='text-red-600 text-sm'>*{errors.name?.message}</p>}
             </div>
             <div className="form-control w-full ">
               <label className="label">
                 <span className="label-text font-bold">Category Name</span>
               </label>
-
-              <input
-                type="text"
-                placeholder="category_name"
-                className="input input-bordered w-full "
-                {...register("category_name", { required: "Category name is required" })}
-              />
+              <select className='select select-bordered w-full max-w-xs'>
+                <option disabled selected>Select Category</option>
+                {
+                  categories?.map(category => <option key={category?._id} {...register("category_name", {required: "Category is required"})}>{category?.categoryName}</option>)
+                }
+              </select>
             </div>
             <div className="form-control w-full ">
               <label className="label">
