@@ -24,7 +24,7 @@ const Search = () => {
     <div>
       <div className="bg-white">
         <input
-          className="px-3 py-2 border border-slate-300 w-[500px] text-inherit outline-none focus:border-[#17dc86] rounded-l-md"
+          className="px-3 py-2 border border-slate-300 w-[500px] text-inherit outline-none focus:border-[#84b840] rounded-l-md"
           type="text"
           name="name"
           placeholder="Search for products(e.g. fish, tomato)"

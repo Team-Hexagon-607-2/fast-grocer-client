@@ -13,7 +13,7 @@ const Home = () => {
       <HomeCategoryProducts></HomeCategoryProducts>
       <HomePageProducts></HomePageProducts>
       <div className="bg-[#FCFFF6]">
-        <p className="text-2xl sm:text-4xl mb-10 sm:mt-10 font-bold text-center ">
+        <p className="text-xl md:text-3xl text-center font-bold py-5">
           Flash Sale
         </p>
         <FlashSaleHome />

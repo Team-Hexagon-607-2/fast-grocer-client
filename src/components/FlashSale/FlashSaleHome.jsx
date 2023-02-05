@@ -13,8 +13,8 @@ const FlashSaleHome = () => {
   );
 
   return (
-    <div className="bg-[#FCFFF6] mt-4 sm:mt-3">
-      <div className="flex  flex-row items-center w-11/12 mx-auto  justify-between ">
+    <div className="bg-[#FCFFF6] mt-5">
+      <div className="flex  flex-row items-center w-11/12 mx-auto justify-between ">
         <div className="flex gap-4 sm:gap-10 items-center justify-start ">
           <p className="text-red-500 text-sm sm:text-lg hidden sm:block">
             On Sale Now
@@ -27,7 +27,7 @@ const FlashSaleHome = () => {
         <Link to="/flashsale" className="">
           <button
             className=" px-2 py-1 sm:py-2 sm:px-5 hover:bg-slate-100
-           bg-slate-50 border-[#80B248] border  text-[#80B248]"
+           bg-slate-50 border-[#80B248] border  text-[#84b840]"
           >
             Shop More
           </button>
