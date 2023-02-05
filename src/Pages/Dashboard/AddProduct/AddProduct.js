@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const AddProduct = () => {
-  const {categories} = useContext(StateContext);
+  const { categories } = useContext(StateContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const handleAddProduct = () => {
-
+  const handleAddProduct = (data) => {
+    console.log(data);
   }
 
   return (
@@ -27,7 +27,7 @@ const AddProduct = () => {
 
               <input
                 type="text"
-                placeholder="name"
+                placeholder="Product Name"
                 className="input input-bordered w-full "
                 {...register("name", { required: "Product name is required" })}
               />
@@ -37,12 +37,12 @@ const AddProduct = () => {
               <label className="label">
                 <span className="label-text font-bold">Category Name</span>
               </label>
-              <select className='select select-bordered w-full max-w-xs'>
-                <option disabled selected>Select Category</option>
+              <select {...register("category_name", { required: "Category is required" })} className="select select-bordered w-full ">
                 {
-                  categories?.map(category => <option key={category?._id} {...register("category_name", {required: "Category is required"})}>{category?.categoryName}</option>)
+                  categories?.map(category => <option key={category?._id}>{category?.categoryName}</option>)
                 }
               </select>
+              {errors.category_name && <p className='text-red-600 text-sm'>*{errors.category_name?.message}</p>}
             </div>
             <div className="form-control w-full ">
               <label className="label">
@@ -50,12 +50,12 @@ const AddProduct = () => {
               </label>
 
               <input
-                type="text"
-
-                placeholder="price"
+                type="number"
+                placeholder="Price"
                 className="input input-bordered w-full "
                 {...register("price", { required: "Set product price" })}
               />
+              {errors.price && <p className='text-red-600 text-sm'>*{errors.price?.message}</p>}
             </div>
             <div className="form-control w-full ">
               <label className="label">
@@ -63,7 +63,7 @@ const AddProduct = () => {
               </label>
 
               <input
-                type="text"
+                type="number"
 
                 placeholder="Original Price"
                 className="input input-bordered w-full "
@@ -77,33 +77,37 @@ const AddProduct = () => {
 
               <input
                 type="text"
-                placeholder="save"
+                placeholder="Discount e.g. 5%"
                 className="input input-bordered w-full "
                 {...register("save")}
               />
             </div>
             <div className="form-control w-full ">
               <label className="label">
-                <span className="label-text font-bold">bundle</span>
+                <span className="label-text font-bold">Bundle</span>
               </label>
 
               <input
                 type="text"
 
-                placeholder="bundle"
+                placeholder="Bundle"
                 className="input input-bordered w-full "
+                {...register("bundle", { required: "Product bundle required" })}
               />
+              {errors.bundle && <p className='text-red-600 text-sm'>*{errors.bundle?.message}</p>}
             </div>
             <div className="form-control w-full ">
               <label className="label">
-                <span className="label-text font-bold">qunatity</span>
+                <span className="label-text font-bold">Quantity</span>
               </label>
 
               <input
                 type="text"
-                placeholder="quantity"
+                placeholder="Quantity per price"
                 className="input input-bordered w-full "
+                {...register("quantity", { required: "Set Quantity per price" })}
               />
+              {errors.quantity && <p className='text-red-600 text-sm'>*{errors.quantity?.message}</p>}
             </div>
             <div className="form-control w-full ">
               <label className="label">
@@ -115,6 +119,7 @@ const AddProduct = () => {
 
                 placeholder="sub_category"
                 className="input input-bordered w-full "
+                {...register("sub_category")}
               />
             </div>
             <div className="form-control w-full ">
@@ -127,19 +132,20 @@ const AddProduct = () => {
 
                 placeholder="stock"
                 className="input input-bordered w-full "
+                {...register("stock", { required: "Set total product stock" })}
               />
+              {errors.stock && <p className='text-red-600 text-sm'>*{errors.stock?.message}</p>}
             </div>
             <div className="form-control w-full ">
               <label className="label">
-                <span className="label-text font-bold">status</span>
+                <span className="label-text font-bold">Status</span>
               </label>
 
-              <input
-                type="text"
-
-                placeholder="status"
-                className="input input-bordered w-full "
-              />
+              <select className='select select-bordered' {...register("status", { required: "Select Product availablity status" })}>
+                <option>Available</option>
+                <option>Limited Available</option>
+              </select>
+              {errors.status && <p className='text-red-600 text-sm'>*{errors.status?.message}</p>}
             </div>
             <div className="form-control w-full ">
               <label className="label">
@@ -147,12 +153,20 @@ const AddProduct = () => {
               </label>
 
               <input
-                type="text"
+                type="number"
 
                 placeholder="sell_amount"
                 className="input input-bordered w-full "
-                {...register("price", { required: "Set product price" })}
+                {...register("price")}
               />
+            </div>
+            <div className="form-control w-full ">
+              <label className="label">
+                <span className="label-text font-bold">Product Image</span>
+              </label>
+
+              <input type="file" className="file-input file-input-bordered w-full max-w-xs" {...register("imageUrl", {required: "Product image required"})}/>
+              {errors.imageUrl && <p className='text-red-600 text-sm'>*{errors.imageUrl?.message}</p>}
             </div>
           </div>
           <div className="form-control w-full mt-4">
@@ -165,23 +179,11 @@ const AddProduct = () => {
               cols="50"
               rows="10"
               className="input input-bordered w-full h-20 px-3 py-1"
-              {...register("description", { required: "Write product description" })}
+              {...register("description", { required: "Write product description", minLength: {value: 10, message: "Write minimum 10 character"} })}
             ></textarea>
-            {errors.description && <p className='text-red-600'>{errors.description?.message}</p>}
+            {errors.description && <p className='text-red-600 text-sm'>*{errors.description?.message}</p>}
           </div>
-          <div className="form-control w-full ">
-            <label className="label">
-              <span className="label-text font-bold">Product Image</span>
-            </label>
 
-            <input
-              type="file"
-
-
-              placeholder="Enter Your Name"
-              className="input input-bordered w-full py-2 "
-            />
-          </div>
           <br />
           <input className="btn btn-accent w-full mt-6" type="submit" />
         </form>
