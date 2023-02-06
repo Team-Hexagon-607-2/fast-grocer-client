@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Cart from "./Cart";
 import Login from "./Login";
 import MobileNavbar from "./MobileNavbar";
@@ -16,8 +16,9 @@ import { FaThList } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut, categories,  } = useContext(StateContext);
+  
   const styles = {
-    wrapper: "bg-white w-full mx-auto hidden sm:block",
+    wrapper: "bg-white w-full mx-auto",
     mobileWrapper: " w-full h-[80px] bg-[#92B137] block sm:hidden",
     flexRow: "flex w-full flex-row justify-between items-center border-slate-200 px-5 py-3",
   };
@@ -31,9 +32,8 @@ const Navbar = () => {
       {/* //////////// */}
 
       {/* Desktop Nav */}
-      <div className={styles.wrapper}>
-        <div className={`${styles.flexRow}`}>
-          <div className="border-slate-300 flex items-center justify-center">
+        <div className={`${styles.flexRow} sticky top-0 duration-300 z-[9999] bg-white`}>
+          <div className="border-slate-300 flex items-center justify-center" >
             <Link to="/">
               <p className="">
                 <img
@@ -70,6 +70,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+      <div className={`${styles.wrapper}`}>
         <div className="bg-slate-800">
           <div className="flex justify-betwee w-11/12 mx-auto">
             {/* Desktop search */}

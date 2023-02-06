@@ -94,7 +94,7 @@ const SingleProduct = ({ products }) => {
           <div className="flex mt-5">
             <button
               onClick={(e) => handleAddToCart(e, products)}
-              className="w-full mr-2 bg-[#84b840] hover:bg-[#6a9333] text-white text-sm duration-300 py-1 rounded-md flex items-center justify-center"
+              className="w-full mr-2 bg-[#84b840] hover:bg-[#6a9333] text-white text-sm duration-300 py-[6px] rounded-md flex items-center justify-center"
             >
               <TbShoppingCartPlus className=" mr-2" />
               Add to Cart

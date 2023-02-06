@@ -14,7 +14,7 @@ import logo from '../../../assets/logo/logo.png'
 const Footer = () => {
     return (
         <div>
-            <footer className="footer p-10 bg-slate-800 text-white place-content-center md:place-content-between">
+            <footer className="footer p-10 bg-slate-800 text-white">
                 <div>
                     <span className="footer-title">Support</span>
                     <a className="link link-hover">Order Track</a>
@@ -46,7 +46,7 @@ const Footer = () => {
             </footer>
 
             {/*section for email and hotline number starts*/}
-            <footer className="footer px-10 py-4 bg-slate-900 text-white border-base-300 flex justify-between">
+            <footer className="footer px-10 py-4 bg-slate-900 text-white border-base-300 flex flex-col md:flex-row justify-between">
                 <div className="items-center grid-flow-row justify-self-center md:grid-flow-col">
                     <img style={{ width: '100px', height: '40px' }} src={logo} alt='logo'></img>
                     <p>Fast Grocer<br />One of the fastests and trusted<br /> service for your day to day life.</p>
