@@ -32,21 +32,21 @@ const Navbar = () => {
       {/* //////////// */}
 
       {/* Desktop Nav */}
-        <div className={`${styles.flexRow} sticky top-0 duration-300 z-[9999] bg-white`}>
+        <div className={`${styles.flexRow} sticky top-0 duration-300 z-[9999] bg-white shadow-lg`}>
           <div className="border-slate-300 flex items-center justify-center" >
             <Link to="/">
               <p className="">
                 <img
                   src={logo}
                   alt="Fast_Grocer"
-                  className="w-[135px]"
+                  className="w-[125px]"
                 />
               </p>
             </Link>
           </div>
           <Search />
           <div className="flex flex-wrap items-center justify-start">
-            <div className=" flex flex-row flex-wrap sm:py-1 gap-3  -mt-[10px] ml-[10px] items-center ">
+            <div className=" flex flex-row flex-wrap sm:py-1 gap-3 ml-[10px] items-center ">
               <Wishlist />
               <Cart />
               <Login />
