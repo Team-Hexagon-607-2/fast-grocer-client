@@ -9,9 +9,11 @@ import { BsChevronDoubleUp, BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { FcAbout } from "react-icons/fc";
 import { RiShoppingCartLine } from "react-icons/ri";
+import { useForm } from "react-hook-form";
 
 const PlaceOrder = () => {
-  const { cart, order, setOrder, user, totalPrice } = useContext(StateContext);
+  const {register, handleSubmit, formState: {errors}} = useForm();
+  const { cart, order, setOrder, user, totalPrice, coupons } = useContext(StateContext);
   const [countryName, setCountryName] = useState('');
   const [name, setName] = useState(user?.displayName);
   const [email, setEmail] = useState(user?.email);
@@ -20,7 +22,7 @@ const PlaceOrder = () => {
   const [checked, setChecked] = useState(false);
   const [value, setValue] = useState("");
   const [product, setShowProduct] = useState(true);
-  console.log(countryName);
+  const [withCoupon, setWithCoupon] = useState(0);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -89,8 +91,18 @@ const PlaceOrder = () => {
     navigate("/payment", { state: order });
   };
 
+  const handleApplyCoupon = (data) =>{
+    const applied_coupon = data.apply_coupon.toLowerCase();
+    const filteredCoupon = coupons.find(coupon => coupon?.coupon_name === applied_coupon)
+    console.log(filteredCoupon);
+    if(filteredCoupon){
+      setWithCoupon(filteredCoupon?.discount_amount);
+      toast.success('Coupon Applied Successfully');
+    }
+  }
+
   return (
-    <div className="lg:w-10/12 mx-auto">
+    <>
       {/* mobile view */}
       <div onClick={() => setShowProduct(!product)} className="collapse lg:hidden">
         <input type="checkbox" className="peer" />
@@ -180,10 +192,10 @@ const PlaceOrder = () => {
 
           <p className="flex items-center justify-between text-sm my-2">Subtotal <span className="font-semibold">৳ {totalPrice}</span></p>
           <p className="flex items-center justify-between text-sm pb-2 border-b-2">Shipping <span className="font-semibold">৳ 29</span></p>
-          <p className="flex items-center justify-between font-semibold mt-3 text-lg">Total <span className="font-semibold">৳ {totalPrice + 29}</span></p>
-          <form className="mt-5">
-            <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" />
-            <button className="btn btn-md rounded-none">Apply</button>
+          <p className="flex items-center justify-between font-semibold mt-3 text-lg">Total <span className="font-semibold">৳ {totalPrice + 29 - withCoupon}</span></p>
+          <form className="mt-5" onSubmit={handleSubmit(handleApplyCoupon)}>
+            <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" {...register("apply_coupon")}/>
+            <button type="submit" className="btn btn-md rounded-none">Apply</button>
           </form>
         </div>
 
@@ -219,7 +231,7 @@ const PlaceOrder = () => {
           <button onClick={handleOrderSubmit} disabled={!checked} className="btn btn-sm rounded-md btn-primary" > Confirm Order</button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

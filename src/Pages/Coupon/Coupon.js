@@ -22,7 +22,7 @@ const Coupon = () => {
   const handleAddCoupon = (data) => {
     const date = new Date();
     const updatedData = {
-      coupon_name: data?.coupon_name,
+      coupon_name: data?.coupon_name.toLowerCase(),
       discount_amount: parseInt(data?.discount_amount),
       expire_date: data?.expire_date,
       couponAddDate: date
