@@ -73,7 +73,7 @@ export const ContextProvider = ({ children }) => {
   const {data: coupons} = useQuery({
     queryKey: ['coupon'],
     queryFn: async () =>{
-      const res = await fetch('http://localhost:5000/get-coupons')
+      const res = await fetch('https://fg-server.vercel.app/get-coupons')
       const data = await res.json();
       return data;
     }

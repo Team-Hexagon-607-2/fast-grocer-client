@@ -36,7 +36,7 @@ const AddProduct = () => {
             description: data?.description,
           }
           console.log(setProductsData)
-          fetch(`http://localhost:5000/add-product`, {
+          fetch(`https://fg-server.vercel.app/add-product`, {
             method: "POST",
             headers: {
               "content-type": "application/json"

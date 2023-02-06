@@ -1,10 +1,13 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { GoPlus } from 'react-icons/go';
+import { StateContext } from '../../contexts/AuthProvider';
 
 const Coupon = () => {
+  const {coupons, refetch} = useContext(StateContext);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [showCouponForm, setShowCouponForm] = useState(false);
 
@@ -25,7 +28,7 @@ const Coupon = () => {
       expire_date: data?.expire_date,
       couponAddDate : date
     }
-    fetch('http://localhost:5000/add-coupon', {
+    fetch('https://fg-server.vercel.app/add-coupon', {
       method: "POST",
       headers: {
         "content-type": "application/json"
