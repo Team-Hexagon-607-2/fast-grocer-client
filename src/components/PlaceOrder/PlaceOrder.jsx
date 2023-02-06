@@ -23,6 +23,7 @@ const PlaceOrder = () => {
   const [value, setValue] = useState("");
   const [product, setShowProduct] = useState(true);
   const [withCoupon, setWithCoupon] = useState(0);
+  const [couponName, setCouponName] = useState("");
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -94,10 +95,9 @@ const PlaceOrder = () => {
   const handleApplyCoupon = (data) =>{
     const applied_coupon = data.apply_coupon.toLowerCase();
     const filteredCoupon = coupons.find(coupon => coupon?.coupon_name === applied_coupon)
-    console.log(filteredCoupon);
     if(filteredCoupon){
       setWithCoupon(filteredCoupon?.discount_amount);
-      toast.success('Coupon Applied Successfully');
+      setCouponName(filteredCoupon?.coupon_name);
     }
   }
 
@@ -139,11 +139,14 @@ const PlaceOrder = () => {
           </div>
 
           <p className="flex items-center justify-between text-sm my-2">Subtotal <span className="font-semibold">৳ {totalPrice}</span></p>
+          {
+            couponName !== "" && <p className="flex items-center justify-between text-sm pb-2">Coupon: {couponName} <span className="font-semibold">- ৳ {withCoupon}</span></p>
+          }
           <p className="flex items-center justify-between text-sm pb-2 border-b-2">Shipping <span className="font-semibold">৳ 29</span></p>
           <p className="flex items-center justify-between font-semibold mt-3 text-lg">Total <span className="font-semibold">৳ {totalPrice + 29}</span></p>
-          <form className="mt-5">
-            <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" />
-            <button className="btn btn-md rounded-none">Apply</button>
+          <form className="mt-5" onSubmit={handleSubmit(handleApplyCoupon)}>
+            <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" {...register("apply_coupon")}/>
+            <button type="submit" className="btn btn-md rounded-none">Apply</button>
           </form>
         </div>
       </div>
@@ -191,6 +194,9 @@ const PlaceOrder = () => {
           </div>
 
           <p className="flex items-center justify-between text-sm my-2">Subtotal <span className="font-semibold">৳ {totalPrice}</span></p>
+          {
+            couponName !== "" && <p className="flex items-center justify-between text-sm pb-2">Coupon: {couponName} <span className="font-semibold">- ৳ {withCoupon}</span></p>
+          }
           <p className="flex items-center justify-between text-sm pb-2 border-b-2">Shipping <span className="font-semibold">৳ 29</span></p>
           <p className="flex items-center justify-between font-semibold mt-3 text-lg">Total <span className="font-semibold">৳ {totalPrice + 29 - withCoupon}</span></p>
           <form className="mt-5" onSubmit={handleSubmit(handleApplyCoupon)}>
