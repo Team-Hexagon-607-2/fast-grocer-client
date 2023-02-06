@@ -33,6 +33,7 @@ export const ContextProvider = ({ children }) => {
     data: AllProducts,
     isLoading,
     isError,
+    refetch,
     error,
   } = useQuery({
     queryKey: ["products"],
@@ -67,6 +68,16 @@ export const ContextProvider = ({ children }) => {
       }).then((res) => res.json()),
     keepPreviousData: true,
   });
+
+  // Coupon
+  const {data: coupons} = useQuery({
+    queryKey: ['coupon'],
+    queryFn: async () =>{
+      const res = await fetch('http://localhost:5000/get-coupons')
+      const data = await res.json();
+      return data;
+    }
+  })
 
   const handleDecrement = (e, id) => {
     e.preventDefault();
@@ -212,6 +223,8 @@ export const ContextProvider = ({ children }) => {
         wishlistRefetch,
         order,
         setOrder,
+        refetch,
+        coupons
       }}
     >
       {children}
