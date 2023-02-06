@@ -3,11 +3,15 @@ import React, { useContext } from 'react';
 import { useState } from 'react';
 import ConfirmModal from '../../../components/Modal/ConfirmModal/ConfirmModal';
 import { StateContext } from '../../../contexts/AuthProvider';
+import useFindAdmin from '../../../hooks/useFindAdmin';
+import useFindBuyer from '../../../hooks/useFindBuyer';
 import useFindDeliveryman from '../../../hooks/useFindDeliveryman';
 
 const Dashboard = () => {
     const { user } = useContext(StateContext);
+    const [isAdmin] = useFindAdmin(user?.email);
     const [isDeliverymen] = useFindDeliveryman(user?.email);
+    const [isBuyer] = useFindBuyer(user?.email);
     const [processing, setProcessing] = useState(false);
     const { data: deliverymanData, refetch } = useQuery({
         queryKey: ['working-status'],
@@ -28,6 +32,15 @@ const Dashboard = () => {
                     <img
                         className="mb-1 h-32 w-32 mx-auto rounded-full shadow-lg" src={user?.photoURL || 'https://picsum.photos/200/300'}
                         alt='' />
+                    {
+                        isAdmin && <p className='text-center'>Admin</p>
+                    }
+                    {
+                        isDeliverymen && <p className='text-center'>Delivery Man</p>
+                    }
+                    {
+                        isBuyer && <p className='text-center'>Buyer</p>
+                    }
                     <br />
                     <button className='bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md'>Edit Profile</button>
                 </div>
