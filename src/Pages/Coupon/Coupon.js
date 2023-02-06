@@ -7,15 +7,15 @@ import { GoPlus } from 'react-icons/go';
 import { StateContext } from '../../contexts/AuthProvider';
 
 const Coupon = () => {
-  const {coupons, refetch} = useContext(StateContext);
+  const { coupons, refetch } = useContext(StateContext);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [showCouponForm, setShowCouponForm] = useState(false);
 
-  const handleShowCouponForm = () =>{
+  const handleShowCouponForm = () => {
     setShowCouponForm(true);
   }
 
-  const handleHideCouponForm = () =>{
+  const handleHideCouponForm = () => {
     setShowCouponForm(false);
   }
 
@@ -25,7 +25,7 @@ const Coupon = () => {
       coupon_name: data?.coupon_name,
       discount_amount: parseInt(data?.discount_amount),
       expire_date: data?.expire_date,
-      couponAddDate : date
+      couponAddDate: date
     }
     fetch('https://fg-server.vercel.app/add-coupon', {
       method: "POST",
@@ -34,21 +34,23 @@ const Coupon = () => {
       },
       body: JSON.stringify(updatedData)
     })
-    .then(res => res.json())
-    .then(data =>{
-      if(data?.acknowledged){
-        toast.success("Coupon added successfully");
-        reset();
-      }
-    })
+      .then(res => res.json())
+      .then(data => {
+        if (data?.acknowledged) {
+          toast.success("Coupon added successfully");
+          reset();
+        }
+      })
   }
+
+  console.log(coupons);
 
   return (
     <div>
       <div className='flex justify-end'>
         <button onClick={handleShowCouponForm} className='my-5 font-semibold px-3 mr-2 bg-[#84b840] hover:bg-[#6a9333] text-white text-sm duration-300 py-[6px] rounded-md flex items-center justify-center'>Add Coupon <GoPlus className='inline-block ml-1' /></button>
       </div>
-      { showCouponForm && <div className='my-5'>
+      {showCouponForm && <div className='my-5'>
         <p onClick={handleHideCouponForm} className="hover:underline mb-2 inline-block cursor-pointer px-3 text-sm">Hide</p>
         <form onSubmit={handleSubmit(handleAddCoupon)} className="flex justify-evenly">
           <div className="form-control w-full max-w-xs">
@@ -66,6 +68,36 @@ const Coupon = () => {
           <button className="btn btn-sm bg-[#84b840] hover:bg-[#6a9333] border-none max-w-xs">Add</button>
         </form>
       </div>}
+
+      <div className="overflow-x-auto">
+        <table className="table table-compact w-full">
+          <thead>
+            <tr>
+              <th>S/N</th>
+              <th>Coupon Name</th>
+              <th>Discount Amount</th>
+              <th>Entry Date</th>
+              <th>Expire Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              coupons?.map((coupon, i) => <tr key={coupon?._id}>
+                <th>{i+1}</th>
+                <td>{coupon?.coupon_name}</td>
+                <td>৳{coupon?.discount_amount}</td>
+                <td>{coupon?.couponAddDate}</td>
+                <td>{coupon?.expire_date}</td>
+                <td>
+                  <button className='btn btn-xs btn-error'>Delete</button>
+                </td>
+              </tr>)
+            }
+          </tbody>
+        </table>
+      </div>
+
     </div>
   );
 };
