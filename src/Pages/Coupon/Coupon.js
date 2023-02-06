@@ -20,7 +20,6 @@ const Coupon = () => {
   }
 
   const handleAddCoupon = (data) => {
-    console.log(data);
     const date = new Date();
     const updatedData = {
       coupon_name: data?.coupon_name,
@@ -42,7 +41,6 @@ const Coupon = () => {
         reset();
       }
     })
-    console.log(updatedData);
   }
 
   return (
