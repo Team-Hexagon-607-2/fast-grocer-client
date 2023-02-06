@@ -51,7 +51,7 @@ const Timer = () => {
   }, []);
 
   const styles = {
-    div: "py-1 sm:py-[8px] px-3 sm:px-4  bg-[#80B248] text-white text-md sm:text-lg",
+    div: "py-1 sm:py-[8px] px-3 sm:px-4 bg-[#84b840] text-white text-md sm:text-lg",
   };
 
   return (

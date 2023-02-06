@@ -10,28 +10,28 @@ import { NavLink } from "react-router-dom";
 const NavNavLinks = () => {
 
   return (
-    <div className="flex flex-row flex-wrap sm:gap-2 font-semibold text-black text-[15px]">
-        <NavLink to="/">
+    <div className="flex flex-row flex-wrap text-[14px] text-white">
+        <NavLink to="/" className={({isActive}) => isActive ? 'bg-slate-700 py-2 px-3 cursor-pointer duration-300' : 'py-2 px-3 cursor-pointer hover:bg-slate-700 duration-300'}>
           <label
             tabIndex={0}
-            className="cursor-pointer hover:underline mx-3"
+            className=" cursor-pointer"
           >
             Home
           </label>
         </NavLink>
 
-        <NavLink to="/allproducts">
-          <label className="cursor-pointer hover:underline mx-3">
+        <NavLink to="/allproducts" className={({isActive}) => isActive ? 'bg-slate-700 py-2 px-3 cursor-pointer duration-300' : 'py-2 px-3 cursor-pointer hover:bg-slate-700 duration-300'}>
+          <label className="cursor-pointer">
             All Products
           </label>
         </NavLink>
 
-      <NavLink to="/onsale">
-        <label className="cursor-pointer hover:underline mx-3">Offer</label>
+      <NavLink to="/onsale" className={({isActive}) => isActive ? 'bg-slate-700 py-2 px-3 cursor-pointer duration-300' : 'py-2 px-3 cursor-pointer hover:bg-slate-700 duration-300'}>
+        <label className="cursor-pointer">Offer</label>
       </NavLink>
 
-      <NavLink to="/aboutUs">
-        <label className="cursor-pointer hover:underline mx-3">About Us</label>
+      <NavLink to="/aboutUs" className={({isActive}) => isActive ? 'bg-slate-700 py-2 px-3 cursor-pointer duration-300' : 'py-2 px-3 cursor-pointer hover:bg-slate-700 duration-300'}>
+        <label className="cursor-pointer">About Us</label>
       </NavLink>
     </div>
   );

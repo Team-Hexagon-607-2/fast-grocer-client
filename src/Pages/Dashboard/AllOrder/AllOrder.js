@@ -138,7 +138,7 @@ const AllOrder = () => {
 
       <div className="overflow-x-auto overflow-y-auto w-full">
         <div>{isLoading && <Loader />}</div>
-        <table className="table w-full">
+        <table className="table table-compact w-full">
           <thead>
             <tr>
               <th>S/N</th>

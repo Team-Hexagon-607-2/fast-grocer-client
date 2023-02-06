@@ -56,9 +56,7 @@ const AllProducts = () => {
   }
 
   return (
-    <>
-      <h2 className="text-center font-semibold text-2xl my-5">All Products</h2>
-
+    <div className="mt-5">
       <div className='flex justify-end items-center mr-8'>
         <p className='text-sm mr-2'>SORT BY</p>
         <select onChange={(e) => setIsAsc(e.target.value)} className="select select-bordered select-sm w-56 focus:outline-none">
@@ -86,7 +84,7 @@ const AllProducts = () => {
           <button className={page === 7 ? 'bg-slate-300  hover:cursor-not-allowed duration-300 px-2 py-1 text-sm rounded-md' : 'bg-[#ddecb0] hover:bg-[#b9cc81] duration-300 px-2 py-1 text-sm rounded-md'} onClick={pageIncrease}>Next</button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Cart from "./Cart";
 import Login from "./Login";
 import MobileNavbar from "./MobileNavbar";
@@ -12,13 +12,15 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import { StateContext } from "./../../../contexts/AuthProvider";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineDashboard } from "react-icons/ai";
+import { FaThList } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut, categories,  } = useContext(StateContext);
+  
   const styles = {
-    wrapper: "bg-white w-full mx-auto hidden sm:block",
-    mobileWrapper: " w-full h-[80px] bg-[#92B137] block sm:hidden",
-    flexRow: "flex w-full flex-row justify-between items-center border-slate-200 px-5 py-3",
+    wrapper: "bg-white w-full mx-auto hidden lg:block",
+    mobileWrapper: " w-full h-[80px] bg-[#92B137] block lg:hidden",
+    flexRow: "lg:flex w-full lg:flex-row justify-between items-center px-5 py-3",
   };
 
   return (
@@ -30,22 +32,21 @@ const Navbar = () => {
       {/* //////////// */}
 
       {/* Desktop Nav */}
-      <div className={styles.wrapper}>
-        <div className={`${styles.flexRow}`}>
-          <div className="border-slate-300 flex items-center justify-center">
+        <div className={`${styles.flexRow} sticky top-0 duration-300 z-[9999] bg-white shadow-lg hidden`}>
+          <div className="border-slate-300 flex items-center justify-center" >
             <Link to="/">
               <p className="">
                 <img
                   src={logo}
                   alt="Fast_Grocer"
-                  className="w-[135px]"
+                  className="w-[125px]"
                 />
               </p>
             </Link>
           </div>
           <Search />
           <div className="flex flex-wrap items-center justify-start">
-            <div className=" flex flex-row flex-wrap sm:py-1 gap-3  -mt-[10px] ml-[10px] items-center ">
+            <div className=" flex flex-row flex-wrap sm:py-1 gap-3 ml-[10px] items-center ">
               <Wishlist />
               <Cart />
               <Login />
@@ -69,17 +70,19 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="w-11/12 mx-auto pb-5">
-          <div className="flex justify-between">
+      <div className={`${styles.wrapper}`}>
+        <div className="bg-slate-800">
+          <div className="flex justify-betwee w-11/12 mx-auto">
             {/* Desktop search */}
             {/* Desktop navbar link such as page home etc */}
 
-            <div className="dropdown dropdown-start font-semibold text-[15px]">
+            <div className="dropdown dropdown-start text-[14px] w-52 bg-[#84b840] py-2 px-3">
               <label
                 tabIndex={0}
-                className="flex cursor-pointer items-center justify-center"
+                className="cursor-pointer text-white"
               >
-                Categories <RiArrowDownSLine />
+                <FaThList className="inline-block mr-3"/>
+                Categories <RiArrowDownSLine className="inline-block"/>
               </label>
               <ul
                 tabIndex={0}
