@@ -32,7 +32,7 @@ const Navbar = () => {
       {/* //////////// */}
 
       {/* Desktop Nav */}
-        <div className={`${styles.flexRow} sticky top-0 duration-300 z-[9999] bg-white shadow-lg hidden`}>
+        <div className={`${styles.flexRow} sticky top-0 duration-300 z-[999] bg-white shadow-lg hidden`}>
           <div className="border-slate-300 flex items-center justify-center" >
             <Link to="/">
               <p className="">

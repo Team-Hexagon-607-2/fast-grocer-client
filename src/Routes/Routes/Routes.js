@@ -158,15 +158,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/all-products",
-        element: <OperateAllProducts></OperateAllProducts>,
+        element: <AdminRoutes><OperateAllProducts></OperateAllProducts></AdminRoutes>,
       },
       {
         path: "/dashboard/edit-product/:id",
-        element: <EditProduct></EditProduct>
+        element: <AdminRoutes><EditProduct></EditProduct></AdminRoutes>
       },
       {
         path: "/dashboard/coupon",
-        element: <Coupon></Coupon>
+        element: <AdminRoutes><Coupon></Coupon></AdminRoutes>
       }
     ],
   },

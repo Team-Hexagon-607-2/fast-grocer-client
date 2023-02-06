@@ -90,7 +90,7 @@ const PlaceOrder = () => {
   };
 
   return (
-    <>
+    <div className="lg:w-10/12 mx-auto">
       {/* mobile view */}
       <div onClick={() => setShowProduct(!product)} className="collapse lg:hidden">
         <input type="checkbox" className="peer" />
@@ -130,10 +130,13 @@ const PlaceOrder = () => {
           <p className="flex items-center justify-between text-sm pb-2 border-b-2">Shipping <span className="font-semibold">৳ 29</span></p>
           <p className="flex items-center justify-between font-semibold mt-3 text-lg">Total <span className="font-semibold">৳ {totalPrice + 29}</span></p>
         </div>
+        <form>
+          <input type="text" placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs" />
+        </form>
       </div>
 
       {/* destop view */}
-      <div className="grid lg:grid-cols-2">
+      <div className="grid lg:grid-cols-2 lg:gap-x-14">
         <div className="p-5">
           <Address
             countryName={countryName}
@@ -204,13 +207,13 @@ const PlaceOrder = () => {
           </button>
           <p>Cash On Delivery</p>
         </div>
-        
+
         <div className="flex items-center justify-between">
           <button onClick={handlePayment} className='border px-3 py-1 rounded-md text-white bg-green-500 hover:bg-green-600 duration-500'>Pay With Card</button>
           <button onClick={handleOrderSubmit} disabled={!checked} className="btn btn-sm rounded-md btn-primary" > Confirm Order</button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
