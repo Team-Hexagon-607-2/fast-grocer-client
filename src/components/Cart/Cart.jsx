@@ -39,7 +39,7 @@ const Cart = () => {
             <div className="p-2 sm:p-1">
               <div className="flex relative items-end flex-col gap-2 justify-end">
                 <button className="text-xl  font-bold"> Total : ৳{totalPrice} </button>
-                <Link to="/place-order"> <button className="bg-[#8caf2b] text-white hover:bg-[#6A802D] font-semibold px-3 py-1 rounded-md duration-300"> Place Order </button></Link>
+                <Link to="/place-order"> <button className="bg-[#17dc86] text-white hover:bg-[#15ba73] font-semibold px-3 py-1 rounded-md duration-300"> Place Order </button></Link>
               </div>
             </div>
           </div>

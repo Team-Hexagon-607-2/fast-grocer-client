@@ -45,11 +45,11 @@ const NewsLetter = () => {
           <input
             type="email"
             name="email"
-            className="border-2 border-slate-300 rounded-full w-full  px-4 py-3 focus:outline-2 focus:outline-[#6A802D] duration-500"
+            className="border-2 border-slate-300 rounded-full w-full  px-4 py-3 focus:outline-2 focus:outline-[#6a9333] duration-500"
             placeholder="Your Email Address"
             required
           />
-          <button className="absolute right-2 bg-[#8BA73B] hover:bg-[#6A802D] duration-500 text-white uppercase font-semibold px-6 py-2 rounded-full">
+          <button className="absolute right-2 bg-[#84b840] hover:bg-[#6a9333] duration-500 text-white uppercase font-semibold px-6 py-2 rounded-full">
             Subscribe
           </button>
         </form>

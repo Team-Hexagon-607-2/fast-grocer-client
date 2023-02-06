@@ -52,7 +52,7 @@ const MyWishList = () => {
         ) : (
           <>
             <div className="overflow-x-auto overflow-y-auto">
-              <table className="table w-full">
+              <table className="table table-compact w-full">
                 <thead>
                   <tr>
                     <th></th>

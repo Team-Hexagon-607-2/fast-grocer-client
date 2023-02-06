@@ -14,9 +14,6 @@ const Home = () => {
       <HomeCategoryProducts></HomeCategoryProducts>
       <HomePageProducts></HomePageProducts>
       <div className="bg-[#FCFFF6]">
-        <p className="text-2xl sm:text-4xl mb-10 sm:mt-10 font-bold text-center ">
-          Flash Sale
-        </p>
         <FlashSaleHome />
       </div>
       <FAQ></FAQ>
