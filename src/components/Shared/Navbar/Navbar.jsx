@@ -18,9 +18,9 @@ const Navbar = () => {
   const { user, logOut, categories,  } = useContext(StateContext);
   
   const styles = {
-    wrapper: "bg-white w-full mx-auto",
-    mobileWrapper: " w-full h-[80px] bg-[#92B137] block sm:hidden",
-    flexRow: "flex w-full flex-row justify-between items-center border-slate-200 px-5 py-3",
+    wrapper: "bg-white w-full mx-auto hidden lg:block",
+    mobileWrapper: " w-full h-[80px] bg-[#92B137] block lg:hidden",
+    flexRow: "lg:flex w-full lg:flex-row justify-between items-center px-5 py-3",
   };
 
   return (
@@ -32,7 +32,7 @@ const Navbar = () => {
       {/* //////////// */}
 
       {/* Desktop Nav */}
-        <div className={`${styles.flexRow} sticky top-0 duration-300 z-[9999] bg-white shadow-lg`}>
+        <div className={`${styles.flexRow} sticky top-0 duration-300 z-[9999] bg-white shadow-lg hidden`}>
           <div className="border-slate-300 flex items-center justify-center" >
             <Link to="/">
               <p className="">

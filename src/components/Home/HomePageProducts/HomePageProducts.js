@@ -25,7 +25,7 @@ const HomePageProducts = () => {
   };
 
   return (
-    <div className="bg-[#fbfff4db] py-20">
+    <div className="bg-[#fbfff4db] pt-16">
       {/* Added Margin my-28 -by Taqi */}
       <h2 className="text-xl md:text-3xl text-center font-bold py-5">
         Featured Products

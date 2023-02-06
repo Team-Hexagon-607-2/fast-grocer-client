@@ -55,7 +55,7 @@ const HomeCategoryProducts = () => {
         <div>
           {
             categories.map(category =>
-              <SwiperSlide className='text-center hover:underline'>
+              <SwiperSlide key={category?._id} className='text-center hover:underline'>
                 <Link to={`/category/${category.categoryName}`}>
                   <img src={category?.image} className="w-32 h-32 object-cover mx-auto" alt="slide-img" />
                   <p>{category?.categoryName}</p>

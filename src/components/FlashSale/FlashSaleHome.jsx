@@ -13,7 +13,10 @@ const FlashSaleHome = () => {
   );
 
   return (
-    <div className="bg-[#FCFFF6] mt-5">
+    <div className="bg-[#FCFFF6] pt-16">
+      <h2 className="text-xl md:text-3xl text-center font-bold py-5">
+        Flash Sale
+      </h2>
       <div className="flex  flex-row items-center w-11/12 mx-auto justify-between ">
         <div className="flex gap-4 sm:gap-10 items-center justify-start ">
           <p className="text-red-500 text-sm sm:text-lg hidden sm:block">
