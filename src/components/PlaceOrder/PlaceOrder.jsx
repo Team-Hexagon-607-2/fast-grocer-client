@@ -12,7 +12,7 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 
 const PlaceOrder = () => {
-  const {register, handleSubmit, formState: {errors}} = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const { cart, order, setOrder, user, totalPrice, coupons } = useContext(StateContext);
   const [countryName, setCountryName] = useState('');
   const [name, setName] = useState(user?.displayName);
@@ -92,10 +92,10 @@ const PlaceOrder = () => {
     navigate("/payment", { state: order });
   };
 
-  const handleApplyCoupon = (data) =>{
+  const handleApplyCoupon = (data) => {
     const applied_coupon = data.apply_coupon.toLowerCase();
     const filteredCoupon = coupons.find(coupon => coupon?.coupon_name === applied_coupon)
-    if(filteredCoupon){
+    if (filteredCoupon) {
       setWithCoupon(filteredCoupon?.discount_amount);
       setCouponName(filteredCoupon?.coupon_name);
     }
@@ -143,9 +143,9 @@ const PlaceOrder = () => {
             couponName !== "" && <p className="flex items-center justify-between text-sm pb-2">Coupon: {couponName} <span className="font-semibold">- ৳ {withCoupon}</span></p>
           }
           <p className="flex items-center justify-between text-sm pb-2 border-b-2">Shipping <span className="font-semibold">৳ 29</span></p>
-          <p className="flex items-center justify-between font-semibold mt-3 text-lg">Total <span className="font-semibold">৳ {totalPrice + 29}</span></p>
+          <p className="flex items-center justify-between font-semibold mt-3 text-lg">Total <span className="font-semibold">৳ {totalPrice + 29 - withCoupon}</span></p>
           <form className="mt-5" onSubmit={handleSubmit(handleApplyCoupon)}>
-            <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" {...register("apply_coupon")}/>
+            <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" {...register("apply_coupon")} />
             <button type="submit" className="btn btn-md rounded-none">Apply</button>
           </form>
         </div>
@@ -200,7 +200,7 @@ const PlaceOrder = () => {
           <p className="flex items-center justify-between text-sm pb-2 border-b-2">Shipping <span className="font-semibold">৳ 29</span></p>
           <p className="flex items-center justify-between font-semibold mt-3 text-lg">Total <span className="font-semibold">৳ {totalPrice + 29 - withCoupon}</span></p>
           <form className="mt-5" onSubmit={handleSubmit(handleApplyCoupon)}>
-            <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" {...register("apply_coupon")}/>
+            <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" {...register("apply_coupon")} />
             <button type="submit" className="btn btn-md rounded-none">Apply</button>
           </form>
         </div>

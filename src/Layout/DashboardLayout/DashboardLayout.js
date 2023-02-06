@@ -136,6 +136,14 @@ const DashboardLayout = () => {
                     <AiOutlineStar />My Reviews
                   </Link>
                 </li>
+                <li className="text-[14px] font-semibold">
+                  <Link
+                    className="text-slate-700"
+                    to="/dashboard/voucher"
+                  >
+                    <RiCoupon2Line />Voucher
+                  </Link>
+                </li>
               </>
             )}
 
