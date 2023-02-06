@@ -129,10 +129,11 @@ const PlaceOrder = () => {
           <p className="flex items-center justify-between text-sm my-2">Subtotal <span className="font-semibold">৳ {totalPrice}</span></p>
           <p className="flex items-center justify-between text-sm pb-2 border-b-2">Shipping <span className="font-semibold">৳ 29</span></p>
           <p className="flex items-center justify-between font-semibold mt-3 text-lg">Total <span className="font-semibold">৳ {totalPrice + 29}</span></p>
+          <form className="mt-5">
+            <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" />
+            <button className="btn btn-md rounded-none">Apply</button>
+          </form>
         </div>
-        <form>
-          <input type="text" placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs" />
-        </form>
       </div>
 
       {/* destop view */}
@@ -180,7 +181,12 @@ const PlaceOrder = () => {
           <p className="flex items-center justify-between text-sm my-2">Subtotal <span className="font-semibold">৳ {totalPrice}</span></p>
           <p className="flex items-center justify-between text-sm pb-2 border-b-2">Shipping <span className="font-semibold">৳ 29</span></p>
           <p className="flex items-center justify-between font-semibold mt-3 text-lg">Total <span className="font-semibold">৳ {totalPrice + 29}</span></p>
+          <form className="mt-5">
+            <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" />
+            <button className="btn btn-md rounded-none">Apply</button>
+          </form>
         </div>
+
       </div>
 
       <div className="mt-4 w-full p-5 bg-slate-100 my-10">
