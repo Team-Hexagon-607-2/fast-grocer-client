@@ -30,6 +30,7 @@ import DeliveryRoutes from "../DeliveryRoutes/DeliveryRoutes";
 import BuyerRoutes from "../BuyerRoutes/BuyerRoutes";
 import OperateAllProducts from "../../Pages/Dashboard/OperateAllProducts/OperateAllProducts";
 import Coupon from "../../Pages/Coupon/Coupon";
+import Voucher from "../../Pages/Dashboard/Voucher/Voucher";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -157,16 +158,20 @@ const router = createBrowserRouter([
         element: <BuyerRoutes><MyReviews /></BuyerRoutes>,
       },
       {
+        path: "/dashboard/voucher",
+        element: <BuyerRoutes><Voucher></Voucher></BuyerRoutes>
+      },
+      {
         path: "/dashboard/all-products",
-        element: <OperateAllProducts></OperateAllProducts>,
+        element: <AdminRoutes><OperateAllProducts></OperateAllProducts></AdminRoutes>,
       },
       {
         path: "/dashboard/edit-product/:id",
-        element: <EditProduct></EditProduct>
+        element: <AdminRoutes><EditProduct></EditProduct></AdminRoutes>
       },
       {
         path: "/dashboard/coupon",
-        element: <Coupon></Coupon>
+        element: <AdminRoutes><Coupon></Coupon></AdminRoutes>
       }
     ],
   },
