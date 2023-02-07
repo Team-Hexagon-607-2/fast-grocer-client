@@ -11,13 +11,13 @@ const MyOrders = () => {
   const [processing, setProcessing] = useState(false);
   const [orderId, setOrderId] = useState(null)
 
-  const { data, isLoading, refetch } = useQuery({
+  const { data : allOrders = [], isLoading, refetch } = useQuery({
     queryKey: ["returnProduct"],
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/order/${user?.email}`)
       .then((res) => res.json())
-
   });
+  
   // const {
   //   data: cancel_data,
   //   isLoading: cancelLoading,
@@ -71,7 +71,7 @@ const MyOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.data?.map((item, index) => (
+              {allOrders?.data?.map((item, index) => (
                 <tr key={item?._id}>
                   <th>{index + 1}</th>
                   <td>
