@@ -1,5 +1,5 @@
 import React from "react";
-import Chat from "../../Chat/Chat";
+
 import FlashSaleHome from "../../FlashSale/FlashSaleHome";
 import FAQ from "../FAQ/FAQ";
 import HomeBanner from "../HomeBanner/HomeBanner";
