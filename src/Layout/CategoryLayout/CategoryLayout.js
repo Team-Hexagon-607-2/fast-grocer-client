@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import Footer from '../../components/Shared/Footer/Footer';
 import productCategory from '../../assets/images/categoryModalIcon/categoryModalIcon.png';
 import { StateContext } from '../../contexts/AuthProvider';
@@ -36,10 +36,10 @@ const CategoryLayout = () => {
               categories.map(category =>
                 <li className="m-0 p-0"
                   key={category._id}>
-                  <Link to={`/category/${category.categoryName}`} className='flex justify-between'>
+                  <NavLink to={`/category/${category.categoryName}`} className='flex justify-between'>
                     <span>{category.categoryName}</span>
                     <span className='bg-[#ddecb0] text-black w-7 h-7 rounded-full flex justify-center items-center text-sm'>({(AllProducts.filter(product => product.category_name === category.categoryName)).length})</span>
-                  </Link>
+                  </NavLink>
                 </li>
               )
             }
