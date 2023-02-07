@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { StateContext } from "../../../contexts/AuthProvider";
-import Loader from "../../Loader/Loader";
+import { FiChevronRight } from "react-icons/fi";
 
 const NavNavLinks = () => {
   const { user } = useContext(StateContext);
@@ -25,9 +25,8 @@ const NavNavLinks = () => {
   const limitsOrders = allOrders.slice(0, 3);
 
   const handleOrderTracking = () => {
-    console.log(orderId)
     const result = allOrders.find(order => order?._id === orderId);
-    setOrderStatus(result.status)
+    setOrderStatus(result.status);
   };
 
   return (
@@ -58,25 +57,28 @@ const NavNavLinks = () => {
       <NavLink className="dropdown py-2 cursor-pointer hover:bg-slate-700 duration-300 relative">
         <label tabIndex={0} className="cursor-pointer px-3">Track My Order</label>
 
-        <ul tabIndex={0} className="dropdown-content bg-white text-black p-2  w-[320px] absolute top-9 left-[-50px]">
+        <div tabIndex={0} className="dropdown-content bg-white text-black p-2  w-[320px] absolute top-9 left-[-50px]">
           <div className="mb-3">
-            <h2 className="text-[18px] mb-1">My last Order</h2>
+            <h2 className="text-[17px] mb-2 text-slate-600">My last Order</h2>
             {
               !isLoading && limitsOrders.map(order =>
                 <li key={order?._id} className="hover:underline text-xs text-[#4CA4BC] inline-block">{order?.createdAt.slice(0, 10)} - Order {order?._id}</li>
               )
             }
           </div>
+
           <div className="mb-3">
-            <h2 className="text-[18px] mb-2">Track my order</h2>
-            
+            <h2 className="text-[17px] mb-2 text-slate-600">Track my order</h2>
+
             <p className="text-xs">Your Order Number</p>
-            <input onMouseOut={(e) => setOrderId(e.target.value)} className='border px-2 py-1' type="text" placeholder="eg. 123456789" />
-            <button onClick={handleOrderTracking} className="bg-green-400 px-2 py-1">icon</button>
+            <div className="flex items-center">
+              <input onMouseOut={(e) => setOrderId(e.target.value)} className='border-t border-l border-b rounded-l-md px-2 py-1 focus:outline-[#84B840]' type="text" placeholder="eg. 123456789" />
+              <button onClick={handleOrderTracking} className="bg-[#84B840] px-2 py-1 rounded-r-md"><FiChevronRight className="text-white h-6 w-6" /> </button>
+            </div>
           </div>
 
           <p>{orderStatus}</p>
-        </ul>
+        </div>
       </NavLink>
     </div>
   );
