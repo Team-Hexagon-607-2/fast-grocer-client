@@ -76,21 +76,21 @@ const Navbar = () => {
             {/* Desktop search */}
             {/* Desktop navbar link such as page home etc */}
 
-            <div className="dropdown dropdown-start text-[14px] w-52 bg-[#84b840] py-2 px-3">
+            <div className="dropdown dropdown-start text-[14px] w-52 bg-[#84b840] py-2 px-3 relative">
               <label
                 tabIndex={0}
-                className="cursor-pointer text-white"
+                className="cursor-pointer text-white block"
               >
                 <FaThList className="inline-block mr-3" />
                 Categories <RiArrowDownSLine className="inline-block" />
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu p-2 shadow bg-base-100 rounded-md w-64"
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-md w-64 absolute top-[36px] left-[-1px] "
               >
-                <div className="h-[400px] overflow-auto">
+                <div className="h-[300px] overflow-auto">
                   {
-                    categories.map(category => <li key={category._id}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>)
+                    categories.map(category => <p key={category._id} className='px-2 py-1 mb-2 hover:bg-[#c9f391] rounded-sm'><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link> </p>)
                   }
                 </div>
               </ul>
