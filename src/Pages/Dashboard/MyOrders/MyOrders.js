@@ -50,7 +50,7 @@ const MyOrders = () => {
   };
 
   const handleWriteReview = (item) => {
-    navigate("/write-review", { data: item });
+    navigate("/write-review", { state: item });
   };
 
   return (
