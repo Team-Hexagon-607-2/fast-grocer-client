@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { StateContext } from "../../../contexts/AuthProvider";
 import { FiChevronRight } from "react-icons/fi";
 
@@ -18,15 +18,16 @@ const NavNavLinks = () => {
     }
   });
 
-  if (isLoading) {
-    return <h2>Loading...</h2>
-  }
-
   const limitsOrders = allOrders.slice(0, 3);
 
   const handleOrderTracking = () => {
-    const result = allOrders.find(order => order?._id === orderId);
-    setOrderStatus(result.status);
+    const result = allOrders?.find(order => order?._id === orderId);
+    if(result?.status) {
+      setOrderStatus(result?.status);
+    }
+    else{
+      setOrderStatus('Result Not Found');
+    }
   };
 
   return (
@@ -54,16 +55,19 @@ const NavNavLinks = () => {
         <label className="cursor-pointer">About Us</label>
       </NavLink>
 
-      <NavLink className="dropdown py-2 cursor-pointer hover:bg-slate-700 duration-300 relative">
+      <div className="dropdown py-2  hover:bg-slate-700 duration-300 relative">
         <label tabIndex={0} className="cursor-pointer px-3">Track My Order</label>
 
-        <div tabIndex={0} className="dropdown-content bg-white text-black p-2  w-[320px] absolute top-9 left-[-50px]">
+        <div tabIndex={0} className="dropdown-content bg-white text-black p-5  w-[320px] absolute top-9 left-[-50px]">
           <div className="mb-3">
             <h2 className="text-[17px] mb-2 text-slate-600">My last Order</h2>
             {
               !isLoading && limitsOrders.map(order =>
-                <li key={order?._id} className="hover:underline text-xs text-[#4CA4BC] inline-block">{order?.createdAt.slice(0, 10)} - Order {order?._id}</li>
+                <Link to={`/dashboard/my-orders`} key={order?._id} className="hover:underline text-xs text-[#4CA4BC] inline-block">{order?.createdAt.slice(0, 10)} - Order {order?._id.slice(0, 15) + '...'}</Link>
               )
+            }
+            {
+              isLoading && <p className="text-center">Loading...</p>
             }
           </div>
 
@@ -72,14 +76,14 @@ const NavNavLinks = () => {
 
             <p className="text-xs">Your Order Number</p>
             <div className="flex items-center">
-              <input onMouseOut={(e) => setOrderId(e.target.value)} className='border-t border-l border-b rounded-l-md px-2 py-1 focus:outline-[#84B840]' type="text" placeholder="eg. 123456789" />
+              <input onMouseOut={(e) => setOrderId(e.target.value)} className='border-t border-l border-b rounded-l-md px-2 py-1 focus:outline-[#84B840] w-full' type="text" placeholder="eg. 123456789" />
               <button onClick={handleOrderTracking} className="bg-[#84B840] px-2 py-1 rounded-r-md"><FiChevronRight className="text-white h-6 w-6" /> </button>
             </div>
           </div>
 
-          <p>{orderStatus}</p>
+          <p>Status: {orderStatus}</p>
         </div>
-      </NavLink>
+      </div>
     </div>
   );
 };

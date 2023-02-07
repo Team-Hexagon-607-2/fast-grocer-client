@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StateContext } from "../../../contexts/AuthProvider";
 import { toast } from "react-hot-toast";
 import Loader from "../../../components/Loader/Loader";
@@ -10,13 +10,15 @@ import ReturnConfirmModal from "../../../components/Modal/ReturnConfirmModal/Ret
 const MyOrders = () => {
   const { user } = useContext(StateContext);
   const [processing, setProcessing] = useState(false);
-  const [orderId, setOrderId] = useState(null)
-
+  const [orderId, setOrderId] = useState(null);
+  const navigate = useNavigate();
+  
   const { data: allOrders = [], isLoading, refetch } = useQuery({
     queryKey: ["returnProduct"],
     queryFn: () =>
-      fetch(`https://fg-server.vercel.app/order/${user?.email}`)
-        .then((res) => res.json())
+      fetch(`https://fg-server.vercel.app/order/${user?.email}`).then((res) =>
+        res.json()
+      ),
   });
 
   // const {
@@ -52,6 +54,10 @@ const MyOrders = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleWriteReview = (item) => {
+    navigate("/write-review", { state: item });
+  };
+
   return (
     <>
       <div className="">
@@ -72,6 +78,7 @@ const MyOrders = () => {
                 <th>Condition</th>
                 <th>Cancel</th>
                 <th>Return Status</th>
+                <th>Write a Review</th>
               </tr>
             </thead>
             <tbody>
@@ -82,7 +89,8 @@ const MyOrders = () => {
                   <td>
                     <div className="flex items-center flex-col">
                       {item?.order_products?.map((product) => (
-                        <Link key={product?._id}
+                        <Link
+                          key={product?._id}
                           to={`/products/${product?._id}`}
                           className="flex w-[300px] hover:bg-blue-200 mb-2 rounded-md"
                         >
@@ -90,14 +98,17 @@ const MyOrders = () => {
                             <img
                               src={product?.imageUrl}
                               className="object-fit w-16 h-16 rounded-md"
-                              alt="" />
+                              alt=""
+                            />
                           </div>
                           <div>
                             <p className="text-sm font-semibold">
                               {product.name?.slice(0, 30)}
                             </p>
                             <p className="text-sm">{product?.bundle}</p>
-                            <p className="text-sm">Quantity: {product?.qunatity}</p>
+                            <p className="text-sm">
+                              Quantity: {product?.qunatity}
+                            </p>
                           </div>
                         </Link>
                       ))}
@@ -124,20 +135,40 @@ const MyOrders = () => {
                   
                   <td>
                     <p>{item?.cancel}</p>
-                    {(!item?.cancel) &&
-                      <button onClick={() => handleCancelRequest(item)}
-                        className="cursor-pointer rounded-full text-sm bg-red-300 hover:bg-red-400 duration-300 px-3 py-1">Cancel</button>
-                    }
+                    {!item?.cancel && (
+                      <button
+                        onClick={() => handleCancelRequest(item)}
+                        className="cursor-pointer rounded-full text-sm bg-red-300 hover:bg-red-400 duration-300 px-3 py-1"
+                      >
+                        Cancel
+                      </button>
+                    )}
                   </td>
                   
                   <td>
-                    {
-                      ((item?.deliver && item?.cancel) || (item?.deliver || !item?.cancel || !item?.returnRequest)) &&
-                      <label htmlFor="return-modal" onClick={() => setOrderId(item?._id)} className="cursor-pointer bg-blue-300 hover:bg-blue-400 duration-300 px-3 py-1 rounded-full">Return</label>
-                    }
-                    {
-                      item?.returnRequest && <p>Return Requested</p>
-                    }
+                    {((item?.deliver && item?.cancel) ||
+                      item?.deliver ||
+                      !item?.cancel ||
+                      !item?.returnRequest) && (
+                      <label
+                        htmlFor="return-modal"
+                        onClick={() => setOrderId(item?._id)}
+                        className="cursor-pointer bg-blue-300 hover:bg-blue-400 duration-300 px-3 py-1 rounded-full"
+                      >
+                        Return
+                      </label>
+                    )}
+                    {item?.returnRequest && <p>Return Requested</p>}
+                  </td>
+                  <td>
+                    {item?.deliver === true && (
+                      <button
+                        onClick={() => handleWriteReview(item)}
+                        className="cursor-pointer bg-red-300 hover:bg-blue-400 duration-300 px-3 py-1 rounded-full"
+                      >
+                        Write a Review
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -145,12 +176,12 @@ const MyOrders = () => {
           </table>
         </div>
       </div>
-      {
-        !processing && <ReturnConfirmModal
+      {!processing && (
+        <ReturnConfirmModal
           setProcessing={setProcessing}
           orderId={orderId}
         ></ReturnConfirmModal>
-      }
+      )}
     </>
   );
 };
