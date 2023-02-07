@@ -27,20 +27,17 @@ const CategoryLayout = () => {
 
         <div className="drawer-side sticky top-[80px]">
           <label htmlFor="category" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-base-100 text-base-content lg:bg-slate-50">
+          <ul className="menu w-80 p-2 bg-base-100 text-base-content lg:bg-slate-50">
             <div className="divider">
               <h2 className='font-semibold pl-4 uppercase'>Shop By Categories</h2>
             </div>
             {
               (!isProductLoading && !isCategoryLoading) &&
               categories.map(category =>
-                <li className="m-0 p-0"
-                  key={category._id}>
-                  <NavLink to={`/category/${category.categoryName}`} className='flex justify-between'>
-                    <span>{category.categoryName}</span>
-                    <span className='bg-[#ddecb0] text-black w-7 h-7 rounded-full flex justify-center items-center text-sm'>({(AllProducts.filter(product => product.category_name === category.categoryName)).length})</span>
-                  </NavLink>
-                </li>
+                <NavLink key={category._id} className={({ isActive }) => isActive ? 'flex justify-between rounded-md px-2 mb-2 bg-[#c9f391]' : 'flex justify-between rounded-md px-2 mb-2 hover:bg-[#c9f391]'} to={`/category/${category.categoryName}`}>
+                  <span>{category.categoryName}</span>
+                  <span className=' text-black w-7 h-7 rounded-full flex justify-center items-center text-sm'>({(AllProducts.filter(product => product.category_name === category.categoryName)).length})</span>
+                </NavLink>
               )
             }
           </ul>
