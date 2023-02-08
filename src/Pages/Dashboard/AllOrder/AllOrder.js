@@ -21,7 +21,7 @@ const AllOrder = () => {
   });
 
   const deliveryMan = AllUsers?.filter(
-    (person) => person?.role === "delivery man"
+    (person) => person?.role === "delivery man" && person?.availabilityStatus === true
   );
   function handleChange(event) {
     const selectedOption = deliveryMan.find(
