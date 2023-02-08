@@ -57,7 +57,7 @@ const Search = () => {
           type="text"
           name="name"
           placeholder="Search for products(e.g. fish, tomato)"
-          // value={searchText}
+          value={searchText}
           onChange={handleOnChage}
           onKeyUp={handleKeyPress}
         />
@@ -70,7 +70,7 @@ const Search = () => {
         </button>
       </div>
       {
-        searchResults.length > 0 && <div className="h-auto max-h-[80vh] absolute bg-white w-[500px] p-5 rounded-md overflow-auto">
+        searchResults.length > 0 && <div className="h-auto max-h-[80vh] absolute bg-white w-[500px] p-5 rounded-md overflow-auto shadow-xl">
           {
             searchResults?.map(result => <Link to={`/products/${result?._id}`} onClick={() => setSearchText("")} key={result?._id}><div className="my-1 p-2 rounded-md flex hover:bg-gray-200">
             <div>
