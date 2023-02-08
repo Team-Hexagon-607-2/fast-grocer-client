@@ -32,6 +32,7 @@ import OperateAllProducts from "../../Pages/Dashboard/OperateAllProducts/Operate
 import Coupon from "../../Pages/Coupon/Coupon";
 import Voucher from "../../Pages/Dashboard/Voucher/Voucher";
 import WriteReview from "../../components/WriteReview/WriteReview";
+import Inventory from "../../Pages/Dashboard/Inventory/Inventory";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -140,6 +141,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoutes>
             <AllBuyers />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/inventory",
+        element: (
+          <AdminRoutes>
+            <Inventory />
           </AdminRoutes>
         ),
       },
