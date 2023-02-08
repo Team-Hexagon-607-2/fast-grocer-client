@@ -3,19 +3,22 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../contexts/AuthProvider';
+import UseToken from '../../hooks/UseToken';
 
 const SignUp = () => {
-    const {register, handleSubmit, reset, formState: {errors}} = useForm();
-    const {createUser, updateUser} = useContext(StateContext);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { createUser, updateUser } = useContext(StateContext);
     const [signUpError, setSignUpError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('');
     const navigate = useNavigate();
+
+    const [token] = UseToken(createdUserEmail);
 
     const handleSignUp = data => {
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                toast('New User added successfully');
+                // toast('New User added successfully');
                 const userInfo = {
                     displayName: data.name
                 }
@@ -24,8 +27,6 @@ const SignUp = () => {
                         saveUser(data.name, data.email, data.accountType);
                     })
                     .catch(err => console.log(err));
-                    navigate('/');
-                    reset();                
             })
             .catch(error => {
                 console.log(error);
@@ -33,9 +34,9 @@ const SignUp = () => {
             });
     }
 
-    const saveUser = (name, email, role)=> {
-        const user = {name, email, role};
-        fetch('https://fg-server.vercel.app/users',{
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role };
+        fetch('https://fg-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -44,7 +45,12 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
-                setCreatedUserEmail(email);
+                if (data.acknowledged) {
+                    toast.success('successfully create user')
+                    setCreatedUserEmail(email)
+                    // navigate('/');
+                    // reset();
+                }
             })
     }
 
@@ -96,12 +102,12 @@ const SignUp = () => {
                         <label className="label">
                             <span className="label-text">Account Type</span>
                         </label>
-                        <select  className="select select-bordered w-full focus:outline-none focus:border focus:border-[#6a9333]"
-                         {...register("accountType",  { required: true })}>                            
+                        <select className="select select-bordered w-full focus:outline-none focus:border focus:border-[#6a9333]"
+                            {...register("accountType", { required: true })}>
                             <option value="buyer">buyer</option>
                             <option value="delivery man">delivery man</option>
                         </select>
-                            
+
                         {errors.name && <p className='text-red-500'>{errors.accountType.message}</p>}
                     </div>
 
@@ -111,7 +117,7 @@ const SignUp = () => {
                     }
                 </form>
                 <p className='text-sm text-center my-3'>Already have an account? <Link className='text-[#84b840] hover:underline' to="/login">Please Login</Link></p>
-                
+
             </div>
         </div>
     );
