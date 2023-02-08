@@ -33,7 +33,6 @@ const Login = () => {
                 setLoginUserEmail(data.email);
             })
             .catch(error => {
-                toast.error(error.message);
                 setLoginError(error.message)
             })
     }
@@ -60,8 +59,6 @@ const Login = () => {
                 setLoginError(error.message)
             });
     }
-
-
 
     const handleResetPassword = (data) => {
         // console.log(data.email);
@@ -136,7 +133,7 @@ const Login = () => {
                     <input className='btn w-full bg-[#84b840] hover:bg-[#6a9333] border-none' value="Login" type="submit" />
                     <div>
                         {
-                            loginError && <p className='text-red-600'>{loginError} </p>
+                            loginError && <p className='text-red-600 text-sm'>* {loginError} </p>
                         }
                     </div>
                 </form>

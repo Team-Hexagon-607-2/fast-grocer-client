@@ -69,6 +69,9 @@ const NavNavLinks = () => {
                 <Link to={`/dashboard/my-orders`} key={order?._id} className="hover:underline text-xs text-[#4CA4BC] inline-block">{order?.createdAt.slice(0, 10)} - Order {order?._id.slice(0, 15) + '...'}</Link>
               )
             }
+            {
+              limitsOrders.length === 0 && <p className="text-center">No Order Found</p>
+            }
           </div>
 
           <div className="mb-3">
