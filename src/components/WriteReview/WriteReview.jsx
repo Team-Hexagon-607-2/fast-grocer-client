@@ -87,7 +87,7 @@ const WriteReview = () => {
                       }}
                     >
                       <Rating
-                        name="hover-feedback"
+                        // name="hover-feedback"
                         value={value}
                         precision={0.5}
                         getLabelText={getLabelText}
