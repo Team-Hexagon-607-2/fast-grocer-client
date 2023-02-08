@@ -79,6 +79,19 @@ export const ContextProvider = ({ children }) => {
     },
   });
 
+  //AllOrders
+  const {
+    data: AllOrders,
+    isLoading: AllOrdersLoading,
+    isError: AllOrderError,
+    refetch: AllOrdersRefetch,
+  } = useQuery({
+    queryKey: ["order"],
+    queryFn: () =>
+      fetch(`https://fg-server.vercel.app/order`).then((res) => res.json()),
+    keepPreviousData: true,
+  });
+
   const handleDecrement = (e, id) => {
     e.preventDefault();
     // Find the index of the item in the cart
@@ -141,8 +154,8 @@ export const ContextProvider = ({ children }) => {
     setCart([]);
   };
 
-  //for firebase authentition
-
+  
+  //for firebase authentication
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -225,6 +238,9 @@ export const ContextProvider = ({ children }) => {
         setOrder,
         refetch,
         coupons,
+        AllOrders,
+        AllOrdersLoading,
+        AllOrdersRefetch,
       }}
     >
       {children}

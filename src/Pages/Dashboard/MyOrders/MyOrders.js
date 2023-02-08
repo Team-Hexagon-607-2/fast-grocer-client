@@ -6,18 +6,21 @@ import { toast } from "react-hot-toast";
 import Loader from "../../../components/Loader/Loader";
 import { useState } from "react";
 import ReturnConfirmModal from "../../../components/Modal/ReturnConfirmModal/ReturnConfirmModal";
+
 const MyOrders = () => {
   const { user } = useContext(StateContext);
   const [processing, setProcessing] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const navigate = useNavigate();
-  const { data, isLoading, refetch } = useQuery({
+  
+  const { data: allOrders = [], isLoading, refetch } = useQuery({
     queryKey: ["returnProduct"],
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/order/${user?.email}`).then((res) =>
         res.json()
       ),
   });
+
   // const {
   //   data: cancel_data,
   //   isLoading: cancelLoading,
@@ -33,7 +36,9 @@ const MyOrders = () => {
       toast.error("Product Delivered and We don't accept any cancel request");
       return;
     }
+
     const cancel = "Cancel Request Sent";
+
     fetch(`https://fg-server.vercel.app/cancel-order/${item?._id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -66,6 +71,7 @@ const MyOrders = () => {
               <tr>
                 <th>S/N</th>
                 <th>Product Info</th>
+                <th>Order Number</th>
                 <th>Total Price</th>
                 <th>Status</th>
                 <th>Paid</th>
@@ -76,9 +82,10 @@ const MyOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.data?.map((item, index) => (
+              {allOrders?.data?.map((item, index) => (
                 <tr key={item?._id}>
                   <th>{index + 1}</th>
+
                   <td>
                     <div className="flex items-center flex-col">
                       {item?.order_products?.map((product) => (
@@ -107,18 +114,25 @@ const MyOrders = () => {
                       ))}
                     </div>
                   </td>
+
+                  <td className="font-semibold">{item?._id}</td>
+
                   <td>
                     <p className="font-semibold font-sm">
                       Total Price: ৳{item?.total_price}
                     </p>
                   </td>
+
                   <td>
                     <p className="text-md ">{item?.status}</p>
                   </td>
+
                   <td className={`${item?.paid === false && "text-red-500"}`}>
                     {item?.paid === false ? "Not Paid" : "Already Paid"}
                   </td>
+
                   <td>{item?.condition}</td>
+                  
                   <td>
                     <p>{item?.cancel}</p>
                     {!item?.cancel && (
@@ -130,6 +144,7 @@ const MyOrders = () => {
                       </button>
                     )}
                   </td>
+                  
                   <td>
                     {((item?.deliver && item?.cancel) ||
                       item?.deliver ||
