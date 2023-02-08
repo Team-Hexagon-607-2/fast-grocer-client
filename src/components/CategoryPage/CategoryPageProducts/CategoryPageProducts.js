@@ -60,7 +60,6 @@ const CategoryPageProducts = () => {
             {categoryProducts.map(categoryProduct => <SingleProduct key={categoryProduct._id} products={categoryProduct}></SingleProduct>)}
           </div>
       }
-
     </div>
   );
 };
