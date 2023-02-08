@@ -1,74 +1,81 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../contexts/AuthProvider';
 import logo from '../../assets/logo/logo.png'
+import UseToken from '../../hooks/UseToken';
 
 const Login = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm();
-    const {signIn, googleSignIn, resetPassword, updateUser} = useContext(StateContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { signIn, googleSignIn, resetPassword, updateUser } = useContext(StateContext);
     const [loginError, setLoginError] = useState('');
-    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [loginUserEmail, setLoginUserEmail] = useState(null);
     const [createdUserEmail, setCreatedUserEmail] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
 
     const from = location.state?.from?.pathname || '/';
 
+    const [token] = UseToken(loginUserEmail);
+
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [token])
+
     const handleLogin = data => {
         setLoginError('');
         signIn(data.email, data.password)
-        .then(result => {
-            const user = result.user;
-            setLoginUserEmail(data.email);
-            navigate(from, {replace: true});
-            
-        })
-        .catch(error => {
-            // console(error.message);
-            setLoginError(error.message)
-        })
-    }
-
-    const handleGoogleSignIn = (data) =>{
-       googleSignIn()
-       .then(result => {
-        const user = result.user;
-        const userInfo = {
-            role: "buyer"
-        }
-
-        updateUser(userInfo)
-            .then(()=> {
-                saveUser(user.displayName, user.email, userInfo.role);
-                navigate(from, {replace: true});
+            .then(result => {
+                const user = result.user;
+                setLoginUserEmail(data.email);
             })
-            .catch(err => {
-                toast.error(err.message)
-            });
-        
-       })
-       .catch(error => {
-        setLoginError(error.message)
-       });
+            .catch(error => {
+                toast.error(error.message);
+                setLoginError(error.message)
+            })
     }
 
-   
+    const handleGoogleSignIn = (data) => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                const userInfo = {
+                    role: "buyer"
+                }
+
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(user.displayName, user.email, userInfo.role);
+                        navigate(from, { replace: true });
+                    })
+                    .catch(err => {
+                        toast.error(err.message)
+                    });
+
+            })
+            .catch(error => {
+                setLoginError(error.message)
+            });
+    }
+
+
 
     const handleResetPassword = (data) => {
-        console.log(data.email);
+        // console.log(data.email);
         resetPassword()
-        .then(result => {
-            const user = result.user;
-            // console.log(user);
-        })
-        .catch(err => console.error(err))
+            .then(result => {
+                const user = result.user;
+                // console.log(user);
+            })
+            .catch(err => console.error(err))
     }
 
-    const saveUser = (name, email, role)=> {
-        const user = {name, email, role};
-        fetch('https://fg-server.vercel.app/users',{
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role };
+        fetch('https://fg-server.vercel.app/users', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -81,7 +88,7 @@ const Login = () => {
             })
     }
 
-    
+
 
     return (
         <div className='flex justify-center items-center'>
@@ -97,11 +104,11 @@ const Login = () => {
                             <span className="label-text">Email</span>
                         </label>
                         <input type='text'
-                         {...register("email", {
-                            required:"Email Address is required"
-                        })} 
-                         className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
-                           {errors.email && <p className='text-red-600 text-sm'>*{errors.email?.message}</p>}
+                            {...register("email", {
+                                required: "Email Address is required"
+                            })}
+                            className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
+                        {errors.email && <p className='text-red-600 text-sm'>*{errors.email?.message}</p>}
                     </div>
 
                     <div className="form-control w-full max-w-xs">
@@ -109,19 +116,19 @@ const Login = () => {
                             <span className="label-text">Password</span>
                         </label>
                         <input type='password'
-                         {...register("password", {
-                            required:"Password is required",
-                            minLength: {
-                                value:6,
-                                message: 'Password must be 6 characters or longer'
-                            }
-                        })}                       
+                            {...register("password", {
+                                required: "Password is required",
+                                minLength: {
+                                    value: 6,
+                                    message: 'Password must be 6 characters or longer'
+                                }
+                            })}
 
-                          className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
+                            className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
                         {errors.password && <p className='text-red-600 text-sm'>*{errors.password?.message}</p>}
-                          
+
                         <label className="label">
-                           <button onClick={handleResetPassword}> <span className="label-text">Forget Password?</span></button>
+                            <button onClick={handleResetPassword}> <span className="label-text">Forget Password?</span></button>
                         </label>
 
 
@@ -129,7 +136,7 @@ const Login = () => {
                     <input className='btn w-full bg-[#84b840] hover:bg-[#6a9333] border-none' value="Login" type="submit" />
                     <div>
                         {
-                           loginError && <p className='text-red-600'>{loginError} </p>  
+                            loginError && <p className='text-red-600'>{loginError} </p>
                         }
                     </div>
                 </form>

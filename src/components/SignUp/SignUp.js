@@ -13,7 +13,7 @@ const SignUp = () => {
     const [createdUserEmail, setCreatedUserEmail] = useState('');
     const navigate = useNavigate();
 
-    const [token] = UseToken(createdUserEmail);
+    // const [token] = UseToken(createdUserEmail);
 
 
     const handleSignUp = data => {

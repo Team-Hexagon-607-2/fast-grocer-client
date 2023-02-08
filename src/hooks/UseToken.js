@@ -4,10 +4,16 @@ const UseToken = email => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    if(email) {
-      console.log('vai useToken emai paice', email);
+    if (email) {
+      fetch(`http://localhost:5000/jwt/${email}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.accessToken) {
+            localStorage.setItem('accessToken', data.accessToken)
+            setToken(data.accessToken);
+          }
+        })
     }
-
   }, [email]);
 
   return [token]

@@ -12,7 +12,7 @@ const NavNavLinks = () => {
   const { data: allOrders = [], isLoading } = useQuery({
     queryKey: ['orderTracking', user?.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/trackingOrder/${user?.email}`);
+      const res = await fetch(`https://fg-server.vercel.app/trackingOrder/${user?.email}`);
       const data = await res.json();
       return data;
     }
