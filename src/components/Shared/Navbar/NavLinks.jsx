@@ -12,7 +12,7 @@ const NavNavLinks = () => {
   const { data: allOrders = [], isLoading } = useQuery({
     queryKey: ['orderTracking', user?.email],
     queryFn: async () => {
-      const res = await fetch(`https://fg-server.vercel.app/orderTracking/${user?.email}`);
+      const res = await fetch(`http://localhost:5000/trackingOrder/${user?.email}`);
       const data = await res.json();
       return data;
     }
@@ -62,12 +62,12 @@ const NavNavLinks = () => {
           <div className="mb-3">
             <h2 className="text-[17px] mb-2 text-slate-600">My last Order</h2>
             {
+              isLoading && <p className="text-center">Loading...</p>
+            }
+            {
               !isLoading && limitsOrders.map(order =>
                 <Link to={`/dashboard/my-orders`} key={order?._id} className="hover:underline text-xs text-[#4CA4BC] inline-block">{order?.createdAt.slice(0, 10)} - Order {order?._id.slice(0, 15) + '...'}</Link>
               )
-            }
-            {
-              isLoading && <p className="text-center">Loading...</p>
             }
           </div>
 

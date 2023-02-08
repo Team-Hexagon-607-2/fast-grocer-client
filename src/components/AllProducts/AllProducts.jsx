@@ -4,6 +4,7 @@ import SingleProduct from "../Home/HomePageProducts/SingleProduct/SingleProduct"
 import sortImg from '../../assets/images/categoryModalIcon/sort.png'
 import Loader from "../Loader/Loader";
 import { toast } from "react-hot-toast";
+import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 
 const AllProducts = () => {
   const [AllProducts, setAllProducts] = useState([]);
@@ -75,13 +76,13 @@ const AllProducts = () => {
         <p>page {page + 1} of 8</p>
 
         <div className="flex items-center">
-          <button className='bg-slate-300 duration-300 px-2 py-1 text-sm rounded-md' onClick={pageDecrease}>Previous</button>
+          <button className='bg-slate-300 duration-300 px-2 py-2 text-sm rounded-md' onClick={pageDecrease}><AiOutlineDoubleLeft /></button>
           <div className="mx-2">
             {
               array.map(number => <button key={number.index} onClick={() => setPage(number)} className={(page === number) ? ' mx-1 w-8 h-8 rounded-full bg-[#ddecb0]' : 'bg-slate-200 mx-1 w-8 h-8 rounded-full'}>{number + 1}</button>)
             }
           </div>
-          <button className='bg-slate-300 duration-300 px-2 py-1 text-sm rounded-md' onClick={pageIncrease}>Next</button>
+          <button className='bg-slate-300 duration-300 px-2 py-2 text-sm rounded-md' onClick={pageIncrease}><AiOutlineDoubleRight /></button>
         </div>
       </div>
     </div>
