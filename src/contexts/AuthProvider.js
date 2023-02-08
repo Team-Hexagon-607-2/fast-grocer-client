@@ -70,14 +70,14 @@ export const ContextProvider = ({ children }) => {
   });
 
   // Coupon
-  const {data: coupons} = useQuery({
-    queryKey: ['coupon'],
-    queryFn: async () =>{
-      const res = await fetch('https://fg-server.vercel.app/get-coupons')
+  const { data: coupons } = useQuery({
+    queryKey: ["coupon"],
+    queryFn: async () => {
+      const res = await fetch("https://fg-server.vercel.app/get-coupons");
       const data = await res.json();
       return data;
-    }
-  })
+    },
+  });
 
   const handleDecrement = (e, id) => {
     e.preventDefault();
@@ -224,7 +224,7 @@ export const ContextProvider = ({ children }) => {
         order,
         setOrder,
         refetch,
-        coupons
+        coupons,
       }}
     >
       {children}
