@@ -182,6 +182,7 @@ export const ContextProvider = ({ children }) => {
   const logOut = () => {
     setLoading(true);
     toast.success("Logout Successfully");
+    localStorage.removeItem('accessToken')
     return signOut(auth);
   };
 
