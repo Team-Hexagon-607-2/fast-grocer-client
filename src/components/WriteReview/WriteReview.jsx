@@ -73,7 +73,7 @@ const WriteReview = () => {
               <img
                 src={product?.imageUrl}
                 className="w-14 h-14 object-contain"
-              />
+              alt=""/>
               <div>
                 <p className="text-sm">{product?.name}</p>
 
