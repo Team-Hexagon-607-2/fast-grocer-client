@@ -21,7 +21,7 @@ const Search = () => {
     }
     ; (
       async () => {
-        const url = `http://localhost:5000/searchproduct?name=${searchText}`;
+        const url = `https://fg-server.vercel.app/searchproduct?name=${searchText}`;
         const res = await fetch(url);
         const data = await res.json();
         setSearchResults(data);
