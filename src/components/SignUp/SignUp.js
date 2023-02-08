@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../contexts/AuthProvider';
 import UseToken from '../../hooks/UseToken';
+import logo from '../../assets/logo/logo.png';
 
 const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -13,6 +14,7 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const [token] = UseToken(createdUserEmail);
+
 
     const handleSignUp = data => {
         createUser(data.email, data.password)
@@ -58,6 +60,9 @@ const SignUp = () => {
     return (
         <div className='flex justify-center items-center'>
             <div className='w-96 p-7'>
+                <Link to='/'>
+                    <img src={logo} className='w-[100px] mx-auto mb-2' alt="" />
+                </Link>
                 <h2 className='text-2xl font-semibold text-center mb-3'>Sign Up</h2>
                 <form onSubmit={handleSubmit(handleSignUp)}>
 

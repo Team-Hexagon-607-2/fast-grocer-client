@@ -5,7 +5,7 @@ const UseToken = email => {
 
   useEffect(() => {
     if(email) {
-      console.log('vai useToken emai paice', email)
+      console.log('vai useToken emai paice', email);
     }
 
   }, [email]);

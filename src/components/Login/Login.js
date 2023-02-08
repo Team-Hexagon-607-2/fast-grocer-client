@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../contexts/AuthProvider';
+import logo from '../../assets/logo/logo.png'
 
 const Login = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
@@ -85,6 +86,9 @@ const Login = () => {
     return (
         <div className='flex justify-center items-center'>
             <div className='w-96 p-7'>
+                <Link to='/'>
+                    <img src={logo} className='w-[100px] mx-auto mb-2' alt="" />
+                </Link>
                 <h2 className='text-2xl font-semibold text-center mb-3'>Please Login</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>
 
