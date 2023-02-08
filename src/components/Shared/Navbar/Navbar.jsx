@@ -77,12 +77,9 @@ const Navbar = () => {
             {/* Desktop navbar link such as page home etc */}
 
             <div className="dropdown dropdown-start text-[14px] w-52 bg-[#84b840] py-2 px-3 relative">
-              <label
-                tabIndex={0}
-                className="cursor-pointer text-white block"
-              >
-                <FaThList className="inline-block mr-3" />
-                Categories <RiArrowDownSLine className="inline-block" />
+              <label tabIndex={0} className="cursor-pointer text-white flex items-center justify-between" >
+                <span><FaThList className="inline-block mr-3" /> Categories </span>
+                <RiArrowDownSLine className="inline-block h-5 w-5 font-semibold" />
               </label>
               <ul
                 tabIndex={0}
@@ -90,7 +87,7 @@ const Navbar = () => {
               >
                 <div className="h-[300px] overflow-auto">
                   {
-                    categories.map(category => <p key={category._id} className='px-2 py-1 mb-2 hover:bg-[#c9f391] rounded-sm'><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link> </p>)
+                    categories.map(category => <Link key={category._id} to={`/category/${category.categoryName}`} className='px-2 py-1 mb-2 hover:bg-[#c9f391] rounded-sm block'>{category.categoryName}</Link>)
                   }
                 </div>
               </ul>
