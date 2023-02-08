@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../contexts/AuthProvider';
 import UseToken from '../../hooks/UseToken';
 import logo from '../../assets/logo/logo.png';
+import { useEffect } from 'react';
 
 const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -13,14 +14,20 @@ const SignUp = () => {
     const [createdUserEmail, setCreatedUserEmail] = useState('');
     const navigate = useNavigate();
 
-    // const [token] = UseToken(createdUserEmail);
+    const [token] = UseToken(createdUserEmail);
+
+    useEffect(() => {
+        if (token) {
+            navigate('/');
+            toast.success('successfully create user')
+        }
+    }, [token]);
 
 
     const handleSignUp = data => {
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                // toast('New User added successfully');
                 const userInfo = {
                     displayName: data.name
                 }
@@ -28,10 +35,10 @@ const SignUp = () => {
                     .then(() => {
                         saveUser(data.name, data.email, data.accountType);
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => toast.error(err.message));
             })
             .catch(error => {
-                console.log(error);
+                toast.error(error.message)
                 setSignUpError(error.message);
             });
     }
@@ -48,10 +55,8 @@ const SignUp = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    toast.success('successfully create user')
                     setCreatedUserEmail(email)
-                    // navigate('/');
-                    // reset();
+                    reset();
                 }
             })
     }
@@ -97,7 +102,7 @@ const SignUp = () => {
                         <input type='password'
                             {...register("password", {
                                 required: "Password is required",
-                                minLength: { value: 6, message: "Password munst be 6 character logn" }
+                                minLength: { value: 6, message: "Password must be 6 character long" }
                             })}
                             className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
                         {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
@@ -118,7 +123,7 @@ const SignUp = () => {
 
                     <input className='btn w-full mt-4 bg-[#84b840] hover:bg-[#6a9333] border-none' value="Sign Up" type="submit" />
                     {
-                        signUpError && <p className='text-red-600'>{signUpError}</p>
+                        signUpError && <p className='text-red-600 text-sm'> * {signUpError}</p>
                     }
                 </form>
                 <p className='text-sm text-center my-3'>Already have an account? <Link className='text-[#84b840] hover:underline' to="/login">Please Login</Link></p>
