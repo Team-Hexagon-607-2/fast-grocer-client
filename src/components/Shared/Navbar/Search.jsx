@@ -17,7 +17,7 @@ const Search = () => {
   useEffect(() => {
     if (searchText === "" || !searchText) {
       return setSearchResults([]);
-
+      
     }
     ; (
       async () => {
@@ -27,7 +27,7 @@ const Search = () => {
         setSearchResults(data);
       }
     )()
-    // return () => setSearchText("");
+      // return () => setSearchText("");
   }, [searchText, setSearchText])
 
   console.log(searchText);
@@ -70,20 +70,18 @@ const Search = () => {
         </button>
       </div>
       {
-        searchResults.length > 0 && <div className="p-5 bg-white">
-          <div className="h-auto max-h-[80vh] absolute bg-white w-[500px] rounded-md overflow-auto">
-            {
-              searchResults?.map(result => <Link to={`/products/${result?._id}`} onClick={() => setSearchText("")} key={result?._id}><div className="my-1 p-2 rounded-md flex hover:bg-gray-200">
-                <div>
-                  <img className="w-12 h-12 rounded-md mr-2" src={result?.imageUrl} alt={result?.name} />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold">{result?.name}</p>
-                  <p className="text-sm text-[#84b840]">৳{result?.price}</p>
-                </div>
-              </div></Link>)
-            }
-          </div>
+        searchResults.length > 0 && <div className="h-auto max-h-[80vh] absolute bg-white w-[500px] p-5 rounded-md overflow-auto">
+          {
+            searchResults?.map(result => <Link to={`/products/${result?._id}`} onClick={() => setSearchText("")} key={result?._id}><div className="my-1 p-2 rounded-md flex hover:bg-gray-200">
+            <div>
+              <img className="w-12 h-12 rounded-md mr-2" src={result?.imageUrl} alt={result?.name} />
+            </div>
+            <div>
+              <p className="text-sm font-semibold">{result?.name}</p>
+              <p className="text-sm text-[#84b840]">৳{result?.price}</p>
+            </div>
+          </div></Link>)
+          }
         </div>
       }
     </div>
