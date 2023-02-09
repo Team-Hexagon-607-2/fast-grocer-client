@@ -37,6 +37,7 @@ const SearchPage = () => {
         </div>
       ) : (
         <div className=" mt-[10px] sm:mt-[50px]">
+          <h2 className="w-11/12 mx-auto">{data?.length} Search Results found for <span className="font-semibold">{searchText}</span></h2>
           <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 mx-auto py-10">
             {data?.map((product) => (
               <SingleProduct key={product?.id} products={product} />

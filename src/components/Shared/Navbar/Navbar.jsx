@@ -20,7 +20,7 @@ const Navbar = () => {
   const styles = {
     wrapper: "bg-white w-full mx-auto hidden lg:block",
     mobileWrapper: " w-full h-[80px] bg-[#92B137] block lg:hidden",
-    flexRow: "lg:flex w-full lg:flex-row justify-between items-center px-5 py-3",
+    flexRow: "lg:flex w-full lg:flex-row justify-between items-center px-5 py-1",
   };
 
   return (
@@ -39,7 +39,7 @@ const Navbar = () => {
                 <img
                   src={logo}
                   alt="Fast_Grocer"
-                  className="w-[125px]"
+                  className="w-[115px]"
                 />
               </p>
             </Link>
