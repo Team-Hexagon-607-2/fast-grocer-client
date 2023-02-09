@@ -19,7 +19,8 @@ import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
 import logo from "../../assets/logo/logo.png";
 import Loader from "../../components/Loader/Loader";
-import { TbPlaylistAdd } from "react-icons/tb";
+import { TbPlaylistAdd, TbReport } from "react-icons/tb";
+import Reports from "./../../Pages/Dashboard/Reports/Reports";
 
 const DashboardLayout = () => {
   const { user, logOut } = useContext(StateContext);
@@ -102,6 +103,12 @@ const DashboardLayout = () => {
                   <Link className="text-slate-700" to="/dashboard/inventory">
                     <RiStore2Line />
                     Inventory
+                  </Link>
+                </li>
+                <li className="text-[14px] font-semibold">
+                  <Link className="text-slate-700" to="/dashboard/reports">
+                    <TbReport />
+                    Reports
                   </Link>
                 </li>
               </>
