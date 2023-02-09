@@ -11,14 +11,13 @@ const Login = () => {
     const { signIn, googleSignIn, resetPassword, updateUser } = useContext(StateContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState(null);
-    const [createdUserEmail, setCreatedUserEmail] = useState('');
+    // const [createdUserEmail, setCreatedUserEmail] = useState('');
+
     const location = useLocation();
     const navigate = useNavigate();
-
     const from = location.state?.from?.pathname || '/';
 
     const [token] = UseToken(loginUserEmail);
-
     useEffect(() => {
         if (token) {
             navigate(from, { replace: true });
@@ -44,16 +43,7 @@ const Login = () => {
                 const userInfo = {
                     role: "buyer"
                 }
-
-                updateUser(userInfo)
-                    .then(() => {
-                        saveUser(user.displayName, user.email, userInfo.role);
-                        navigate(from, { replace: true });
-                    })
-                    .catch(err => {
-                        toast.error(err.message)
-                    });
-
+                saveUser(user.displayName, user.email, userInfo.role);
             })
             .catch(error => {
                 setLoginError(error.message)
@@ -72,8 +62,9 @@ const Login = () => {
 
     const saveUser = (name, email, role) => {
         const user = { name, email, role };
+
         fetch('https://fg-server.vercel.app/users', {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
@@ -81,11 +72,11 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                setCreatedUserEmail(email);
+                if (data.acknowledged) {
+                    setLoginUserEmail(email);
+                }
             })
     }
-
-
 
     return (
         <div className='flex justify-center items-center'>
