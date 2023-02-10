@@ -27,7 +27,6 @@ const Search = () => {
         setSearchResults(data);
       }
     )()
-      // return () => setSearchText("");
   }, [searchText, setSearchText])
 
   console.log(searchText);
