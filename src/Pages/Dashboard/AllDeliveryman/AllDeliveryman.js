@@ -2,39 +2,53 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { toast } from 'react-hot-toast';
+import Loader from '../../../components/Loader/Loader';
+import { useContext } from 'react';
+import { StateContext } from '../../../contexts/AuthProvider';
 
 const AllDeliveryman = () => {
+    const { logOut } = useContext(StateContext);
+
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['name'],
         queryFn: async () => {
-            const res = await fetch('https://fg-server.vercel.app/deliverymen');
+            const res = await fetch('http://localhost:5000/allDeliverymen', {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                },
+            });
+
             const data = await res.json();
+            if (data?.statusCode === 401 || data?.statusCode === 403) {
+                return logOut()
+            }
+
             return data;
         }
-    })
+    });
 
-    const handleAcceptRequest = (email) =>{
+    const handleAcceptRequest = (email) => {
         console.log(email);
-        fetch(`https://fg-server.vercel.app/deliveryman-request-accept?email=${email}`,{
+        fetch(`https://fg-server.vercel.app/deliveryman-request-accept?email=${email}`, {
             method: 'PUT'
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            refetch();
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                refetch();
+            })
     }
-    
-    const handleRejectRequest = (email) =>{
+
+    const handleRejectRequest = (email) => {
         console.log(email);
-        fetch(`https://fg-server.vercel.app/deliveryman-request-reject?email=${email}`,{
+        fetch(`https://fg-server.vercel.app/deliveryman-request-reject?email=${email}`, {
             method: 'PUT'
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            refetch()
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                refetch()
+            })
     }
 
 
@@ -93,7 +107,7 @@ const AllDeliveryman = () => {
                                             user?.certification && <>
                                                 <PhotoProvider>
                                                     <PhotoView src={user?.certification}>
-                                                        <img src={user?.certification} alt="" className='cursor-pointer w-16 h-16'/>
+                                                        <img src={user?.certification} alt="" className='cursor-pointer w-16 h-16' />
                                                     </PhotoView>
                                                 </PhotoProvider>
                                             </>

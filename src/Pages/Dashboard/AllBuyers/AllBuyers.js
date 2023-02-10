@@ -11,7 +11,7 @@ const AllBuyers = () => {
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['name'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/buyers', {
+            const res = await fetch('http://localhost:5000/allBuyers', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
@@ -25,10 +25,6 @@ const AllBuyers = () => {
             return data;
         }
     });
-
-    if (isLoading) {
-        return <Loader />
-    }
 
     const handleDelete = user => {
         console.log(user._id);
