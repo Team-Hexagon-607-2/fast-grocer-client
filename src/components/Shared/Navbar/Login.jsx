@@ -9,7 +9,6 @@ import { BsPeople } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { StateContext } from "../../../contexts/AuthProvider";
-import { BiLogOutCircle } from "react-icons/bi";
 const Login = () => {
   const { user, logOut } = useContext(StateContext);
   return (
