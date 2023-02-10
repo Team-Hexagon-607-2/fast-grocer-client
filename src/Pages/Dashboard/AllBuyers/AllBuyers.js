@@ -7,25 +7,29 @@ const AllBuyers = () => {
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['name'],
         queryFn: async () => {
-            const res = await fetch('https://fg-server.vercel.app/buyers');
+            const res = await fetch('https://fg-server.vercel.app/buyers', {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                },
+            });
             const data = await res.json();
             return data;
         }
-    })
+    });
 
-    
+
     const handleDelete = user => {
         console.log(user._id);
         fetch(`https://fg-server.vercel.app/users/${user._id}`, {
             method: 'DELETE'
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.deletedCount > 0){
-                refetch();
-                toast.success(`${user.name} deleted successfully`)
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`${user.name} deleted successfully`)
+                }
+            })
     }
 
 
@@ -58,7 +62,7 @@ const AllBuyers = () => {
                                         {user.email}
                                     </td>
                                     <th>
-                                        <button onClick={()=> handleDelete(user)}  className="btn bg-red-600 btn-xs">Delete</button>
+                                        <button onClick={() => handleDelete(user)} className="btn bg-red-600 btn-xs">Delete</button>
                                     </th>
                                 </tr>)
                         }
