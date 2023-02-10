@@ -24,6 +24,7 @@ const Coupon = () => {
     const updatedData = {
       coupon_name: data?.coupon_name.toLowerCase(),
       discount_amount: parseInt(data?.discount_amount),
+      condition_amount: parseInt(data?.condition_amount),
       expire_date: data?.expire_date,
       couponAddDate: date
     }
@@ -52,17 +53,21 @@ const Coupon = () => {
       </div>
       {showCouponForm && <div className='my-5'>
         <p onClick={handleHideCouponForm} className="hover:underline mb-2 inline-block cursor-pointer px-3 text-sm">Hide</p>
-        <form onSubmit={handleSubmit(handleAddCoupon)} className="flex justify-evenly">
-          <div className="form-control w-full max-w-xs">
-            <input type="text" placeholder="Coupon Name" className="input input-sm input-bordered w-full max-w-xs" {...register("coupon_name", { required: "Add Coupon Name" })} />
+        <form onSubmit={handleSubmit(handleAddCoupon)} className="flex justify-evenly mx-2">
+          <div className="form-control w-full mx-2">
+            <input type="text" placeholder="Coupon Name" className="input input-sm input-bordered w-full" {...register("coupon_name", { required: "Add Coupon Name" })} />
             {errors?.coupon_name && <p className='text-red-600 text-sm'>*{errors?.coupon_name?.message}</p>}
           </div>
-          <div className="form-control w-full max-w-xs">
-            <input type="text" placeholder="Set Discount Ammount" className="input input-sm input-bordered w-full max-w-xs" {...register("discount_amount", { required: "Set a Discount Amount" })} />
+          <div className="form-control w-full mx-2">
+            <input type="text" placeholder="Set Discount Ammount" className="input input-sm input-bordered w-full" {...register("discount_amount", { required: "Set a Discount Amount" })} />
             {errors?.discount_amount && <p className='text-red-600 text-sm'>*{errors?.discount_amount?.message}</p>}
           </div>
-          <div className="form-control w-full max-w-xs">
-            <input type="date" placeholder="Type here" className="input input-sm input-bordered w-full max-w-xs" {...register("expire_date", { required: "Select Expiration Date" })} />
+          <div className="form-control w-full mx-2">
+            <input type="text" placeholder="Set Minimal Condition Ammount" className="input input-sm input-bordered w-full" {...register("condition_amount", { required: "Set a Condition Amount" })} />
+            {errors?.condition_amount && <p className='text-red-600 text-sm'>*{errors?.condition_amount?.message}</p>}
+          </div>
+          <div className="form-control w-full mx-2">
+            <input type="date" placeholder="Type here" className="input input-sm input-bordered w-full" {...register("expire_date", { required: "Select Expiration Date" })} />
             {errors?.expire_date && <p className='text-red-600 text-sm'>*{errors?.expire_date?.message}</p>}
           </div>
           <button className="btn btn-sm bg-[#84b840] hover:bg-[#6a9333] border-none max-w-xs">Add</button>
