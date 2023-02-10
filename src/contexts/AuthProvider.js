@@ -154,7 +154,7 @@ export const ContextProvider = ({ children }) => {
     setCart([]);
   };
 
-  
+
   //for firebase authentication
   const createUser = (email, password) => {
     setLoading(true);
