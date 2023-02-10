@@ -1,7 +1,14 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { Form } from 'react-router-dom';
 
 const AddProduct = () => {
+  const {register, handleSubmit, reset, formState: {errors}} = useForm();
+ 
+  const handleAddProduct=data=>{
+     console.log(data);
+  }
+
     return (
         <div className="">
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600">
@@ -9,7 +16,7 @@ const AddProduct = () => {
                Add Product
             </h1>
   
-        <form>
+        <form onSubmit={handleSubmit(handleAddProduct)}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="form-control w-full ">
               <label className="label">
@@ -18,7 +25,7 @@ const AddProduct = () => {
   
               <input
                 type="text"
-                
+                {...register("resalePrice", {})}
                 placeholder="name"
                
                 className="input input-bordered w-full "
