@@ -44,7 +44,7 @@ const Coupon = () => {
       })
   }
 
-  console.log(coupons);
+  refetch();
 
   return (
     <div>
@@ -81,6 +81,7 @@ const Coupon = () => {
               <th>S/N</th>
               <th>Coupon Name</th>
               <th>Discount Amount</th>
+              <th>Condition Amount</th>
               <th>Entry Date</th>
               <th>Expire Date</th>
               <th>Action</th>
@@ -92,6 +93,7 @@ const Coupon = () => {
                 <th>{i+1}</th>
                 <td>{coupon?.coupon_name}</td>
                 <td>৳{coupon?.discount_amount}</td>
+                <td>৳{coupon?.condition_amount}</td>
                 <td>{coupon?.couponAddDate}</td>
                 <td>{coupon?.expire_date}</td>
                 <td>
