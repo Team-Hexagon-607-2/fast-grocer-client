@@ -9,7 +9,7 @@ const useFindAdmin = email => {
             fetch(`https://fg-server.vercel.app/users/admin/${email}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     setIsAdmin(data.isAdmin);
                     setIsAdminLoading(false);
                 })

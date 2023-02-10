@@ -1,22 +1,34 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { useContext } from 'react';
 import { toast } from 'react-hot-toast';
+import Loader from '../../../components/Loader/Loader';
+import { StateContext } from '../../../contexts/AuthProvider';
 
 const AllBuyers = () => {
+    const { logOut } = useContext(StateContext);
 
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['name'],
         queryFn: async () => {
-            const res = await fetch('https://fg-server.vercel.app/buyers', {
+            const res = await fetch('http://localhost:5000/buyers', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
             });
+
             const data = await res.json();
+            if (data?.statusCode === 401 || data?.statusCode === 403) {
+                return logOut();
+            }
+
             return data;
         }
     });
 
+    if (isLoading) {
+        return <Loader />
+    }
 
     const handleDelete = user => {
         console.log(user._id);
@@ -31,7 +43,6 @@ const AllBuyers = () => {
                 }
             })
     }
-
 
     return (
         <div className=''>
@@ -67,9 +78,6 @@ const AllBuyers = () => {
                                 </tr>)
                         }
                     </tbody>
-
-
-
                 </table>
             </div>
         </div>

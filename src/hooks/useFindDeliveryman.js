@@ -8,7 +8,7 @@ const useFindDeliveryman = email => {
             fetch(`https://fg-server.vercel.app/users/deliverymen/${email}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     setIsDeliveryman(data?.isDeliveryman);
                     setIsDeliverymanLoading(false);
                 })
