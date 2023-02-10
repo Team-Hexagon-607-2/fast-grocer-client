@@ -30,12 +30,12 @@ const Sales = () => {
   console.log(product_sale_price);
 
   const salesPriceWithoutShippingFee = totalSales - totalShipping;
-  const netProfit = (salesPriceWithoutShippingFee / 100) * 20;
+  const netProfit = (salesPriceWithoutShippingFee / 100) * 23.3;
   const allCost = (salesPriceWithoutShippingFee / 100) * 10;
-  const productCost = (salesPriceWithoutShippingFee / 100) * 70;
+  const productCost = (salesPriceWithoutShippingFee / 100) * 67.7;
   if (AllOrdersLoading) return <div>Loading</div>;
   return (
-    <div>
+    <div className="overflow-hidden p-2">
       <div className="">
         <div className="flex flex-row flex-wrap">
           <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
@@ -106,7 +106,7 @@ const Sales = () => {
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">Product Cost</h2>
                 <h3 class="mt-2 text-xl font-bold text-orange-500 text-left">
-                  Bdt {productCost}
+                  Bdt {productCost.toFixed(2)}
                 </h3>
 
                 <button class="text-sm mt-6 px-4 py-2 bg-orange-400  text-white rounded-lg  tracking-wider hover:bg-orange-500 outline-none">
@@ -122,7 +122,7 @@ const Sales = () => {
                   All Management Cost
                 </h2>
                 <h3 class="mt-2 text-xl font-bold text-orange-500 text-left">
-                  Bdt {allCost}
+                  Bdt {allCost.toFixed(2)}
                 </h3>
 
                 <button class="text-sm mt-6 px-4 py-2 bg-orange-400  text-white rounded-lg  tracking-wider hover:bg-orange-500 outline-none">
@@ -138,7 +138,7 @@ const Sales = () => {
                   Net Profit or Revenue
                 </h2>
                 <h3 class="mt-2 text-xl font-bold text-orange-500 text-left">
-                  Bdt {netProfit}
+                  Bdt {netProfit.toFixed(2)}
                 </h3>
 
                 <button class="text-sm mt-6 px-4 py-2 bg-orange-400  text-white rounded-lg  tracking-wider hover:bg-orange-500 outline-none">
