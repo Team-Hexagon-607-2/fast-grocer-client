@@ -1,20 +1,29 @@
 import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
+import { TbDiscount2 } from 'react-icons/tb';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const Voucher = () => {
   const { coupons } = useContext(StateContext);
   return (
-    <div>
-      <h2>Available Voucher</h2>
-      {coupons?.map(coupon => <div key={coupon?._id} className="w-80 h-52 bg-green-400 rounded-md flex items-center justify-center">
-        <div>
-          <p className='text-4xl font-bold text-center'>Save <span className='text-white'>{coupon?.discount_amount}</span> Tk</p>
-          <p className='text-2xl font-semibold text-center'>Code: {coupon?.coupon_name}</p>
-          <p className='text-center'>Expire: {coupon?.expire_date}</p>
-        </div>
-      </div>)}
+    <div className='mx-5'>
+      <h2 className='text-center md:text-2xl font-bold mb-4 p-0 md:p-10'>Available Voucher</h2>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
+        {coupons?.map(coupon => <div key={coupon?._id} className="flex border-2 border-slate-100 rounded-md">
+          <div className='bg-green-400 h-40 w-[300px] border-r-slate-800 border-dashed border-r-2 p-3 flex flex-col justify-center rounded-l-md relative'>
+            <p>Discount Coupon</p>
+            <p className='text-3xl font-bold'>Save <span className='text-white'>{coupon?.discount_amount}</span> Tk</p>
+            <p className='text-sm font-semibold'>Minimum spend {coupon?.condition_amount} Tk</p>
+            <p className=''>Expire: {coupon?.expire_date}</p>
+          <TbDiscount2 className='absolute text-green-200 text-[80px] right-0 top-0'/>
+          </div>
+          <div className='bg-white h-40 w-[200px] p-3 flex justify-center items-center flex-col rounded-r-md'>
+            <p className='text-sm'>Voucher Code</p>
+            <p className='font-semibold text-center text-xl'>{coupon?.coupon_name}</p>
+          </div>
+        </div>)}
+      </div>
     </div>
   );
 };
