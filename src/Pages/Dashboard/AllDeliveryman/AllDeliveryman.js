@@ -17,12 +17,10 @@ const AllDeliveryman = () => {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
             });
-
             const data = await res.json();
             if (data?.statusCode === 401 || data?.statusCode === 403) {
                 return logOut()
             }
-
             return data;
         }
     });
@@ -69,7 +67,7 @@ const AllDeliveryman = () => {
     return (
         <div className=''>
             <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">All Delivery Mans</h2>
-            <div className="overflow-x-auto w-full">
+            <div className="overflow-x-auto w-full px-6">
                 <table className="table table-compact w-full">
 
                     <thead>

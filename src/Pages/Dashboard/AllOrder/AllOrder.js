@@ -152,7 +152,7 @@ const AllOrder = () => {
         All Orders
       </h2>
 
-      <div className="overflow-x-auto overflow-y-auto w-full">
+      <div className="overflow-x-auto overflow-y-auto w-full px-6">
         <div>{isLoading && <Loader />}</div>
         <table className="table table-compact w-full">
           <thead>
