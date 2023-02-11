@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useContext } from 'react';
 import { toast } from 'react-hot-toast';
+import Loader from '../../../components/Loader/Loader';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const AllBuyers = () => {
@@ -22,6 +23,10 @@ const AllBuyers = () => {
             return data;
         }
     });
+
+    if(isLoading) {
+        return <Loader />
+    }
 
     const handleDelete = user => {
         console.log(user._id);

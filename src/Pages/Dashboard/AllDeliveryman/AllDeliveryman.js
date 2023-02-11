@@ -25,6 +25,10 @@ const AllDeliveryman = () => {
         }
     });
 
+    if(isLoading) {
+        return <Loader />
+    }
+
     const handleAcceptRequest = (email) => {
         console.log(email);
         fetch(`https://fg-server.vercel.app/deliveryman-request-accept?email=${email}`, {
