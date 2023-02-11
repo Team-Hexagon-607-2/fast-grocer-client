@@ -7,12 +7,12 @@ import { useContext } from 'react';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const AllDeliveryman = () => {
-    const { logOut } = useContext(StateContext);
+    const { user, logOut } = useContext(StateContext);
 
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['name'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allDeliverymen', {
+            const res = await fetch(`http://localhost:5000/allDeliverymen?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },

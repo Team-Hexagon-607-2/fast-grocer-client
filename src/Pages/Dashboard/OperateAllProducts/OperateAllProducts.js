@@ -11,7 +11,7 @@ const OperateAllProducts = () => {
   const { data: products, isLoading, refetch } = useQuery({
     queryKey: ['name'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/all-products', {
+      const res = await fetch(`http://localhost:5000/all-products?email=${user?.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         }

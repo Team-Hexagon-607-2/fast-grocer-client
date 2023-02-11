@@ -2,16 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useContext } from 'react';
 import { toast } from 'react-hot-toast';
-import Loader from '../../../components/Loader/Loader';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const AllBuyers = () => {
-    const { logOut } = useContext(StateContext);
+    const { user, logOut } = useContext(StateContext);
 
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['name'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allBuyers', {
+            const res = await fetch(`http://localhost:5000/allBuyers?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },

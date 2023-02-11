@@ -8,13 +8,13 @@ import { useContext } from "react";
 import { StateContext } from "../../../contexts/AuthProvider";
 
 const AllOrder = () => {
+  const {user, logOut } = useContext(StateContext);
   const [selectedValue, setSelectedValue] = useState({});
-  const { logOut } = useContext(StateContext);
 
   const { data: allOrders, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["order", "cancel-order"],
     queryFn: () =>
-      fetch(`http://localhost:5000/allOrder`, {
+      fetch(`http://localhost:5000/allOrders?email=${user?.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
