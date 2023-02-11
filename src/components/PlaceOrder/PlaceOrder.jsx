@@ -238,7 +238,7 @@ const PlaceOrder = () => {
         </div>
 
         <div className="flex items-center justify-between">
-          <button onClick={handlePayment} className='border px-3 py-1 rounded-md text-white bg-green-500 hover:bg-green-600 duration-500'>Pay With Card</button>
+          <button onClick={handlePayment} className='border px-3 py-1 rounded-md text-white bg-[#84b840] hover:bg-[#6a9333] duration-300'>Pay With Card</button>
           <button onClick={handleOrderSubmit} disabled={!checked} className="btn btn-sm rounded-md btn-primary" > Confirm Order</button>
         </div>
       </div>

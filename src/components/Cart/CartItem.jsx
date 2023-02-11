@@ -21,19 +21,19 @@ const CartItem = ({ cart }) => {
             <p className="text-slate-600 text-sm">{cart?.bundle}</p>
             <p className="text-slate-600 text-sm">Price: {cart?.price} ৳</p>
             <p className="text-slate-600 text-sm">SubTotal: {subTotal} ৳</p>
-            <div className="sm:text-xl text-[13px] font-bold ">
+            <div className=" ">
 
               <div className="rounded-[2px]">
-                <span className="mr-2 text-sm font-bold">{" "}Quantity:</span>
+                <span className="mr-2 text-sm">{" "}Qty:</span>
                 <span
                   onClick={(e) => handleDecrement(e, cart?._id)}
-                  className=" hover:bg-[#6BA22C]  cursor-pointer py-1 px-4 sm:px-5 sm:py-1 bg-slate-100 text-lg border-[1px] border-slate-200 ">-</span>
-                <span className=" py-1 px-4 sm:px-5  sm:py-1 bg-slate-100 text-lg border-[1px] border-slate-200">
+                  className=" hover:bg-[#6BA22C] cursor-pointer bg-slate-100 text-lg border-[1px] border-slate-200 ">-</span>
+                <span className=" bg-slate-100 border-[1px] border-slate-200">
                   {cart?.qunatity}
                 </span>
                 <span
                   onClick={(e) => handleIncrement(e, cart?._id)}
-                  className="hover:bg-[#6BA22C]  cursor-pointer  py-1 px-4 sm:px-5  sm:py-1 bg-slate-100 text-lg border-[1px] border-slate-200"
+                  className="hover:bg-[#6BA22C]  cursor-pointer bg-slate-100 text-lg border-[1px] border-slate-200"
                 >
                   +
                 </span>
