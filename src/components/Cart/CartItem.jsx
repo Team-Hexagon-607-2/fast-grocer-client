@@ -8,20 +8,22 @@ const CartItem = ({ cart }) => {
   return (
     <div className="border rounded-md">
       <div className="flex items-center justify-between">
-        <div className="flex items-center justify-around w-full">
-          <div className="">
-            <img
-              src={cart?.imageUrl}
-              className="w-20 h-20 object-contain" alt=""
-            />
-          </div>
+        <div className="grid grid-cols-3 gap-x-5 w-full">
 
-          <div>
-            <p className="font-semibold">{cart?.name}</p>
-            <p className="text-slate-600 text-sm">{cart?.bundle}</p>
-            <p className="text-slate-600 text-sm">Price: {cart?.price} ৳</p>
+          <div className="flex items-center">
+            <div className="">
+              <img
+                src={cart?.imageUrl}
+                className="w-20 h-20 object-contain" alt=""
+              />
+            </div>
+            <div>
+              <p className="font-semibold text-sm">{cart?.name}</p>
+              <p className="text-slate-600 text-[12px]">{cart?.bundle}</p>
+              <p className="text-slate-600 text-[12px]">Price: {cart?.price} ৳</p>
+            </div>
           </div>
-          <div className="rounded-[2px]">
+          <div className="rounded-[2px] mx-auto my-auto">
             <span className="mr-2 text-sm">{" "}Qty:</span>
             <span
               onClick={(e) => handleDecrement(e, cart?._id)}
@@ -37,7 +39,7 @@ const CartItem = ({ cart }) => {
             </span>
           </div>
 
-          <p className="text-slate-600 text-sm">SubTotal: {subTotal} ৳</p>
+          <p className="text-slate-600 text-sm text-center my-auto">SubTotal: {subTotal} ৳</p>
         </div>
         <div>
           <div
