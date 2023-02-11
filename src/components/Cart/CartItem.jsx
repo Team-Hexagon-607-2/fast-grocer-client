@@ -8,38 +8,36 @@ const CartItem = ({ cart }) => {
   return (
     <div className="border rounded-md">
       <div className="flex items-center justify-between">
-        <div className="flex items-center justify-center gap-3 sm:w-auto sm:h-auto h-[150px]  ">
-          <div className="w-[100px] h-[100px]   sm:w-[140px] sm:h-[170px]  ">
+        <div className="flex items-center justify-around w-full">
+          <div className="">
             <img
               src={cart?.imageUrl}
-              className="w-full h-full object-contain" alt=""
+              className="w-20 h-20 object-contain" alt=""
             />
           </div>
 
           <div>
-            <p className="sm:text-xl text-[13px] font-bold">{cart?.name}</p>
+            <p className="font-semibold">{cart?.name}</p>
             <p className="text-slate-600 text-sm">{cart?.bundle}</p>
             <p className="text-slate-600 text-sm">Price: {cart?.price} ৳</p>
-            <p className="text-slate-600 text-sm">SubTotal: {subTotal} ৳</p>
-            <div className=" ">
-
-              <div className="rounded-[2px]">
-                <span className="mr-2 text-sm">{" "}Qty:</span>
-                <span
-                  onClick={(e) => handleDecrement(e, cart?._id)}
-                  className=" hover:bg-[#6BA22C] cursor-pointer bg-slate-100 text-lg border-[1px] border-slate-200 ">-</span>
-                <span className=" bg-slate-100 border-[1px] border-slate-200">
-                  {cart?.qunatity}
-                </span>
-                <span
-                  onClick={(e) => handleIncrement(e, cart?._id)}
-                  className="hover:bg-[#6BA22C]  cursor-pointer bg-slate-100 text-lg border-[1px] border-slate-200"
-                >
-                  +
-                </span>
-              </div>
-            </div>
           </div>
+          <div className="rounded-[2px]">
+            <span className="mr-2 text-sm">{" "}Qty:</span>
+            <span
+              onClick={(e) => handleDecrement(e, cart?._id)}
+              className=" hover:bg-[#6BA22C] cursor-pointer bg-slate-100 text-lg border-[1px] border-slate-200 ">-</span>
+            <span className=" bg-slate-100 border-[1px] border-slate-200">
+              {cart?.qunatity}
+            </span>
+            <span
+              onClick={(e) => handleIncrement(e, cart?._id)}
+              className="hover:bg-[#6BA22C]  cursor-pointer bg-slate-100 text-lg border-[1px] border-slate-200"
+            >
+              +
+            </span>
+          </div>
+
+          <p className="text-slate-600 text-sm">SubTotal: {subTotal} ৳</p>
         </div>
         <div>
           <div
