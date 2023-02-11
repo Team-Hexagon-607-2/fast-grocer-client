@@ -14,7 +14,7 @@ const CartItem = ({ cart }) => {
             <div className="">
               <img
                 src={cart?.imageUrl}
-                className="w-20 h-20 object-contain" alt=""
+                className="w-20 h-20 object-contain mr-3" alt=""
               />
             </div>
             <div>
@@ -27,19 +27,18 @@ const CartItem = ({ cart }) => {
             <span className="mr-2 text-sm">{" "}Qty:</span>
             <span
               onClick={(e) => handleDecrement(e, cart?._id)}
-              className=" hover:bg-[#6BA22C] cursor-pointer bg-slate-100 text-lg border-[1px] border-slate-200 ">-</span>
-            <span className=" bg-slate-100 border-[1px] border-slate-200">
+              className=" hover:bg-slate-200 cursor-pointer bg-slate-100 border-[1px] border-slate-200 px-2 rounded-l-full text-sm">-</span>
+            <span className=" bg-slate-100 border-[1px] border-slate-200 px-3 text-sm">
               {cart?.qunatity}
             </span>
             <span
               onClick={(e) => handleIncrement(e, cart?._id)}
-              className="hover:bg-[#6BA22C]  cursor-pointer bg-slate-100 text-lg border-[1px] border-slate-200"
-            >
+              className="hover:bg-slate-200  cursor-pointer bg-slate-100 border-[1px] border-slate-200 px-2 rounded-r-full text-sm">
               +
             </span>
           </div>
 
-          <p className="text-slate-600 text-sm text-center my-auto">SubTotal: {subTotal} ৳</p>
+          <p className="text-slate-600 text-sm text-center my-auto font-semibold">SubTotal: {subTotal} ৳</p>
         </div>
         <div>
           <div
