@@ -17,7 +17,7 @@ import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
 import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
-import logo from "../../assets/logo/logo.png";
+import logo from "../../assets/logo/logo-text2.png";
 import Loader from "../../components/Loader/Loader";
 import { TbPlaylistAdd, TbReport } from "react-icons/tb";
 import Reports from "./../../Pages/Dashboard/Reports/Reports";

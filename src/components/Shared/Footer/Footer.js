@@ -3,10 +3,9 @@ import bkash from '../../../assets/images/bkash.png';
 import nagad from '../../../assets/images/nagad.jpg';
 import visaCard from '../../../assets/images/visaCard.jpg';
 import masterCard from '../../../assets/images/masterCard.png';
-import fastGrocerLogo from '../../../assets/images/fastGrocerLogo.jpg';
 import { FaEnvelope } from 'react-icons/fa';
 import { FaPhoneAlt } from 'react-icons/fa';
-import logo from '../../../assets/logo/logo.png'
+import logo from '../../../assets/logo/logo-text2.png'
 
 
 

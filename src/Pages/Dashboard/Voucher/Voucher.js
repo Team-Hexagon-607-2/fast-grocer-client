@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import { useContext } from 'react';
 import { TbDiscount2 } from 'react-icons/tb';
 import { StateContext } from '../../../contexts/AuthProvider';
@@ -13,9 +12,9 @@ const Voucher = () => {
         {coupons?.map(coupon => <div key={coupon?._id} className="flex border-2 border-slate-100 rounded-md">
           <div className='bg-green-400 h-40 w-[300px] border-r-slate-800 border-dashed border-r-2 p-3 flex flex-col justify-center rounded-l-md relative'>
             <p>Discount Coupon</p>
-            <p className='text-3xl font-bold'>Save <span className='text-white'>{coupon?.discount_amount}</span> Tk</p>
+            <p className='text-3xl font-bold my-3'>Save <span className='text-white'>{coupon?.discount_amount}</span> Tk</p>
             <p className='text-sm font-semibold'>Minimum spend {coupon?.condition_amount} Tk</p>
-            <p className=''>Expire: {coupon?.expire_date}</p>
+            <p className='text-sm'>Expire: {coupon?.expire_date}</p>
           <TbDiscount2 className='absolute text-green-200 text-[80px] right-0 top-0'/>
           </div>
           <div className='bg-white h-40 w-[200px] p-3 flex justify-center items-center flex-col rounded-r-md'>
