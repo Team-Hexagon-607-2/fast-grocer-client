@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { GoPlus } from 'react-icons/go';
+import Loader from '../../components/Loader/Loader';
 import { StateContext } from '../../contexts/AuthProvider';
 
 const Coupon = () => {
-  const { coupons, refetch } = useContext(StateContext);
+  const { coupons, refetch, couponsLoading } = useContext(StateContext);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [showCouponForm, setShowCouponForm] = useState(false);
 
@@ -43,7 +44,11 @@ const Coupon = () => {
       })
   }
 
-  console.log(coupons);
+  // console.log(coupons);
+
+  if(couponsLoading) {
+    return <Loader />
+  }
 
   return (
     <div>

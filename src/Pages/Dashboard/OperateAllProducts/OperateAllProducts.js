@@ -24,6 +24,10 @@ const OperateAllProducts = () => {
     }
   });
 
+  if(isLoading) {
+    return <Loader></Loader>
+  }
+
   const handleDelete = product => {
     const permission = window.confirm(`Are Your sure? you want to ${product.name} delete product`);
     if (permission) {

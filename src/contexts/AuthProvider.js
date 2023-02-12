@@ -70,10 +70,14 @@ export const ContextProvider = ({ children }) => {
   });
 
   // Coupon
-  const { data: coupons } = useQuery({
+  const { data: coupons, isLoading: couponsLoading } = useQuery({
     queryKey: ["coupon"],
     queryFn: async () => {
-      const res = await fetch("https://fg-server.vercel.app/get-coupons");
+      const res = await fetch(`http://localhost:5000/get-coupons?email=${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
@@ -239,6 +243,7 @@ export const ContextProvider = ({ children }) => {
         setOrder,
         refetch,
         coupons,
+        couponsLoading,
         AllOrders,
         AllOrdersLoading,
         AllOrdersRefetch,
