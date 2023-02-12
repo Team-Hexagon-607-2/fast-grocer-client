@@ -9,7 +9,7 @@ const Voucher = () => {
     <div className='mx-5'>
       <h2 className='text-center md:text-2xl font-bold mb-4 p-0 md:p-10'>Available Voucher</h2>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
-        {coupons?.map(coupon => <div key={coupon?._id} className="flex border-2 border-slate-100 rounded-md">
+        {coupons?.map(coupon => <div key={coupon?._id} className="flex border-2 border-slate-200 rounded-md">
           <div className='bg-green-400 h-40 w-[300px] border-r-slate-800 border-dashed border-r-2 p-3 flex flex-col justify-center rounded-l-md relative'>
             <p>Discount Coupon</p>
             <p className='text-3xl font-bold my-3'>Save <span className='text-white'>{coupon?.discount_amount}</span> Tk</p>
