@@ -72,11 +72,11 @@ const Sales = () => {
         </div>
       </div>
 
-      <div className="mt-5">
+      <div className="my-5">
         <p class="text-lg font-bold text-green-500 mb-2">Cost </p>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           <div class="border rounded-md hover:scale-105 duration-500">
-            <div class=" flex items-center  p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
+            <div class=" flex items-center  p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg h-[180px]">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
                   Total Shipping Fee
@@ -92,7 +92,7 @@ const Sales = () => {
             </div>
           </div>
           <div class="border rounded-md hover:scale-105 duration-500">
-            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
+            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg h-[180px]">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
                   Sales Volume Without shipping Fee
@@ -108,7 +108,7 @@ const Sales = () => {
             </div>
           </div>
           <div class="border rounded-md hover:scale-105 duration-500">
-            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
+            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg h-[180px]">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">Product Cost</h2>
                 <h3 class="mt-2 text-xl font-bold text-orange-500 text-left">
@@ -122,7 +122,7 @@ const Sales = () => {
             </div>
           </div>
           <div class="border rounded-md hover:scale-105 duration-500">
-            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
+            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg h-[180px]">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
                   All Management Cost
@@ -138,7 +138,7 @@ const Sales = () => {
             </div>
           </div>
           <div class="border rounded-md hover:scale-105 duration-500">
-            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
+            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg h-[180px]">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
                   Net Profit or Revenue
