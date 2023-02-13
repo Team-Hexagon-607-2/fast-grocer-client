@@ -3,21 +3,25 @@ import { logDOM } from "@testing-library/react";
 import React from "react";
 import { useContext } from "react";
 import Sales from "../../../components/Inventory/Sales.jsx";
+import Loader from "../../../components/Loader/Loader.jsx";
 import { StateContext } from "../../../contexts/AuthProvider";
 
 const Inventory = () => {
-  const { AllProducts } = useContext(StateContext);
+  const { user, logOut, AllProducts } = useContext(StateContext);
   const stockOutProduct = AllProducts?.filter((item) => item?.stock < 10);
 
-  const {
-    data: AllUsers,
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["users"],
+  const { data: AllUsers = [], isLoading, refetch, } = useQuery({
+    queryKey: ["users", user?.email],
     queryFn: async () => {
-      const res = await fetch("https://fg-server.vercel.app/users");
+      const res = await fetch(`http://localhost:5000/users?email=${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
       const data = await res.json();
+      if (data?.statusCode === 401 || data?.statusCode === 403) {
+        return logOut();
+    }
       return data;
     },
   });
@@ -26,13 +30,15 @@ const Inventory = () => {
   const deliveryMan = AllUsers?.filter((item) => item.role === "delivery man");
   const buyers = AllUsers?.filter((item) => item.role === "buyer");
 
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <div className="flex flex-col">
-      <p className=" m-3 text-lg font-bold ml-6">Employees</p>
-      <div className="flex flex-wrap gap-2">
-        <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+      <p className=" text-lg font-bold text-green-500">Employees</p>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div class="p-4 hover:scale-105 duration-500">
           <div class=" flex items-center  p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
             <div>
               <h2 class="text-gray-900 text-lg font-bold">Total Admin</h2>
@@ -49,7 +55,7 @@ const Inventory = () => {
             </div>
           </div>
         </div>
-        <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+        <div class="p-4 hover:scale-105 duration-500">
           <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
             <div>
               <h2 class="text-gray-900 text-lg font-bold">Total Users</h2>
@@ -63,7 +69,7 @@ const Inventory = () => {
             </div>
           </div>
         </div>
-        <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+        <div class="p-4 hover:scale-105 duration-500">
           <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
             <div>
               <h2 class="text-gray-900 text-lg font-bold">Total Deliveryman</h2>
@@ -79,9 +85,9 @@ const Inventory = () => {
         </div>
       </div>
 
-      <p className=" m-3 text-lg font-bold ml-6">Products</p>
-      <div className="flex  gap-2">
-        <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+      <p className=" text-lg font-bold text-green-500">Products</p>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div class="p-4 hover:scale-105 duration-500">
           <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
             <div>
               <h2 class="text-gray-900 text-lg font-bold">Total Product</h2>
@@ -95,7 +101,7 @@ const Inventory = () => {
             </div>
           </div>
         </div>
-        <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+        <div class="p-4 hover:scale-105 duration-500">
           <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
             <div>
               <h2 class="text-gray-900 text-lg font-bold">Stock Out Product</h2>
@@ -112,7 +118,7 @@ const Inventory = () => {
       </div>
 
       <div>
-        <p className=" m-3 text-lg font-bold ml-6">Orders</p>
+        <p className=" text-lg font-bold text-green-500">Orders</p>
         <Sales />
       </div>
     </div>

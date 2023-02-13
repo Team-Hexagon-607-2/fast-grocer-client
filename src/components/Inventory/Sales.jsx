@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { StateContext } from "../../contexts/AuthProvider";
+import Loader from "../Loader/Loader";
 
 const Sales = () => {
   const { AllOrders, AllOrdersLoading, AllOrdersRefetch } =
@@ -27,18 +28,22 @@ const Sales = () => {
     }
   }
 
-  console.log(product_sale_price);
+  // console.log(product_sale_price);
 
   const salesPriceWithoutShippingFee = totalSales - totalShipping;
   const netProfit = (salesPriceWithoutShippingFee / 100) * 23.3;
   const allCost = (salesPriceWithoutShippingFee / 100) * 10;
   const productCost = (salesPriceWithoutShippingFee / 100) * 67.7;
-  if (AllOrdersLoading) return <div>Loading</div>;
+ 
+  if (AllOrdersLoading) {
+    return <Loader />
+  }
+ 
   return (
     <div className="overflow-hidden p-2">
-      <div className="">
-        <div className="flex flex-row flex-wrap">
-          <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+      <div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div class="p-4 hover:scale-105 duration-500">
             <div class=" flex items-center   p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">Total Order</h2>
@@ -52,7 +57,7 @@ const Sales = () => {
               </div>
             </div>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+          <div class="p-4 hover:scale-105 duration-500">
             <div class=" flex items-center  p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">Total Sales</h2>
@@ -67,9 +72,10 @@ const Sales = () => {
             </div>
           </div>
         </div>
-        <p class="text-lg font-bold m-3 ml-6">Cost </p>
-        <div class="flex flex-row flex-wrap">
-          <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+
+        <p class="text-lg font-bold text-green-500">Cost </p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3">
+          <div class="p-4 hover:scale-105 duration-500">
             <div class=" flex items-center  p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
@@ -85,7 +91,7 @@ const Sales = () => {
               </div>
             </div>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+          <div class="p-4 hover:scale-105 duration-500">
             <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
@@ -100,8 +106,8 @@ const Sales = () => {
                 </button>
               </div>
             </div>
-          </div>{" "}
-          <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+          </div>
+          <div class="p-4 hover:scale-105 duration-500">
             <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">Product Cost</h2>
@@ -115,7 +121,7 @@ const Sales = () => {
               </div>
             </div>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+          <div class="p-4 hover:scale-105 duration-500">
             <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
@@ -131,7 +137,7 @@ const Sales = () => {
               </div>
             </div>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
+          <div class="p-4 hover:scale-105 duration-500">
             <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
