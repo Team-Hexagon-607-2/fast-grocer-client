@@ -13,6 +13,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import useFindBuyer from "../hooks/useFindBuyer";
 
 export const StateContext = createContext();
 const auth = getAuth(app);
@@ -27,6 +28,7 @@ export const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState({});
   const [address, setAddress] = useState({});
+  const [isBuyer] = useFindBuyer(user?.email);
 
   // all products
   const {
@@ -130,19 +132,22 @@ export const ContextProvider = ({ children }) => {
   };
 
   const handleAddToCart = (e, product) => {
-    const isExist = cart?.find((p) => p._id === product._id);
-    if (isExist) {
-      const p = cart?.map((item) =>
-        item._id === product._id
-          ? { ...isExist, qunatity: item.qunatity + 1 }
-          : item
-      );
-      setCart(p);
-    } else {
-      setCart([...cart, { ...product, qunatity: 1 }]);
-    }
+    if(!user || isBuyer) {
+      const isExist = cart?.find((p) => p._id === product._id);
+      if (isExist) {
+        const p = cart?.map((item) =>
+          item._id === product._id
+            ? { ...isExist, qunatity: item.qunatity + 1 }
+            : item
+        );
+        setCart(p);
+      } else {
+        setCart([...cart, { ...product, qunatity: 1 }]);
+      }
+  
+      toast.success("Product added successfully");
+    };
 
-    toast.success("Product added successfully");
   };
 
   const handleRemove = (e, id) => {

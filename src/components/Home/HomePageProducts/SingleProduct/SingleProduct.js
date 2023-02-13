@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { StateContext } from "../../../../contexts/AuthProvider";
 import { toast } from "react-hot-toast";
+import useFindAdmin from "../../../../hooks/useFindAdmin";
 
 const SingleProduct = ({ products }) => {
   // commented out console.log -by Taqi //
@@ -13,6 +14,7 @@ const SingleProduct = ({ products }) => {
   const [loading, setLoading] = useState();
   const { user, handleAddToCart, wishlistRefetch } = useContext(StateContext);
   const { _id, name, imageUrl, price, bundle, original_price, save } = products;
+  const [isAdmin] = useFindAdmin(user?.email);
 
   const handleWishlist = (products) => {
     if (!user) {
@@ -56,11 +58,14 @@ const SingleProduct = ({ products }) => {
       setLoading(false);
     }
   };
+  
   return (
     <div className='bg-white hover:shadow-xl rounded-md border border-slate-200/60 duration-300'>
-      <Link to={`/products/${_id}`}>
+      <div>
         <div className='h-225px'>
-          <img src={imageUrl} alt="product img" className='mx-auto h-[225px] rounded-t-md' />
+          <Link to={`/products/${_id}`}>
+            <img src={imageUrl} alt="product img" className='mx-auto h-[225px] rounded-t-md' />
+          </Link>
         </div>
         <div className="p-4">
           <span className="flex items-center">
@@ -71,11 +76,11 @@ const SingleProduct = ({ products }) => {
             <AiFillStar className="text-yellow-400" />
           </span>
           <div className="md:h-[60px]">
-            <p
+            <Link to={`/products/${_id}`}
               className={`text-[16px] font-semibold text-zinc-700 hover:underline cursor-pointer`}
             >
               {name.length > 45 ? name.slice(0, 45) + "..." : name}
-            </p>
+            </Link>
           </div>
           <p className="text-zinc-700 font-semibold">
             <small>{bundle ? bundle : "As Picture"}</small>
@@ -108,7 +113,7 @@ const SingleProduct = ({ products }) => {
             </button>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };
