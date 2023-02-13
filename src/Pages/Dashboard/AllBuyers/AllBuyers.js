@@ -48,7 +48,6 @@ const AllBuyers = () => {
           </thead>
 
           <tbody>
-            {isLoading && <Loader />}
             {users?.map((user, i) => (
               <tr>
                 <td>
