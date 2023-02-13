@@ -48,7 +48,7 @@ const DashboardLayout = () => {
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu w-56 bg-slate-900 text-white">
             <div className="border-b">
-              <Link to="/">
+              <Link to={isBuyer && '/'}>
                 <img className="mx-auto my-7 w-[125px]" src={logo} alt="" />
               </Link>
             </div>
