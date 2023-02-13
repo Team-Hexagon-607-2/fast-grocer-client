@@ -34,48 +34,48 @@ const Sales = () => {
   const netProfit = (salesPriceWithoutShippingFee / 100) * 23.3;
   const allCost = (salesPriceWithoutShippingFee / 100) * 10;
   const productCost = (salesPriceWithoutShippingFee / 100) * 67.7;
- 
+
   if (AllOrdersLoading) {
     return <Loader />
   }
- 
+
   return (
-    <div className="overflow-hidden p-2">
-      <div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
-          <div class="p-4 hover:scale-105 duration-500">
-            <div class=" flex items-center   p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-              <div>
-                <h2 class="text-gray-900 text-lg font-bold">Total Order</h2>
-                <h3 class="mt-2 text-xl font-bold text-indigo-500 text-left">
-                  {AllOrders?.data?.length}
-                </h3>
+    <>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="border rounded-md hover:scale-105 duration-500">
+          <div class=" flex items-center   p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
+            <div>
+              <h2 class="text-gray-900 text-lg font-bold">Total Order</h2>
+              <h3 class="mt-2 text-xl font-bold text-indigo-500 text-left">
+                {AllOrders?.data?.length}
+              </h3>
 
-                <button class="text-sm mt-6 px-4 py-2 bg-indigo-400 text-white rounded-lg  tracking-wider hover:bg-indigo-500 outline-none">
-                  See orders
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="p-4 hover:scale-105 duration-500">
-            <div class=" flex items-center  p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-              <div>
-                <h2 class="text-gray-900 text-lg font-bold">Total Sales</h2>
-                <h3 class="mt-2 text-xl font-bold text-indigo-500 text-left">
-                  Bdt {totalSales}
-                </h3>
-
-                <button class="text-sm mt-6 px-4 py-2 bg-indigo-400 text-white rounded-lg  tracking-wider hover:bg-indigo-500 outline-none">
-                  See statistics
-                </button>
-              </div>
+              <button class="text-sm mt-6 px-4 py-2 bg-indigo-400 text-white rounded-lg  tracking-wider hover:bg-indigo-500 outline-none">
+                See orders
+              </button>
             </div>
           </div>
         </div>
+        <div class="border rounded-md hover:scale-105 duration-500">
+          <div class=" flex items-center  p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
+            <div>
+              <h2 class="text-gray-900 text-lg font-bold">Total Sales</h2>
+              <h3 class="mt-2 text-xl font-bold text-indigo-500 text-left">
+                Bdt {totalSales}
+              </h3>
 
-        <p class="text-lg font-bold text-green-500">Cost </p>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3">
-          <div class="p-4 hover:scale-105 duration-500">
+              <button class="text-sm mt-6 px-4 py-2 bg-indigo-400 text-white rounded-lg  tracking-wider hover:bg-indigo-500 outline-none">
+                See statistics
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5">
+        <p class="text-lg font-bold text-green-500 mb-2">Cost </p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="border rounded-md hover:scale-105 duration-500">
             <div class=" flex items-center  p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
@@ -91,8 +91,8 @@ const Sales = () => {
               </div>
             </div>
           </div>
-          <div class="p-4 hover:scale-105 duration-500">
-            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
+          <div class="border rounded-md hover:scale-105 duration-500">
+            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
                   Sales Volume Without shipping Fee
@@ -107,8 +107,8 @@ const Sales = () => {
               </div>
             </div>
           </div>
-          <div class="p-4 hover:scale-105 duration-500">
-            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
+          <div class="border rounded-md hover:scale-105 duration-500">
+            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">Product Cost</h2>
                 <h3 class="mt-2 text-xl font-bold text-orange-500 text-left">
@@ -121,8 +121,8 @@ const Sales = () => {
               </div>
             </div>
           </div>
-          <div class="p-4 hover:scale-105 duration-500">
-            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
+          <div class="border rounded-md hover:scale-105 duration-500">
+            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
                   All Management Cost
@@ -137,8 +137,8 @@ const Sales = () => {
               </div>
             </div>
           </div>
-          <div class="p-4 hover:scale-105 duration-500">
-            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
+          <div class="border rounded-md hover:scale-105 duration-500">
+            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
               <div>
                 <h2 class="text-gray-900 text-lg font-bold">
                   Net Profit or Revenue
@@ -155,7 +155,7 @@ const Sales = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

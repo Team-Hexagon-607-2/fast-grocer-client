@@ -21,7 +21,7 @@ const Inventory = () => {
       const data = await res.json();
       if (data?.statusCode === 401 || data?.statusCode === 403) {
         return logOut();
-    }
+      }
       return data;
     },
   });
@@ -35,90 +35,94 @@ const Inventory = () => {
   }
 
   return (
-    <div className="flex flex-col">
-      <p className=" text-lg font-bold text-green-500">Employees</p>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
-        <div class="p-4 hover:scale-105 duration-500">
-          <div class=" flex items-center  p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-            <div>
-              <h2 class="text-gray-900 text-lg font-bold">Total Admin</h2>
-              <h3
-                class="mt-2 text-xl font-bold text-cyan-500
+    <div className="flex flex-col px-6">
+      <div className="my-5">
+        <p className=" text-lg font-bold text-green-500 mb-2">Employees</p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="border rounded-md hover:scale-105 duration-500">
+            <div class="p-4 flex items-center   rounded-lg bg-white shadow-indigo-50 shadow-lg">
+              <div>
+                <h2 class="text-gray-900 text-lg font-bold">Total Admin</h2>
+                <h3
+                  class="mt-2 text-xl font-bold text-cyan-500
                text-left"
-              >
-                {admins.length}
-              </h3>
+                >
+                  {admins.length}
+                </h3>
 
-              <button class="text-sm mt-6 px-4 py-2 bg-cyan-400  text-white rounded-lg  tracking-wider hover:bg-cyan-500 outline-none">
-                See Details
-              </button>
+                <button class="text-sm mt-6 px-4 py-2 bg-cyan-400  text-white rounded-lg  tracking-wider hover:bg-cyan-500 outline-none">
+                  See Details
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="p-4 hover:scale-105 duration-500">
-          <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-            <div>
-              <h2 class="text-gray-900 text-lg font-bold">Total Users</h2>
-              <h3 class="mt-2 text-xl font-bold text-red-500 text-left">
-                {buyers.length}
-              </h3>
+          <div class="border rounded-md hover:scale-105 duration-500">
+            <div class="p-4 flex items-center  justify-between  rounded-lg bg-white shadow-indigo-50 shadow-lg">
+              <div>
+                <h2 class="text-gray-900 text-lg font-bold">Total Users</h2>
+                <h3 class="mt-2 text-xl font-bold text-red-500 text-left">
+                  {buyers.length}
+                </h3>
 
-              <button class="text-sm mt-6 px-4 py-2 bg-red-400  text-white rounded-lg  tracking-wider hover:bg-red-500 outline-none">
-                See details
-              </button>
+                <button class="text-sm mt-6 px-4 py-2 bg-red-400  text-white rounded-lg  tracking-wider hover:bg-red-500 outline-none">
+                  See details
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="p-4 hover:scale-105 duration-500">
-          <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-            <div>
-              <h2 class="text-gray-900 text-lg font-bold">Total Deliveryman</h2>
-              <h3 class="mt-2 text-xl font-bold text-yellow-500 text-left">
-                {deliveryMan?.length}
-              </h3>
+          <div class="border rounded-md hover:scale-105 duration-500">
+            <div class="p-4 flex items-center  justify-between  rounded-lg bg-white shadow-indigo-50 shadow-lg">
+              <div>
+                <h2 class="text-gray-900 text-lg font-bold">Total Deliveryman</h2>
+                <h3 class="mt-2 text-xl font-bold text-yellow-500 text-left">
+                  {deliveryMan?.length}
+                </h3>
 
-              <button class="text-sm mt-6 px-4 py-2 bg-yellow-400 text-white rounded-lg  tracking-wider hover:bg-yellow-300 outline-none">
-                See Details
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p className=" text-lg font-bold text-green-500">Products</p>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
-        <div class="p-4 hover:scale-105 duration-500">
-          <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-            <div>
-              <h2 class="text-gray-900 text-lg font-bold">Total Product</h2>
-              <h3 class="mt-2 text-xl font-bold text-green-500 text-left">
-                {AllProducts?.length}
-              </h3>
-
-              <button class="text-sm mt-6 px-4 py-2 bg-green-400  text-white rounded-lg  tracking-wider hover:bg-green-500 outline-none">
-                Add Product
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="p-4 hover:scale-105 duration-500">
-          <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-            <div>
-              <h2 class="text-gray-900 text-lg font-bold">Stock Out Product</h2>
-              <h3 class="mt-2 text-xl font-bold text-yellow-500 text-left">
-                {stockOutProduct?.length}
-              </h3>
-
-              <button class="text-sm mt-6 px-4 py-2 bg-yellow-400 text-white rounded-lg  tracking-wider hover:bg-yellow-300 outline-none">
-                Fill Stock
-              </button>
+                <button class="text-sm mt-6 px-4 py-2 bg-yellow-400 text-white rounded-lg  tracking-wider hover:bg-yellow-300 outline-none">
+                  See Details
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div>
-        <p className=" text-lg font-bold text-green-500">Orders</p>
+      <div className="my-5">
+        <p className="text-lg font-bold text-green-500 mb-2">Products</p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="border rounded-md hover:scale-105 duration-500">
+            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
+              <div>
+                <h2 class="text-gray-900 text-lg font-bold">Total Product</h2>
+                <h3 class="mt-2 text-xl font-bold text-green-500 text-left">
+                  {AllProducts?.length}
+                </h3>
+
+                <button class="text-sm mt-6 px-4 py-2 bg-green-400  text-white rounded-lg  tracking-wider hover:bg-green-500 outline-none">
+                  Add Product
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="border rounded-md hover:scale-105 duration-500">
+            <div class=" flex items-center  justify-between p-4  rounded-lg bg-white shadow-indigo-50 shadow-lg">
+              <div>
+                <h2 class="text-gray-900 text-lg font-bold">Stock Out Product</h2>
+                <h3 class="mt-2 text-xl font-bold text-yellow-500 text-left">
+                  {stockOutProduct?.length}
+                </h3>
+
+                <button class="text-sm mt-6 px-4 py-2 bg-yellow-400 text-white rounded-lg  tracking-wider hover:bg-yellow-300 outline-none">
+                  Fill Stock
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5">
+        <p className="text-lg font-bold text-green-500 mb-2">Orders</p>
         <Sales />
       </div>
     </div>
