@@ -9,7 +9,7 @@ const OperateAllProducts = () => {
   const { user, logOut } = useContext(StateContext);
 
   const { data: products, isLoading, refetch } = useQuery({
-    queryKey: ['name'],
+    queryKey: ['all-products', user?.email],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/all-products?email=${user?.email}`, {
         headers: {

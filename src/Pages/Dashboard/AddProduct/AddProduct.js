@@ -1,14 +1,17 @@
 import React from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const AddProduct = () => {
-  const {user, logOut, categories } = useContext(StateContext);
+  const { user, logOut, categories } = useContext(StateContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [addProductLoading, setAddProductLoading] = useState(false);
 
   const handleAddProduct = (data) => {
+    setAddProductLoading(true);
     // console.log(data);
     const image = data?.photo[0];
     const formData = new FormData();
@@ -46,11 +49,12 @@ const AddProduct = () => {
           }).then(res => res.json())
             .then(data => {
               if (data?.statusCode === 401 || data?.statusCode === 403) {
-                // toast('provide valid token');
+                toast('JWT or VerifyAdmin problem')
                 return logOut();
               }
 
               if (data?.acknowledged) {
+                setAddProductLoading(false)
                 toast.success(`Product Added successfully`);
               }
             })
@@ -238,7 +242,7 @@ const AddProduct = () => {
           </div>
 
           <br />
-          <button type='submit' className='btn w-full'>Add</button>
+          <button type='submit' className={addProductLoading ? 'btn w-full loading disabled:' : 'btn w-full'}>Add</button>
         </form>
       </div>
     </div>

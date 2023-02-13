@@ -70,8 +70,8 @@ export const ContextProvider = ({ children }) => {
   });
 
   // Coupon
-  const { data: coupons, isLoading: couponsLoading } = useQuery({
-    queryKey: ["coupon"],
+  const { data: coupons = [], refetch: couponRefresh, isLoading: couponsLoading } = useQuery({
+    queryKey: ["coupon", user?.email],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/get-coupons?email=${user?.email}`, {
         headers: {
@@ -244,6 +244,7 @@ export const ContextProvider = ({ children }) => {
         refetch,
         coupons,
         couponsLoading,
+        couponRefresh,
         AllOrders,
         AllOrdersLoading,
         AllOrdersRefetch,

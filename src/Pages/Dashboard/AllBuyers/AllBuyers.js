@@ -9,7 +9,7 @@ const AllBuyers = () => {
     const { user, logOut } = useContext(StateContext);
 
     const { data: users, isLoading, refetch } = useQuery({
-        queryKey: ['name'],
+        queryKey: ['allBuyers', user?.email],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/allBuyers?email=${user?.email}`, {
                 headers: {

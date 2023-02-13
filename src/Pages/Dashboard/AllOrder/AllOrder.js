@@ -12,7 +12,7 @@ const AllOrder = () => {
   const [selectedValue, setSelectedValue] = useState({});
 
   const { data: allOrders, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["order", "cancel-order"],
+    queryKey: ["order", "cancel-order", user?.email],
     queryFn: () =>
       fetch(`http://localhost:5000/allOrders?email=${user?.email}`, {
         headers: {

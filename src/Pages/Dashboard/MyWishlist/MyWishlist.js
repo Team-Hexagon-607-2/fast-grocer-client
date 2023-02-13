@@ -26,6 +26,7 @@ const MyWishList = () => {
       })
       .catch((err) => console.log(err));
   };
+
   const Loader = () => {
     return (
       <div
@@ -36,6 +37,7 @@ const MyWishList = () => {
       ></div>
     );
   };
+  
   const wishlist = wishListData?.data;
   return (
     <div className="">
