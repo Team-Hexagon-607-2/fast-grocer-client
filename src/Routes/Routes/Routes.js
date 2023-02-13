@@ -34,6 +34,8 @@ import Voucher from "../../Pages/Dashboard/Voucher/Voucher";
 import WriteReview from "../../components/WriteReview/WriteReview";
 import Inventory from "../../Pages/Dashboard/Inventory/Inventory";
 import Reports from "./../../Pages/Dashboard/Reports/Reports";
+import PrivacyPolicy from "../../components/PrivacyPolicy/PrivacyPolicy";
+import CookiePolicy from "../../components/CookiePolicy/CookiePolicy";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -98,6 +100,14 @@ const router = createBrowserRouter([
       {
         path: "/aboutUs",
         element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy></PrivacyPolicy>
+      },
+      {
+        path: "cookie-policy",
+        element: <CookiePolicy></CookiePolicy>
       },
 
       {

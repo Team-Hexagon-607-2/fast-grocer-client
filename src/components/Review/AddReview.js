@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { StateContext } from '../../contexts/AuthProvider';
 
 
+
 const AddReview = ({name,id}) => {
     const { register, handleSubmit, reset } = useForm();
     const { user } = useContext(StateContext);
@@ -17,7 +18,7 @@ const AddReview = ({name,id}) => {
         productId:id,
         porductName:name
     }
-    //    console.log(data);
+       console.log(data);
       
        fetch('https://fg-server.vercel.app/reviews', {
         method: 'POST',
@@ -57,6 +58,7 @@ const AddReview = ({name,id}) => {
                              className="textarea border border-slate-300" placeholder="We always evaluate your feedback"></textarea>
                     
                     </div>
+                   
                     <input className='btn btn-accent w-full mt-4' value="Submit" type="submit" />
                 </form>
             </div>
