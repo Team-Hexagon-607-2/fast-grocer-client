@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { toast } from "react-hot-toast";
-import Loader from "../../../components/Loader/Loader";
 
 const AllBuyers = () => {
   const {
@@ -11,7 +10,11 @@ const AllBuyers = () => {
   } = useQuery({
     queryKey: ["name"],
     queryFn: async () => {
-      const res = await fetch("https://fg-server.vercel.app/buyers");
+      const res = await fetch("https://fg-server.vercel.app/buyers", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
