@@ -5,21 +5,17 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { StateContext } from "../../../../contexts/AuthProvider";
 import { toast } from "react-hot-toast";
-import useFindAdmin from "../../../../hooks/useFindAdmin";
 
 const SingleProduct = ({ products }) => {
-  // commented out console.log -by Taqi //
-  // console.log(products);
-  // const { product_name, product_photo, product_mesurement, product_price } = products;
-  const [loading, setLoading] = useState();
-  const { user, handleAddToCart, wishlistRefetch } = useContext(StateContext);
+  const { user, isAdmin, isDeliveryman, isBuyer, handleAddToCart, wishlistRefetch } = useContext(StateContext);
   const { _id, name, imageUrl, price, bundle, original_price, save } = products;
-  const [isAdmin] = useFindAdmin(user?.email);
+  const [wishlistLoading, setWishListLoading] = useState(false);
 
   const handleWishlist = (products) => {
-    if (!user) {
-      toast.error("Please Log In");
-    } else {
+    if (!user) { return alert('Please login for wishlist') }
+
+    if (isBuyer) {
+      setWishListLoading(true);
       const data = {
         productId: products?._id,
         productName: products?.name,
@@ -34,7 +30,6 @@ const SingleProduct = ({ products }) => {
         createdAt: new Date(),
       };
 
-      setLoading(true);
       fetch("https://fg-server.vercel.app/wishlist", {
         method: "POST",
         headers: {
@@ -42,23 +37,21 @@ const SingleProduct = ({ products }) => {
         },
         body: JSON.stringify(data),
       })
-        .then((response) => response.json())
+        .then(res => res.json())
         .then((data) => {
           if (data.status === true) {
-            setLoading(false);
+            setWishListLoading(false);
             toast.success(`${data.message}`);
             wishlistRefetch();
-          } else {
-            toast.error("Already Added on Wishlist Page");
           }
         })
         .catch((error) => {
-          // console.log(error)
+          setWishListLoading(false);
+          toast.error(error.message);
         });
-      setLoading(false);
     }
   };
-  
+
   return (
     <div className='bg-white hover:shadow-xl rounded-md border border-slate-200/60 duration-300'>
       <div>
@@ -99,18 +92,24 @@ const SingleProduct = ({ products }) => {
           <div className="flex mt-5">
             <button
               onClick={(e) => handleAddToCart(e, products)}
-              className="w-full mr-2 bg-[#84b840] hover:bg-[#6a9333] text-white text-sm duration-300 py-[6px] rounded-md flex items-center justify-center"
-            >
+              className="w-full mr-2 bg-[#84b840] hover:bg-[#6a9333] text-white text-sm duration-300 py-[6px] rounded-md flex items-center justify-center" >
               <TbShoppingCartPlus className=" mr-2" />
               Add to Cart
             </button>
-            <button
-              onClick={() => handleWishlist(products)}
-              className="text-sm px-2 rounded-md bg-[#ff00001c] hover:bg-[#ff00002e] duration-300 flex items-center justify-center"
-            >
-              <AiFillHeart className="text-red-600 mr-2" />
-              Wishlist
-            </button>
+
+            {
+              wishlistLoading ? <button className="btn bg-[#ff00001c] text-black btn-sm loading btn-square w-[90px]"></button>
+                :
+                <button
+                  onClick={() => handleWishlist(products)}
+                  className={isAdmin || isDeliveryman ?
+                    "disabled cursor-not-allowed text-sm px-2 rounded-md bg-slate-200 flex items-center justify-center" :
+                    "text-sm px-2 rounded-md bg-[#ff00001c] hover:bg-[#ff00002e] duration-300 flex items-center justify-center"
+                  }>
+                  <AiFillHeart className="text-red-600 mr-2" />
+                  Wishlist
+                </button>
+            }
           </div>
         </div>
       </div>

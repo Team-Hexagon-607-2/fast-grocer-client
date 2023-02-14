@@ -14,6 +14,8 @@ import {
   updateProfile,
 } from "firebase/auth";
 import useFindBuyer from "../hooks/useFindBuyer";
+import useFindAdmin from "../hooks/useFindAdmin";
+import useFindDeliveryman from "../hooks/useFindDeliveryman";
 
 export const StateContext = createContext();
 const auth = getAuth(app);
@@ -29,7 +31,7 @@ export const ContextProvider = ({ children }) => {
   const [order, setOrder] = useState({});
   const [address, setAddress] = useState({});
   const [isBuyer] = useFindBuyer(user?.email);
-
+  
   // all products
   const {
     data: AllProducts,
