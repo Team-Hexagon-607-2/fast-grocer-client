@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StateContext } from "../../contexts/AuthProvider";
 import Address from "./Address";
-import PickedItems from "./PickedItems";
 import { toast } from "react-hot-toast";
-import { BsChevronDoubleUp, BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { FcAbout } from "react-icons/fc";
 import { RiShoppingCartLine } from "react-icons/ri";
@@ -13,7 +12,7 @@ import { useForm } from "react-hook-form";
 
 const PlaceOrder = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { cart, order, setOrder, user, totalPrice, coupons } = useContext(StateContext);
+  const { isAdmin, isDeliveryman, cart,  user, totalPrice, coupons } = useContext(StateContext);
   const [countryName, setCountryName] = useState('');
   const [name, setName] = useState(user?.displayName);
   const [email, setEmail] = useState(user?.email);
@@ -106,7 +105,7 @@ const PlaceOrder = () => {
   }
 
   return (
-    <>
+    <div className={isAdmin || isDeliveryman ? "hidden" : "block"}>
       {/* mobile view */}
       <div onClick={() => setShowProduct(!product)} className="collapse lg:hidden">
         <input type="checkbox" className="peer" />
@@ -206,7 +205,7 @@ const PlaceOrder = () => {
           <form className="mt-5" onSubmit={handleSubmit(handleApplyCoupon)}>
             <input type="text" placeholder="Apply Coupon" className="input input-bordered input-md w-full max-w-xs rounded-none" {...register("apply_coupon")} />
             <button type="submit" className="btn btn-md rounded-none">Apply</button>
-          {totalPrice < conditaionalAmount && <p className="text-sm text-red-500">*Total must be {conditaionalAmount} TK minimum for apply coupon.</p> }
+            {totalPrice < conditaionalAmount && <p className="text-sm text-red-500">*Total must be {conditaionalAmount} TK minimum for apply coupon.</p>}
           </form>
         </div>
 
@@ -242,7 +241,7 @@ const PlaceOrder = () => {
           <button onClick={handleOrderSubmit} disabled={!checked} className="btn btn-sm rounded-md btn-primary" > Confirm Order</button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
