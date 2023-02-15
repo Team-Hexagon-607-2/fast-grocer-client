@@ -25,7 +25,7 @@ const AboutUs = () => {
           We also participate in various charitable events and donation programs throughout the year.</p>
       </div>
 
-      <div className='py-14 px-5 workImage my-10'>
+      <div className='py-10 px-5 workImage my-10'>
         <p className='text-center text-[#3CB813] text-sm mb-5'>HOW IT WORK</p>
         <h2 className='text-center text-3xl md:text-4xl font-bold mb-8'>Healthy, affordable, delicious</h2>
 
@@ -50,7 +50,7 @@ const AboutUs = () => {
         </div>
       </div>
 
-      <div className='py-20 my-10 px-5 bg-[#FDF2F7]'>
+      <div className='mt-32 mb-10 px-5'>
         <h2 className="text-4xl font-bold mb-5">Grocery shopping in a few steps</h2>
         <div className='grid md:grid-cols-3 gap-10'>
           <div>
