@@ -145,6 +145,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/all-deliveryman",
+        element: (
+          <AdminRoutes>
+            <AllDeliveryman />
+          </AdminRoutes>
+        ),
+      },
+      {
         path: "/dashboard/inventory",
         element: (
           <AdminRoutes>
@@ -157,14 +165,6 @@ const router = createBrowserRouter([
         element: (
           <AdminRoutes>
             <Reports />
-          </AdminRoutes>
-        ),
-      },
-      {
-        path: "/dashboard/all-deliveryman",
-        element: (
-          <AdminRoutes>
-            <AllDeliveryman />
           </AdminRoutes>
         ),
       },

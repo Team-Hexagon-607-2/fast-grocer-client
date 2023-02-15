@@ -1,33 +1,48 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Loader from '../../../components/Loader/Loader';
+import { StateContext } from '../../../contexts/AuthProvider';
 
 const OperateAllProducts = () => {
+  const { user, logOut } = useContext(StateContext);
+
   const { data: products, isLoading, refetch } = useQuery({
-    queryKey: ['name'],
+    queryKey: ['all-products', user?.email],
     queryFn: async () => {
-      const res = await fetch('https://fg-server.vercel.app/products');
+      const res = await fetch(`https://fg-server.vercel.app/allProducts`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        }
+      });
       const data = await res.json();
+      if (data?.statusCode === 401 || data?.statusCode === 403) {
+        return logOut();
+      }
       return data;
     }
-  })
+  });
 
+  if(isLoading) {
+    return <Loader></Loader>
+  }
 
   const handleDelete = product => {
-    console.log(product?._id);
-    fetch(`https://fg-server.vercel.app/products/${product?._id}`, {
-      method: 'DELETE'
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.deletedCount > 0) {
-          refetch();
-          toast.success(`${product.name} deleted successfully`)
-        }
+    const permission = window.confirm(`Are Your sure? you want to ${product.name} delete product`);
+    if (permission) {
+      fetch(`https://fg-server.vercel.app/product-delete/${product?._id}?email=${user?.email}`, {
+        method: 'DELETE'
       })
-  }
+        .then(res => res.json())
+        .then(data => {
+          if (data.deletedCount > 0) {
+            refetch();
+            toast.success(`${product.name} deleted successfully`)
+          }
+        })
+    }
+  };
 
   if (isLoading) {
     return <Loader />
@@ -38,7 +53,7 @@ const OperateAllProducts = () => {
   return (
     <div className=''>
       <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">All Products</h2>
-      <div className="overflow-x-auto w-full">
+      <div className="overflow-x-auto w-full px-6">
         <table className="table table-compact w-full">
 
           <thead>

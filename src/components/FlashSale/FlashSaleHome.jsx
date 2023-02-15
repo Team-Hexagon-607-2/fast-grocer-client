@@ -38,16 +38,9 @@ const FlashSaleHome = () => {
       </div>
 
       {isLoading && <Loader />}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 mx-auto py-10">
-        {flashSaleProducts?.length &&
-          flashSaleProducts
-            ?.slice(0, 8)
-            ?.map((product) => (
-              <SingleProduct
-                key={product?._id}
-                products={product}
-              ></SingleProduct>
-            ))}
+        {!isLoading && flashSaleProducts?.length && flashSaleProducts?.slice(0, 8)?.map((product) => (<SingleProduct key={product?._id} products={product} ></SingleProduct>))}
       </div>
     </div>
   );
