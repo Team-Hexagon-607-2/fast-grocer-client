@@ -8,13 +8,13 @@ import { useContext } from "react";
 import { StateContext } from "../../../contexts/AuthProvider";
 
 const AllOrder = () => {
-  const {user, logOut } = useContext(StateContext);
+  const { user, logOut } = useContext(StateContext);
   const [selectedValue, setSelectedValue] = useState({});
 
   const { data: allOrders, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["order", "cancel-order", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/allOrders?email=${user?.email}`, {
+      fetch(`https://fg-server.vercel.app/allOrders?email=${user?.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
@@ -28,11 +28,20 @@ const AllOrder = () => {
         })
   });
 
-  const { data: AllUsers, isLoading: DeliveryLoading } = useQuery({
-    queryKey: ["products"],
+  const { data: AllUsers = [], isLoading: DeliveryLoading } = useQuery({
+    queryKey: ["users"],
     queryFn: () =>
-      fetch(`https://fg-server.vercel.app/users`).then((res) => res.json()),
+      fetch(`https://fg-server.vercel.app/users?email=${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+        .then((res) => res.json()),
   });
+
+  if (DeliveryLoading) {
+    return <Loader />
+  }
 
   const deliveryMan = AllUsers?.filter(
     (person) => person?.role === "delivery man" && person?.availabilityStatus === true

@@ -11,7 +11,7 @@ const AllBuyers = () => {
   const { data: users, isLoading, refetch } = useQuery({
     queryKey: ['allBuyers', user?.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/allBuyers?email=${user?.email}`, {
+      const res = await fetch(`https://fg-server.vercel.app/allBuyers?email=${user?.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },

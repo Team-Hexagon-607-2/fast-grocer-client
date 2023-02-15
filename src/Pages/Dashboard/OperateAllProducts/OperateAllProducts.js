@@ -11,7 +11,7 @@ const OperateAllProducts = () => {
   const { data: products, isLoading, refetch } = useQuery({
     queryKey: ['all-products', user?.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/all-products?email=${user?.email}`, {
+      const res = await fetch(`https://fg-server.vercel.app/all-products?email=${user?.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         }
@@ -31,7 +31,7 @@ const OperateAllProducts = () => {
   const handleDelete = product => {
     const permission = window.confirm(`Are Your sure? you want to ${product.name} delete product`);
     if (permission) {
-      fetch(`http://localhost:5000/product-delete/${product?._id}?email=${user?.email}`, {
+      fetch(`https://fg-server.vercel.app/product-delete/${product?._id}?email=${user?.email}`, {
         method: 'DELETE'
       })
         .then(res => res.json())

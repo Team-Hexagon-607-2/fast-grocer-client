@@ -29,7 +29,7 @@ const Coupon = () => {
       expire_date: data?.expire_date,
       couponAddDate: date
     }
-    fetch(`http://localhost:5000/add-coupon?email=${user?.email}`, {
+    fetch(`https://fg-server.vercel.app/add-coupon?email=${user?.email}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -54,7 +54,7 @@ const Coupon = () => {
   const handleDeleteCoupon = (name, id) => {
     const permission = window.confirm(`You want to delete "${name}" coupon?`);
     if(permission) {
-      fetch(`http://localhost:5000/delete-coupon/${id}?email=${user?.email}`, {
+      fetch(`https://fg-server.vercel.app/delete-coupon/${id}?email=${user?.email}`, {
         method: 'DELETE',
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -86,7 +86,7 @@ const Coupon = () => {
       </div>
       {showCouponForm && <div className='my-5'>
         <p onClick={handleHideCouponForm} className="hover:underline mb-2 inline-block cursor-pointer px-3 ml-4 text-sm">Hide</p>
-        <form onSubmit={handleSubmit(handleAddCoupon)} className="flex justify-evenly">
+        <form onSubmit={handleSubmit(handleAddCoupon)} className="flex justify-evenly px-6">
           <div className="form-control w-full max-w-xs">
             <input type="text" placeholder="Coupon Name" className="input input-sm input-bordered w-full max-w-xs" {...register("coupon_name", { required: "Add Coupon Name" })} />
             {errors?.coupon_name && <p className='text-red-600 text-sm'>*{errors?.coupon_name?.message}</p>}

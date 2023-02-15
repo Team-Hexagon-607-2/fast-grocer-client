@@ -14,8 +14,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import useFindBuyer from "../hooks/useFindBuyer";
-import useFindAdmin from "../hooks/useFindAdmin";
-import useFindDeliveryman from "../hooks/useFindDeliveryman";
 
 export const StateContext = createContext();
 const auth = getAuth(app);
@@ -29,20 +27,14 @@ export const ContextProvider = ({ children }) => {
   const [cart, setCart] = useState(cartFromLocalStorage);
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState({});
-  const [address, setAddress] = useState({});
   const [isBuyer] = useFindBuyer(user?.email);
-  
+
   // all products
-  const {
-    data: AllProducts,
-    isLoading,
-    isError,
-    refetch,
-    error,
-  } = useQuery({
-    queryKey: ["products"],
+  const { data: AllProducts = [], isLoading, isError, refetch, } = useQuery({
+    queryKey: ["get-allProducts"],
     queryFn: () =>
-      fetch(`https://fg-server.vercel.app/products`).then((res) => res.json()),
+      fetch(`https://fg-server.vercel.app/allProducts`)
+      .then((res) => res.json()),
     keepPreviousData: true,
   });
 
@@ -75,9 +67,9 @@ export const ContextProvider = ({ children }) => {
 
   // Coupon
   const { data: coupons = [], refetch: couponRefresh, isLoading: couponsLoading } = useQuery({
-    queryKey: ["coupon", user?.email],
+    queryKey: ["get-coupons"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/get-coupons?email=${user?.email}`, {
+      const res = await fetch(`https://fg-server.vercel.app/get-coupons`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
@@ -94,9 +86,15 @@ export const ContextProvider = ({ children }) => {
     isError: AllOrderError,
     refetch: AllOrdersRefetch,
   } = useQuery({
-    queryKey: ["order"],
+    queryKey: ["allOrder", user?.email],
     queryFn: () =>
-      fetch(`https://fg-server.vercel.app/order`).then((res) => res.json()),
+      fetch(`https://fg-server.vercel.app/allOrders?email=${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+        .then((res) => res.json()),
+
     keepPreviousData: true,
   });
 
@@ -134,7 +132,7 @@ export const ContextProvider = ({ children }) => {
   };
 
   const handleAddToCart = (e, product) => {
-    if(!user || isBuyer) {
+    if (!user || isBuyer) {
       const isExist = cart?.find((p) => p._id === product._id);
       if (isExist) {
         const p = cart?.map((item) =>
@@ -146,7 +144,7 @@ export const ContextProvider = ({ children }) => {
       } else {
         setCart([...cart, { ...product, qunatity: 1 }]);
       }
-  
+
       toast.success("Product added successfully");
     };
 
@@ -224,10 +222,11 @@ export const ContextProvider = ({ children }) => {
         searchText,
         setSearchText,
         AllProducts,
-        categories,
-        isCategoryLoading,
         isLoading,
         isError,
+        refetch,
+        categories,
+        isCategoryLoading,
         handleDecrement,
         handleIncrement,
         handleAddToCart,
@@ -248,7 +247,6 @@ export const ContextProvider = ({ children }) => {
         wishlistRefetch,
         order,
         setOrder,
-        refetch,
         coupons,
         couponsLoading,
         couponRefresh,

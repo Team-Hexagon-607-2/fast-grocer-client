@@ -12,7 +12,7 @@ const AllDeliveryman = () => {
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['allDeliverymen', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/allDeliverymen?email=${user?.email}`, {
+            const res = await fetch(`https://fg-server.vercel.app/allDeliverymen?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },

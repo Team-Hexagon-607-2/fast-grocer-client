@@ -1,27 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import SingleProduct from "../Home/HomePageProducts/SingleProduct/SingleProduct";
 import sortImg from '../../assets/images/categoryModalIcon/sort.png'
 import Loader from "../Loader/Loader";
-import { useQuery } from "@tanstack/react-query";
+import { StateContext } from "../../contexts/AuthProvider";
 
 const AllProducts = () => {
+  const {AllProducts, isLoading} = useContext(StateContext);
   const [isAsc, setIsAsc] = useState('');
   const [limitProduct, setLimitProduct] = useState(30);
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['AllProducts'],
-    queryFn: async () => {
-      const res = await fetch('http://localhost:5000/AllProducts');
-      const data = await res.json();
-      return data;
-    }
-  });
 
   if (isLoading) {
     return <Loader />
   }
 
-  const AllProducts = data.products;
   const limitProducts = AllProducts.slice(0, limitProduct);
 
   const handleLoadMoreProducts = () => {
