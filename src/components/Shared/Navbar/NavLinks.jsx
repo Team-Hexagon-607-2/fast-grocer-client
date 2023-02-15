@@ -10,6 +10,7 @@ const NavNavLinks = () => {
   const [orderId, setOrderId] = useState('');
   const [orderStatus, setOrderStatus] = useState('');
   const [isBuyer] = useFindBuyer(user?.email);
+  const [toggle, setToggle] = useState(true);
 
   const { data: allOrders = [], isLoading } = useQuery({
     queryKey: ['orderTracking', user?.email],
@@ -62,9 +63,13 @@ const NavNavLinks = () => {
       {
         isBuyer &&
         <div className="dropdown py-2  hover:bg-slate-700 duration-300 relative">
-          <label tabIndex={0} className="cursor-pointer px-3">Track My Order</label>
+          <label onClick={() => setToggle(!toggle)} tabIndex={0} className="cursor-pointer px-3">Track My Order</label>
 
-          <div tabIndex={0} className="dropdown-content bg-white text-black p-5  w-[320px] absolute top-9 left-[-50px]">
+          <div tabIndex={0}
+            className={toggle ?
+              "hidden dropdown-content bg-white text-black p-5 rounded-md w-[320px] absolute top-9 left-[-50px]" :
+              "dropdown-content bg-white text-black p-5 rounded-md w-[320px] absolute top-9 left-[-50px]"
+            }>
             <div className="mb-3">
               <h2 className="text-[17px] mb-2 text-slate-600">My last Order</h2>
               {

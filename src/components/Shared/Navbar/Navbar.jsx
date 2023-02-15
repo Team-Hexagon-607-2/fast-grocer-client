@@ -13,10 +13,11 @@ import { StateContext } from "./../../../contexts/AuthProvider";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaThList } from "react-icons/fa";
+import { useState } from "react";
 
 const Navbar = () => {
   const { user, logOut, categories, } = useContext(StateContext);
-  
+  const [toggle, setToggle] = useState(true);
 
   const styles = {
     wrapper: "bg-white w-full mx-auto hidden lg:block",
@@ -53,12 +54,16 @@ const Navbar = () => {
             <Login />
             {user && (
               <div className="dropdown dropdown-end">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <label onClick={() => setToggle(!toggle)} tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
                     <img src={user?.photoURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRbiMjUoOxJCAMB9poSO2wLg34m7OxmyaT-A&usqp=CAU"} alt="" />
                   </div>
                 </label>
-                <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+
+                <ul tabIndex={0}
+                  className={toggle ?
+                    "hidden menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52" :
+                    "menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-md w-52"}>
                   <li>
                     <Link to="/dashboard">
                       <AiOutlineDashboard /> Dashboard
@@ -78,16 +83,19 @@ const Navbar = () => {
             {/* Desktop navbar link such as page home etc */}
 
             <div className="dropdown dropdown-start text-[14px] w-52 bg-[#84b840] py-2 px-3 relative">
-              <label tabIndex={0} className="cursor-pointer text-white flex items-center justify-between" >
+              <label onClick={() => setToggle(!toggle)} tabIndex={0} className="cursor-pointer text-white flex items-center justify-between" >
                 <span><FaThList className="inline-block mr-3" /> Categories </span>
                 <RiArrowDownSLine className="inline-block h-5 w-5 font-semibold" />
               </label>
 
               <ul tabIndex={0}
-                className="dropdown-content menu p-2 shadow bg-base-100 rounded-md w-64 absolute top-[36px] left-[-1px]">
+                className={toggle ?
+                  "hidden dropdown-content menu p-2 shadow bg-base-100 rounded-md w-64 absolute top-[36px] left-[-1px]" :
+                  "dropdown-content menu p-2 shadow bg-base-100 rounded-md w-64 absolute top-[36px] left-[-1px]"
+                }>
                 <div className="h-[300px] overflow-auto">
                   {
-                    categories.map(category => <Link key={category._id} to={`/category/${category.categoryName}`} className='px-2 py-1 mb-2 hover:bg-[#c9f391] rounded-sm block'>{category.categoryName}</Link>)
+                    categories.map(category => <Link onClick={() => setToggle(!toggle)} key={category._id} to={`/category/${category.categoryName}`} className='px-2 py-1 mb-2 hover:bg-[#c9f391] rounded-sm block'>{category.categoryName}</Link>)
                   }
                 </div>
               </ul>
