@@ -8,7 +8,7 @@ import Wishlist from "./Wishlist";
 import logo from "../../../assets/logo/logo.png";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { RiArrowDownSLine } from "react-icons/ri";
+import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 import { StateContext } from "./../../../contexts/AuthProvider";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineDashboard } from "react-icons/ai";
@@ -85,7 +85,11 @@ const Navbar = () => {
             <div className="dropdown dropdown-start text-[14px] w-52 bg-[#84b840] py-2 px-3 relative">
               <label onClick={() => setToggle(!toggle)} tabIndex={0} className="cursor-pointer text-white flex items-center justify-between" >
                 <span><FaThList className="inline-block mr-3" /> Categories </span>
-                <RiArrowDownSLine className="inline-block h-5 w-5 font-semibold" />
+                {
+                  toggle ?
+                  <RiArrowDownSLine className="inline-block h-5 w-5 font-semibold" />:
+                  <RiArrowUpSLine className="inline-block h-5 w-5 font-semibold" />
+                }
               </label>
 
               <ul tabIndex={0}
