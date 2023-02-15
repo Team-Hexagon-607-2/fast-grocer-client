@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { StateContext } from "../../contexts/AuthProvider";
+import UseTitle from "../../hooks/UseTitle";
 import CartItem from "./CartItem";
 
 const Cart = () => {
+  UseTitle('Cart')
   const { isAdmin, isDeliveryman, cart, totalPrice, clearCart, totalQuantity } = useContext(StateContext);
 
   return (

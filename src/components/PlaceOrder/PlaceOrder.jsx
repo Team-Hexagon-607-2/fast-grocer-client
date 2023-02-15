@@ -9,8 +9,10 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 import { FcAbout } from "react-icons/fc";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
+import UseTitle from "../../hooks/UseTitle";
 
 const PlaceOrder = () => {
+  UseTitle('CheckOut')
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { isAdmin, isDeliveryman, cart,  user, totalPrice, coupons } = useContext(StateContext);
   const [countryName, setCountryName] = useState('');

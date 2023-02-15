@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Cart from "./Cart";
 import Login from "./Login";
 import MobileNavbar from "./MobileNavbar";
@@ -16,6 +16,7 @@ import { FaThList } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut, categories, } = useContext(StateContext);
+  
 
   const styles = {
     wrapper: "bg-white w-full mx-auto hidden lg:block",
@@ -32,44 +33,44 @@ const Navbar = () => {
 
 
       {/* Desktop Nav */}
-        <div className={`${styles.flexRow} sticky top-0 duration-300 z-[9999] bg-white shadow-lg hidden`}>
-          <div className="border-slate-300 flex items-center justify-center" >
-            <Link to="/">
-              <p className="">
-                <img
-                  src={logo}
-                  alt="Fast_Grocer"
-                  className="w-[115px]"
-                />
-              </p>
-            </Link>
-          </div>
-          <Search />
-          <div className="flex flex-wrap items-center justify-start">
-            <div className=" flex flex-row flex-wrap sm:py-1 gap-3 ml-[10px] items-center ">
-              <Wishlist />
-              <Cart />
-              <Login />
-              {user && (
-                <div className="dropdown dropdown-end">
-                  <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                    <div className="w-10 rounded-full">
-                      <img src={user?.photoURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRbiMjUoOxJCAMB9poSO2wLg34m7OxmyaT-A&usqp=CAU"} alt="" />
-                    </div>
-                  </label>
-                  <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                    <li>
-                      <Link to="/dashboard">
-                        <AiOutlineDashboard/> Dashboard
-                      </Link>
-                    </li>
-                    <li><button onClick={logOut}><BiLogOut/> Logout</button></li>
-                  </ul>
-                </div>
-              )}
-            </div>
+      <div className={`${styles.flexRow} sticky top-0 duration-300 z-[9999] bg-white shadow-lg hidden`}>
+        <div className="border-slate-300 flex items-center justify-center" >
+          <Link to="/">
+            <p className="">
+              <img
+                src={logo}
+                alt="Fast_Grocer"
+                className="w-[115px]"
+              />
+            </p>
+          </Link>
+        </div>
+        <Search />
+        <div className="flex flex-wrap items-center justify-start">
+          <div className=" flex flex-row flex-wrap sm:py-1 gap-3 ml-[10px] items-center ">
+            <Wishlist />
+            <Cart />
+            <Login />
+            {user && (
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img src={user?.photoURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRbiMjUoOxJCAMB9poSO2wLg34m7OxmyaT-A&usqp=CAU"} alt="" />
+                  </div>
+                </label>
+                <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                  <li>
+                    <Link to="/dashboard">
+                      <AiOutlineDashboard /> Dashboard
+                    </Link>
+                  </li>
+                  <li><button onClick={logOut}><BiLogOut /> Logout</button></li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
+      </div>
       <div className={`${styles.wrapper}`}>
         <div className="bg-slate-800">
           <div className="flex mx-auto">
@@ -81,10 +82,9 @@ const Navbar = () => {
                 <span><FaThList className="inline-block mr-3" /> Categories </span>
                 <RiArrowDownSLine className="inline-block h-5 w-5 font-semibold" />
               </label>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu p-2 shadow bg-base-100 rounded-md w-64 absolute top-[36px] left-[-1px] "
-              >
+
+              <ul tabIndex={0}
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-md w-64 absolute top-[36px] left-[-1px]">
                 <div className="h-[300px] overflow-auto">
                   {
                     categories.map(category => <Link key={category._id} to={`/category/${category.categoryName}`} className='px-2 py-1 mb-2 hover:bg-[#c9f391] rounded-sm block'>{category.categoryName}</Link>)
