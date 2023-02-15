@@ -72,7 +72,7 @@ const Navbar = () => {
         </div>
       <div className={`${styles.wrapper}`}>
         <div className="bg-slate-800">
-          <div className="flex justify-betwee w-11/12 mx-auto">
+          <div className="flex mx-auto">
             {/* Desktop search */}
             {/* Desktop navbar link such as page home etc */}
 
