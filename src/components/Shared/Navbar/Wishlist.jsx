@@ -8,7 +8,7 @@ const Wishlist = () => {
   const { isAdmin, isDeliveryman, wishListData } = useContext(StateContext);
   
   return (
-    <Link to="/dashboard/my-wishlist" className={isAdmin || isAdmin ? "flex flex-row hidden" : "flex flex-row"}>
+    <Link to="/dashboard/my-wishlist" className={isAdmin || isDeliveryman ? "flex-row hidden" : "flex flex-row"}>
       <label tabIndex={0} className="btn btn-ghost btn-circle">
         <div className="indicator">
           <AiFillHeart className="text-2xl" />
