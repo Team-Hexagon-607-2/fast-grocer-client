@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ConfirmModal from '../../../components/Modal/ConfirmModal/ConfirmModal';
-import ProfileEditModal from '../../../components/ProfileEditModal/ProfileEditModal';
 import { StateContext } from '../../../contexts/AuthProvider';
 import useFindAdmin from '../../../hooks/useFindAdmin';
 import useFindBuyer from '../../../hooks/useFindBuyer';
@@ -45,10 +45,7 @@ const Dashboard = () => {
                         isBuyer && <p className='text-center'>Buyer</p>
                     }
                     <br />
-                    <label onClick={() => setShowModal(true)} className='bg-[#9acd5e] hover:bg-[#80b248] py-1 px-3 cursor-pointer duration-300 rounded-md' htmlFor="profileModal">Edit Profile</label>
-                    {
-                        shoModal && <ProfileEditModal shoModal={shoModal} setShowModal={setShowModal} user={user}></ProfileEditModal>
-                    }
+                    <Link className='bg-[#9acd5e] hover:bg-[#80b248] py-1 px-3 cursor-pointer duration-300 rounded-md'>Edit Profile</Link>
                 </div>
                 <div>
                     <div className='mb-5'>
