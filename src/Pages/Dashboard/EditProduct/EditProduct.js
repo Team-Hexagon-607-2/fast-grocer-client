@@ -42,7 +42,7 @@ const EditProduct = () => {
                         }
                         console.log(updatedProductData)
                         fetch(`https://fg-server.vercel.app/product/${filterd?._id}`, {
-                            method: "PUT",
+                            method: "",
                             headers: {
                                 "content-type": "application/json"
                             },
