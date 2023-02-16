@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import SingleProduct from "../Home/HomePageProducts/SingleProduct/SingleProduct";
 import sortImg from '../../assets/images/categoryModalIcon/sort.png'
+import Loader from "../Loader/Loader";
+import { toast } from "react-hot-toast";
 
 const AllProducts = () => {
   const [AllProducts, setAllProducts] = useState([]);
@@ -21,15 +23,14 @@ const AllProducts = () => {
         const { products, count } = data;
         setTotalProducts(count);
         setAllProducts(products);
-        setIsLoading(false)
+        setIsLoading(false);
+      })
+      .catch(err => {
+        toast.error(err.message);
+        setIsLoading(false);
       })
   }, [page, size]);
 
-  const Loader = () => {
-    return (
-      <div className="sm:w-[80px]  sm:h-[80px] w-[40px] h-[40px]  animate-spin bg-white text-white border-dashed border-4 sm:border-8 border-[#92B137] rounded-[50%]" ></div>
-    );
-  };
 
   if (isAsc === 'Low Price') {
     AllProducts.sort(function (a, b) { return a.price - b.price });
@@ -39,21 +40,23 @@ const AllProducts = () => {
   }
 
   function pageIncrease() {
-    if (page <= 6) {
+    if(page + 2 <= array.length) {
       setPage(page + 1)
     }
   }
 
   function pageDecrease() {
-    if (page >= 1) {
+    if(page === 1){
       setPage(page - 1)
     }
   }
 
-  return (
-    <>
-      <h2 className="text-center font-semibold text-2xl my-5">All Products</h2>
+  if (isLoading) {
+    return <Loader />
+  }
 
+  return (
+    <div className="mt-5">
       <div className='flex justify-end items-center mr-8'>
         <p className='text-sm mr-2'>SORT BY</p>
         <select onChange={(e) => setIsAsc(e.target.value)} className="select select-bordered select-sm w-56 focus:outline-none">
@@ -64,10 +67,6 @@ const AllProducts = () => {
         <img src={sortImg} alt="" />
       </div>
 
-      <div className="flex items-center justify-center">
-        {isLoading && <Loader />}
-      </div>
-
       <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-[95%] mx-auto py-5">
         {AllProducts?.map((product) => (<SingleProduct key={product?.id} products={product} />))}
       </div>
@@ -76,16 +75,16 @@ const AllProducts = () => {
         <p>page {page + 1} of 8</p>
 
         <div className="flex items-center">
-          <button className={page === 7 ? 'bg-slate-300  hover:cursor-not-allowed duration-300 px-2 py-1 text-sm rounded-md' : 'bg-[#ddecb0] hover:bg-[#b9cc81] duration-300 px-2 py-1 text-sm rounded-md'} onClick={pageIncrease}>Next</button>
+          <button className='bg-slate-300 duration-300 px-2 py-1 text-sm rounded-md' onClick={pageDecrease}>Previous</button>
           <div className="mx-2">
             {
               array.map(number => <button key={number.index} onClick={() => setPage(number)} className={(page === number) ? ' mx-1 w-8 h-8 rounded-full bg-[#ddecb0]' : 'bg-slate-200 mx-1 w-8 h-8 rounded-full'}>{number + 1}</button>)
             }
           </div>
-          <button className={page === 0 ? 'bg-slate-300  hover:cursor-not-allowed duration-300 px-2 py-1 text-sm rounded-md' : 'bg-[#ddecb0] hover:bg-[#b9cc81] duration-300 px-2 py-1 text-sm rounded-md'} onClick={pageDecrease}>Previews</button>
+          <button className='bg-slate-300 duration-300 px-2 py-1 text-sm rounded-md' onClick={pageIncrease}>Next</button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

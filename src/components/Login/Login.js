@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../contexts/AuthProvider';
 
@@ -24,7 +25,7 @@ const Login = () => {
             
         })
         .catch(error => {
-            console.log(error.message);
+            // console(error.message);
             setLoginError(error.message)
         })
     }
@@ -42,7 +43,9 @@ const Login = () => {
                 saveUser(user.displayName, user.email, userInfo.role);
                 navigate(from, {replace: true});
             })
-            .catch(err=> console.log(err));
+            .catch(err => {
+                toast.error(err.message)
+            });
         
        })
        .catch(error => {
@@ -57,7 +60,7 @@ const Login = () => {
         resetPassword()
         .then(result => {
             const user = result.user;
-            console.log(user);
+            // console.log(user);
         })
         .catch(err => console.error(err))
     }
@@ -80,9 +83,9 @@ const Login = () => {
     
 
     return (
-        <div className='h-[800px] flex justify-center items-center'>
+        <div className='flex justify-center items-center'>
             <div className='w-96 p-7'>
-                <h2 className='text-xl text-center'>Login</h2>
+                <h2 className='text-2xl font-semibold text-center mb-3'>Please Login</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>
 
                     <div className="form-control w-full max-w-xs">
@@ -93,8 +96,8 @@ const Login = () => {
                          {...register("email", {
                             required:"Email Address is required"
                         })} 
-                         className="input input-bordered w-full max-w-xs" />
-                           {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
+                         className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
+                           {errors.email && <p className='text-red-600 text-sm'>*{errors.email?.message}</p>}
                     </div>
 
                     <div className="form-control w-full max-w-xs">
@@ -110,25 +113,25 @@ const Login = () => {
                             }
                         })}                       
 
-                          className="input input-bordered w-full max-w-xs" />
+                          className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
+                        {errors.password && <p className='text-red-600 text-sm'>*{errors.password?.message}</p>}
                           
                         <label className="label">
                            <button onClick={handleResetPassword}> <span className="label-text">Forget Password?</span></button>
                         </label>
-                        {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
 
 
                     </div>
-                    <input className='btn btn-accent w-full' value="Login" type="submit" />
+                    <input className='btn w-full bg-[#84b840] hover:bg-[#6a9333] border-none' value="Login" type="submit" />
                     <div>
                         {
                            loginError && <p className='text-red-600'>{loginError} </p>  
                         }
                     </div>
                 </form>
-                <p>New in FastGrocer? <Link className='text-secondary' to="/signup">Create an Account</Link></p>
+                <p className='my-3 text-sm text-center'>New to Fast Grocer? <Link className='text-[#84b840] hover:underline' to="/signup">Create an Account</Link></p>
                 <div className="divider">OR</div>
-                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full '>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );

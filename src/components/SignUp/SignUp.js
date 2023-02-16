@@ -50,9 +50,9 @@ const SignUp = () => {
 
 
     return (
-        <div className='h-[800px] flex justify-center items-center'>
+        <div className='flex justify-center items-center'>
             <div className='w-96 p-7'>
-                <h2 className='text-xl text-center'>Sign Up</h2>
+                <h2 className='text-2xl font-semibold text-center mb-3'>Sign Up</h2>
                 <form onSubmit={handleSubmit(handleSignUp)}>
 
                     <div className="form-control w-full max-w-xs">
@@ -63,7 +63,7 @@ const SignUp = () => {
                             {...register("name", {
                                 required: "Name is required"
                             })}
-                            className="input input-bordered w-full max-w-xs" />
+                            className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
                         {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
                     </div>
 
@@ -75,7 +75,7 @@ const SignUp = () => {
                             {...register("email", {
                                 required: true
                             })}
-                            className="input input-bordered w-full max-w-xs" />
+                            className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
                         {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
                     </div>
 
@@ -88,7 +88,7 @@ const SignUp = () => {
                                 required: "Password is required",
                                 minLength: { value: 6, message: "Password munst be 6 character logn" }
                             })}
-                            className="input input-bordered w-full max-w-xs" />
+                            className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
                         {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                     </div>
 
@@ -96,7 +96,7 @@ const SignUp = () => {
                         <label className="label">
                             <span className="label-text">Account Type</span>
                         </label>
-                        <select  className="select select-bordered w-full"
+                        <select  className="select select-bordered w-full focus:outline-none focus:border focus:border-[#6a9333]"
                          {...register("accountType",  { required: true })}>                            
                             <option value="buyer">buyer</option>
                             <option value="delivery man">delivery man</option>
@@ -105,12 +105,12 @@ const SignUp = () => {
                         {errors.name && <p className='text-red-500'>{errors.accountType.message}</p>}
                     </div>
 
-                    <input className='btn btn-accent w-full mt-4' value="Sign Up" type="submit" />
+                    <input className='btn w-full mt-4 bg-[#84b840] hover:bg-[#6a9333] border-none' value="Sign Up" type="submit" />
                     {
                         signUpError && <p className='text-red-600'>{signUpError}</p>
                     }
                 </form>
-                <p>Already have an account? <Link className='text-secondary' to="/login">Please Login</Link></p>
+                <p className='text-sm text-center my-3'>Already have an account? <Link className='text-[#84b840] hover:underline' to="/login">Please Login</Link></p>
                 
             </div>
         </div>

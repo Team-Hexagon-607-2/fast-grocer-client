@@ -13,24 +13,24 @@ import { BiLogOutCircle } from "react-icons/bi";
 const Login = () => {
   const { user, logOut } = useContext(StateContext);
   return (
-    <div>
-      <div className="">
-        {!user && (
+    <>
+      {!user && (
+        <div className="">
           <Link
             to="/login"
-            className="flex items-center gap-[2px] justify-center cursor-pointer hover:text-[#96B240] "
+            className="flex items-center gap-[2px] justify-center cursor-pointer hover:text-[#6a9333] "
           >
-            <div className="w-[40px] h-[40px]  rounded-[50%] bg-[#F2F4EC] flex items-center justify-center ">
-              <BsPeople className="text-lg" />
+            <div className="w-[47px] h-[47px]  rounded-[50%] bg-[#F2F4EC] flex items-center justify-center ">
+              <BsPeople className="text-xl" />
             </div>
-            <p className="hover:text-[#92ad3f] font-semibold text-black  text-[14px]">
+            <p className="hover:text-[#6a9333] font-semibold text-black  text-[14px] ml-1">
               Login <span className="italic text-[#95AF4D]">or</span> <br />{" "}
               Register
             </p>
           </Link>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 

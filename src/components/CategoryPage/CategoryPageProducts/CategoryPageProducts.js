@@ -10,6 +10,7 @@ const CategoryPageProducts = () => {
   const { AllProducts, isLoading } = useContext(StateContext);
   const { name } = useParams();
   const [isAsc, setIsAsc] = useState('');
+  const [productsView, setProductsView] = useState(true)
 
   if (isLoading) {
     return <div className='h-[250px flex justify-center items-center]'>
@@ -26,11 +27,13 @@ const CategoryPageProducts = () => {
     categoryProducts.sort(function (a, b) { return b.price - a.price });
   }
 
+  console.log(productsView)
+
   return (
     <div>
       <div className='md:flex justify-between items-center mb-3 md:mt-3'>
         <h2 className='font-semibold text-2xl pl-5 mt-3 mb-2 text-[#70a138]'>{name}</h2>
-        
+
         <div className='flex items-center gap-3 px-5'>
           <div className='flex items-center'>
             {/* <p className='text-sm mr-3'>SORT BY</p> */}
@@ -42,16 +45,21 @@ const CategoryPageProducts = () => {
             <img src={sortImg} alt="" />
           </div>
 
-          <BsFillGrid3X3GapFill className='w-5 h-5 font-semibold cursor-pointer inline-block' />
-          <FaListUl className='w-5 h-5 font-semibold cursor-pointer inline-block' />
+          <BsFillGrid3X3GapFill onClick={() => setProductsView(true)} className='w-5 h-5 font-semibold cursor-pointer inline-block' />
+          <FaListUl onClick={() => setProductsView(false)} className='w-5 h-5 font-semibold cursor-pointer inline-block' />
         </div>
       </div>
 
-      <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10 px-5'>
-        {
-          categoryProducts.map(categoryProduct => <SingleProduct key={categoryProduct._id} products={categoryProduct}></SingleProduct>)
-        }
-      </div>
+      {
+        productsView ?
+          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10 px-5'>
+            { categoryProducts.map(categoryProduct => <SingleProduct key={categoryProduct._id} products={categoryProduct}></SingleProduct>)}
+          </div>
+          :
+          <div className='mb-10 px-5'>
+            {categoryProducts.map(categoryProduct => <SingleProduct key={categoryProduct._id} products={categoryProduct}></SingleProduct>)}
+          </div>
+      }
     </div>
   );
 };

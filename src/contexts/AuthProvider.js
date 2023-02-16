@@ -13,6 +13,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+
 export const StateContext = createContext();
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
@@ -32,11 +33,13 @@ export const ContextProvider = ({ children }) => {
     data: AllProducts,
     isLoading,
     isError,
+    refetch,
     error,
   } = useQuery({
     queryKey: ["products"],
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/products`).then((res) => res.json()),
+    keepPreviousData: true,
   });
 
   // all product categories name
@@ -63,6 +66,30 @@ export const ContextProvider = ({ children }) => {
           "content-type": "application/json",
         },
       }).then((res) => res.json()),
+    keepPreviousData: true,
+  });
+
+  // Coupon
+  const { data: coupons } = useQuery({
+    queryKey: ["coupon"],
+    queryFn: async () => {
+      const res = await fetch("https://fg-server.vercel.app/get-coupons");
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  //AllOrders
+  const {
+    data: AllOrders,
+    isLoading: AllOrdersLoading,
+    isError: AllOrderError,
+    refetch: AllOrdersRefetch,
+  } = useQuery({
+    queryKey: ["order"],
+    queryFn: () =>
+      fetch(`https://fg-server.vercel.app/order`).then((res) => res.json()),
+    keepPreviousData: true,
   });
 
   const handleDecrement = (e, id) => {
@@ -127,8 +154,8 @@ export const ContextProvider = ({ children }) => {
     setCart([]);
   };
 
-  //for firebase authentition
-
+  
+  //for firebase authentication
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -209,6 +236,11 @@ export const ContextProvider = ({ children }) => {
         wishlistRefetch,
         order,
         setOrder,
+        refetch,
+        coupons,
+        AllOrders,
+        AllOrdersLoading,
+        AllOrdersRefetch,
       }}
     >
       {children}

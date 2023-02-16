@@ -24,6 +24,16 @@ import EditProduct from "../../Pages/Dashboard/EditProduct/EditProduct";
 import OrderForDeliverMan from "../../Pages/Dashboard/OrderForDeliverMan/OrderForDeliverMan";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DeliveryHistory from "../../Pages/Dashboard/DeliveryHistory/DeliveryHistory";
+import FlashSalePage from "../../components/FlashSale/FlashSalePage";
+import AdminRoutes from "../AdminRoutes/AdminRoutes";
+import DeliveryRoutes from "../DeliveryRoutes/DeliveryRoutes";
+import BuyerRoutes from "../BuyerRoutes/BuyerRoutes";
+import OperateAllProducts from "../../Pages/Dashboard/OperateAllProducts/OperateAllProducts";
+import Coupon from "../../Pages/Coupon/Coupon";
+import Voucher from "../../Pages/Dashboard/Voucher/Voucher";
+import WriteReview from "../../components/WriteReview/WriteReview";
+import Inventory from "../../Pages/Dashboard/Inventory/Inventory";
+import Reports from "./../../Pages/Dashboard/Reports/Reports";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -58,29 +68,37 @@ const router = createBrowserRouter([
         element: <OnSale />,
       },
       {
+        path: "/flashsale",
+        element: <FlashSalePage />,
+      },
+      {
         path: "/cart",
         element: <Cart />,
       },
       {
+        path: "/write-review",
+        element: <WriteReview />,
+      },
+      {
         path: "/place-order",
-        element: <PlaceOrder />,
+        element: (
+          <PrivateRoute>
+            <PlaceOrder />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/payment",
-        element: <Payment />,
-      },
-      {
-        path: "/signup",
-        element: <SignUp></SignUp>,
-      },
-      {
-        path: "/login",
-        element: <Login></Login>,
+        element: (
+          <PrivateRoute>
+            <Payment />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/aboutUs",
         element: <AboutUs></AboutUs>,
-      },      
+      },
 
       {
         path: "/category",
@@ -92,59 +110,167 @@ const router = createBrowserRouter([
           },
         ],
       },
+    ],
+  },
+  {
+    path: "/signup",
+    element: <SignUp></SignUp>,
+  },
+  {
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
       {
         path: "/dashboard",
-        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-        children: [
-          {
-            path: "/dashboard",
-            element: <Dashboard></Dashboard>,
-          },
-          {
-            path: "/dashboard/all-buyers",
-            element: <AllBuyers></AllBuyers>,
-          },
-          {
-            path: "/dashboard/all-deliveryman",
-            element: <AllDeliveryman></AllDeliveryman>,
-          },
-          {
-            path: "/dashboard/my-orders",
-            element: <MyOrders></MyOrders>,
-          },
-          {
-            path: "/dashboard/all-order",
-            element: <AllOrder />,
-          },
-          {
-            path: "/dashboard/delivery-man-order",
-            element: <OrderForDeliverMan />,
-          },
-          {
-            path: '/dashboard/delivery-history',
-            element: <DeliveryHistory></DeliveryHistory>
-          },
-          {
-            path: "/dashboard/my-wishlist",
-            element: <MyWishlist></MyWishlist>,
-          },
-          {
-            path: "/dashboard/payments",
-            element: <Payments></Payments>,
-          },
-          {
-            path: "/dashboard/my-reviews",
-            element: <MyReviews></MyReviews>,
-          },
-          {
-            path: "/dashboard/add-product",
-            element: <AddProduct></AddProduct>,
-          },
-          {
-            path: "/dashboard/edit-product",
-            element: <EditProduct></EditProduct>,
-          },
-        ],
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/all-buyers",
+        element: (
+          <AdminRoutes>
+            <AllBuyers />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/inventory",
+        element: (
+          <AdminRoutes>
+            <Inventory />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/reports",
+        element: (
+          <AdminRoutes>
+            <Reports />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/all-deliveryman",
+        element: (
+          <AdminRoutes>
+            <AllDeliveryman />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/all-order",
+        element: (
+          <AdminRoutes>
+            <AllOrder />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/add-product",
+        element: (
+          <AdminRoutes>
+            <AddProduct />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/edit-product",
+        element: (
+          <AdminRoutes>
+            <EditProduct />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/delivery-man-order",
+        element: (
+          <DeliveryRoutes>
+            <OrderForDeliverMan />
+          </DeliveryRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/delivery-history",
+        element: (
+          <DeliveryRoutes>
+            <DeliveryHistory />
+          </DeliveryRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/my-orders",
+        element: (
+          <BuyerRoutes>
+            <MyOrders />
+          </BuyerRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/my-wishlist",
+        element: (
+          <BuyerRoutes>
+            <MyWishlist />
+          </BuyerRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/payments",
+        element: (
+          <BuyerRoutes>
+            <Payments />
+          </BuyerRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/my-reviews",
+        element: (
+          <BuyerRoutes>
+            <MyReviews />
+          </BuyerRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/voucher",
+        element: (
+          <BuyerRoutes>
+            <Voucher></Voucher>
+          </BuyerRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/all-products",
+        element: (
+          <AdminRoutes>
+            <OperateAllProducts></OperateAllProducts>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/edit-product/:id",
+        element: (
+          <AdminRoutes>
+            <EditProduct></EditProduct>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/coupon",
+        element: (
+          <AdminRoutes>
+            <Coupon></Coupon>
+          </AdminRoutes>
+        ),
       },
     ],
   },

@@ -58,14 +58,13 @@ const OrderForDeliverMan = () => {
 
       <div className="overflow-x-auto  w-full">
         <div>{isLoading && <Loader />}</div>
-        <table className="table w-full">
+        <table className="table table-compact w-full">
           <thead>
             <tr>
               <th>S/N</th>
               <th>Name</th>
               <th>Phone</th>
               <th>address</th>
-
               <th>Picked This Order</th>
               <th>Product Info</th>
               <th>Total Price</th>

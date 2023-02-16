@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SingleProduct from "../Home/HomePageProducts/SingleProduct/SingleProduct";
+import Loader from "../Loader/Loader";
 
 const SearchPage = () => {
   const location = useLocation();
@@ -20,16 +21,6 @@ const SearchPage = () => {
   }, [searchText]);
   console.log(data);
 
-  const Loader = () => {
-    return (
-      <div
-        className="sm:w-[80px]  sm:h-[80px]
-       w-[40px] h-[40px]  animate-spin bg-white
-        text-white border-dashed border-4 sm:border-8 
-        border-[#92B137] rounded-[50%]"
-      ></div>
-    );
-  };
 
   return (
     <div className=" sm:mt-[20px] sm:mb-[20px] ">
@@ -39,14 +30,14 @@ const SearchPage = () => {
         </div>
       ) : data.length === 0 ? (
         <div
-          className="flex mt-[20px] mb-[20px] items-center justify-center
-         sm:text-[50px] text-[20px] text-red-500 font-bold 
+          className="flex mt-[20px] mb-[20px] items-center justify-center text-[25px] text-red-500 font-bold min-h-screen 
         "
         >
           No Product found
         </div>
       ) : (
         <div className=" mt-[10px] sm:mt-[50px]">
+          <h2 className="w-11/12 mx-auto">{data?.length} Search Results found for <span className="font-semibold">{searchText}</span></h2>
           <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 mx-auto py-10">
             {data?.map((product) => (
               <SingleProduct key={product?.id} products={product} />

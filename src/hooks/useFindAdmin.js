@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const useFindAdmin = email => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [isAdminLoading, setIsAdminLoading] = useState(true);
+
     useEffect(() => {
         if (email) {
             fetch(`https://fg-server.vercel.app/users/admin/${email}`)
