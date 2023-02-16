@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
-import Footer from '../../components/Shared/Footer/Footer';
+import { NavLink, Outlet } from 'react-router-dom';
 import productCategory from '../../assets/images/categoryModalIcon/categoryModalIcon.png';
 import { StateContext } from '../../contexts/AuthProvider';
+import UseTitle from '../../hooks/UseTitle';
 
 const CategoryLayout = () => {
+  UseTitle('Product Category')
   const { AllProducts, isLoading: isProductLoading, categories, isCategoryLoading } = useContext(StateContext);
 
   return (

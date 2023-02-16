@@ -4,10 +4,12 @@ import { StateContext } from "../../contexts/AuthProvider";
 import CheckoutForm from "./CheckoutForm ";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import UseTitle from "../../hooks/UseTitle";
 const stripePromise = loadStripe(
   "pk_test_51M6RZkBTug5LZU4zCk5W0QrAY49XMvfelTEHbrn78yqa2CdZeGxYBI306Oo2ZbcdKwsykWHnvcayykkCp1GwnDON000h0oFDBQ"
 );
 const Payment = () => {
+  UseTitle('Payment')
   const { state } = useLocation();
 
   return (
