@@ -8,7 +8,7 @@ const useFindBuyer = email => {
             fetch(`https://fg-server.vercel.app/users/buyers/${email}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     setIsBuyer(data.isBuyer);
                     setIsBuyerLoading(false);
                 })
