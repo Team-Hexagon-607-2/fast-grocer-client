@@ -52,7 +52,7 @@ const AddReview = ({ name, id }) => {
                             <option value="good">Good</option>
                             <option value="poor">Poor</option>
                         </select>
-
+                        
 
                     </div>
                     <div className="form-control w-full max-w-xs mt-2">

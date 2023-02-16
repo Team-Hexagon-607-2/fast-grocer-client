@@ -2,7 +2,7 @@ import React from 'react';
 
 const CookiePolicy = () => {
     return (
-        <div className='py-5'>
+        <div className='w-5/6 mx-auto my-10'>
             <h2 className='text-3xl font-bold my-3'>Our Cookie Policy</h2>
             <ol className='list-decimal list-inside'>
                 <li>

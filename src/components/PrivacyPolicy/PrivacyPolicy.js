@@ -2,7 +2,7 @@ import React from 'react';
 
 const PrivacyPolicy = () => {
     return (
-        <div>
+        <div className='w-5/6 mx-auto my-10'>
             <h1 className='text-3xl font-bold my-3'>Privacy and Confidentiallity</h1>
             <p className='py-5'>
                 Welcome to the https://fast-grocer-client.vercel.app/ website (the "Site"). , We respect your privacy and want to protect your personal information. To learn more, please read this Privacy Policy.

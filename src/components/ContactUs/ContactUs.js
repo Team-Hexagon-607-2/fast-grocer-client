@@ -8,7 +8,8 @@ const ContactUs = () => {
         console.log(data);
     }
     return (
-        <div className='m-5'>
+        <div className='flex justify-center my-10'>
+            <div>
             <h3 className='text-2xl'>Please send us your query here</h3>
             <form onSubmit={handleSubmit(sendQuery)}>
                 <div className="form-control w-full max-w-xs">
@@ -67,6 +68,7 @@ const ContactUs = () => {
             <br/>
             <span>Or</span><br/>
             <p className='font-bold'>Call us: 096239</p>
+            </div>
         </div>
     );
 };

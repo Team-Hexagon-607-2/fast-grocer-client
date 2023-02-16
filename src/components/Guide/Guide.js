@@ -2,7 +2,7 @@ import React from 'react';
 
 const Guide = () => {
     return (
-        <div>
+        <div className='w-5/6 mx-auto my-10'>
             <div className='bannerImage flex items-center justify-center'>
                 <div className='text-white font-semibold '>
                     <h1 className='text-5xl md:text-6xl'>How To Place An Order <br/>On<br/> Fast Grocer?</h1>                  
