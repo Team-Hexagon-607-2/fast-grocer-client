@@ -9,8 +9,6 @@ const HomePageProducts = () => {
   const [getAllProducts, setGetAllProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Winter Collection");
 
-  console.log(AllProducts.products);
-
   useEffect(() => {
     const categoryProducts = AllProducts?.filter((category) => category.category_name === "Winter Collection");
     setGetAllProducts(categoryProducts);
