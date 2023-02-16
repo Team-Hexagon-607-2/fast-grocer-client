@@ -35,6 +35,7 @@ import WriteReview from "../../components/WriteReview/WriteReview";
 import Inventory from "../../Pages/Dashboard/Inventory/Inventory";
 import Reports from "./../../Pages/Dashboard/Reports/Reports";
 import PaymentForDeliveryman from "../../Pages/Dashboard/PaymentForDeliveryman/PaymentForDeliveryman";
+import EditProfile from "../../Pages/Dashboard/EditProfile/EditProfile";
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -136,6 +137,10 @@ const router = createBrowserRouter([
             <Dashboard />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/dashboard/edit-profile",
+        element: <PrivateRoute><EditProfile /></PrivateRoute>
       },
       {
         path: "/dashboard/all-buyers",

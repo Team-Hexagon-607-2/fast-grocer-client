@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import ConfirmModal from '../../../components/Modal/ConfirmModal/ConfirmModal';
 import { StateContext } from '../../../contexts/AuthProvider';
 import useFindAdmin from '../../../hooks/useFindAdmin';
@@ -61,7 +62,7 @@ const Dashboard = () => {
                         isBuyer && <p className='text-center'>Buyer</p>
                     }
                     <br />
-                    <button className='bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md'>Edit Profile</button>
+                    <Link to='/dashboard/edit-profile' className='bg-[#9acd5e] hover:bg-[#80b248] py-1 px-2 text-center duration-300 rounded-md'>Edit Profile</Link>
                 </div>
                 <div>
                     <div className='mb-5'>
