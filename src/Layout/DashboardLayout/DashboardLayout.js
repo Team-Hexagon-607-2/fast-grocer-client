@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import {
-  AiOutlineEdit,
+  AiOutlineDollarCircle,
   AiOutlineHeart,
   AiOutlineHistory,
   AiOutlineStar,
@@ -171,6 +171,15 @@ const DashboardLayout = () => {
                   >
                     <AiOutlineHistory />
                     Delivery History
+                  </Link>
+                </li>
+                <li className="text-[14px] font-semibold">
+                  <Link
+                    to="/dashboard/my-payment"
+                    className="text-slate-700"
+                  >
+                    <AiOutlineDollarCircle />
+                    My Payment
                   </Link>
                 </li>
               </>
