@@ -82,8 +82,8 @@ const Navbar = () => {
             {/* Desktop search */}
             {/* Desktop navbar link such as page home etc */}
 
-            <div className="dropdown dropdown-start text-[14px] w-52 bg-[#84b840] py-2 px-3 relative">
-              <label onClick={() => setToggle(!toggle)} tabIndex={0} className="cursor-pointer text-white flex items-center justify-between" >
+            <div className="dropdown dropdown-start text-[14px] w-52 bg-[#84b840] relative">
+              <label onClick={() => setToggle(!toggle)} tabIndex={0} className="py-2 px-3 cursor-pointer text-white flex items-center justify-between" >
                 <span><FaThList className="inline-block mr-3" /> Categories </span>
                 {
                   toggle ?
