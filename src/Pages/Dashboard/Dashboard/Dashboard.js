@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useState } from 'react';
 import ConfirmModal from '../../../components/Modal/ConfirmModal/ConfirmModal';
+import ProfileEditModal from '../../../components/ProfileEditModal/ProfileEditModal';
 import { StateContext } from '../../../contexts/AuthProvider';
 import useFindAdmin from '../../../hooks/useFindAdmin';
 import useFindBuyer from '../../../hooks/useFindBuyer';
@@ -13,6 +14,8 @@ const Dashboard = () => {
     const [isDeliverymen] = useFindDeliveryman(user?.email);
     const [isBuyer] = useFindBuyer(user?.email);
     const [processing, setProcessing] = useState(false);
+    const [shoModal, setShowModal] = useState(false);
+
     const { data: deliverymanData, refetch } = useQuery({
         queryKey: ['working-status'],
         queryFn: async () => {
@@ -42,7 +45,10 @@ const Dashboard = () => {
                         isBuyer && <p className='text-center'>Buyer</p>
                     }
                     <br />
-                    <button className='bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md'>Edit Profile</button>
+                    <label onClick={() => setShowModal(true)} className='bg-[#9acd5e] hover:bg-[#80b248] py-1 px-3 cursor-pointer duration-300 rounded-md' htmlFor="profileModal">Edit Profile</label>
+                    {
+                        shoModal && <ProfileEditModal shoModal={shoModal} setShowModal={setShowModal} user={user}></ProfileEditModal>
+                    }
                 </div>
                 <div>
                     <div className='mb-5'>
