@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { StateContext } from "react-scroll-to-bottom";
 
 import FlashSaleHome from "../../FlashSale/FlashSaleHome";
+import Loader from "../../Loader/Loader";
 import FAQ from "../FAQ/FAQ";
 import HomeBanner from "../HomeBanner/HomeBanner";
 import HomeCategoryProducts from "../HomeCategoryProducts/HomeCategoryProducts";

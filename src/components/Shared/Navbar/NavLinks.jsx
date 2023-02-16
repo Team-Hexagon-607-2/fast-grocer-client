@@ -3,18 +3,22 @@ import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { StateContext } from "../../../contexts/AuthProvider";
 import { FiChevronRight } from "react-icons/fi";
+import useFindBuyer from "../../../hooks/useFindBuyer";
 
 const NavNavLinks = () => {
   const { user } = useContext(StateContext);
   const [orderId, setOrderId] = useState('');
   const [orderStatus, setOrderStatus] = useState('');
+  const [isBuyer] = useFindBuyer(user?.email);
 
   const { data: allOrders = [], isLoading } = useQuery({
     queryKey: ['orderTracking', user?.email],
     queryFn: async () => {
-      const res = await fetch(`https://fg-server.vercel.app/orderTracking/${user?.email}`);
-      const data = await res.json();
-      return data;
+      if (isBuyer) {
+        const res = await fetch(`https://fg-server.vercel.app/trackingOrder/${user?.email}`)
+        const data = await res.json();
+        return data;
+      };
     }
   });
 
@@ -22,10 +26,10 @@ const NavNavLinks = () => {
 
   const handleOrderTracking = () => {
     const result = allOrders?.find(order => order?._id === orderId);
-    if(result?.status) {
+    if (result?.status) {
       setOrderStatus(result?.status);
     }
-    else{
+    else {
       setOrderStatus('Result Not Found');
     }
   };
@@ -55,35 +59,41 @@ const NavNavLinks = () => {
         <label className="cursor-pointer">About Us</label>
       </NavLink>
 
-      <div className="dropdown py-2  hover:bg-slate-700 duration-300 relative">
-        <label tabIndex={0} className="cursor-pointer px-3">Track My Order</label>
+      {
+        isBuyer &&
+        <div className="dropdown py-2  hover:bg-slate-700 duration-300 relative">
+          <label tabIndex={0} className="cursor-pointer px-3">Track My Order</label>
 
-        <div tabIndex={0} className="dropdown-content bg-white text-black p-5  w-[320px] absolute top-9 left-[-50px]">
-          <div className="mb-3">
-            <h2 className="text-[17px] mb-2 text-slate-600">My last Order</h2>
-            {
-              !isLoading && limitsOrders.map(order =>
-                <Link to={`/dashboard/my-orders`} key={order?._id} className="hover:underline text-xs text-[#4CA4BC] inline-block">{order?.createdAt.slice(0, 10)} - Order {order?._id.slice(0, 15) + '...'}</Link>
-              )
-            }
-            {
-              isLoading && <p className="text-center">Loading...</p>
-            }
-          </div>
-
-          <div className="mb-3">
-            <h2 className="text-[17px] mb-2 text-slate-600">Track my order</h2>
-
-            <p className="text-xs">Your Order Number</p>
-            <div className="flex items-center">
-              <input onMouseOut={(e) => setOrderId(e.target.value)} className='border-t border-l border-b rounded-l-md px-2 py-1 focus:outline-[#84B840] w-full' type="text" placeholder="eg. 123456789" />
-              <button onClick={handleOrderTracking} className="bg-[#84B840] px-2 py-1 rounded-r-md"><FiChevronRight className="text-white h-6 w-6" /> </button>
+          <div tabIndex={0} className="dropdown-content bg-white text-black p-5  w-[320px] absolute top-9 left-[-50px]">
+            <div className="mb-3">
+              <h2 className="text-[17px] mb-2 text-slate-600">My last Order</h2>
+              {
+                isLoading && <p className="text-center">Loading...</p>
+              }
+              {
+                !isLoading && limitsOrders.map(order =>
+                  <Link to={`/dashboard/my-orders`} key={order?._id} className="hover:underline text-xs text-[#4CA4BC] inline-block">{order?.createdAt.slice(0, 10)} - Order {order?._id.slice(0, 15) + '...'}</Link>
+                )
+              }
+              {
+                limitsOrders.length === 0 && <p className="text-center">No Order Found</p>
+              }
             </div>
-          </div>
 
-          <p>Status: {orderStatus}</p>
+            <div className="mb-3">
+              <h2 className="text-[17px] mb-2 text-slate-600">Track my order</h2>
+
+              <p className="text-xs">Your Order Number</p>
+              <div className="flex items-center">
+                <input onMouseOut={(e) => setOrderId(e.target.value)} className='border-t border-l border-b rounded-l-md px-2 py-1 focus:outline-[#84B840] w-full' type="text" placeholder="eg. 123456789" />
+                <button onClick={handleOrderTracking} className="bg-[#84B840] px-2 py-1 rounded-r-md"><FiChevronRight className="text-white h-6 w-6" /> </button>
+              </div>
+            </div>
+
+            <p>Status: {orderStatus}</p>
+          </div>
         </div>
-      </div>
+      }
     </div>
   );
 };

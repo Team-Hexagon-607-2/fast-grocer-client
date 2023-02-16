@@ -3,6 +3,7 @@ import { logDOM } from "@testing-library/react";
 import React from "react";
 import { useContext } from "react";
 import Sales from "../../../components/Inventory/Sales.jsx";
+import Loader from "../../../components/Loader/Loader.jsx";
 import { StateContext } from "../../../contexts/AuthProvider";
 
 const Inventory = () => {
@@ -26,7 +27,7 @@ const Inventory = () => {
   const deliveryMan = AllUsers?.filter((item) => item.role === "delivery man");
   const buyers = AllUsers?.filter((item) => item.role === "buyer");
 
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="flex flex-col">
