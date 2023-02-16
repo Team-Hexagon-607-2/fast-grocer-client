@@ -3,8 +3,10 @@ import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { StateContext } from "../../../contexts/AuthProvider";
+import UseTitle from "../../../hooks/UseTitle";
 
 const MyWishList = () => {
+  UseTitle('WishList')
   const { wishListData, wishlistLoading, wishlistRefetch } =
     useContext(StateContext);
 
@@ -26,6 +28,7 @@ const MyWishList = () => {
       })
       .catch((err) => console.log(err));
   };
+
   const Loader = () => {
     return (
       <div
@@ -36,6 +39,7 @@ const MyWishList = () => {
       ></div>
     );
   };
+  
   const wishlist = wishListData?.data;
   return (
     <div className="">

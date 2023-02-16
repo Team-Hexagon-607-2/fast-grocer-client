@@ -1,91 +1,58 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import SingleProduct from "../Home/HomePageProducts/SingleProduct/SingleProduct";
 import sortImg from '../../assets/images/categoryModalIcon/sort.png'
 import Loader from "../Loader/Loader";
-import { toast } from "react-hot-toast";
-import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
+import { StateContext } from "../../contexts/AuthProvider";
+import UseTitle from "../../hooks/UseTitle";
 
 const AllProducts = () => {
-  const [AllProducts, setAllProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [totalProducts, setTotalProducts] = useState(null);
-  const [size, setSize] = useState(30);
-  const [page, setPage] = useState(0);
+  UseTitle('All Products')
+  const {AllProducts, isLoading} = useContext(StateContext);
   const [isAsc, setIsAsc] = useState('');
-
-  const pages = Math.ceil(totalProducts / parseInt(size));
-  const array = [...Array(pages).keys()];
-
-  useEffect(() => {
-    fetch(`https://fg-server.vercel.app/AllProducts?page=${page}&size=${size}`)
-      .then(res => res.json())
-      .then(data => {
-        const { products, count } = data;
-        setTotalProducts(count);
-        setAllProducts(products);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        toast.error(err.message);
-        setIsLoading(false);
-      })
-  }, [page, size]);
-
-
-  if (isAsc === 'Low Price') {
-    AllProducts.sort(function (a, b) { return a.price - b.price });
-  }
-  if (isAsc === 'High Price') {
-    AllProducts.sort(function (a, b) { return b.price - a.price });
-  }
-
-  function pageIncrease() {
-    if(page + 2 <= array.length) {
-      setPage(page + 1)
-    }
-  }
-
-  function pageDecrease() {
-    if(page === 1){
-      setPage(page - 1)
-    }
-  }
+  const [limitProduct, setLimitProduct] = useState(30);
 
   if (isLoading) {
     return <Loader />
   }
 
+  const limitProducts = AllProducts.slice(0, limitProduct);
+
+  const handleLoadMoreProducts = () => {
+    setLimitProduct(limitProduct + 30);
+  };
+
+  if (isAsc === 'Low Price') {
+    limitProducts.sort(function (a, b) { return a.price - b.price });
+  }
+  if (isAsc === 'High Price') {
+    limitProducts.sort(function (a, b) { return b.price - a.price });
+  }
+
   return (
-    <div className="mt-5">
-      <div className='flex justify-end items-center mr-8'>
-        <p className='text-sm mr-2'>SORT BY</p>
-        <select onChange={(e) => setIsAsc(e.target.value)} className="select select-bordered select-sm w-56 focus:outline-none">
-          <option disabled selected>-- Price --</option>
-          <option>Low Price</option>
-          <option>High Price</option>
-        </select>
-        <img src={sortImg} alt="" />
-      </div>
+    <>
+      <div className="mt-5">
+        <div className='flex justify-end items-center mr-8'>
+          <p className='text-sm mr-2'>SORT BY</p>
+          <select onChange={(e) => setIsAsc(e.target.value)} className="select select-bordered select-sm w-56 focus:outline-none">
+            <option disabled selected>-- Price --</option>
+            <option>Low Price</option>
+            <option>High Price</option>
+          </select>
+          <img src={sortImg} alt="" />
+        </div>
 
-      <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-[95%] mx-auto py-5">
-        {AllProducts?.map((product) => (<SingleProduct key={product?.id} products={product} />))}
-      </div>
-
-      <div className="md:flex justify-between items-center mx-8 mb-10">
-        <p>page {page + 1} of 8</p>
-
-        <div className="flex items-center">
-          <button className='bg-slate-300 duration-300 px-2 py-2 text-sm rounded-md' onClick={pageDecrease}><AiOutlineDoubleLeft /></button>
-          <div className="mx-2">
-            {
-              array.map(number => <button key={number.index} onClick={() => setPage(number)} className={(page === number) ? ' mx-1 w-8 h-8 rounded-full bg-[#ddecb0]' : 'bg-slate-200 mx-1 w-8 h-8 rounded-full'}>{number + 1}</button>)
-            }
-          </div>
-          <button className='bg-slate-300 duration-300 px-2 py-2 text-sm rounded-md' onClick={pageIncrease}><AiOutlineDoubleRight /></button>
+        <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-[95%] mx-auto py-5">
+          {
+            limitProducts.map(product => <SingleProduct key={product?._id} products={product}></SingleProduct>)
+          }
         </div>
       </div>
-    </div>
+
+      {
+        !(limitProducts.length === AllProducts.length) &&
+        <button onClick={handleLoadMoreProducts} className="bg-[#84b840] hover:bg-[#79a83b] text-white duration-500 font-semibold px-2 py-2 rounded-md w-[250px] block mx-auto my-5">Load More</button>
+      }
+    </>
   );
 };
 

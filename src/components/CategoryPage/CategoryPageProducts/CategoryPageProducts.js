@@ -18,7 +18,7 @@ const CategoryPageProducts = () => {
     </div>
   }
 
-  const categoryProducts = AllProducts.filter(category => category.category_name === name);
+  const categoryProducts = AllProducts?.filter(category => category.category_name === name);
 
   if (isAsc === 'Low Price') {
     categoryProducts.sort(function (a, b) { return a.price - b.price });
@@ -27,7 +27,7 @@ const CategoryPageProducts = () => {
     categoryProducts.sort(function (a, b) { return b.price - a.price });
   }
 
-  console.log(productsView)
+  // console.log(productsView)
 
   return (
     <div>
