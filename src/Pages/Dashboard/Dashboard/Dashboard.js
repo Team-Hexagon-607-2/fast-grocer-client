@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import ConfirmModal from '../../../components/Modal/ConfirmModal/ConfirmModal';
 import { StateContext } from '../../../contexts/AuthProvider';
 import useFindAdmin from '../../../hooks/useFindAdmin';
@@ -14,8 +14,6 @@ const Dashboard = () => {
     const [isDeliverymen] = useFindDeliveryman(user?.email);
     const [isBuyer] = useFindBuyer(user?.email);
     const [processing, setProcessing] = useState(false);
-    const [shoModal, setShowModal] = useState(false);
-
     const { data: deliverymanData, refetch } = useQuery({
         queryKey: ['working-status'],
         queryFn: async () => {
@@ -24,8 +22,26 @@ const Dashboard = () => {
             return data;
         }
     })
-
     refetch();
+
+    const handleClick = () =>{
+        console.log(deliverymanData.availabilityStatus);
+        const updatedUser ={
+            availabilityStatus: !deliverymanData.availabilityStatus
+        } 
+        fetch(`https://fg-server.vercel.app/deliveryman-toggle-availability?email=${user?.email}`, {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(updatedUser)
+            })
+        .then(res => res.json())
+        .then(data => {
+                console.log(data);
+                toast.success("Your status is updated successfully");
+            })
+    }
 
     return (
         <div className=''>
@@ -45,7 +61,7 @@ const Dashboard = () => {
                         isBuyer && <p className='text-center'>Buyer</p>
                     }
                     <br />
-                    <Link className='bg-[#9acd5e] hover:bg-[#80b248] py-1 px-3 cursor-pointer duration-300 rounded-md'>Edit Profile</Link>
+                    <button className='bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md'>Edit Profile</button>
                 </div>
                 <div>
                     <div className='mb-5'>
