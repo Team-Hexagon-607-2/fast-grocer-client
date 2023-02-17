@@ -26,7 +26,7 @@ const Cart = () => {
           <span className="font-bold text-lg text-center">{totalQuantity} Items</span>
           <span className="text-dark my-3 text-center">Subtotal: <span className="font-semibold">{totalPrice}</span>৳</span>
           <div className="card-actions">
-            <Link to="/cart" className="bg-[#17dc86] hover:bg-[#15ba73] duration-300 w-full p-2 font-semibold text-center text-white rounded-md">View cart</Link>
+            <Link to="/cart" className="bg-[#84b840] hover:bg-[#6a9333] duration-300 w-full p-2 font-semibold text-center text-white rounded-md">View cart</Link>
           </div>
         </div>
       </div>

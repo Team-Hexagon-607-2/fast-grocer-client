@@ -45,7 +45,7 @@ const HomeCategoryProducts = () => {
           enabled: true,
         }}
         autoplay={{
-          delay: 2000,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         navigation={true}
