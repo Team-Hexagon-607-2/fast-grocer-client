@@ -38,13 +38,32 @@ const EditProfile = () => {
           };
           updateUser(profile)
             .then(() => {
-              toast.success('profile update success');
-              navigate('/dashboard')
+              updateDBUserInfo(name, imageData?.data?.url)
             })
             .catch(err => toast.error(err.message))
         }
       })
   };
+
+  const updateDBUserInfo = (name, img) => {
+    const updatedUserData = { name, image: img };
+
+    fetch(`http://localhost:5000/user/${user?.email}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+      body: JSON.stringify(updatedUserData)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.acknowledged) {
+          toast.success('profile update success');
+          navigate('/dashboard')
+        }
+      })
+  }
 
   return (
     <div >
