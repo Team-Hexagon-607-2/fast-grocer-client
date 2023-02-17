@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { useContext } from "react";
 import { StateContext } from "../../contexts/AuthProvider";
 import Loader from "../Loader/Loader";
@@ -7,6 +6,10 @@ import Loader from "../Loader/Loader";
 const Sales = () => {
   const { AllOrders, AllOrdersLoading, AllOrdersRefetch } =
     useContext(StateContext);
+
+  if(AllOrdersLoading) {
+    return <Loader />
+  }
 
   const totalSales = AllOrders?.data?.reduce(
     (acc, item) => acc + item?.total_price,
@@ -18,7 +21,7 @@ const Sales = () => {
   );
 
   const order_products = AllOrders?.data?.map((item) => item?.order_products);
-  console.log(order_products);
+  // console.log(order_products);
 
   let product_sale_price = 0;
   for (const subOrders of order_products) {
@@ -34,10 +37,6 @@ const Sales = () => {
   const netProfit = (salesPriceWithoutShippingFee / 100) * 23.3;
   const allCost = (salesPriceWithoutShippingFee / 100) * 10;
   const productCost = (salesPriceWithoutShippingFee / 100) * 67.7;
-
-  if (AllOrdersLoading) {
-    return <Loader />
-  }
 
   return (
     <>

@@ -35,6 +35,7 @@ import WriteReview from "../../components/WriteReview/WriteReview";
 import Inventory from "../../Pages/Dashboard/Inventory/Inventory";
 import Reports from "./../../Pages/Dashboard/Reports/Reports";
 import PaymentForDeliveryman from "../../Pages/Dashboard/PaymentForDeliveryman/PaymentForDeliveryman";
+import EditProfile from "../../Pages/Dashboard/EditProfile/EditProfile";
 import Guide from "../../components/Guide/Guide";
 import PrivacyPolicy from "../../components/PrivacyPolicy/PrivacyPolicy";
 import CookiePolicy from '../../components/CookiePolicy/CookiePolicy';
@@ -164,6 +165,10 @@ const router = createBrowserRouter([
             <Dashboard />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/dashboard/edit-profile",
+        element: <PrivateRoute><EditProfile /></PrivateRoute>
       },
       {
         path: "/dashboard/all-buyers",
