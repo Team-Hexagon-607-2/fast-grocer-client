@@ -146,6 +146,7 @@ const MyOrders = () => {
                   </td>
                   
                   <td>
+                  {!item?.returnRequest && <>
                     {((item?.deliver && item?.cancel) ||
                       item?.deliver ||
                       !item?.cancel ||
@@ -158,6 +159,7 @@ const MyOrders = () => {
                         Return
                       </label>
                     )}
+                    </>}
                     {item?.returnRequest && <p>Return Requested</p>}
                   </td>
                   <td>

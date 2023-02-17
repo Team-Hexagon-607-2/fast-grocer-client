@@ -26,9 +26,9 @@ const Dashboard = () => {
     refetch();
 
     const handleClick = () =>{
-        console.log(deliverymanData.availabilityStatus);
+        console.log(deliverymanData?.availabilityStatus);
         const updatedUser ={
-            availabilityStatus: !deliverymanData.availabilityStatus
+            availabilityStatus: !deliverymanData?.availabilityStatus
         } 
         fetch(`https://fg-server.vercel.app/deliveryman-toggle-availability?email=${user?.email}`, {
                 method: "PUT",
@@ -93,10 +93,10 @@ const Dashboard = () => {
                         ((isDeliverymen && !deliverymanData?.workPermitStatus === "Accepted") || (isDeliverymen && !deliverymanData?.verified)) && <label htmlFor="deliveryman-modal" className={`bg-[#9acd5e] hover:bg-[#80b248] py-1 duration-300 rounded-md px-3`}>Request for Work Permit</label>
                     }
                     {
-                        (isDeliverymen && deliverymanData.availabilityStatus === true) && <button className='bg-[#f13737] hover:bg-[#940404] text-white py-1 px-3 duration-300 rounded-md'>Take a Break</button>
+                        (isDeliverymen && deliverymanData?.availabilityStatus === true) && <button onClick={handleClick} className='bg-[#f13737] hover:bg-[#940404] text-white py-1 px-3 duration-300 rounded-md'>Take a Break</button>
                     }
                     {
-                        (isDeliverymen && deliverymanData.availabilityStatus === false) && <button className='bg-[#4727ff] hover:bg-[#100e72] py-1 px-3 duration-300 rounded-md'>Get Back to Work</button>
+                        (isDeliverymen && deliverymanData?.availabilityStatus === false) && <button onClick={handleClick} className='bg-[#4727ff] hover:bg-[#100e72] py-1 px-3 duration-300 rounded-md'>Get Back to Work</button>
                     }
                 </div>
             </div>
