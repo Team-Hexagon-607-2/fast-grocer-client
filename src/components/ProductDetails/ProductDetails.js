@@ -74,18 +74,18 @@ const ProductDetails = () => {
         </div>
       )}
 
-      <div>
+      {/* <div>
         <ProductReview
         id= {_id}
         ></ProductReview>
-      </div>
+      </div> */}
         
-      <div>
+      {/* <div>
       <AddReview
         name={name}
         id={_id}
       ></AddReview>
-      </div>
+      </div> */}
     </div>
   );
 };
