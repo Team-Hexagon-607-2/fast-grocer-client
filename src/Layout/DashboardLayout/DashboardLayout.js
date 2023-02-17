@@ -17,7 +17,7 @@ import { StateContext } from "../../contexts/AuthProvider";
 import useFindAdmin from "../../hooks/useFindAdmin";
 import useFindBuyer from "../../hooks/useFindBuyer";
 import useFindDeliveryman from "../../hooks/useFindDeliveryman";
-import logo from "../../assets/logo/logo.png";
+import logo from "../../assets/logo/logo-text2.png";
 import Loader from "../../components/Loader/Loader";
 import { TbPlaylistAdd, TbReport } from "react-icons/tb";
 
@@ -45,15 +45,15 @@ const DashboardLayout = () => {
 
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu w-56 bg-slate-100 text-base-100">
+          <ul className="menu w-56 bg-slate-900 text-white">
             <div className="border-b">
-              <Link to="/">
+              <Link to={isBuyer && '/'}>
                 <img className="mx-auto my-7 w-[125px]" src={logo} alt="" />
               </Link>
             </div>
 
             <li className="text-[14px] font-semibold">
-              <Link className="text-slate-700" to="/dashboard">
+              <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard">
                 <AiOutlineUser /> My Profile
               </Link>
             </li>
@@ -62,50 +62,50 @@ const DashboardLayout = () => {
             {isAdmin && (
               <>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/all-buyers">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/all-buyers">
                     <FiUsers /> All Buyers
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
                   <Link
-                    className="text-slate-700"
+                    className="hover:bg-slate-800 click:bg-slate-700"
                     to="/dashboard/all-deliveryman"
                   >
                     <FiUsers /> Delivery Men
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/all-order">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/all-order">
                     <AiOutlineUnorderedList />
                     All Orders
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/all-products">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/all-products">
                     <GoTasklist />
                     All Products
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/add-product">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/add-product">
                     <TbPlaylistAdd />
                     Add Product
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/coupon">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/coupon">
                     <RiCoupon2Line />
                     Coupon
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/inventory">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/inventory">
                     <RiStore2Line />
                     Inventory
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/reports">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/reports">
                     <TbReport />
                     Reports
                   </Link>
@@ -118,32 +118,32 @@ const DashboardLayout = () => {
               <>
                 <div className="dropdown">
                   <li className="text-[14px] font-semibold">
-                    <Link className="text-slate-700" to="/dashboard/my-orders">
+                    <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/my-orders">
                       <AiOutlineUnorderedList />
                       My Orders
                     </Link>
                   </li>
                 </div>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/my-wishlist">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/my-wishlist">
                     <AiOutlineHeart />
                     My Wishlist
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/payments">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/payments">
                     <BsCash />
                     Payments
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/my-reviews">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/my-reviews">
                     <AiOutlineStar />
                     My Reviews
                   </Link>
                 </li>
                 <li className="text-[14px] font-semibold">
-                  <Link className="text-slate-700" to="/dashboard/voucher">
+                  <Link className="hover:bg-slate-800 click:bg-slate-700" to="/dashboard/voucher">
                     <RiCoupon2Line />
                     Voucher
                   </Link>
@@ -157,7 +157,7 @@ const DashboardLayout = () => {
                 <li className="text-[14px] font-semibold">
                   <Link
                     to="/dashboard/delivery-man-order"
-                    className="text-slate-700"
+                    className="hover:bg-slate-800 click:bg-slate-700"
                   >
                     <GoListUnordered />
                     My Delivery Orders
@@ -166,7 +166,7 @@ const DashboardLayout = () => {
                 <li className="text-[14px] font-semibold">
                   <Link
                     to="/dashboard/delivery-history"
-                    className="text-slate-700"
+                    className="hover:bg-slate-800 click:bg-slate-700"
                   >
                     <AiOutlineHistory />
                     Delivery History
@@ -187,7 +187,7 @@ const DashboardLayout = () => {
             <li className="text-[14px] font-semibold">
               <button
                 onClick={logOut}
-                className="text-slate-700"
+                className="hover:bg-slate-800 click:bg-slate-700"
                 to="/dashboard"
               >
                 <BiLogOut /> Logout

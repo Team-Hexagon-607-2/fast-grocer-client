@@ -8,38 +8,37 @@ const CartItem = ({ cart }) => {
   return (
     <div className="border rounded-md">
       <div className="flex items-center justify-between">
-        <div className="flex items-center justify-center gap-3 sm:w-auto sm:h-auto h-[150px]  ">
-          <div className="w-[100px] h-[100px]   sm:w-[140px] sm:h-[170px]  ">
-            <img
-              src={cart?.imageUrl}
-              className="w-full h-full object-contain" alt=""
-            />
-          </div>
+        <div className="grid grid-cols-3 gap-x-5 w-full">
 
-          <div>
-            <p className="sm:text-xl text-[13px] font-bold">{cart?.name}</p>
-            <p className="text-slate-600 text-sm">{cart?.bundle}</p>
-            <p className="text-slate-600 text-sm">Price: {cart?.price} ৳</p>
-            <p className="text-slate-600 text-sm">SubTotal: {subTotal} ৳</p>
-            <div className="sm:text-xl text-[13px] font-bold ">
-
-              <div className="rounded-[2px]">
-                <span className="mr-2 text-sm font-bold">{" "}Quantity:</span>
-                <span
-                  onClick={(e) => handleDecrement(e, cart?._id)}
-                  className=" hover:bg-[#6BA22C]  cursor-pointer py-1 px-4 sm:px-5 sm:py-1 bg-slate-100 text-lg border-[1px] border-slate-200 ">-</span>
-                <span className=" py-1 px-4 sm:px-5  sm:py-1 bg-slate-100 text-lg border-[1px] border-slate-200">
-                  {cart?.qunatity}
-                </span>
-                <span
-                  onClick={(e) => handleIncrement(e, cart?._id)}
-                  className="hover:bg-[#6BA22C]  cursor-pointer  py-1 px-4 sm:px-5  sm:py-1 bg-slate-100 text-lg border-[1px] border-slate-200"
-                >
-                  +
-                </span>
-              </div>
+          <div className="flex items-center">
+            <div className="">
+              <img
+                src={cart?.imageUrl}
+                className="w-20 h-20 object-contain mr-3" alt=""
+              />
+            </div>
+            <div>
+              <p className="font-semibold text-sm">{cart?.name}</p>
+              <p className="text-slate-600 text-[12px]">{cart?.bundle}</p>
+              <p className="text-slate-600 text-[12px]">Price: {cart?.price} ৳</p>
             </div>
           </div>
+          <div className="rounded-[2px] mx-auto my-auto">
+            <span className="mr-2 text-sm">{" "}Qty:</span>
+            <span
+              onClick={(e) => handleDecrement(e, cart?._id)}
+              className=" hover:bg-slate-200 cursor-pointer bg-slate-100 border-[1px] border-slate-200 px-2 rounded-l-full text-sm">-</span>
+            <span className=" bg-slate-100 border-[1px] border-slate-200 px-3 text-sm">
+              {cart?.qunatity}
+            </span>
+            <span
+              onClick={(e) => handleIncrement(e, cart?._id)}
+              className="hover:bg-slate-200  cursor-pointer bg-slate-100 border-[1px] border-slate-200 px-2 rounded-r-full text-sm">
+              +
+            </span>
+          </div>
+
+          <p className="text-slate-600 text-sm text-center my-auto font-semibold">SubTotal: {subTotal} ৳</p>
         </div>
         <div>
           <div
