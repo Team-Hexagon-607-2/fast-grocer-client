@@ -12,7 +12,6 @@ const Login = () => {
     const { signIn, googleSignIn, resetPassword, } = useContext(StateContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState(null);
-    // const [createdUserEmail, setCreatedUserEmail] = useState('');
 
     const location = useLocation();
     const navigate = useNavigate();
