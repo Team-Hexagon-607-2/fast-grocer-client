@@ -83,13 +83,8 @@ export const ContextProvider = ({ children }) => {
     },
   });
 
-  //AllOrders
-  const {
-    data: AllOrders,
-    isLoading: AllOrdersLoading,
-    isError: AllOrderError,
-    refetch: AllOrdersRefetch,
-  } = useQuery({
+  // AllOrders
+  const { data: AllOrders, isLoading: AllOrdersLoading, isError: AllOrderError, refetch: AllOrdersRefetch, } = useQuery({
     queryKey: ["allOrder", user?.email],
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/allOrders?email=${user?.email}`, {
