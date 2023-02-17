@@ -63,5 +63,5 @@ The grocery delivery web portal has three primary integrations
 - css frameworks: Tailwind
 - css libraries: daisyui
 
-## New Technology: Redux. 
-  Redux will help us with better state management. In our project, there has been complexity  in several state handling. 
+## New Technology: React Native. 
+  

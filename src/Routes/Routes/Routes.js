@@ -34,6 +34,16 @@ import Voucher from "../../Pages/Dashboard/Voucher/Voucher";
 import WriteReview from "../../components/WriteReview/WriteReview";
 import Inventory from "../../Pages/Dashboard/Inventory/Inventory";
 import Reports from "./../../Pages/Dashboard/Reports/Reports";
+import PaymentForDeliveryman from "../../Pages/Dashboard/PaymentForDeliveryman/PaymentForDeliveryman";
+import EditProfile from "../../Pages/Dashboard/EditProfile/EditProfile";
+import Guide from "../../components/Guide/Guide";
+import PrivacyPolicy from "../../components/PrivacyPolicy/PrivacyPolicy";
+import CookiePolicy from '../../components/CookiePolicy/CookiePolicy';
+import ContactUs from '../../components/ContactUs/ContactUs';
+import FAQ from "../../components/Home/FAQ/FAQ";
+
+
+
 const { createBrowserRouter } = require("react-router-dom");
 const { default: ErrorPage } = require("../../components/ErrorPage/ErrorPage");
 const { default: Home } = require("../../components/Home/Home/Home");
@@ -99,6 +109,26 @@ const router = createBrowserRouter([
         path: "/aboutUs",
         element: <AboutUs></AboutUs>,
       },
+      {
+        path: "/guide",
+        element: <Guide></Guide>
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy></PrivacyPolicy>
+      },
+      {
+        path: "/cookie-policy",
+        element: <CookiePolicy></CookiePolicy>
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs></ContactUs>
+      },
+      {
+        path: '/faq',
+        element: <FAQ></FAQ>
+      },
 
       {
         path: "/category",
@@ -137,10 +167,22 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/edit-profile",
+        element: <PrivateRoute><EditProfile /></PrivateRoute>
+      },
+      {
         path: "/dashboard/all-buyers",
         element: (
           <AdminRoutes>
             <AllBuyers />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/all-deliveryman",
+        element: (
+          <AdminRoutes>
+            <AllDeliveryman />
           </AdminRoutes>
         ),
       },
@@ -157,14 +199,6 @@ const router = createBrowserRouter([
         element: (
           <AdminRoutes>
             <Reports />
-          </AdminRoutes>
-        ),
-      },
-      {
-        path: "/dashboard/all-deliveryman",
-        element: (
-          <AdminRoutes>
-            <AllDeliveryman />
           </AdminRoutes>
         ),
       },
@@ -205,6 +239,14 @@ const router = createBrowserRouter([
         element: (
           <DeliveryRoutes>
             <DeliveryHistory />
+          </DeliveryRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/my-payment",
+        element: (
+          <DeliveryRoutes>
+            <PaymentForDeliveryman />
           </DeliveryRoutes>
         ),
       },

@@ -14,16 +14,16 @@ const FAQ = () => {
         </div>
       </div>
 
-      <div tabIndex={0} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-lg mb-3">
+      <div tabIndex={1} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-lg mb-3">
         <div className="collapse-title text-xl font-medium">
           How much do deliveries cost? 
         </div>
         <div className="collapse-content">
-          <p>There is a BDT 19 delivery fee for every order.</p>
+          <p>There is a BDT 29 delivery fee for every order inside Dhaka city..</p>
         </div>
       </div>
 
-      <div tabIndex={0} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-lg mb-3">
+      <div tabIndex={2} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-lg mb-3">
         <div className="collapse-title text-xl font-medium">
         How do I pay? 
         </div>
@@ -32,7 +32,7 @@ const FAQ = () => {
         </div>
       </div>
 
-      <div tabIndex={0} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-lg mb-3">
+      <div tabIndex={3} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-lg mb-3">
         <div className="collapse-title text-xl font-medium">
         Can I have multiple addresses under one account?
         </div>
@@ -41,9 +41,9 @@ const FAQ = () => {
         </div>
       </div>
 
-      <div tabIndex={0} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-lg mb-3">
+      <div tabIndex={4} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-lg mb-3">
         <div className="collapse-title text-xl font-medium">
-        I can’t find the product I am looking for. What do I do? 
+        I can not find the product I am looking for. What do I do? 
         </div>
         <div className="collapse-content">
           <p>Fast Grocer only stocks basic necessities. You can request for more specific needs. </p>

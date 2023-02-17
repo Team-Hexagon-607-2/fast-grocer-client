@@ -3,10 +3,12 @@ import { AiFillHeart } from "react-icons/ai";
 import { TbShoppingCartPlus } from "react-icons/tb";
 import { useLoaderData } from "react-router";
 import { StateContext } from "../../contexts/AuthProvider";
+import UseTitle from "../../hooks/UseTitle";
 import AddReview from "../Review/AddReview";
 import ProductReview from "../Review/ProductReview";
 
 const ProductDetails = () => {
+  UseTitle('Product Details');
   const product = useLoaderData();
   // console.log(product);
   const { handleAddToCart } = useContext(StateContext);
@@ -72,18 +74,18 @@ const ProductDetails = () => {
         </div>
       )}
 
-      <div>
+      {/* <div>
         <ProductReview
         id= {_id}
         ></ProductReview>
-      </div>
+      </div> */}
         
-      <div>
+      {/* <div>
       <AddReview
         name={name}
         id={_id}
       ></AddReview>
-      </div>
+      </div> */}
     </div>
   );
 };

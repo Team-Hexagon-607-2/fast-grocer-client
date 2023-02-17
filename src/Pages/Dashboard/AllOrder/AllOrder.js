@@ -4,31 +4,56 @@ import Loader from "../../../components/Loader/Loader";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { useContext } from "react";
+import { StateContext } from "../../../contexts/AuthProvider";
 
 const AllOrder = () => {
+  const { user, logOut } = useContext(StateContext);
   const [selectedValue, setSelectedValue] = useState({});
 
-  const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["order", "cancel-order"],
+  const { data: allOrders, isLoading, isError, error, refetch } = useQuery({
+    queryKey: ["order", "cancel-order", user?.email],
     queryFn: () =>
-      fetch(`https://fg-server.vercel.app/order`).then((res) => res.json()),
+      fetch(`https://fg-server.vercel.app/allOrders?email=${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+        .then((res) => res.json())
+        .then(data => {
+          if (data?.statusCode === 401 || data?.statusCode === 403) {
+            return logOut();
+          }
+          return data;
+        })
   });
 
-  const { data: AllUsers, isLoading: DeliveryLoading } = useQuery({
-    queryKey: ["products"],
+  const { data: AllUsers = [], isLoading: DeliveryLoading } = useQuery({
+    queryKey: ["users"],
     queryFn: () =>
-      fetch(`https://fg-server.vercel.app/users`).then((res) => res.json()),
+      fetch(`https://fg-server.vercel.app/users?email=${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+        .then((res) => res.json()),
   });
+
+  if (DeliveryLoading) {
+    return <Loader />
+  }
 
   const deliveryMan = AllUsers?.filter(
     (person) => person?.role === "delivery man" && person?.availabilityStatus === true
   );
+
   function handleChange(event) {
     const selectedOption = deliveryMan.find(
       (option) => option.email === event.target.value
     );
     setSelectedValue(selectedOption);
-  }
+  };
+
   const handleConfirmOrder = (id) => {
     const status = "Confirmed Order";
     fetch(`https://fg-server.vercel.app/order/${id}`, {
@@ -114,7 +139,7 @@ const AllOrder = () => {
           toast.success("Request Accepted");
         }
       })
-  }
+  };
 
   // handler for return request reject
   const handleReturnReject = (id) => {
@@ -128,7 +153,7 @@ const AllOrder = () => {
           toast.error("Request Rejected");
         }
       })
-  }
+  };
 
   return (
     <div className="">
@@ -136,7 +161,7 @@ const AllOrder = () => {
         All Orders
       </h2>
 
-      <div className="overflow-x-auto overflow-y-auto w-full">
+      <div className="overflow-x-auto overflow-y-auto w-full px-6">
         <div>{isLoading && <Loader />}</div>
         <table className="table table-compact w-full">
           <thead>
@@ -153,7 +178,7 @@ const AllOrder = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.data?.map((item, index) => (
+            {allOrders?.data?.map((item, index) => (
               <tr key={item?._id}>
                 <th>{index + 1}</th>
                 <td>

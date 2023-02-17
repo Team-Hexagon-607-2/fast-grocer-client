@@ -6,8 +6,10 @@ import { StateContext } from '../../contexts/AuthProvider';
 import UseToken from '../../hooks/UseToken';
 import logo from '../../assets/logo/logo.png';
 import { useEffect } from 'react';
+import UseTitle from '../../hooks/UseTitle';
 
 const SignUp = () => {
+    UseTitle('SignUp');
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { createUser, updateUser } = useContext(StateContext);
     const [signUpError, setSignUpError] = useState('');

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import {
-  AiOutlineEdit,
+  AiOutlineDollarCircle,
   AiOutlineHeart,
   AiOutlineHistory,
   AiOutlineStar,
@@ -20,7 +20,6 @@ import useFindDeliveryman from "../../hooks/useFindDeliveryman";
 import logo from "../../assets/logo/logo-text2.png";
 import Loader from "../../components/Loader/Loader";
 import { TbPlaylistAdd, TbReport } from "react-icons/tb";
-import Reports from "./../../Pages/Dashboard/Reports/Reports";
 
 const DashboardLayout = () => {
   const { user, logOut } = useContext(StateContext);
@@ -171,6 +170,15 @@ const DashboardLayout = () => {
                   >
                     <AiOutlineHistory />
                     Delivery History
+                  </Link>
+                </li>
+                <li className="text-[14px] font-semibold">
+                  <Link
+                    to="/dashboard/my-payment"
+                    className="text-slate-700"
+                  >
+                    <AiOutlineDollarCircle />
+                    My Payment
                   </Link>
                 </li>
               </>
