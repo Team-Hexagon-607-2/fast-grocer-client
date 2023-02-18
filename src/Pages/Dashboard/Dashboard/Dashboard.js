@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import ConfirmModal from '../../../components/Modal/ConfirmModal/ConfirmModal';
 import { StateContext } from '../../../contexts/AuthProvider';
+import useDBUserData from '../../../hooks/useDBUserData';
 import useFindAdmin from '../../../hooks/useFindAdmin';
 import useFindBuyer from '../../../hooks/useFindBuyer';
 import useFindDeliveryman from '../../../hooks/useFindDeliveryman';
@@ -15,6 +16,8 @@ const Dashboard = () => {
     const [isDeliverymen] = useFindDeliveryman(user?.email);
     const [isBuyer] = useFindBuyer(user?.email);
     const [processing, setProcessing] = useState(false);
+    const [dbUser] = useDBUserData(user?.email);
+ 
     const { data: deliverymanData, refetch } = useQuery({
         queryKey: ['working-status'],
         queryFn: async () => {
@@ -75,7 +78,7 @@ const Dashboard = () => {
                     </div>
                     <div className='mb-5'>
                         <p className='font-semibold'><small>Contact No.</small></p>
-                        <p>N/A</p>
+                        <p>{dbUser?.contact ? dbUser?.contact : 'N/A'}</p>
                     </div>
                     {
                         isDeliverymen && <div className='mb-5'>
