@@ -3,8 +3,10 @@ import SingleProduct from "../Home/HomePageProducts/SingleProduct/SingleProduct"
 import sortImg from '../../assets/images/categoryModalIcon/sort.png'
 import Loader from "../Loader/Loader";
 import { StateContext } from "../../contexts/AuthProvider";
+import UseTitle from "../../hooks/UseTitle";
 
 const AllProducts = () => {
+  UseTitle('All Products')
   const {AllProducts, isLoading} = useContext(StateContext);
   const [isAsc, setIsAsc] = useState('');
   const [limitProduct, setLimitProduct] = useState(30);

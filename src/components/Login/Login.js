@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { StateContext } from '../../contexts/AuthProvider';
 import logo from '../../assets/logo/logo.png'
 import UseToken from '../../hooks/UseToken';
+import UseTitle from '../../hooks/UseTitle';
 
 const Login = () => {
+    UseTitle('Login')
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signIn, googleSignIn, resetPassword, updateUser } = useContext(StateContext);
+    const { signIn, googleSignIn, resetPassword, } = useContext(StateContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState(null);
     // const [createdUserEmail, setCreatedUserEmail] = useState('');

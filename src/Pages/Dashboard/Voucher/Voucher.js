@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import { useContext } from 'react';
 import { StateContext } from '../../../contexts/AuthProvider';
 
@@ -7,14 +6,26 @@ const Voucher = () => {
   const { coupons } = useContext(StateContext);
   return (
     <div>
-      <h2>Available Voucher</h2>
-      {coupons?.map(coupon => <div key={coupon?._id} className="w-80 h-52 bg-green-400 rounded-md flex items-center justify-center">
-        <div>
-          <p className='text-4xl font-bold text-center'>Save <span className='text-white'>{coupon?.discount_amount}</span> Tk</p>
-          <p className='text-2xl font-semibold text-center'>Code: {coupon?.coupon_name}</p>
-          <p className='text-center'>Expire: {coupon?.expire_date}</p>
+      <div className='flex flex-col px-6'>
+        <div className="my-5">
+          <p className="text-lg font-bold text-green-500 mb-2">Available Voucher</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+            {
+              coupons?.map(coupon =>
+                <div class="border hover:shadow-lg duration-500 rounded-md ">
+                  <div class="p-4 bg-green-400 shadow-indigo-50 shadow-lg rounded-md">
+                    <div className='text-center '>
+                      <h2 className='text-4xl font-bold'>Save <span className='text-white'>{coupon?.discount_amount}</span> Tk</h2>
+                      <h3 className='text-2xl font-semibold'>Code: {coupon?.coupon_name}</h3>
+                      <p>Expire: {coupon?.expire_date}</p>
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+          </div>
         </div>
-      </div>)}
+      </div>
     </div>
   );
 };

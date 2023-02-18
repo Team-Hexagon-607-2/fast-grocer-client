@@ -14,6 +14,8 @@ import {
   updateProfile,
 } from "firebase/auth";
 import useFindBuyer from "../hooks/useFindBuyer";
+import useFindAdmin from "../hooks/useFindAdmin";
+import useFindDeliveryman from "../hooks/useFindDeliveryman";
 
 export const StateContext = createContext();
 const auth = getAuth(app);
@@ -28,13 +30,15 @@ export const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState({});
   const [isBuyer] = useFindBuyer(user?.email);
+  const [isAdmin] = useFindAdmin(user?.email);
+  const [isDeliveryman] = useFindDeliveryman(user?.email);
 
   // all products
   const { data: AllProducts = [], isLoading, isError, refetch, } = useQuery({
     queryKey: ["get-allProducts"],
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/allProducts`)
-      .then((res) => res.json()),
+        .then((res) => res.json()),
     keepPreviousData: true,
   });
 
@@ -79,13 +83,8 @@ export const ContextProvider = ({ children }) => {
     },
   });
 
-  //AllOrders
-  const {
-    data: AllOrders,
-    isLoading: AllOrdersLoading,
-    isError: AllOrderError,
-    refetch: AllOrdersRefetch,
-  } = useQuery({
+  // AllOrders
+  const { data: AllOrders, isLoading: AllOrdersLoading, isError: AllOrderError, refetch: AllOrdersRefetch, } = useQuery({
     queryKey: ["allOrder", user?.email],
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/allOrders?email=${user?.email}`, {
@@ -218,6 +217,9 @@ export const ContextProvider = ({ children }) => {
     <StateContext.Provider
       value={{
         user,
+        isAdmin,
+        isDeliveryman,
+        isBuyer,
         setUser,
         searchText,
         setSearchText,
