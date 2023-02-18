@@ -80,7 +80,7 @@ const Login = () => {
     }
 
     return (
-        <div className='flex justify-center items-center bg-[#E5E7EB] h-screen'>
+        <div className='flex justify-center items-center bg-[#E5E7EB] pb-14'>
             <div className='w-[80%] md:w-[40%] lg:w-[30%] p-7 border bg-white text-black rounded-md my-10'>
                 <Link to='/'>
                     <img src={logo} className='w-[100px] mx-auto mb-2' alt="" />
