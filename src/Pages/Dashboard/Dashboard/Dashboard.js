@@ -53,7 +53,7 @@ const Dashboard = () => {
             <div className='flex flex-col md:flex-row items-start'>
                 <div className='mr-10 flex flex-col justify-center px-20 mx-auto md:mx-0'>
                     <img
-                        className="mb-1 h-32 w-32 mx-auto rounded-full shadow-lg" src={user?.photoURL || 'https://picsum.photos/200/300'}
+                        className="mb-1 h-32 w-32 mx-auto rounded-full shadow-lg" src={user?.photoURL || 'https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png'}
                         alt='' />
                     {
                         isAdmin && <p className='text-center'>Admin</p>
