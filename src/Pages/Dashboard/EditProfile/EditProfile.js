@@ -16,7 +16,7 @@ const EditProfile = () => {
   const handleProfileUpdate = (data) => {
     if (image) {
       setLoading(true);
-      imageBbUpload(image, data);
+      imageUpload(image, data);
     }
     else {
       setLoading(true);
@@ -27,7 +27,7 @@ const EditProfile = () => {
 
       updateUser(profile)
         .then(() => {
-          saveDBUserInfo(data?.fullName, user?.photoURL, data?.contactInfo)
+          updateProfileWithOutImage(data?.fullName, user?.photoURL, data?.contactInfo)
         })
         .catch(err => {
           toast.error(err.message);
@@ -36,7 +36,7 @@ const EditProfile = () => {
     }
   };
 
-  function imageBbUpload(img, data) {
+  function imageUpload(img, data) {
     const image = img;
     const formData = new FormData();
     formData.append('image', image);
@@ -56,7 +56,7 @@ const EditProfile = () => {
           updateUser(profile)
             .then(() => {
               data.image = user?.photoURL;
-              updateDBUserInfo(data)
+              updateProfileWithImage(data)
             })
             .catch(err => {
               toast.error(err.message);
@@ -70,42 +70,26 @@ const EditProfile = () => {
       })
   };
 
-  const updateDBUserInfo = (data) => {
+  const updateProfileWithImage = (data) => {
     const updateUserData = {
-      name: data?.fullName,
-      image: data?.image,
-      contact: data?.contactInfo,
+      updateName: data?.fullName,
+      updateImage: data?.image,
+      updateContact: data?.contactInfo,
     };
-
-    fetch(`http://localhost:5000/user/${user?.email}`, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-      body: JSON.stringify(updateUserData)
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.acknowledged) {
-          setLoading(false);
-          toast.success('profile update success');
-          navigate('/dashboard')
-        }
-      })
-      .catch(err => {
-        toast.error(err.message);
-        setLoading(false);
-      })
+    storeUpdateUserData(updateUserData);
   };
 
-  const saveDBUserInfo = (name, image, contact) => {
+  const updateProfileWithOutImage = (name, image, contact) => {
     const updateUserData = {
-      name: name,
-      image: image,
-      contact: contact,
+      updateName: name,
+      updateImage: image,
+      updateContact: contact,
     };
 
+    storeUpdateUserData(updateUserData);
+  };
+
+  const storeUpdateUserData = (updateUserData) => {
     fetch(`http://localhost:5000/user/${user?.email}`, {
       method: 'PUT',
       headers: {
