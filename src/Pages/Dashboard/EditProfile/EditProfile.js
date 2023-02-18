@@ -17,7 +17,15 @@ const EditProfile = () => {
       imageBbUpload(image, data);
     }
     else {
+      const profile = {
+        displayName: data?.fullName,
+      };
 
+      updateUser(profile)
+        .then(() => {
+          saveDBUserInfo(data?.fullName, user?.photoURL, data?.contactInfo)
+        })
+        .catch(err => toast.error(err.message));
     }
   };
 
@@ -49,11 +57,34 @@ const EditProfile = () => {
   };
 
   const updateDBUserInfo = (data) => {
-
     const updateUserData = {
       name: data?.fullName,
       image: data?.image,
       contact: data?.contactInfo,
+    };
+
+    fetch(`http://localhost:5000/user/${user?.email}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+      body: JSON.stringify(updateUserData)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.acknowledged) {
+          toast.success('profile update success');
+          navigate('/dashboard')
+        }
+      })
+  };
+
+  const saveDBUserInfo = (name, image, contact) => {
+    const updateUserData = {
+      name: name,
+      image: image,
+      contact: contact,
     };
 
     fetch(`http://localhost:5000/user/${user?.email}`, {
@@ -82,9 +113,9 @@ const EditProfile = () => {
           <img className="mb-1 h-32 w-32 mx-auto rounded-full shadow-lg" src={image ? URL.createObjectURL(image) : (user?.photoURL || 'https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png')} alt='' />
           <br />
 
-          <div className='relative'>
-            <h2 className='bg-[#9acd5e] py-2 px-2 text-center duration-300 rounded-md w-full cursor-pointer'>Upload</h2>
-            <input onChange={(e) => setImage(e.target.files[0])} type="file" className='absolute top-0 left-0 w-full cursor-pointer' />
+          <div className='relative overflow-hidden'>
+            <h2 className='bg-[#9acd5e] py-1 px-2 text-center duration-300 rounded-md w-full'>Upload</h2>
+            <input onChange={(e) => setImage(e.target.files[0])} type="file" className='absolute top-0 left-0 h-9 opacity-0' />
           </div>
         </div>
 
