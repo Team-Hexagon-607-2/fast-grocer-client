@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../../../contexts/AuthProvider';
@@ -8,19 +9,19 @@ import { StateContext } from '../../../contexts/AuthProvider';
 const EditProfile = () => {
   const { user, updateUser } = useContext(StateContext);
   const [image, setImage] = useState(null);
-  const [name, setName] = useState(null);
-  const [number, setNumber] = useState(null);
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
-  const handleProfileUpdate = () => {
+  const handleProfileUpdate = (data) => {
     if (image) {
-      imageUpdate(image, name)
-    } else {
+      imageBbUpload(image, data);
+    }
+    else {
 
     }
   };
 
-  function imageUpdate(img, name) {
+  function imageBbUpload(img, data) {
     const image = img;
     const formData = new FormData();
     formData.append('image', image);
@@ -31,22 +32,29 @@ const EditProfile = () => {
     })
       .then(res => res.json())
       .then(imageData => {
-        if (imageData.success) {
+        if (imageData?.success) {
           const profile = {
-            displayName: name,
             photoURL: imageData?.data?.url,
+            displayName: data?.fullName,
           };
+
           updateUser(profile)
             .then(() => {
-              updateDBUserInfo(name, imageData?.data?.url)
+              data.image = user?.photoURL;
+              updateDBUserInfo(data)
             })
-            .catch(err => toast.error(err.message))
+            .catch(err => toast.error(err.message));
         }
       })
   };
 
-  const updateDBUserInfo = (name, img) => {
-    const updatedUserData = { name, image: img };
+  const updateDBUserInfo = (data) => {
+
+    const updateUserData = {
+      name: data?.fullName,
+      image: data?.image,
+      contact: data?.contactInfo,
+    };
 
     fetch(`http://localhost:5000/user/${user?.email}`, {
       method: 'PUT',
@@ -54,7 +62,7 @@ const EditProfile = () => {
         'content-type': 'application/json',
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
-      body: JSON.stringify(updatedUserData)
+      body: JSON.stringify(updateUserData)
     })
       .then(res => res.json())
       .then(data => {
@@ -63,38 +71,39 @@ const EditProfile = () => {
           navigate('/dashboard')
         }
       })
-  }
+  };
 
   return (
-    <div >
+    <div>
       <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">Edit Profile</h2>
 
-      <div className='flex gap-10 ml-20'>
+      <form onSubmit={handleSubmit(handleProfileUpdate)} className='flex gap-10 ml-20'>
         <div>
           <img className="mb-1 h-32 w-32 mx-auto rounded-full shadow-lg" src={image ? URL.createObjectURL(image) : (user?.photoURL || 'https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png')} alt='' />
           <br />
-          {/* <button className='bg-[#9acd5e] hover:bg-[#80b248] py-1 px-2 text-center duration-300 rounded-md w-full'>Upload</button> */}
-          <input onChange={(e) => setImage(e.target.files[0])} type="file" />
+
+          <div className='relative'>
+            <h2 className='bg-[#9acd5e] py-2 px-2 text-center duration-300 rounded-md w-full cursor-pointer'>Upload</h2>
+            <input onChange={(e) => setImage(e.target.files[0])} type="file" className='absolute top-0 left-0 w-full cursor-pointer' />
+          </div>
         </div>
 
         <div>
           <div className='mb-5'>
             <p className='font-semibold'><small>Full name</small></p>
-            <input onBlur={(e) => setName(e.target.value)} type='text' defaultValue={user?.displayName} className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
+            <input {...register('fullName')} type='text' defaultValue={user?.displayName} className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
           </div>
-
           <div className='mb-5'>
             <p className='font-semibold'><small>Email Address (Email Address cannot be changed)</small></p>
             <input type='text' defaultValue={user?.email} readOnly className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
           </div>
-
           <div className='mb-5'>
-            <p className='font-semibold'><small>Phone</small></p>
-            <input type='text' onBlur={(e) => setNumber(e.target.value)} className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
+            <p className='font-semibold'><small>Contact info</small></p>
+            <input {...register('contactInfo')} type='text' className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" placeholder='+880 1870130413' required />
           </div>
-          <button onClick={handleProfileUpdate} className='btn btn-sm bg-slate-800 flex justify-end'>Save</button>
+          <button className='btn btn-sm bg-slate-800 flex justify-end'>Save</button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
