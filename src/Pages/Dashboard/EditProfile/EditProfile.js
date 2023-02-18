@@ -11,12 +11,16 @@ const EditProfile = () => {
   const [image, setImage] = useState(null);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleProfileUpdate = (data) => {
     if (image) {
+      setLoading(true);
       imageBbUpload(image, data);
     }
     else {
+      setLoading(true);
+
       const profile = {
         displayName: data?.fullName,
       };
@@ -25,7 +29,10 @@ const EditProfile = () => {
         .then(() => {
           saveDBUserInfo(data?.fullName, user?.photoURL, data?.contactInfo)
         })
-        .catch(err => toast.error(err.message));
+        .catch(err => {
+          toast.error(err.message);
+          setLoading(false);
+        });
     }
   };
 
@@ -51,8 +58,15 @@ const EditProfile = () => {
               data.image = user?.photoURL;
               updateDBUserInfo(data)
             })
-            .catch(err => toast.error(err.message));
+            .catch(err => {
+              toast.error(err.message);
+              setLoading(false);
+            });
         }
+      })
+      .catch(err => {
+        toast.error(err.message);
+        setLoading(false);
       })
   };
 
@@ -74,9 +88,14 @@ const EditProfile = () => {
       .then(res => res.json())
       .then(data => {
         if (data.acknowledged) {
+          setLoading(false);
           toast.success('profile update success');
           navigate('/dashboard')
         }
+      })
+      .catch(err => {
+        toast.error(err.message);
+        setLoading(false);
       })
   };
 
@@ -98,9 +117,14 @@ const EditProfile = () => {
       .then(res => res.json())
       .then(data => {
         if (data.acknowledged) {
+          setLoading(false);
           toast.success('profile update success');
           navigate('/dashboard')
         }
+      })
+      .catch(err => {
+        toast.error(err.message);
+        setLoading(false);
       })
   };
 
@@ -132,7 +156,7 @@ const EditProfile = () => {
             <p className='font-semibold'><small>Contact info</small></p>
             <input {...register('contactInfo')} type='text' className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" placeholder='+880 1870130413' required />
           </div>
-          <button className='btn btn-sm bg-slate-800 flex justify-end'>Save</button>
+          <button className={loading ? 'loading btn btn-sm bg-slate-800 flex justify-end' : 'btn btn-sm bg-slate-800 flex justify-end'}>Save</button>
         </div>
       </form>
     </div>
