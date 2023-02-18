@@ -5,6 +5,8 @@ import { StateContext } from '../../contexts/AuthProvider';
 import logo from '../../assets/logo/logo.png'
 import UseToken from '../../hooks/UseToken';
 import UseTitle from '../../hooks/UseTitle';
+import { FcGoogle } from "react-icons/fc";
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
     UseTitle('Login')
@@ -32,7 +34,7 @@ const Login = () => {
                 setLoginUserEmail(data.email);
             })
             .catch(error => {
-                setLoginError(error.message)
+                toast.error(error.message)
             })
     }
 
@@ -46,16 +48,14 @@ const Login = () => {
                 saveUser(user.displayName, user.email, userInfo.role);
             })
             .catch(error => {
-                setLoginError(error.message)
+                toast.error(error.message)
             });
     }
 
     const handleResetPassword = (data) => {
-        // console.log(data.email);
         resetPassword()
             .then(result => {
                 const user = result.user;
-                // console.log(user);
             })
             .catch(err => console.error(err))
     }
@@ -76,18 +76,21 @@ const Login = () => {
                     setLoginUserEmail(email);
                 }
             })
+            .catch(err => toast.error(err.message))
     }
 
     return (
-        <div className='flex justify-center items-center'>
-            <div className='w-96 p-7'>
+        <div className='flex justify-center items-center bg-[#E5E7EB] h-screen'>
+            <div className='w-[80%] md:w-[40%] lg:w-[30%] p-7 border bg-white text-black rounded-md my-10'>
                 <Link to='/'>
                     <img src={logo} className='w-[100px] mx-auto mb-2' alt="" />
                 </Link>
-                <h2 className='text-2xl font-semibold text-center mb-3'>Please Login</h2>
+
+                <h2 className='text-2xl font-semibold text-center mb-3'>Login To Your Account</h2>
+
                 <form onSubmit={handleSubmit(handleLogin)}>
 
-                    <div className="form-control w-full max-w-xs">
+                    <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
@@ -95,11 +98,11 @@ const Login = () => {
                             {...register("email", {
                                 required: "Email Address is required"
                             })}
-                            className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
+                            className="input input-bordered w-full focus:outline-none focus:border focus:border-[#6a9333]" />
                         {errors.email && <p className='text-red-600 text-sm'>*{errors.email?.message}</p>}
                     </div>
 
-                    <div className="form-control w-full max-w-xs">
+                    <div className="form-control w-full ">
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
@@ -112,7 +115,7 @@ const Login = () => {
                                 }
                             })}
 
-                            className="input input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
+                            className="input input-bordered w-full focus:outline-none focus:border focus:border-[#6a9333]" />
                         {errors.password && <p className='text-red-600 text-sm'>*{errors.password?.message}</p>}
 
                         <label className="label">
@@ -122,15 +125,15 @@ const Login = () => {
 
                     </div>
                     <input className='btn w-full bg-[#84b840] hover:bg-[#6a9333] border-none' value="Login" type="submit" />
-                    <div>
-                        {
-                            loginError && <p className='text-red-600 text-sm'>* {loginError} </p>
-                        }
-                    </div>
+                   
                 </form>
                 <p className='my-3 text-sm text-center'>New to Fast Grocer? <Link className='text-[#84b840] hover:underline' to="/signup">Create an Account</Link></p>
                 <div className="divider">OR</div>
-                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full '>CONTINUE WITH GOOGLE</button>
+
+                <button onClick={handleGoogleSignIn} className='bg-slate-700 hover:bg-slate-800 duration-300 w-full h-10 rounded-md'>
+                    <span className='text-white'>Continue with</span>
+                    <FcGoogle  className='h-6 w-6 ml-5 cursor-pointer inline-block  ' />
+                </button>
             </div>
         </div>
     );
