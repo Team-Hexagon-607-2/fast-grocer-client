@@ -7,7 +7,7 @@ const useDBUserData = (email) => {
 
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/user/${email}`, {
+      fetch(`https://fg-server.vercel.app/user/${email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         }

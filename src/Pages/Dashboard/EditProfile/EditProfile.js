@@ -90,7 +90,7 @@ const EditProfile = () => {
   };
 
   const storeUpdateUserData = (updateUserData) => {
-    fetch(`http://localhost:5000/user/${user?.email}`, {
+    fetch(`https://fg-server.vercel.app/user/${user?.email}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
