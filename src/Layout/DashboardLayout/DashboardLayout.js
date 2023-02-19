@@ -167,7 +167,7 @@ const DashboardLayout = () => {
                   <Link
                     to="/dashboard/delivery-history"
                     className="hover:bg-slate-800 click:bg-slate-700"
-                  >
+                    >
                     <AiOutlineHistory />
                     Delivery History
                   </Link>
@@ -175,7 +175,7 @@ const DashboardLayout = () => {
                 <li className="text-[14px] font-semibold">
                   <Link
                     to="/dashboard/my-payment"
-                    className="text-slate-700"
+                    className="hover:bg-slate-800 click:bg-slate-700"
                   >
                     <AiOutlineDollarCircle />
                     My Payment

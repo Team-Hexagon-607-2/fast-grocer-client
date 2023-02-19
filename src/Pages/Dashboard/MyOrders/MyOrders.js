@@ -12,7 +12,7 @@ const MyOrders = () => {
   const [processing, setProcessing] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const navigate = useNavigate();
-  
+
   const { data: allOrders = [], isLoading, refetch } = useQuery({
     queryKey: ["returnProduct"],
     queryFn: () =>
@@ -132,7 +132,7 @@ const MyOrders = () => {
                   </td>
 
                   <td>{item?.condition}</td>
-                  
+
                   <td>
                     <p>{item?.cancel}</p>
                     {!item?.cancel && (
@@ -144,22 +144,25 @@ const MyOrders = () => {
                       </button>
                     )}
                   </td>
-                  
+
                   <td>
-                  {!item?.returnRequest && <>
-                    {((item?.deliver && item?.cancel) ||
-                      item?.deliver ||
-                      !item?.cancel ||
-                      !item?.returnRequest) && (
-                      <label
-                        htmlFor="return-modal"
-                        onClick={() => setOrderId(item?._id)}
-                        className="cursor-pointer bg-blue-300 hover:bg-blue-400 duration-300 px-3 py-1 rounded-full"
-                      >
-                        Return
-                      </label>
-                    )}
-                    </>}
+                    {
+                      !item?.returnRequest &&
+                      <>
+                        {((item?.deliver && item?.cancel) ||
+                          item?.deliver ||
+                          !item?.cancel ||
+                          !item?.returnRequest) && (
+                            <label
+                              htmlFor="return-modal"
+                              onClick={() => setOrderId(item?._id)}
+                              className="cursor-pointer bg-blue-300 hover:bg-blue-400 duration-300 px-3 py-1 rounded-full"
+                            >
+                              Return
+                            </label>
+                          )}
+                      </>
+                    }
                     {item?.returnRequest && <p>Return Requested</p>}
                   </td>
                   <td>

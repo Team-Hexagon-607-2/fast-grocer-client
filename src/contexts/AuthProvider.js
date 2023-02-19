@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import app from "../firebase/firebase.config";
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -187,6 +188,10 @@ export const ContextProvider = ({ children }) => {
     return updateProfile(auth.currentUser, userInfo);
   };
 
+  // const userDelete = (user) => {
+  //   return deleteUser(auth.currentUser, user);
+  // }
+
   const logOut = () => {
     setLoading(true);
     toast.success("Logout Successfully");
@@ -242,8 +247,9 @@ export const ContextProvider = ({ children }) => {
         googleSignIn,
         updateUser,
         resetPassword,
-        loading,
+        // userDelete,
         logOut,
+        loading,
         wishListData,
         wishlistLoading,
         wishlistRefetch,

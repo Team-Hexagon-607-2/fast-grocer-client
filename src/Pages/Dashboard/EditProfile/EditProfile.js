@@ -1,47 +1,148 @@
 import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const EditProfile = () => {
-  const { user } = useContext(StateContext);
+  const { user, updateUser } = useContext(StateContext);
   const [image, setImage] = useState(null);
-  const [name, setName] = useState(null);
-  const [number, setNumber] = useState(null);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const handleProfileUpdate = () => {
+  const handleProfileUpdate = (data) => {
+    if (image) {
+      setLoading(true);
+      imageUpload(image, data);
+    }
+    else {
+      setLoading(true);
 
+      const profile = {
+        displayName: data?.fullName,
+      };
+
+      updateUser(profile)
+        .then(() => {
+          updateProfileWithOutImage(data?.fullName, user?.photoURL, data?.contactInfo)
+        })
+        .catch(err => {
+          toast.error(err.message);
+          setLoading(false);
+        });
+    }
+  };
+
+  function imageUpload(img, data) {
+    const image = img;
+    const formData = new FormData();
+    formData.append('image', image);
+
+    fetch(`https://api.imgbb.com/1/upload?key=5ecef3f26027aea9e3fef6c177020bfb`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(res => res.json())
+      .then(imageData => {
+        if (imageData?.success) {
+          const profile = {
+            photoURL: imageData?.data?.url,
+            displayName: data?.fullName,
+          };
+
+          updateUser(profile)
+            .then(() => {
+              data.image = user?.photoURL;
+              updateProfileWithImage(data)
+            })
+            .catch(err => {
+              toast.error(err.message);
+              setLoading(false);
+            });
+        }
+      })
+      .catch(err => {
+        toast.error(err.message);
+        setLoading(false);
+      })
+  };
+
+  const updateProfileWithImage = (data) => {
+    const updateUserData = {
+      updateName: data?.fullName,
+      updateImage: data?.image,
+      updateContact: data?.contactInfo,
+    };
+    storeUpdateUserData(updateUserData);
+  };
+
+  const updateProfileWithOutImage = (name, image, contact) => {
+    const updateUserData = {
+      updateName: name,
+      updateImage: image,
+      updateContact: contact,
+    };
+
+    storeUpdateUserData(updateUserData);
+  };
+
+  const storeUpdateUserData = (updateUserData) => {
+    fetch(`https://fg-server.vercel.app/user/${user?.email}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+      body: JSON.stringify(updateUserData)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.acknowledged) {
+          setLoading(false);
+          toast.success('profile update success');
+          navigate('/dashboard')
+        }
+      })
+      .catch(err => {
+        toast.error(err.message);
+        setLoading(false);
+      })
   };
 
   return (
-    <div >
+    <div>
       <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">Edit Profile</h2>
 
-      <div className='flex gap-10 ml-20'>
+      <form onSubmit={handleSubmit(handleProfileUpdate)} className='flex gap-10 ml-20'>
         <div>
-          <img className="mb-1 h-32 w-32 mx-auto rounded-full shadow-lg" src={user?.photoURL || 'https://picsum.photos/200/300'} alt='' />
+          <img className="mb-1 h-32 w-32 mx-auto rounded-full shadow-lg" src={image ? URL.createObjectURL(image) : (user?.photoURL || 'https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png')} alt='' />
           <br />
-          <button className='bg-[#9acd5e] hover:bg-[#80b248] py-1 px-2 text-center duration-300 rounded-md w-full'>Upload</button>
+
+          <div className='relative overflow-hidden'>
+            <h2 className='bg-[#9acd5e] py-1 px-2 text-center duration-300 rounded-md w-full'>Upload</h2>
+            <input onChange={(e) => setImage(e.target.files[0])} type="file" className='absolute top-0 left-0 h-9 opacity-0' />
+          </div>
         </div>
 
         <div>
           <div className='mb-5'>
             <p className='font-semibold'><small>Full name</small></p>
-            <input onBlur={(e) => setName(e.target.value)} type='text' defaultValue={user?.displayName} className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
+            <input {...register('fullName')} type='text' defaultValue={user?.displayName} className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
           </div>
-
           <div className='mb-5'>
             <p className='font-semibold'><small>Email Address (Email Address cannot be changed)</small></p>
             <input type='text' defaultValue={user?.email} readOnly className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
           </div>
-
           <div className='mb-5'>
-            <p className='font-semibold'><small>Phone</small></p>
-            <input type='text' onBlur={(e) => setNumber(e.target.value)} className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" />
+            <p className='font-semibold'><small>Contact info</small></p>
+            <input {...register('contactInfo')} type='text' className="input input-sm input-bordered w-full max-w-xs focus:outline-none focus:border focus:border-[#6a9333]" placeholder='+880 1870130413' required />
           </div>
-          <button onClick={handleProfileUpdate} className='btn btn-sm bg-slate-800 flex justify-end'>Save</button>
+          <button className={loading ? 'loading btn btn-sm bg-slate-800 flex justify-end' : 'btn btn-sm bg-slate-800 flex justify-end'}>Save</button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

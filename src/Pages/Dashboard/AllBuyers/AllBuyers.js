@@ -6,7 +6,7 @@ import Loader from '../../../components/Loader/Loader';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const AllBuyers = () => {
-  const { user, logOut } = useContext(StateContext);
+  const { user, logOut, userDelete } = useContext(StateContext);
 
   const { data: users, isLoading, refetch } = useQuery({
     queryKey: ['allBuyers', user?.email],
@@ -25,23 +25,26 @@ const AllBuyers = () => {
   });
 
 
-  if(isLoading) {
+  if (isLoading) {
     return <Loader />
   }
 
   const handleDelete = user => {
-    console.log(user._id);
-    fetch(`https://fg-server.vercel.app/users/${user._id}`, {
-      method: 'DELETE'
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.deletedCount > 0) {
-          refetch();
-          toast.success(`${user.name} deleted successfully`)
-        }
+    const permission = window.confirm(`Are Your sure you want to ${user?.name} delete product ?`);
+    if (permission) {
+      fetch(`http://localhost:5000/users/${user?._id}`, {
+        method: 'DELETE'
       })
-  }
+        .then(res => res.json())
+        .then(data => {
+          if (data.deletedCount > 0) {
+            refetch();
+            toast.success(`${user.name} deleted successfully`)
+          }
+        })
+        .catch(error => toast.error(error.message))
+    }
+  };
 
   return (
     <div className=''>
@@ -74,7 +77,8 @@ const AllBuyers = () => {
                   <th>
                     <button onClick={() => handleDelete(user)} className="btn bg-red-600 btn-xs">Delete</button>
                   </th>
-                </tr>)
+                </tr>
+              )
             }
           </tbody>
         </table>
