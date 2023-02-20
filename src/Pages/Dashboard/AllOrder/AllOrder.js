@@ -6,27 +6,12 @@ import { toast } from "react-hot-toast";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { useContext } from "react";
 import { StateContext } from "../../../contexts/AuthProvider";
+import useAllOrders from "../../../hooks/useAllOrders";
 
 const AllOrder = () => {
   const { user, logOut } = useContext(StateContext);
   const [selectedValue, setSelectedValue] = useState({});
-
-  const { data: allOrders, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["order", "cancel-order", user?.email],
-    queryFn: () =>
-      fetch(`https://fg-server.vercel.app/allOrders?email=${user?.email}`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
-        .then((res) => res.json())
-        .then(data => {
-          if (data?.statusCode === 401 || data?.statusCode === 403) {
-            return logOut();
-          }
-          return data;
-        })
-  });
+  const {allOrders, allOrdersLoading, allOrderError, allOrdersRefetch} = useAllOrders();
 
   const { data: AllUsers = [], isLoading: DeliveryLoading } = useQuery({
     queryKey: ["users"],
@@ -65,7 +50,7 @@ const AllOrder = () => {
       .then((data) => {
         if (data?.status === true) {
           toast.success("Order Confirmed");
-          refetch();
+          allOrdersRefetch()
         }
       })
       .catch((err) => console.log(err));
@@ -82,7 +67,7 @@ const AllOrder = () => {
       .then((data) => {
         if (data?.status === true) {
           toast.success("Ready To Ship");
-          refetch();
+          allOrdersRefetch()
         }
       })
       .catch((err) => console.log(err));
@@ -99,7 +84,7 @@ const AllOrder = () => {
       .then((data) => {
         if (data?.status === true) {
           toast.success("Cancel Request Received");
-          refetch();
+          allOrdersRefetch()
         }
       })
       .catch((err) => console.log(err));
@@ -121,7 +106,7 @@ const AllOrder = () => {
       .then((data) => {
         if (data?.status === true) {
           toast.success("Assign Delivery man updated");
-          refetch();
+          allOrdersRefetch()
         }
       })
       .catch((err) => console.log(err));
@@ -162,7 +147,7 @@ const AllOrder = () => {
       </h2>
 
       <div className="overflow-x-auto overflow-y-auto w-full px-6">
-        <div>{isLoading && <Loader />}</div>
+        <div>{allOrdersLoading && <Loader />}</div>
         <table className="table table-compact w-full">
           <thead>
             <tr>

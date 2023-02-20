@@ -5,7 +5,7 @@ import { StateContext } from '../contexts/AuthProvider';
 const useAllOrders = () => {
   const { user, logOut } = useContext(StateContext);
 
-  const { data: AllOrders = [], isLoading: AllOrdersLoading, isError: AllOrderError, refetch: AllOrdersRefetch, } = useQuery({
+  const { data: allOrders = [], isLoading: allOrdersLoading, isError: allOrderError, refetch: allOrdersRefetch, } = useQuery({
     queryKey: ["allOrder", user?.email],
     queryFn: () =>
       fetch(`https://fg-server.vercel.app/allOrders?email=${user?.email}`, {
@@ -16,7 +16,7 @@ const useAllOrders = () => {
         .then((res) => res.json())
   });
 
-  return [ AllOrders, AllOrdersLoading, AllOrderError, AllOrdersRefetch ];
+  return { allOrders, allOrdersLoading, allOrdersRefetch, allOrderError};
 };
 
 export default useAllOrders;
