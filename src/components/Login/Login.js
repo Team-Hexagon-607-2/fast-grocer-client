@@ -93,8 +93,8 @@ const Login = () => {
     return (
         <div className='flex justify-center items-center bg-[#E5E7EB] pb-14'>
             <div className='w-[80%] md:w-[40%] lg:w-[30%] p-7 border bg-white text-black rounded-md my-10'>
-                <Link to='/'>
-                    <img src={logo} className='w-[100px] mx-auto mb-2' alt="" />
+                <Link to='/'> 
+                    <img src={logo} className='w-[100px] mx-auto mb-2' alt="" /> 
                 </Link>
 
                 <h2 className='text-2xl font-semibold text-center mb-3'>Login To Your Account</h2>
@@ -114,7 +114,7 @@ const Login = () => {
                     </div>
 
                     <div className="form-control w-full ">
-                        <label className="label">
+                        <label className="label"> 
                             <span className="label-text">Password</span>
                         </label>
                         <input type='password'
@@ -125,17 +125,17 @@ const Login = () => {
                                     message: 'Password must be 6 characters or longer'
                                 }
                             })}
-
+                            
                             className="input input-bordered w-full focus:outline-none focus:border focus:border-[#6a9333]" />
                         {errors.password && <p className='text-red-600 text-sm'>*{errors.password?.message}</p>}
-
+                        
                         <label className="label">
                             <button onClick={handleResetPassword}> <span className="label-text">Forget Password?</span></button>
                         </label>
-
-
+                    
+                    
                     </div>
-                   <button className={signInLoading ? 'btn loading disabled w-full bg-[#84b840] hover:bg-[#6a9333] border-none': 'btn w-full bg-[#84b840] hover:bg-[#6a9333] border-none'}>Login</button>
+                    <button className={signInLoading ? 'btn loading disabled w-full bg-[#84b840] hover:bg-[#6a9333] border-none' : 'btn w-full bg-[#84b840] hover:bg-[#6a9333] border-none'}>Login</button>
                 </form>
                 <p className='my-3 text-sm text-center'>New to Fast Grocer? <Link className='text-[#84b840] hover:underline' to="/signup">Create an Account</Link></p>
                 <div className="divider">OR</div>
