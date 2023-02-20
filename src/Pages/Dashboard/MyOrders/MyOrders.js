@@ -13,12 +13,17 @@ const MyOrders = () => {
   const [orderId, setOrderId] = useState(null);
   const navigate = useNavigate();
 
-  const { data: allOrders = [], isLoading, refetch } = useQuery({
-    queryKey: ["returnProduct"],
+  const { data: myOrders = [], isLoading, refetch } = useQuery({
+    queryKey: ["order", user?.email],
     queryFn: () =>
-      fetch(`https://fg-server.vercel.app/order/${user?.email}`).then((res) =>
-        res.json()
-      ),
+      fetch(`http://localhost:5000/order/${user?.email}?email=${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        }
+      })
+        .then((res) =>
+          res.json()
+        ),
   });
 
   // const {
@@ -82,7 +87,7 @@ const MyOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {allOrders?.data?.map((item, index) => (
+              {myOrders?.data?.map((item, index) => (
                 <tr key={item?._id}>
                   <th>{index + 1}</th>
 
