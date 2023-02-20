@@ -14,6 +14,7 @@ const SignUp = () => {
     const { createUser, updateUser } = useContext(StateContext);
     const [createdUserEmail, setCreatedUserEmail] = useState('');
     const navigate = useNavigate();
+    const [signUpLoading, setSignUpLoading] = useState(false);
 
     const [token] = UseToken(createdUserEmail);
     useEffect(() => {
@@ -24,6 +25,7 @@ const SignUp = () => {
     }, [token]);
 
     const handleSignUp = data => {
+        setSignUpLoading(true);
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
@@ -34,9 +36,13 @@ const SignUp = () => {
                     .then(() => {
                         saveUser(data.name, data.email, data.accountType);
                     })
-                    .catch(err => toast.error(err.message));
+                    .catch(err => {
+                        toast.error(err.message)
+                        setSignUpLoading(false);
+                    });
             })
             .catch(error => {
+                setSignUpLoading(false);
                 toast.error(error.message)
             });
     }
@@ -53,11 +59,15 @@ const SignUp = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
+                    setSignUpLoading(false);
                     setCreatedUserEmail(email)
                     reset();
                 }
             })
-            .catch(error => toast.error(error.message))
+            .catch(error => {
+                toast.error(error.message)
+                setSignUpLoading(false);
+            })
     }
 
     return (
@@ -120,7 +130,7 @@ const SignUp = () => {
                         {errors.accountType && <p className='text-red-500 text-sm'>*{errors?.accountType?.message}</p>}
                     </div>
 
-                    <input className='btn w-full mt-4 bg-[#84b840] hover:bg-[#6a9333] border-none' value="Sign Up" type="submit" />
+                    <button className={signUpLoading ? 'btn loading disabled w-full mt-4 bg-[#84b840] hover:bg-[#6a9333] border-none' : 'btn w-full mt-4 bg-[#84b840] hover:bg-[#6a9333] border-none'}>Sign Up</button>
                 </form>
 
                 <p className='text-sm text-center my-3'>Already have an account? <Link className='text-[#84b840] hover:underline' to="/login">Please Login</Link></p>
