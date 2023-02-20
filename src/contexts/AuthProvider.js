@@ -84,19 +84,7 @@ export const ContextProvider = ({ children }) => {
     },
   });
 
-  // AllOrders
-  const { data: AllOrders, isLoading: AllOrdersLoading, isError: AllOrderError, refetch: AllOrdersRefetch, } = useQuery({
-    queryKey: ["allOrder", user?.email],
-    queryFn: () =>
-      fetch(`https://fg-server.vercel.app/allOrders?email=${user?.email}`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
-        .then((res) => res.json()),
-
-    keepPreviousData: true,
-  });
+ 
 
   const handleDecrement = (e, id) => {
     e.preventDefault();
@@ -188,10 +176,6 @@ export const ContextProvider = ({ children }) => {
     return updateProfile(auth.currentUser, userInfo);
   };
 
-  // const userDelete = (user) => {
-  //   return deleteUser(auth.currentUser, user);
-  // }
-
   const logOut = () => {
     setLoading(true);
     toast.success("Logout Successfully");
@@ -247,7 +231,6 @@ export const ContextProvider = ({ children }) => {
         googleSignIn,
         updateUser,
         resetPassword,
-        // userDelete,
         logOut,
         loading,
         wishListData,
@@ -258,9 +241,6 @@ export const ContextProvider = ({ children }) => {
         coupons,
         couponsLoading,
         couponRefresh,
-        AllOrders,
-        AllOrdersLoading,
-        AllOrdersRefetch,
       }}
     >
       {children}

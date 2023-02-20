@@ -6,7 +6,7 @@ import Loader from '../../../components/Loader/Loader';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const AllBuyers = () => {
-  const { user, logOut, userDelete } = useContext(StateContext);
+  const { user, logOut } = useContext(StateContext);
 
   const { data: users, isLoading, refetch } = useQuery({
     queryKey: ['allBuyers', user?.email],

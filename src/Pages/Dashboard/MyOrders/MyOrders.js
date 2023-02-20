@@ -13,12 +13,17 @@ const MyOrders = () => {
   const [orderId, setOrderId] = useState(null);
   const navigate = useNavigate();
 
-  const { data: allOrders = [], isLoading, refetch } = useQuery({
-    queryKey: ["returnProduct"],
+  const { data: myOrders = [], isLoading, refetch } = useQuery({
+    queryKey: ["order", user?.email],
     queryFn: () =>
-      fetch(`https://fg-server.vercel.app/order/${user?.email}`).then((res) =>
-        res.json()
-      ),
+      fetch(`http://localhost:5000/order/${user?.email}?email=${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        }
+      })
+        .then((res) =>
+          res.json()
+        ),
   });
 
   // const {
@@ -64,7 +69,7 @@ const MyOrders = () => {
         <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">
           My Orders
         </h2>
-        <div className="overflow-x-auto w-full">
+        <div className="overflow-x-auto w-full px-6">
           <div>{isLoading && <Loader />}</div>
           <table className="table table-compact w-full">
             <thead>
@@ -82,7 +87,7 @@ const MyOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {allOrders?.data?.map((item, index) => (
+              {myOrders?.data?.map((item, index) => (
                 <tr key={item?._id}>
                   <th>{index + 1}</th>
 
