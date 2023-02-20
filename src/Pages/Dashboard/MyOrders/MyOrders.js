@@ -16,7 +16,7 @@ const MyOrders = () => {
   const { data: myOrders = [], isLoading, refetch } = useQuery({
     queryKey: ["order", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/order/${user?.email}?email=${user?.email}`, {
+      fetch(`https://fg-server.vercel.app/order/${user?.email}?email=${user?.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         }
