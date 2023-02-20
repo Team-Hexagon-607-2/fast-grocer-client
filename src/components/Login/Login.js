@@ -14,6 +14,7 @@ const Login = () => {
     const { signIn, googleSignIn, resetPassword, } = useContext(StateContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState(null);
+    const [signInLoading, setSignInLoading] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -22,23 +23,28 @@ const Login = () => {
     const [token] = UseToken(loginUserEmail);
     useEffect(() => {
         if (token) {
+            setSignInLoading(false);
             navigate(from, { replace: true });
         }
     }, [token])
 
     const handleLogin = data => {
+        setSignInLoading(true);
         setLoginError('');
+
         signIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 setLoginUserEmail(data.email);
             })
             .catch(error => {
-                toast.error(error.message)
+                toast.error(error.message);
+                setSignInLoading(false);
             })
-    }
+    };
 
     const handleGoogleSignIn = (data) => {
+        setSignInLoading(true);
         googleSignIn()
             .then(result => {
                 const user = result.user;
@@ -48,7 +54,8 @@ const Login = () => {
                 saveUser(user.displayName, user.email, userInfo.role);
             })
             .catch(error => {
-                toast.error(error.message)
+                setSignInLoading(false);
+                toast.error(error.message);
             });
     }
 
@@ -73,10 +80,14 @@ const Login = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
+                    setSignInLoading(false);
                     setLoginUserEmail(email);
                 }
             })
-            .catch(err => toast.error(err.message))
+            .catch(err => {
+                toast.error(err.message);
+                setSignInLoading(false);
+            })
     }
 
     return (
@@ -124,8 +135,7 @@ const Login = () => {
 
 
                     </div>
-                    <input className='btn w-full bg-[#84b840] hover:bg-[#6a9333] border-none' value="Login" type="submit" />
-                   
+                   <button className={signInLoading ? 'btn loading disabled w-full bg-[#84b840] hover:bg-[#6a9333] border-none': 'btn w-full bg-[#84b840] hover:bg-[#6a9333] border-none'}>Login</button>
                 </form>
                 <p className='my-3 text-sm text-center'>New to Fast Grocer? <Link className='text-[#84b840] hover:underline' to="/signup">Create an Account</Link></p>
                 <div className="divider">OR</div>
