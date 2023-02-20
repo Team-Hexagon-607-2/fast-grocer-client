@@ -32,7 +32,7 @@ const AllBuyers = () => {
   const handleDelete = deleteUser => {
     const permission = window.confirm(`Are Your sure you want to ${deleteUser?.name} delete product ?`);
     if (permission) {
-      fetch(`http://localhost:5000/users/${deleteUser?._id}?email=${user?.email}`, {
+      fetch(`https://fg-server.vercel.app/users/${deleteUser?._id}?email=${user?.email}`, {
         method: 'DELETE',
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,
