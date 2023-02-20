@@ -1,10 +1,16 @@
 import React from 'react';
 import { useContext } from 'react';
 import { TbDiscount2 } from 'react-icons/tb';
+import Loader from '../../../components/Loader/Loader';
 import { StateContext } from '../../../contexts/AuthProvider';
 
 const Voucher = () => {
-  const { coupons } = useContext(StateContext);
+  const { coupons, couponsLoading, couponRefresh } = useContext(StateContext);
+
+  if(couponsLoading) {
+    return <Loader />
+  }
+
   return (
     <div className='mx-5'>
       <h2 className='text-center md:text-2xl font-bold mb-4 p-0 md:p-10'>Available Voucher</h2>
@@ -15,7 +21,7 @@ const Voucher = () => {
             <p className='text-3xl font-bold my-3'>Save <span className='text-white'>{coupon?.discount_amount}</span> Tk</p>
             <p className='text-sm font-semibold'>Minimum spend {coupon?.condition_amount} Tk</p>
             <p className='text-sm'>Expire: {coupon?.expire_date}</p>
-          <TbDiscount2 className='absolute text-green-200 text-[80px] right-0 top-0'/>
+            <TbDiscount2 className='absolute text-green-200 text-[80px] right-0 top-0' />
           </div>
           <div className='bg-white h-40 w-[200px] p-3 flex justify-center items-center flex-col rounded-r-md'>
             <p className='text-sm'>Voucher Code</p>
