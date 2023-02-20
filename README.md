@@ -64,4 +64,4 @@ The grocery delivery web portal has three primary integrations
 - css libraries: daisyui
 
 ## New Technology: React Native. 
-  
+- A Mobile App for buyers. Download now from https://mega.nz/file/iAI3DChK#JR6J9m1LCPm-QbJeRtxk7QV0Q8sWjH5YMHzALM_hwkU
