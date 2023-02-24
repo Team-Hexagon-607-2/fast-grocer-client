@@ -9,13 +9,13 @@ import HomeBannerItem from './HomeBannerItem';
 
 const bannerData=[
     {
-        image:img1,
+        image:img2,
         prev:6,
         id:1,
         next:2
     },
     {
-        image:img2,
+        image:img1,
         prev:1,
         id:2,
         next:3

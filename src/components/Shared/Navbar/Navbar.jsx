@@ -77,7 +77,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className={`${styles.wrapper}`}>
-        <div className="bg-slate-800">
+        <div className="bg-slate-800 ">
           <div className="flex mx-auto">
             {/* Desktop search */}
             {/* Desktop navbar link such as page home etc */}
