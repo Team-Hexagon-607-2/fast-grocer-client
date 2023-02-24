@@ -67,10 +67,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-            <hr/>
-             <div style={{backgroundColor:"#0F172A",color:"yellow",textAlign:"center",padding:"5px"}}>
-               <p>Fast Grocer ©2023 || Design And Developed By H.M Merajul Hasan</p>
-             </div>
+           
         </div>
     );
 };
