@@ -1,27 +1,24 @@
 import React from "react";
-import { useContext } from "react";
-import { StateContext } from "../../contexts/AuthProvider";
+import useAllOrders from "../../hooks/useAllOrders";
 import Loader from "../Loader/Loader";
 
 const Sales = () => {
-  const { AllOrders, AllOrdersLoading, AllOrdersRefetch } =
-    useContext(StateContext);
+  const {allOrders, allOrdersLoading, allOrdersRefetch} = useAllOrders();
 
-  if(AllOrdersLoading) {
+  if(allOrdersLoading) {
     return <Loader />
   }
 
-  const totalSales = AllOrders?.data?.reduce(
+  const totalSales = allOrders?.data?.reduce(
     (acc, item) => acc + item?.total_price,
     0
   );
-  const totalShipping = AllOrders?.data?.reduce(
+  const totalShipping = allOrders?.data?.reduce(
     (acc, item) => acc + item?.shipping_fee,
     0
   );
 
-  const order_products = AllOrders?.data?.map((item) => item?.order_products);
-  // console.log(order_products);
+  const order_products = allOrders?.data?.map((item) => item?.order_products);
 
   let product_sale_price = 0;
   for (const subOrders of order_products) {
@@ -30,9 +27,6 @@ const Sales = () => {
       product_sale_price += order?.price;
     }
   }
-
-  // console.log(product_sale_price);
-
   const salesPriceWithoutShippingFee = totalSales - totalShipping;
   const netProfit = (salesPriceWithoutShippingFee / 100) * 23.3;
   const allCost = (salesPriceWithoutShippingFee / 100) * 10;
@@ -46,7 +40,7 @@ const Sales = () => {
             <div>
               <h2 class="text-gray-900 text-lg font-bold">Total Order</h2>
               <h3 class="mt-2 text-xl font-bold text-indigo-500 text-left">
-                {AllOrders?.data?.length}
+                {allOrders?.data?.length}
               </h3>
 
               <button class="text-sm mt-6 px-4 py-2 bg-indigo-400 text-white rounded-lg  tracking-wider hover:bg-indigo-500 outline-none">

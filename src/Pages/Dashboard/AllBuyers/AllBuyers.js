@@ -25,23 +25,29 @@ const AllBuyers = () => {
   });
 
 
-  if(isLoading) {
+  if (isLoading) {
     return <Loader />
   }
 
-  const handleDelete = user => {
-    console.log(user._id);
-    fetch(`https://fg-server.vercel.app/users/${user._id}`, {
-      method: 'DELETE'
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.deletedCount > 0) {
-          refetch();
-          toast.success(`${user.name} deleted successfully`)
+  const handleDelete = deleteUser => {
+    const permission = window.confirm(`Are Your sure you want to ${deleteUser?.name} delete product ?`);
+    if (permission) {
+      fetch(`https://fg-server.vercel.app/users/${deleteUser?._id}?email=${user?.email}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         }
       })
-  }
+        .then(res => res.json())
+        .then(data => {
+          if (data.deletedCount > 0) {
+            refetch();
+            toast.success(`${deleteUser.name} deleted successfully`)
+          }
+        })
+        .catch(error => toast.error(error.message))
+    }
+  };
 
   return (
     <div className=''>
@@ -74,7 +80,8 @@ const AllBuyers = () => {
                   <th>
                     <button onClick={() => handleDelete(user)} className="btn bg-red-600 btn-xs">Delete</button>
                   </th>
-                </tr>)
+                </tr>
+              )
             }
           </tbody>
         </table>

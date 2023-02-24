@@ -13,10 +13,15 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import useAllOrders from "../../../hooks/useAllOrders";
+import Loader from "../../../components/Loader/Loader";
 
 const Reports = () => {
-  const { AllOrders, AllOrdersLoading, AllOrdersRefetch } =
-    useContext(StateContext);
+  const {allOrders, allOrdersLoading, allOrdersRefetch} = useAllOrders();
+
+  if(allOrdersLoading) {
+    return <Loader />
+  } 
 
   return (
     <>
@@ -27,7 +32,7 @@ const Reports = () => {
           <ComposedChart
             width={500}
             height={400}
-            data={AllOrders?.data}
+            data={allOrders?.data}
             margin={{
               top: 20,
               right: 20,

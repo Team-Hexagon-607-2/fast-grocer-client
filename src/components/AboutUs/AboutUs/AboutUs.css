@@ -1,6 +1,6 @@
 .bannerImage {
   height: 300px;
-  background: linear-gradient(135deg, rgba(60, 184, 19, 0.45), rgba(252, 198, 2, 0.45)), url('../../../assets/images/AboutUs/AboutPageBanner.jpg');
+  background: linear-gradient(to bottom right, rgba(60, 184, 19, .80), rgba(252, 198, 2, .80)), url('../../../assets/images/AboutUs/AboutPageBanner.jpg');
   background-size: cover;
   text-align: center;
 }

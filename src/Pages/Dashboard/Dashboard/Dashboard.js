@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import ConfirmModal from '../../../components/Modal/ConfirmModal/ConfirmModal';
 import { StateContext } from '../../../contexts/AuthProvider';
+import useDBUserData from '../../../hooks/useDBUserData';
 import useFindAdmin from '../../../hooks/useFindAdmin';
 import useFindBuyer from '../../../hooks/useFindBuyer';
 import useFindDeliveryman from '../../../hooks/useFindDeliveryman';
@@ -15,6 +16,8 @@ const Dashboard = () => {
     const [isDeliverymen] = useFindDeliveryman(user?.email);
     const [isBuyer] = useFindBuyer(user?.email);
     const [processing, setProcessing] = useState(false);
+    const [dbUser] = useDBUserData(user?.email);
+ 
     const { data: deliverymanData, refetch } = useQuery({
         queryKey: ['working-status'],
         queryFn: async () => {
@@ -50,7 +53,7 @@ const Dashboard = () => {
             <div className='flex flex-col md:flex-row items-start'>
                 <div className='mr-10 flex flex-col justify-center px-20 mx-auto md:mx-0'>
                     <img
-                        className="mb-1 h-32 w-32 mx-auto rounded-full shadow-lg" src={user?.photoURL || 'https://picsum.photos/200/300'}
+                        className="mb-1 h-32 w-32 mx-auto rounded-full shadow-lg" src={user?.photoURL || 'https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg'}
                         alt='' />
                     {
                         isAdmin && <p className='text-center'>Admin</p>
@@ -75,7 +78,7 @@ const Dashboard = () => {
                     </div>
                     <div className='mb-5'>
                         <p className='font-semibold'><small>Contact No.</small></p>
-                        <p>N/A</p>
+                        <p>{dbUser?.contact ? dbUser?.contact : 'N/A'}</p>
                     </div>
                     {
                         isDeliverymen && <div className='mb-5'>

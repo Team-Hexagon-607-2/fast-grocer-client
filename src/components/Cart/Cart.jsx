@@ -44,8 +44,8 @@ const Cart = () => {
                 <Link to="/place-order">
                   <button
                     className={isAdmin || isDeliveryman ?
-                      "hidden bg-[#17dc86] text-white hover:bg-[#15ba73] font-semibold px-3 py-1 rounded-md duration-300" :
-                      "bg-[#17dc86] text-white hover:bg-[#15ba73] font-semibold px-3 py-1 rounded-md duration-300"
+                      "hidden bg-[#84b840] hover:bg-[#6a9333] text-white font-semibold px-3 py-1 rounded-md duration-300" :
+                      "bg-[#84b840] hover:bg-[#6a9333] text-white font-semibold px-3 py-1 rounded-md duration-300"
                     }>
                     Place Order
                   </button>

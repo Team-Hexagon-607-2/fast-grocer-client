@@ -39,16 +39,16 @@ const MyWishList = () => {
       ></div>
     );
   };
-  
+
   const wishlist = wishListData?.data;
   return (
     <div className="">
+      {/* <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">My Wishlist</h2> */}
       <h2 className="text-center md:text-2xl font-bold mb-4 p-0 md:p-10">My Wishlist</h2>
-      <div className="flex items-center justify-center">
-        {" "}
-        {wishlistLoading && <Loader />}
-      </div>
-      <div className="mt-5 flex-col flex">
+
+      {wishlistLoading && <Loader />}
+
+      <div className="mt-5 flex-col flex px-6">
         {wishlist?.length === 0 ? (
           <div className=" flex text-5xl sm:mt-40 mt-20  text-[#FF5F3D] font-extrabold flex-col items-center justify-center">
             No Item
@@ -103,13 +103,13 @@ const MyWishList = () => {
                       <td>
                         <button
                           onClick={() => handleDelete(item?._id)}
-                          className="btn btn-error "
+                          className="btn btn-sm btn-error "
                         >
                           Delete
                         </button>
                       </td>
                       <td>
-                        <button className="btn btn-primary ">Buy</button>
+                        <button className="btn btn-sm btn-primary ">Buy</button>
                       </td>
                     </tr>
                   ))}
