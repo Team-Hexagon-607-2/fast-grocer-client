@@ -7,7 +7,7 @@ import masterCard from '../../../assets/images/masterCard.png';
 import { FaEnvelope } from 'react-icons/fa';
 import { FaPhoneAlt } from 'react-icons/fa';
 
-import logo from '../../../assets/logo/logo.png'
+import logo from '../../../assets/logo/logo-text2.png'
 import { Link } from 'react-router-dom';
 
 
